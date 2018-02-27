@@ -1,0 +1,10 @@
+.dropbox
+*.rds
+*.csv
+*.rdata
+*.data.R
+*.log
+*.cpp
+*.hpp
+data/mcmc_out/*
+data/data_dump/*
