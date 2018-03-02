@@ -91,4 +91,4 @@ survi <- longi %>%
   dplyr::mutate(id = as.numeric(as.factor(fullname)))
 
 # write to file
-write_rds(longi, path = '../data/survival.rds')
+write_rds(survi, path = '../data/survival.rds')
