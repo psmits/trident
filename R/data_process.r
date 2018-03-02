@@ -63,9 +63,9 @@ sprange <- nano %>%
   dplyr::summarise(nocc = n(),  # number of occurrences in bin
                    ncell = n_distinct(cell),  # number of unique cells in bin
                    # latitidinal extent in bin
-                   latext = abs(max(latitude) - min(latitude)),  
+                   latext = abs(max(plat) - min(plat)),  
                    # great circle distance (on ellipsoid) in km in bin
-                   maxgcd = max(distm(cbind(longitude, latitude), 
+                   maxgcd = max(distm(cbind(plng, plat), 
                                       fun = distGeo)) / 1000,
                    nprov = n_distinct(longhurst.code),
                    fg = unique(fossil.group))
@@ -73,11 +73,22 @@ sprange <- nano %>%
 
 # relative age in bins
 longi <- sprange %>%
-  dplyr::mutate(relage = abs(mybin - max(mybin)))
+  dplyr::mutate(relage = abs(mybin - max(mybin))) %>%
+  ungroup() %>%
+  dplyr::mutate(id = as.numeric(as.factor(fullname)))
+
+# write to file
+write_rds(longi, path = '../data/longitude.rds')
 
 # survival dataset
 survi <- longi %>%
+  group_by(fullname) %>%
   dplyr::summarise(duration = max(relage) + 1,
                    cohort = max(mybin),
                    fg = unique(fg),
-                   dead = ifelse(min(mybin) == 1, 0, 1))
+                   dead = ifelse(min(mybin) == 1, 0, 1)) %>%
+  ungroup() %>%
+  dplyr::mutate(id = as.numeric(as.factor(fullname)))
+
+# write to file
+write_rds(longi, path = '../data/survival.rds')
