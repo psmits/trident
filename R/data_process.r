@@ -10,6 +10,11 @@ library(XML)
 library(maptools)
 library(geosphere)
 
+# plotting stuff
+library(ggplot2)
+library(scales)
+library(survminer)
+
 
 # read in data file and clean column names
 neptune <- list.files(path = '../data', pattern = 'nannotax', full.names = TRUE)
@@ -71,14 +76,26 @@ sprange <- nano %>%
                    fg = unique(fossil.group))
 # still grouped by fullname!
 
+# longitudinal dataset
 # relative age in bins
 longi <- sprange %>%
   dplyr::mutate(relage = abs(mybin - max(mybin))) %>%
   ungroup() %>%
   dplyr::mutate(id = as.numeric(as.factor(fullname)))
 
+# make some data plots
+gg <- unique(longi$fullname)[21:40]
+lls <- longi[longi$fullname %in% gg, ]
+glt <- ggplot(lls, aes(x = relage, y = maxgcd))
+glt <- glt + geom_point() + geom_line()
+glt <- glt + facet_wrap(~ fullname, ncol = 4)
+
+
 # write to file
 write_rds(longi, path = '../data/longitude.rds')
+
+
+
 
 # survival dataset
 survi <- longi %>%
@@ -89,6 +106,11 @@ survi <- longi %>%
                    dead = ifelse(min(mybin) == 1, 0, 1)) %>%
   ungroup() %>%
   dplyr::mutate(id = as.numeric(as.factor(fullname)))
+
+# make some data plots
+sf <- with(survi, {survfit(Surv(duration, dead) ~ cohort, survi)})
+gsf <- ggsurvplot(fit = sf, data = survi) 
+
 
 # write to file
 write_rds(survi, path = '../data/survival.rds')
