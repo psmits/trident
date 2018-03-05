@@ -34,7 +34,7 @@ survi <- survi %>%
 # set up model fit
 fit <- stan_jm(formulaLong = maxgcd ~ relage + (relage | id),
                dataLong = longi,
-               formulaEvent = survival::Surv(duration, dead) ~ cc,
+               formulaEvent = survival::Surv(duration, dead) ~ 1,
                dataEvent = survi,
                assoc = c('etavalue', 'etaslope'),
                time_var = 'relage',

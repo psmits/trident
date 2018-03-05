@@ -83,7 +83,7 @@ write_rds(longi, path = '../data/longitude.rds')
 # survival dataset
 survi <- longi %>%
   group_by(fullname) %>%
-  dplyr::summarise(duration = max(relage) + 1,
+  dplyr::summarise(duration = max(relage),
                    cohort = max(mybin),
                    fg = unique(fg),
                    dead = ifelse(min(mybin) == 1, 0, 1)) %>%
