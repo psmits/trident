@@ -10,6 +10,8 @@ library(XML)
 library(maptools)
 library(geosphere)
 
+library(survival)
+
 # plotting stuff
 library(ggplot2)
 library(scales)
@@ -109,7 +111,8 @@ survi <- longi %>%
 
 # make some data plots
 sf <- with(survi, {survfit(Surv(duration, dead) ~ cohort, survi)})
-gsf <- ggsurvplot(fit = sf, data = survi) 
+gsf <- ggsurvplot(fit = sf, data = survi, fun = 'pct')  # survival plot (K-M est)
+gse <- ggsurvevents(fit = sf, data = survi)  # event plot
 
 
 # write to file
