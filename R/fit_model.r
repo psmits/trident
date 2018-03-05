@@ -27,9 +27,14 @@ longi <- longi %>%
   dplyr::filter(fg == 'F')
 
 survi <- survi %>%
-  dplyr::mutate(cc = parse_factor(cohort, levels = sort(unique(cohort))))
+  dplyr::mutate(cohort = as.character(cohort),
+                cc = fct_drop(cohort))
 survi <- survi %>%
   dplyr::filter(fg == 'F')
+survi$cc <- plyr::mapvalues(survi$cc, 
+                            from = sort(unique(survi$cc)), 
+                            to = seq(length(unique(survi$cc))))
+
 
 # set up model fit
 fit <- stan_jm(formulaLong = maxgcd ~ relage + (relage | id),
