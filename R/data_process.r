@@ -40,7 +40,7 @@ nano$latitude <- parse_double(nano$latitude)
 
 # some don't have paleolat or long
 nano <- nano %>%
-  filter(!is.na(plat), !is.na(plng))
+  filter(!is.na(plat), !is.na(plng), fossil.group == 'F')
 
 # assign million year bins (decreasing; youngest lowest)
 nano <- nano %>%
@@ -74,9 +74,7 @@ sprange <- nano %>%
                    # great circle distance (on ellipsoid) in km in bin
                    maxgcd = max(distm(cbind(plng, plat), 
                                       fun = distGeo)) / 1000,
-                   nprov = n_distinct(longhurst.code),
-                   fg = unique(fossil.group))
-# still grouped by fullname!
+                   nprov = n_distinct(longhurst.code))
 
 # longitudinal dataset
 # relative age in bins
@@ -100,20 +98,50 @@ write_rds(longi, path = '../data/longitude.rds')
 
 
 # survival dataset
+# continuous data form
 survi <- longi %>%
   group_by(fullname) %>%
   dplyr::summarise(duration = max(relage),
                    cohort = max(mybin),
-                   fg = unique(fg),
                    dead = ifelse(min(mybin) == 1, 0, 1)) %>%
   ungroup() %>%
   dplyr::mutate(id = as.numeric(as.factor(fullname)))
 
-# make some data plots
-sf <- with(survi, {survfit(Surv(duration, dead) ~ cohort, survi)})
-gsf <- ggsurvplot(fit = sf, data = survi, fun = 'pct')  # survival plot (K-M est)
-gse <- ggsurvevents(fit = sf, data = survi)  # event plot
+survi <- survi %>%
+  dplyr::mutate(cohort = as.character(cohort),
+                cc = fct_drop(cohort))
+survi$cc.rescale <- plyr::mapvalues(survi$cc, 
+                                    from = sort(unique(survi$cc)), 
+                                    to = seq(length(unique(survi$cc))))
 
+# counting process form
+counti <- longi %>%
+  group_by(fullname) %>%
+  dplyr::mutate(time1 = relage,
+                time2 = relage + 1,
+                event = ifelse(relage == max(relage) &
+                               min(mybin) != 1, 1, 0),
+                cohort = as.character(max(mybin)),
+                cc = fct_drop(cohort)) %>%
+  ungroup()
+
+counti$cc.rescale <- plyr::mapvalues(counti$cc, 
+                                     from = sort(unique(counti$cc)), 
+                                     to = seq(length(unique(counti$cc))))
+
+sc <- with(counti, {survfit(Surv(time = time1, time2 = time2, 
+                                 event = event, type = 'counting') ~ 1, 
+                            data = counti)})
+gsc <- ggsurvplot(fit = sc, data = counti)
+
+
+# make some data plots
+sf <- with(survi, {survfit(Surv(duration, dead) ~ 1, survi)})
+# survival plot (K-M est)
+gsf <- ggsurvplot(fit = sf, data = survi, fun = 'pct')  
+# event plot
+gsfe <- ggsurvevents(fit = sf, data = survi)  
 
 # write to file
 write_rds(survi, path = '../data/survival.rds')
+write_rds(counti, path = '../data/counting.rds')

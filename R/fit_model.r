@@ -18,29 +18,22 @@ source('../R/stan_utility.R')
 # get data in
 longi <- read_rds('../data/longitude.rds')
 survi <- read_rds('../data/survival.rds')
+counti <- read_rds('../data/counting.rds')
 
 # data transforms
 longi <- longi %>%
   dplyr::mutate_at(.vars = vars(ncell, latext, maxgcd), 
                    .funs = ~ arm::rescale(log1p(.x)))
-longi <- longi %>%
-  dplyr::filter(fg == 'F')
-
-survi <- survi %>%
-  dplyr::mutate(cohort = as.character(cohort),
-                cc = fct_drop(cohort))
-survi <- survi %>%
-  dplyr::filter(fg == 'F')
-survi$cc <- plyr::mapvalues(survi$cc, 
-                            from = sort(unique(survi$cc)), 
-                            to = seq(length(unique(survi$cc))))
 
 
 # set up model fit
 fit <- stan_jm(formulaLong = maxgcd ~ relage + (relage | id),
                dataLong = longi,
-               formulaEvent = survival::Surv(duration, dead) ~ 1,
-               dataEvent = survi,
+               formulaEvent = survival::Surv(time = time1,
+                                             time2 = time2,
+                                             event = event,
+                                             type = 'counting') ~ cc.rescale,
+               dataEvent = counti,
                assoc = c('etavalue', 'etaslope'),
                time_var = 'relage',
                id_var = 'id', 
@@ -49,8 +42,10 @@ fit <- stan_jm(formulaLong = maxgcd ~ relage + (relage | id),
                iter = 8000)
 
 # check the model
-pp <- posterior_predict(fit)
+pp <- posterior_predict(fit)           # posterior predictive distribution
+# worry is what exactly am a simulating?
 
+# use bayes plot to compare
 
 
 # what are we really interested in?
