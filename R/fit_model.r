@@ -36,17 +36,26 @@ fit <- stan_jm(formulaLong = maxgcd ~ relage + (relage | id),
                                              event = event,
                                              type = 'counting') ~ cc.rescale,
                dataEvent = counti,
-               assoc = c('etavalue', 'etaslope'),
                time_var = 'relage',
                id_var = 'id', 
+               assoc = c('etavalue', 'etaslope'),
+               basehaz = 'weibull',
                chains = 4,
                cores = detectCores(),
                iter = 8000)
 
-# check the model
-pp <- posterior_predict(fit)           # posterior predictive distribution
+# check the model...
+# apparently the wrapper doesn't work for counting process formulation
+# only one row per observation...key is i need to provide cc.rescale for each
 # worry is what exactly am a simulating?
-
+nsu <- counti %>% 
+  group_by(fullname) %>%
+  dplyr::summarize(cc.rescale = unique(cc.rescale),
+                   time1 = max(time1),
+                   time2 = max(time2),
+                   event = max(event),
+                   id = unique(id))
+pp <- posterior_survfit(fit, newdataLong = longi, newdataEvent = nsu)
 # use bayes plot to compare
 
 
