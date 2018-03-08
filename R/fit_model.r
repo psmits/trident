@@ -24,7 +24,9 @@ counti <- read_rds('../data/counting.rds')
 longi <- longi %>%
   dplyr::mutate_at(.vars = vars(ncell, latext, maxgcd), 
                    .funs = ~ arm::rescale(log1p(.x)))
-
+counti$cc.rescale <- with(counti, {
+                            factor(cc.rescale, 
+                            levels = sort(unique(as.numeric(cc.rescale))))})
 
 # set up model fit
 fit <- stan_jm(formulaLong = maxgcd ~ relage + (relage | id),
