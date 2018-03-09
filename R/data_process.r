@@ -10,12 +10,13 @@ library(XML)
 library(maptools)
 library(geosphere)
 
+# survival
 library(survival)
+library(survminer)
 
 # plotting stuff
 library(ggplot2)
 library(scales)
-library(survminer)
 
 
 # read in data file and clean column names
@@ -130,7 +131,7 @@ counti$cc.rescale <- plyr::mapvalues(counti$cc,
                                      to = seq(length(unique(counti$cc))))
 
 sc <- with(counti, {survfit(Surv(time = time1, time2 = time2, 
-                                 event = event, type = 'counting') ~ 1, 
+                                 event = event, type = 'counting') ~ cc.rescale,
                             data = counti)})
 gsc <- ggsurvplot(fit = sc, data = counti)
 

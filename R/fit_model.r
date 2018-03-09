@@ -44,6 +44,7 @@ fit <- stan_jm(formulaLong = maxgcd ~ relage + (relage | id),
                cores = detectCores(),
                iter = 8000)
 
+
 # check the model...
 # apparently the wrapper doesn't work for counting process formulation
 # only one row per observation...key is i need to provide cc.rescale for each
