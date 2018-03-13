@@ -29,12 +29,14 @@ counti$cc.rescale <- with(counti, {
                             levels = sort(unique(as.numeric(cc.rescale))))})
 
 # set up model fit
+#   could include extrinsic climate as time-dependent covariate of survival
 fit <- stan_jm(formulaLong = maxgcd ~ ns(relage, 2) + (ns(relage, 2) | id),
                dataLong = longi,
                formulaEvent = survival::Surv(time = time1,
                                              time2 = time2,
                                              event = event,
-                                             type = 'counting') ~ cc.rescale,
+                                             type = 'counting') ~ 
+                 cc.rescale + eco + keel + symb + spin,
                dataEvent = counti,
                time_var = 'relage',
                id_var = 'id', 
@@ -44,25 +46,3 @@ fit <- stan_jm(formulaLong = maxgcd ~ ns(relage, 2) + (ns(relage, 2) | id),
                cores = detectCores(),
                iter = 8000)
 write_rds(fit, path = '../data/jm_fit.rds')
-
-
-# check the model...
-# apparently the wrapper doesn't work for counting process formulation
-# only one row per observation...key is i need to provide cc.rescale for each
-# worry is what exactly am a simulating?
-nsu <- counti %>% 
-  group_by(fullname) %>%
-  dplyr::summarize(cc.rescale = unique(cc.rescale),
-                   time1 = max(time1),
-                   time2 = max(time2),
-                   event = max(event),
-                   id = unique(id))
-
-pp <- posterior_survfit(fit, newdataLong = longi, newdataEvent = nsu)
-# use bayes plot to compare
-
-
-# what are we really interested in?
-#   association parameters
-#   ns(relage) because nonlinear?
-
