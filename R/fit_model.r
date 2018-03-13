@@ -29,7 +29,7 @@ counti$cc.rescale <- with(counti, {
                             levels = sort(unique(as.numeric(cc.rescale))))})
 
 # set up model fit
-fit <- stan_jm(formulaLong = maxgcd ~ relage + (relage | id),
+fit <- stan_jm(formulaLong = maxgcd ~ ns(relage, 2) + (ns(relage, 2) | id),
                dataLong = longi,
                formulaEvent = survival::Surv(time = time1,
                                              time2 = time2,
@@ -43,6 +43,7 @@ fit <- stan_jm(formulaLong = maxgcd ~ relage + (relage | id),
                chains = 4,
                cores = detectCores(),
                iter = 8000)
+write_rds(fit, path = '../data/jm_fit.rds')
 
 
 # check the model...
@@ -56,6 +57,7 @@ nsu <- counti %>%
                    time2 = max(time2),
                    event = max(event),
                    id = unique(id))
+
 pp <- posterior_survfit(fit, newdataLong = longi, newdataEvent = nsu)
 # use bayes plot to compare
 

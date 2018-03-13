@@ -12,6 +12,7 @@ library(geosphere)
 
 # survival
 library(survival)
+library(flexsurv)
 library(survminer)
 
 # plotting stuff
@@ -48,6 +49,47 @@ nano <- nano %>%
   dplyr::arrange(desc(age)) %>%
   dplyr::mutate(mybin = ntile(age, 65))
 
+# make a genus_species combo
+nano <- nano %>% 
+  dplyr::mutate(fullname = str_c(genus, '_', species)) %>% 
+  arrange(fullname)
+
+
+
+# join with metadata
+# species ids
+idinfo <- read_csv('../data/ezard2011/ezard_id2.csv')
+names(idinfo) <- str_to_lower(names(idinfo))
+names(idinfo) <- str_replace_all(names(idinfo), ' ', '.')
+idinfo <- idinfo %>% 
+  dplyr::mutate(fullname = str_replace_all(species.in.lineage, ' ', '_'),
+                code = str_to_lower(lineage.code))
+
+idinfo <- idinfo %>% separate_rows(fullname, sep = '-')
+
+# combine with nano with left join
+nano <- left_join(nano, idinfo, by = 'fullname')
+
+# trait information
+trait <- read_csv('../data/2010-09-06_aLext.csv')
+names(trait) <- str_to_lower(names(trait))
+names(trait) <- str_replace_all(names(trait), ' ', '.')
+
+trait$ec <- fct_collapse(factor(trait$ec),
+                         'mixed' = c(1, 2),
+                         'thermocline' = '3',
+                         'subthermocline' = '4')
+trait <- trait %>%
+  dplyr::mutate(label = str_to_lower(label),
+                code = str_to_lower(nm),
+                pn = str_to_lower(pn)) %>%
+  separate_rows(code, sep = '-')
+
+
+# combine all the data with an inner joing
+nano <- inner_join(nano, trait, by = 'code')
+
+
 # assign everything a geographic cell
 # uses paleocoordinates
 eq <- CRS("+proj=cea +lat_0=0 +lon_0=0 +lat_ts=30 +a=6371228.0 +units=m")
@@ -61,10 +103,6 @@ ras <- rasterize(spatialref, r)
 nano$cell <- cellFromXY(ras, 
                         xy = as.data.frame(nano[, c('plng', 'plat')]))
 
-# make a genus_species combo
-nano <- nano %>% dplyr::mutate(fullname = str_c(genus, '_', species))
-
-
 # get all the important geographic range information
 sprange <- nano %>%
   group_by(fullname, mybin) %>%
@@ -75,7 +113,15 @@ sprange <- nano %>%
                    # great circle distance (on ellipsoid) in km in bin
                    maxgcd = max(distm(cbind(plng, plat), 
                                       fun = distGeo)) / 1000,
-                   nprov = n_distinct(longhurst.code))
+                   nprov = n_distinct(longhurst.code),
+                   eco = names(which.max(table(ec))),
+                   morph = names(which.max(table(mp))),
+                   keel = names(which.max(table(kl))),
+                   symb = names(which.max(table(sy))),
+                   spin = names(which.max(table(sp))))
+
+
+
 
 # longitudinal dataset
 # relative age in bins
@@ -104,7 +150,12 @@ survi <- longi %>%
   group_by(fullname) %>%
   dplyr::summarise(duration = max(relage),
                    cohort = max(mybin),
-                   dead = ifelse(min(mybin) == 1, 0, 1)) %>%
+                   dead = ifelse(min(mybin) == 1, 0, 1),
+                   eco = unique(eco),
+                   morph = unique(morph),
+                   keel = unique(keel),
+                   symb = unique(symb),
+                   spin = unique(spin)) %>%
   ungroup() %>%
   dplyr::mutate(id = as.numeric(as.factor(fullname)))
 
