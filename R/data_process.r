@@ -128,12 +128,12 @@ sprange <- nano %>%
 longi <- sprange %>%
   dplyr::mutate(relage = abs(mybin - max(mybin))) %>%
   ungroup() %>%
-  dplyr::mutate(id = as.numeric(as.factor(fullname)))
+  dplyr::mutate(id = as.factor(fullname))
 
 # make some data plots
 gg <- unique(longi$fullname)[21:40]
 lls <- longi[longi$fullname %in% gg, ]
-glt <- ggplot(lls, aes(x = relage, y = maxgcd))
+glt <- ggplot(lls, aes(x = relage, y = log(maxgcd)))
 glt <- glt + geom_point() + geom_line()
 glt <- glt + facet_wrap(~ fullname, ncol = 4)
 
@@ -157,7 +157,7 @@ survi <- longi %>%
                    symb = unique(symb),
                    spin = unique(spin)) %>%
   ungroup() %>%
-  dplyr::mutate(id = as.numeric(as.factor(fullname)))
+  dplyr::mutate(id = as.factor(fullname))
 
 survi <- survi %>%
   dplyr::mutate(cohort = as.character(cohort),
