@@ -89,7 +89,6 @@ trait <- trait %>%
 # combine all the data with an inner joing
 nano <- inner_join(nano, trait, by = 'code')
 
-
 # assign everything a geographic cell
 # uses paleocoordinates
 eq <- CRS("+proj=cea +lat_0=0 +lon_0=0 +lat_ts=30 +a=6371228.0 +units=m")
@@ -103,9 +102,12 @@ ras <- rasterize(spatialref, r)
 nano$cell <- cellFromXY(ras, 
                         xy = as.data.frame(nano[, c('plng', 'plat')]))
 
+
 # get all the important geographic range information
 sprange <- nano %>%
   group_by(fullname, mybin) %>%
+  filter((max(distm(cbind(plng, plat), fun = distGeo)) / 1000) > 0,
+         abs(max(plat) - min(plat)) > 0) %>%
   dplyr::summarise(nocc = n(),  # number of occurrences in bin
                    ncell = n_distinct(cell),  # number of unique cells in bin
                    # latitidinal extent in bin
@@ -119,8 +121,6 @@ sprange <- nano %>%
                    keel = names(which.max(table(kl))),
                    symb = names(which.max(table(sy))),
                    spin = names(which.max(table(sp))))
-
-
 
 
 # longitudinal dataset
