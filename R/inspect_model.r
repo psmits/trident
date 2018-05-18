@@ -57,18 +57,37 @@ nsu <- counti %>%
 
 # survival process
 #   keeps breaking for some reason -> issues with factors but i can't find it
-pp_surv1 <- posterior_survfit(fit1, newdataLong = longi, newdataEvent = nsu)
-pp_surv2 <- posterior_survfit(fit2, newdataLong = longi, newdataEvent = nsu)
-pp_surv3 <- posterior_survfit(fit3, newdataLong = longi, newdataEvent = nsu)
+pp_surv1 <- posterior_survfit(fit1, newdataLong = longi, newdataEvent = nsu, 
+                              condition = FALSE, standardise = FALSE, times = 0)
 
-# longitudinal process
-pp_long1 <- posterior_predict(fit1)
-pp_long2 <- posterior_predict(fit2)
-pp_long3 <- posterior_predict(fit3)
+l1 <- longi %>%
+  filter(fullname == fullname[1])
+n1 <- nsu %>%
+  filter(fullname == fullname[1])
+pp_surv2 <- posterior_survfit(fit2, newdataLong = l1, newdataEvent = n1, condition = FALSE, standardise = FALSE, times = 0)
 
+#pp_surv2 <- posterior_survfit(fit2, newdataLong = longi, newdataEvent = nsu)
+#pp_surv3 <- posterior_survfit(fit3, newdataLong = longi, newdataEvent = nsu)
+# survival posterior predictive checks are based on survival 
+ggplot(pp_surv1, aes(x = relage, y = survpred, group = id)) + geom_step()
 
+nsu[nsu$id == 'Turborotalita_quinqueloba', ]
+survi[survi$id == 'Turborotalita_quinqueloba', ]
+longi[longi$id == 'Turborotalita_quinqueloba', ]
+pp_surv1[pp_surv1$id == 'Turborotalita_quinqueloba', ]
+
+# survival predict is more complicated
+# go through each observation?
+# go deeper into rstanarm object
+#   more complicated than normal
 # simuates survival probability for each species for up to max observed age
 # use bayes plot to compare
+
+names(fit1)
+
+
+
+
 
 pp_checks <- function(value, ppc, group) {
   pmean <- ppc_stat(value, ppc, 'mean')
@@ -88,12 +107,17 @@ pp_checks <- function(value, ppc, group) {
   out
 }
 
-surv_checks1a <- pp_checks(nsu$time1, pp_surv1, survi$cc.rescale)
-surv_checks1b <- pp_checks(nsu$time2, pp_surv1, survi$cc.rescale)
 
+
+# longitudinal process
+pp_long1 <- posterior_predict(fit1)
+#pp_long2 <- posterior_predict(fit2)
+#pp_long3 <- posterior_predict(fit3)
+
+# checks using posterior predictive distribution
 long_checks1 <- pp_checks(longi$maxgcd, pp_long1, longi$id)
-long_checks2 <- pp_checks(longi$maxgcd, pp_long2, longi$id)
-long_checks3 <- pp_checks(longi$maxgcd, pp_long3, longi$id)
+#long_checks2 <- pp_checks(longi$maxgcd, pp_long2, longi$id)
+#long_checks3 <- pp_checks(longi$maxgcd, pp_long3, longi$id)
 
 
 
