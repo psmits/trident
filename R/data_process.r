@@ -43,7 +43,7 @@ names(nano)[24] <- 'plng'
 # one of the fossil group tibble's miscoded fossil group as logical
 nano[nano$fossil.group == 'FALSE', 'fossil.group'] <- 'F'
 
-# rbind miscoded as strings
+# miscoded as strings
 nano$longitude <- parse_double(nano$longitude)
 nano$latitude <- parse_double(nano$latitude)
 
@@ -108,8 +108,6 @@ nano <-
 
 # get all the important geographic range information
 # have to summarize the big matrix nano
-dist_gcd <- function(x, y) max(distm(cbind(x, y), fun = distGeo))
-plurality <- function(x) names(which.max(table(x)))
 
 count.groups <- with(nano, table(fossil.group))
 
@@ -125,11 +123,7 @@ sprange <- nano %>%
                    nprov = n_distinct(longhurst.code),
                    fossil.group = plurality(fossil.group)) %>%
   filter(maxgcd > 0,
-         latext > 0,
-         fossil.group == 'R')
-
-
-
+         latext > 0)
 
 
 # longitudinal dataset
@@ -139,10 +133,15 @@ longi <- sprange %>%
   ungroup() %>%
   dplyr::mutate(id = as.factor(fullname))
 # longi has a weird data sorting issue i need to figure out
+# so this is currently "inelegant" (not tidy)
 ff <- split(longi, longi$fullname)
 ff <- purrr::map(ff, function(x) {
                    x <- x[order(x$relage), ]
                    x})
+# longi $>$ group_by(fullname) %>% arrange(relage)  # should work?
+# longi $>$ group_by(fullname) %>% purr(., ~ .x[order(.x$relage)])
+
+
 longi <- purrr::reduce(ff, bind_rows)
 
 # write to file
@@ -198,6 +197,10 @@ counti <- longi %>%
 counti$cc.rescale <- plyr::mapvalues(counti$cc, 
                                      from = sort(unique(counti$cc)), 
                                      to = seq(length(unique(counti$cc))))
+# necessary data transform to handle factor
+counti$cc.rescale <- with(counti, {
+                          factor(cc.rescale, 
+                          levels = sort(unique(as.numeric(cc.rescale))))})
 
 # make some data plots
 sf <- with(survi, {survfit(Surv(duration, dead) ~ 1, survi)})

@@ -18,3 +18,62 @@ sample_n_groups = function(tbl, size, replace = FALSE, weight = NULL) {
   # regrouping may be unnecessary but joins do something funky to grouping variable
   tbl %>% right_join(keep, by=grps) %>% group_by_(.dots = grps)
 }
+
+#' Measure maximum great circle from a geocoordinates
+#'
+#' Uses functions from geosphere to measure maximum great circle distance amoungst a cloud of points. 
+#' Coordinates are in longitude, and latitude. Output is in meters. 
+#'
+#' @param x vector of longitudes
+#' @param y vector of latitudes
+#' @return maximum greater distance measured in meters
+dist_gcd <- function(x, y) max(distm(cbind(x, y), fun = distGeo))
+
+#' Get most common entry of a vector of characters or factors
+#' 
+#' Given a vector of characters or factors, count number of occurrences of each unique entry.
+#' Return most common (using which.max rules).
+#' 
+#' @param x vector of characters or factors
+#' @return most common entry in vector x
+plurality <- function(x) names(which.max(table(x)))
+
+
+
+
+#' Prepare tibble for analysis
+#'
+#' This is mostly an internal function. Takes a tibble and returns a tibble with some variables transformed.
+#'
+#' @param x tibble
+#' @param fossil.group vector of characters defining which fossil groups to include
+#' @return a tibble ready for analysis
+prepare_analysis <- function(x, fossil.group = NULL) {
+  # do i want to restrict the taxonomic group?
+  tb <- x
+
+  if(!is.null(fossil.group)) {
+    tb <- tb %>%
+      filter(fossil.group %in% fossil.group)
+  }
+
+  # prep the data
+  tb <- tb %>%
+    arrange(fullname, desc(mybin)) %>%
+    mutate_at(.vars = vars(ncell, latext, maxgcd, area),
+              .funs = ~ arm::rescale(log1p(.x))) %>%
+    group_by(fullname) %>%
+    mutate(diff_maxgcd = c(0, diff(maxgcd)),
+           lag1_maxgcd = lag(maxgcd, default = 0),
+           lag2_maxgcd = lag(maxgcd, n = 2, default = 0),
+           lead1_maxgcd = lead(maxgcd, default = 0),
+           lead2_maxgcd = lead(maxgcd, n = 2, default = 0)) %>%
+    ungroup() %>%
+    mutate(fact_mybin = as.factor(mybin),
+           fact_relage = as.factor(relage))
+
+  tb$fact_mybin <- as.factor(tb$mybin)
+  tb$fact_relage <- as.factor(tb$relage)
+    
+  tb
+}

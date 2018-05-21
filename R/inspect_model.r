@@ -6,123 +6,87 @@ library(tidybayes)
 # parallel processing
 library(parallel)
 
-# analysis packages
+# survival
 library(survival)
-library(splines)
+library(LTRCtrees)
+library(rpart.plot)
+library(partykit)
+
+# bayes
 library(arm)
 library(rstanarm)
 library(bayesplot)
 source('../R/stan_utility.R')
 
+# misc
+library(splines)
+library(pROC)
+source('../R/process_foo.r')
+
+# important constants
+options(mc.cores = parallel::detectCores())
+
 # get data in
 longi <- read_rds('../data/longitude.rds')
 survi <- read_rds('../data/survival.rds')
 counti <- read_rds('../data/counting.rds')
-fit1 <- read_rds('../data/jm_fit1.rds')
-fit2 <- read_rds('../data/jm_fit2.rds')
-fit3 <- read_rds('../data/jm_fit3.rds')
 
-# data transforms
-longi <- longi %>%
-  dplyr::mutate_at(.vars = vars(ncell, latext, maxgcd), 
-                   .funs = ~ arm::rescale(log(.x)))
-longi <- longi %>% 
-  mutate_at(.vars = vars(keel, symb, spin),
-            .funs = ~ factor(.x, levels = c(0, 1)))
-counti <- counti %>%
-  mutate_at(.vars = vars(keel, symb, spin),
-            .funs = ~ factor(.x, levels = c(0, 1)))
-            #.funs = ~ as.numeric(.x))
+# form of data that was analyzed
+counti_trans <- prepare_analysis(counti)
+inspect <- counti_trans %>%            # nice to see the super relevant columns
+  dplyr::select(event, relage, mybin, maxgcd, diff_maxgcd, lag1_maxgcd)
 
-counti$cc.rescale <- with(counti, {
-                          factor(cc.rescale, 
-                          levels = sort(unique(as.numeric(cc.rescale))))})
+# read in model fits
+disc_fit <- read_rds('../data/disc_fit.rds')
+tree_fit <- read_rds('../data/tree_fit.rds')
 
-# check the model...
-# apparently the wrapper doesn't work for counting process formulation
-# only one row per observation...key is i need to provide cc.rescale for each
-# worry is what exactly am a simulating?
-nsu <- counti %>% 
-  group_by(fullname) %>%
-  dplyr::summarize(cc.rescale = unique(cc.rescale),
-                   time = max(time1),
-                   time1 = max(time1),
-                   time2 = max(time2),
-                   event = max(event),
-                   id = unique(id),
-                   eco = unique(eco),
-                   keel = unique(keel),
-                   symb = unique(symb),
-                   spin = unique(spin))
 
-# survival process
-#   keeps breaking for some reason -> issues with factors but i can't find it
-pp_surv1 <- posterior_survfit(fit1, newdataLong = longi, newdataEvent = nsu, 
-                              condition = FALSE, standardise = FALSE, times = 0)
 
-l1 <- longi %>%
-  filter(fullname == fullname[1])
-n1 <- nsu %>%
-  filter(fullname == fullname[1])
-pp_surv2 <- posterior_survfit(fit2, newdataLong = l1, newdataEvent = n1, condition = FALSE, standardise = FALSE, times = 0)
+# glmer model
+# posterior intervals
+interval_est <- disc_fit %>%
+  spread_samples(`(Intercept)`, 
+                 maxgcd, 
+                 diff_maxgcd, 
+                 lag1_maxgcd, 
+                 `Sigma[fact_relage:(Intercept),(Intercept)]`) %>%
+  median_qi(.prob = c(0.9, 0.5))
 
-#pp_surv2 <- posterior_survfit(fit2, newdataLong = longi, newdataEvent = nsu)
-#pp_surv3 <- posterior_survfit(fit3, newdataLong = longi, newdataEvent = nsu)
-# survival posterior predictive checks are based on survival 
-ggplot(pp_surv1, aes(x = relage, y = survpred, group = id)) + geom_step()
+interval_eye <- disc_fit %>%
+  gather_samples(maxgcd, diff_maxgcd, lag1_maxgcd) %>%
+  ggplot(aes(y = term, x = estimate)) +
+  geom_halfeyeh(.prob = c(0.9, 0.5))
 
-nsu[nsu$id == 'Turborotalita_quinqueloba', ]
-survi[survi$id == 'Turborotalita_quinqueloba', ]
-longi[longi$id == 'Turborotalita_quinqueloba', ]
-pp_surv1[pp_surv1$id == 'Turborotalita_quinqueloba', ]
+interval_range <- disc_fit %>%
+  gather_samples(`(Intercept)`, 
+                 maxgcd, 
+                 diff_maxgcd, 
+                 lag1_maxgcd) %>%
+  median_qi(.prob = c(0.9, 0.5)) %>%
+  ggplot(aes(y = term, x = estimate, xmin = conf.low, xmax = conf.high)) +
+  geom_pointintervalh()
 
-# survival predict is more complicated
-# go through each observation?
-# go deeper into rstanarm object
-#   more complicated than normal
-# simuates survival probability for each species for up to max observed age
-# use bayes plot to compare
 
-names(fit1)
+modelr::data_grid(counti, maxgcd)
+
+
+
+
+# base-line hazard plot, continuation ratio
+# exp(ranef(disc_fit)$fact_relage[, 1])
+
+
+# posterior probability of observation surviving
+pp_est <- posterior_predict(disc_fit)
+pp_prob <- posterior_linpred(disc_fit, transform = TRUE)
 
 
 
 
 
-pp_checks <- function(value, ppc, group) {
-  pmean <- ppc_stat(value, ppc, 'mean')
-  psd <- ppc_stat(value, ppc, 'sd')
-  pmed <- ppc_stat(value, ppc, 'median')
-  pmeang <- ppc_stat_grouped(value, ppc, 
-                             group = group, 'mean')
-  psdg <- ppc_stat_grouped(value, ppc,
-                           group = group, 'sd')
-  pmedg <- ppc_stat_grouped(value, ppc,
-                            group = group, 'median')
-  pe <- ppc_ecdf_overlay(value, ppc[1:50, ])
-  pd <- ppc_dens_overlay(value, ppc[1:50, ])
-  out <- list(pmean = pmean, psd = psd, pmed = pmed,
-              pmeang = pmeang, psdg = psdg, pmedg = pmedg,
-              pe = pe, pd = pd)
-  out
-}
 
-
-
-# longitudinal process
-pp_long1 <- posterior_predict(fit1)
-#pp_long2 <- posterior_predict(fit2)
-#pp_long3 <- posterior_predict(fit3)
-
-# checks using posterior predictive distribution
-long_checks1 <- pp_checks(longi$maxgcd, pp_long1, longi$id)
-#long_checks2 <- pp_checks(longi$maxgcd, pp_long2, longi$id)
-#long_checks3 <- pp_checks(longi$maxgcd, pp_long3, longi$id)
-
-
-
-# i need a plot average hazard
-#   really interested in knowing its shape
-#   want to know if hazard (non)monotonic and/or age-dependent
-#     these things don't necessarily go hand-in-hand
-#     hazard can be nonmonotonic but not age-dependent if something else induces it (e.g. geographic range change)
+## tree-based model
+#rpart.plot(tree_fit, type = 2)
+#tree_fit_party <- as.party(tree_fit)
+#tree_fit_party$fitted[["(response)"]]<- Surv(counti$time1, counti$time2, counti$event)
+#plot(tree_fit_party)
