@@ -67,13 +67,19 @@ interval_range <- disc_fit %>%
   geom_pointintervalh()
 
 
-modelr::data_grid(counti, maxgcd)
+# base-line hazard plot, measured as continuation ratio
+hazard_plot <- 
+  disc_fit %>%
+  spread_samples(b[i, f], `(Intercept)`) %>%
+  mutate(cr = exp(`(Intercept)` + b)) %>%
+  median_qi(.prob = 0.9) %>%
+  mutate(age = as.numeric(str_extract(f, '[0-9]+'))) %>%
+  ggplot(aes(y = cr, x = age, 
+             ymin = cr.low, ymax = cr.high)) +
+  geom_pointrange(fatten = 2) +
+  geom_line()
 
 
-
-
-# base-line hazard plot, continuation ratio
-# exp(ranef(disc_fit)$fact_relage[, 1])
 
 
 # posterior probability of observation surviving
@@ -84,9 +90,8 @@ pp_prob <- posterior_linpred(disc_fit, transform = TRUE)
 
 
 
-
-## tree-based model
-#rpart.plot(tree_fit, type = 2)
-#tree_fit_party <- as.party(tree_fit)
-#tree_fit_party$fitted[["(response)"]]<- Surv(counti$time1, counti$time2, counti$event)
-#plot(tree_fit_party)
+# tree-based model
+rpart.plot(tree_fit, type = 2)
+tree_fit_party <- as.party(tree_fit)
+tree_fit_party$fitted[["(response)"]]<- Surv(counti$time1, counti$time2, counti$event)
+plot(tree_fit_party)
