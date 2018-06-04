@@ -54,3 +54,10 @@ survival function. probability of survival at time t given survival up till that
 censoring. incomplete observation or event of interest has not occurred during observation period.
 
 joint model allows man aspects of the longitudinal model to be used as a covariate in the survival process. e.g. expected value, derivative of function, area under function, etc.
+
+
+
+
+discrete-time hazard model. this is pretty standard when we're dealing with naturally discrete time units. seth has the pieces that are assembled to form this model, but has never considered it this way. this model is built directly out of the discrete-time survival literature and represents something close to best practices for this type of data.
+
+paleo data has been analyed as both discrete time and continuous time (including by peter). however, as we look deeper at the data is becomes clear to in most cases a discrete time approach makes more sense. the time units in paleontological data are brackets between t and t + dt. also, in continuous time there should never be "ties" or events occurring at identical moments; these are the hallmark of an actually discrete time occurrence. while there are certainly events in earth's history that could cause ties (e.g. mass extinctions) these are inherently an exception and not a rule. Additionally, these ties are a function of the time averaging of the fossil record, so what might be reasonable ties at the million year discrete time scale, if we were to actually observe these events in continuous time there would be no ties (species go extinct as a random process).

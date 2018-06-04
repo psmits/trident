@@ -30,13 +30,19 @@ survi <- read_rds('../data/survival.rds')
 counti <- read_rds('../data/counting.rds')
 
 # transform the data for analysis
-counti <- prepare_analysis(counti, fossil.group = 'F')
+counti <- prepare_analysis(counti)
 
 
 # fit the model
-form <- formula(event ~ maxgcd + lag1_maxgcd + 
+form <- formula(event ~ maxgcd * lag1_maxgcd +
                 (1 | fact_relage))
-disc_fit <- stan_glmer(form, family = 'binomial', data = counti)
+forms <- list(form,
+             update(form, ~ . + (1 | fact_mybin)),
+             update(form, ~ . + (1 | fossil.group)),
+             update(form, ~ . + (1 | fact_mybin) + (1 | fossil.group)))
+
+disc_fit <- map(forms, ~ stan_glmer(.x, family = 'binomial', data = counti,
+                                    adapt_delta = 0.95))
 write_rds(disc_fit, path = '../data/disc_fit.rds')
 
 
@@ -45,6 +51,6 @@ write_rds(disc_fit, path = '../data/disc_fit.rds')
 # survival tree with time-varying covariates
 counti <- as.data.frame(counti)  # this is fucking annoying but necessary
 form <- formula(Surv(time1, time2, event) ~ 
-                maxgcd + lag1_maxgcd + relage)
+                maxgcd + lag1_maxgcd + relage + mybin + fossil.group)
 tree_fit <- LTRCART(formula = form, data = counti)
 write_rds(tree_fit, path = '../data/tree_fit.rds')

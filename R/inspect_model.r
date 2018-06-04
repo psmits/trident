@@ -34,7 +34,7 @@ counti <- read_rds('../data/counting.rds')
 # form of data that was analyzed
 counti_trans <- prepare_analysis(counti)
 inspect <- counti_trans %>%            # nice to see the super relevant columns
-  dplyr::select(event, relage, mybin, maxgcd, diff_maxgcd, lag1_maxgcd)
+  dplyr::select(event, relage, mybin, maxgcd, diff_maxgcd)
 
 # read in model fits
 disc_fit <- read_rds('../data/disc_fit.rds')
@@ -47,31 +47,35 @@ tree_fit <- read_rds('../data/tree_fit.rds')
 interval_est <- disc_fit %>%
   spread_samples(`(Intercept)`, 
                  maxgcd, 
-                 diff_maxgcd, 
-                 lag1_maxgcd, 
-                 `Sigma[fact_relage:(Intercept),(Intercept)]`) %>%
+                 lag1_maxgcd,
+                 `maxgcd:lag1_maxgcd`,
+                 `Sigma[fact_mybin:(Intercept),(Intercept)]`,
+                 `Sigma[fact_relage:(Intercept),(Intercept)]`,
+                 `Sigma[fossil.group:(Intercept),(Intercept)]`) %>%
   median_qi(.prob = c(0.9, 0.5))
 
 interval_eye <- disc_fit %>%
-  gather_samples(maxgcd, diff_maxgcd, lag1_maxgcd) %>%
+  gather_samples(`(Intercept)`, 
+                 maxgcd, 
+                 lag1_maxgcd) %>%
   ggplot(aes(y = term, x = estimate)) +
   geom_halfeyeh(.prob = c(0.9, 0.5))
 
 interval_range <- disc_fit %>%
   gather_samples(`(Intercept)`, 
                  maxgcd, 
-                 diff_maxgcd, 
                  lag1_maxgcd) %>%
   median_qi(.prob = c(0.9, 0.5)) %>%
   ggplot(aes(y = term, x = estimate, xmin = conf.low, xmax = conf.high)) +
   geom_pointintervalh()
 
 
-# base-line hazard plot, measured as continuation ratio
+# base-line hazard plot
 hazard_plot <- 
   disc_fit %>%
   spread_samples(b[i, f], `(Intercept)`) %>%
-  mutate(cr = exp(`(Intercept)` + b)) %>%
+  filter(str_detect(f, pattern = 'fact_mybin')) %>%
+  mutate(cr = invlogit(`(Intercept)` + b)) %>%
   median_qi(.prob = 0.9) %>%
   mutate(age = as.numeric(str_extract(f, '[0-9]+'))) %>%
   ggplot(aes(y = cr, x = age, 
@@ -81,12 +85,11 @@ hazard_plot <-
 
 
 
-
 # posterior probability of observation surviving
 pp_est <- posterior_predict(disc_fit)
 pp_prob <- posterior_linpred(disc_fit, transform = TRUE)
-
-
+# this is for ROC stuff
+pp_roc <- apply(pp_est, 1, function(x) auc(roc(counti_trans$event, x)))
 
 
 
