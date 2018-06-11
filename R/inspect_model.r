@@ -40,31 +40,51 @@ inspect <- counti_trans %>%            # nice to see the super relevant columns
 disc_fit <- read_rds('../data/disc_fit.rds')
 tree_fit <- read_rds('../data/tree_fit.rds')
 
+# estimate of out-of-sample performance
+compare_loo <- map(disc_fit, loo)
+compare_loo_tab <- loo::compare(x = compare_loo)
+compare_waic <- map(disc_fit, waic)
+compare_waic_tab <- loo::compare(x = compare_waic)
+
+# posterior probability of observation surviving
+pp_est <- map(disc_fit, posterior_predict)
+#fitted_samples(disc_fit[[1]])
+pp_prob <- map(disc_fit, ~ posterior_linpred(.x, transform = TRUE))
+#predicted_samples(disc_fit[[1]])
+
+# adequacy of fit ROC
+pp_roc <- map(pp_est, ~ apply(.x, 1, function(y) auc(roc(counti_trans$event, y))))
+
+# for each time bin
+#pp_est
+#counti_trans$fact_mybin
 
 
-# glmer model
+# pic a model
+#disc_best <- disc_fit[[2]]
+disc_best <- disc_fit[[4]]
 # posterior intervals
-interval_est <- disc_fit %>%
+interval_est <- disc_best %>%
   spread_samples(`(Intercept)`, 
                  maxgcd, 
-                 lag1_maxgcd,
-                 `maxgcd:lag1_maxgcd`,
+                 diff_maxgcd,
+                 `maxgcd:diff_maxgcd`,
                  `Sigma[fact_mybin:(Intercept),(Intercept)]`,
                  `Sigma[fact_relage:(Intercept),(Intercept)]`,
                  `Sigma[fossil.group:(Intercept),(Intercept)]`) %>%
   median_qi(.prob = c(0.9, 0.5))
 
-interval_eye <- disc_fit %>%
+interval_eye <- disc_best %>%
   gather_samples(`(Intercept)`, 
                  maxgcd, 
-                 lag1_maxgcd) %>%
+                 diff_maxgcd) %>%
   ggplot(aes(y = term, x = estimate)) +
   geom_halfeyeh(.prob = c(0.9, 0.5))
 
-interval_range <- disc_fit %>%
+interval_range <- disc_best %>%
   gather_samples(`(Intercept)`, 
                  maxgcd, 
-                 lag1_maxgcd) %>%
+                 diff_maxgcd) %>%
   median_qi(.prob = c(0.9, 0.5)) %>%
   ggplot(aes(y = term, x = estimate, xmin = conf.low, xmax = conf.high)) +
   geom_pointintervalh()
@@ -72,7 +92,7 @@ interval_range <- disc_fit %>%
 
 # base-line hazard plot
 hazard_plot <- 
-  disc_fit %>%
+  disc_best %>%
   spread_samples(b[i, f], `(Intercept)`) %>%
   filter(str_detect(f, pattern = 'fact_mybin')) %>%
   mutate(cr = invlogit(`(Intercept)` + b)) %>%
@@ -85,16 +105,9 @@ hazard_plot <-
 
 
 
-# posterior probability of observation surviving
-pp_est <- posterior_predict(disc_fit)
-pp_prob <- posterior_linpred(disc_fit, transform = TRUE)
-# this is for ROC stuff
-pp_roc <- apply(pp_est, 1, function(x) auc(roc(counti_trans$event, x)))
-
-
 
 # tree-based model
-rpart.plot(tree_fit, type = 2)
-tree_fit_party <- as.party(tree_fit)
-tree_fit_party$fitted[["(response)"]]<- Surv(counti$time1, counti$time2, counti$event)
-plot(tree_fit_party)
+#rpart.plot(tree_fit, type = 2)
+#tree_fit_party <- as.party(tree_fit)
+#tree_fit_party$fitted[["(response)"]]<- Surv(counti$time1, counti$time2, counti$event)
+#plot(tree_fit_party)
