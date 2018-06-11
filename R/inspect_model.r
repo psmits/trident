@@ -38,7 +38,6 @@ inspect <- counti_trans %>%            # nice to see the super relevant columns
 
 # read in model fits
 disc_fit <- read_rds('../data/disc_fit.rds')
-tree_fit <- read_rds('../data/tree_fit.rds')
 
 # estimate of out-of-sample performance
 compare_loo <- map(disc_fit, loo)
@@ -46,23 +45,22 @@ compare_loo_tab <- loo::compare(x = compare_loo)
 compare_waic <- map(disc_fit, waic)
 compare_waic_tab <- loo::compare(x = compare_waic)
 
-# posterior probability of observation surviving
-pp_est <- map(disc_fit, posterior_predict)
-#fitted_samples(disc_fit[[1]])
-pp_prob <- map(disc_fit, ~ posterior_linpred(.x, transform = TRUE))
-#predicted_samples(disc_fit[[1]])
-
-# adequacy of fit ROC
-pp_roc <- map(pp_est, ~ apply(.x, 1, function(y) auc(roc(counti_trans$event, y))))
-
-# for each time bin
-#pp_est
-#counti_trans$fact_mybin
-
-
-# pic a model
-#disc_best <- disc_fit[[2]]
+# limit
 disc_best <- disc_fit[[4]]
+# posterior probability of observation surviving
+pp_est <- posterior_predict(disc_best)
+pp_prob <- posterior_linpred(disc_best, transform = TRUE)
+# adequacy of fit ROC
+pp_auc <- apply(pp_est, 1, function(x) roc(counti_trans$event, x))
+
+
+# break up by point in time
+tt <- split(pp_est, counti_trans$fact_mybin)
+tt <- lapply(tt, function(x) matrix(x, nrow = 4000))
+ee <- split(counti_trans$event, counti_trans$fact_mybin)
+pp_auc_time <- map2(tt, ee, ~ apply(.x, 1, function(a) auc(roc(a, .y))))
+
+
 # posterior intervals
 interval_est <- disc_best %>%
   spread_samples(`(Intercept)`, 
@@ -74,20 +72,20 @@ interval_est <- disc_best %>%
                  `Sigma[fossil.group:(Intercept),(Intercept)]`) %>%
   median_qi(.prob = c(0.9, 0.5))
 
-interval_eye <- disc_best %>%
+effect_eye <- disc_best %>%
   gather_samples(`(Intercept)`, 
                  maxgcd, 
-                 diff_maxgcd) %>%
+                 diff_maxgcd,
+                 `maxgcd:diff_maxgcd`) %>%
   ggplot(aes(y = term, x = estimate)) +
   geom_halfeyeh(.prob = c(0.9, 0.5))
 
-interval_range <- disc_best %>%
-  gather_samples(`(Intercept)`, 
-                 maxgcd, 
-                 diff_maxgcd) %>%
-  median_qi(.prob = c(0.9, 0.5)) %>%
-  ggplot(aes(y = term, x = estimate, xmin = conf.low, xmax = conf.high)) +
-  geom_pointintervalh()
+vary_eye <- disc_best %>%
+  gather_samples(`Sigma[fact_mybin:(Intercept),(Intercept)]`,
+                 `Sigma[fact_relage:(Intercept),(Intercept)]`,
+                 `Sigma[fossil.group:(Intercept),(Intercept)]`) %>%
+  ggplot(aes(y = term, x = estimate)) +
+  geom_halfeyeh(.prob = c(0.9, 0.5))
 
 
 # base-line hazard plot
@@ -96,18 +94,8 @@ hazard_plot <-
   spread_samples(b[i, f], `(Intercept)`) %>%
   filter(str_detect(f, pattern = 'fact_mybin')) %>%
   mutate(cr = invlogit(`(Intercept)` + b)) %>%
-  median_qi(.prob = 0.9) %>%
   mutate(age = as.numeric(str_extract(f, '[0-9]+'))) %>%
-  ggplot(aes(y = cr, x = age, 
-             ymin = cr.low, ymax = cr.high)) +
-  geom_pointrange(fatten = 2) +
-  geom_line()
-
-
-
-
-# tree-based model
-#rpart.plot(tree_fit, type = 2)
-#tree_fit_party <- as.party(tree_fit)
-#tree_fit_party$fitted[["(response)"]]<- Surv(counti$time1, counti$time2, counti$event)
-#plot(tree_fit_party)
+  ggplot(aes(y = cr, x = age)) + 
+  stat_lineribbon() +
+  scale_fill_brewer() +
+  labs(x = 'age (My)', y = 'P(T = t | T >= t, x)')
