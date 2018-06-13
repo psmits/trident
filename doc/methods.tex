@@ -39,7 +39,7 @@ In survival analysis the hazard function describes the in stannous rate of extin
 
 \(\Theta\) is then parameterized as a hierarchical model with multiple non-nested varying intercepts CITATION. First, we considered two aspects of geographic range as continuous covariates: geographic range \(r\) during interval \(t\), and the difference \(d\) between the geographic range at \(t - 1\) and \(t\). We also considered the interaction between geographic range during intervals \(t\) and \(t - 1\). At the first observation for a taxon, the diff of geographic range is 0.
 
-Second, we considered two aspects of global temperature: mean temperature during interval \(t\), and the mean temperature during interval \(t - 1\).
+Second, we considered two aspects of global temperature: mean temperature during interval \(t\), and the mean temperature during interval \(t - 1\). 
 
 
 Our model had up to three non-nested varying intercepts: age of observation \(a\), bin of observation \(b\), and taxonomic group of the observation \(c\). Age of observation is a critical varying intercept as this effect, when considered along with the intercept \(\beta_{0}\), captures changes to baseline hazard with species age. Because these factors are modeled as varying intercepts, we are assuming that the effects of geographic range (\(\beta_{1} \dots \beta_{3}\)) and temperature (\(\beta_{4} \dots \beta_{5}\)) are constant over time.

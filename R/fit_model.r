@@ -4,12 +4,6 @@ library(tidyverse)
 # parallel processing
 library(parallel)
 
-# survival
-library(survival)
-library(LTRCtrees)
-library(rpart.plot)
-library(partykit)
-
 # bayes
 library(arm)
 library(rstanarm)
@@ -17,8 +11,6 @@ library(bayesplot)
 source('../R/stan_utility.R')
 
 # misc
-library(splines)
-library(pROC)
 source('../R/process_foo.r')
 
 # important constants
@@ -43,5 +35,5 @@ form2 <- update(form,
 forms <- list(form, form2)
 
 disc_fit <- map(forms, ~ stan_glmer(.x, family = 'binomial', data = counti,
-                                    adapt_delta = 0.999, thin = 2))
+                                    adapt_delta = 0.999, thin = 4))
 write_rds(disc_fit, path = '../data/disc_fit.rds')
