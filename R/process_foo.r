@@ -60,14 +60,19 @@ prepare_analysis <- function(x, fossil.group = NULL) {
   # prep the data
   tb <- tb %>%
     arrange(fullname, desc(mybin)) %>%
-    mutate_at(.vars = vars(ncell, latext, maxgcd, area),
+    mutate_at(.vars = vars(ncell, latext, maxgcd, area, temp),
               .funs = ~ arm::rescale(log1p(.x))) %>%
     group_by(fullname) %>%
     mutate(diff_maxgcd = c(0, diff(maxgcd)),
            lag1_maxgcd = lag(maxgcd, default = 0),
            lag2_maxgcd = lag(maxgcd, n = 2, default = 0),
            lead1_maxgcd = lead(maxgcd, default = 0),
-           lead2_maxgcd = lead(maxgcd, n = 2, default = 0)) %>%
+           lead2_maxgcd = lead(maxgcd, n = 2, default = 0),
+           diff_temp = c(0, diff(temp)),
+           lag1_temp = lag(temp, default = 0),
+           lag2_temp = lag(temp, n = 2, default = 0),
+           lead1_temp = lead(temp, default = 0),
+           lead2_temp = lead(temp, n = 2, default = 0)) %>%
     ungroup() %>%
     mutate(fact_mybin = as.factor(mybin),
            fact_relage = as.factor(relage))
@@ -76,4 +81,33 @@ prepare_analysis <- function(x, fossil.group = NULL) {
   tb$fact_relage <- as.factor(tb$relage)
     
   tb
+}
+
+
+
+
+#' Break time data up into bins
+#' 
+#' Have fun.
+#' 
+#' @param x vector of ages
+#' @param by bin width
+#' @return vector of bin memberships
+break_my <- function(x, by = 1, number = NULL) {
+  top <- ceiling(max(x))
+  bot <- floor(min(x))
+  if(!is.null(by)) {
+    unt <- seq(from = bot, to = top, by = by)
+  } else {
+    unt <- seq(from = bot, to = top, length.out = number)
+  }
+  unt1 <- unt[-length(unt)]
+  unt2 <- unt[-1]
+  uu <- map(map2(unt1, unt2, ~ x >= .x & x < .y), which)
+
+  y <- x
+  for(ii in seq(length(uu))) {
+    y[uu[[ii]]] <- ii
+  }
+  y
 }

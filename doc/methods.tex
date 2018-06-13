@@ -16,7 +16,7 @@
 
 \section{Data Specifications}
 
-Microfossil occurrence data was downloaded from the Neptune Database \url{http://www.nsb-mfn-berlin.de/nannotax}. Occurrence information was downloaded for calcareous nannofossils, diatoms, dinoflaggellants, foraminifera, and radiolarians from the entire globe and having occurred after 65 Mya.
+Microfossil occurrence data was downloaded from the Neptune Database \url{http://www.nsb-mfn-berlin.de/nannotax}. Occurrence information was downloaded for calcareous nannofossils, diatoms, dinoflaggellants, foraminifera, and radiolarians from the entire globe and having occurred between 120 and 0 Mya. This selection of species was then culled to just those species which have their first occurrence at most 63 My; this avoids those taxa which survived the K/Pg boundary, those taxa arrising just after the K/Pg boundary, and lines up the occurrences with the temperature time-series (discussed below).
 
 Data was binned into 1 My bins based on the estimated age of the fossil occurrence. The estimated ages of each occurrence is a product of core-specific age-models and are overly precise. The hope is that binning the data overcomes the heterogenity in age-models between the cores. 
 % binning, [t - 1, t)
@@ -28,6 +28,8 @@ A taxon's geographic range during a 1 My bin was calculated as the maximum great
 
 Geographic range was then log-plus-one transformed and then standardized by zero-centering the data and then dividing by its standard deviation so that geographic range had mean 0 and standard deviation 1.
 
+Temperature data is based on estimates from Cramer et al CITATION. These estimates are based on Magnesian/Calcium isotope ratios and are a more accurate estimate of global temperature than the standard Oxygen isotope-based estimates because Mg/Ca based estimates are not effected by ice-volume and fresh-water input (e.g. metioric water). Cramer et al. provide temperature estimates for every 0.1 My from 0 to 63 Mya; we binned these estimates every 1 My in accordance with the way we binned all fossil occurrences.
+
 
 \section{Model Specifications}
 
@@ -35,9 +37,12 @@ In survival analysis, the hazard funciton describes the instanenous rate of exti
 
 In survival analysis the hazard function describes the in stannous rate of extinction for a species given matrix of covariates X, \(\lambda(t | X)\). We parameterized the hazard function as a logistic regression/generalized linear model defined \(\lambda(t | X) = h(\Theta)\) where \(h(.)\) is an inverse logit link function and \(\Theta\) is the probability of a taxon going extinction during interval \(t\). 
 
-\(\Theta\) is then parameterized as a hierarchical model with multiple non-nested varying intercepts CITATION. We considered two aspects of geographic range as continuous covariates: geographic range \(r\) during interval \(t\), and the difference \(d\) between the geographic range at \(t - 1\) and \(t\). We also considered the interaction between geographic range during intervals \(t\) and \(t - 1\). At the first observation for a taxon, the diff of geographic range is 0.
+\(\Theta\) is then parameterized as a hierarchical model with multiple non-nested varying intercepts CITATION. First, we considered two aspects of geographic range as continuous covariates: geographic range \(r\) during interval \(t\), and the difference \(d\) between the geographic range at \(t - 1\) and \(t\). We also considered the interaction between geographic range during intervals \(t\) and \(t - 1\). At the first observation for a taxon, the diff of geographic range is 0.
 
-Our model had up to three non-nested varying intercepts: age of observation \(a\), bin of observation \(b\), and taxonomic group of the observation \(c\). Age of observation is a critical varying intercept as this effect, when considered along with the intercept \(\beta_{0}\), captures changes to baseline hazard with species age. Because these factors are modeled as varying intercepts, we are assuming that the effects of geographic range (\(\beta_{1} \dots \beta_{3}\))
+Second, we considered two aspects of global temperature: mean temperature during interval \(t\), and the mean temperature during interval \(t - 1\).
+
+
+Our model had up to three non-nested varying intercepts: age of observation \(a\), bin of observation \(b\), and taxonomic group of the observation \(c\). Age of observation is a critical varying intercept as this effect, when considered along with the intercept \(\beta_{0}\), captures changes to baseline hazard with species age. Because these factors are modeled as varying intercepts, we are assuming that the effects of geographic range (\(\beta_{1} \dots \beta_{3}\)) and temperature (\(\beta_{4} \dots \beta_{5}\)) are constant over time.
 
 The logistic regression can thus be expressed as 
 \begin{equation}

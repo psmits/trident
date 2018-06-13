@@ -6,12 +6,6 @@ library(tidybayes)
 # parallel processing
 library(parallel)
 
-# survival
-library(survival)
-library(LTRCtrees)
-library(rpart.plot)
-library(partykit)
-
 # bayes
 library(arm)
 library(rstanarm)
@@ -19,7 +13,6 @@ library(bayesplot)
 source('../R/stan_utility.R')
 
 # misc
-library(splines)
 library(pROC)
 source('../R/process_foo.r')
 
@@ -33,33 +26,10 @@ counti <- read_rds('../data/counting.rds')
 
 # form of data that was analyzed
 counti_trans <- prepare_analysis(counti)
-inspect <- counti_trans %>%            # nice to see the super relevant columns
-  dplyr::select(event, relage, mybin, maxgcd, diff_maxgcd)
 
 # read in model fits
 disc_fit <- read_rds('../data/disc_fit.rds')
-
-# estimate of out-of-sample performance
-compare_loo <- map(disc_fit, loo)
-compare_loo_tab <- loo::compare(x = compare_loo)
-compare_waic <- map(disc_fit, waic)
-compare_waic_tab <- loo::compare(x = compare_waic)
-
-# limit
-disc_best <- disc_fit[[4]]
-# posterior probability of observation surviving
-pp_est <- posterior_predict(disc_best)
-pp_prob <- posterior_linpred(disc_best, transform = TRUE)
-# adequacy of fit ROC
-pp_auc <- apply(pp_est, 1, function(x) roc(counti_trans$event, x))
-
-
-# break up by point in time
-tt <- split(pp_est, counti_trans$fact_mybin)
-tt <- lapply(tt, function(x) matrix(x, nrow = 4000))
-ee <- split(counti_trans$event, counti_trans$fact_mybin)
-pp_auc_time <- map2(tt, ee, ~ apply(.x, 1, function(a) auc(roc(a, .y))))
-
+disc_best <- disc_fit[[1]]
 
 # posterior intervals
 interval_est <- disc_best %>%
@@ -67,6 +37,8 @@ interval_est <- disc_best %>%
                  maxgcd, 
                  diff_maxgcd,
                  `maxgcd:diff_maxgcd`,
+                 temp,
+                 lag1_temp,
                  `Sigma[fact_mybin:(Intercept),(Intercept)]`,
                  `Sigma[fact_relage:(Intercept),(Intercept)]`,
                  `Sigma[fossil.group:(Intercept),(Intercept)]`) %>%
@@ -76,7 +48,9 @@ effect_eye <- disc_best %>%
   gather_samples(`(Intercept)`, 
                  maxgcd, 
                  diff_maxgcd,
-                 `maxgcd:diff_maxgcd`) %>%
+                 `maxgcd:diff_maxgcd`,
+                 temp,
+                 lag1_temp) %>%
   ggplot(aes(y = term, x = estimate)) +
   geom_halfeyeh(.prob = c(0.9, 0.5))
 

@@ -10,21 +10,16 @@ library(XML)
 library(maptools)
 library(geosphere)
 
-# survival
-library(survival)
-library(flexsurv)
-library(survminer)
-
 # plotting stuff
-library(ggplot2)
 library(scales)
 
+# misc
 source('../R/process_foo.r')
 
 
 # constants
 bin_width <- 1
-age_max <- 65
+age_max <- 63
 bin_number <- age_max / bin_width
 
 # read in data file and clean column names
@@ -47,14 +42,18 @@ nano[nano$fossil.group == 'FALSE', 'fossil.group'] <- 'F'
 nano$longitude <- parse_double(nano$longitude)
 nano$latitude <- parse_double(nano$latitude)
 
-# basic properties
-nano <- nano %>%
+nano <- nano %>% 
+  filter(!is.na(plat), 
+         !is.na(plng)) %>%
+  group_by(taxon.id) %>%
+  filter(max(age) < age_max) %>%
+  ungroup() %>%
   # some don't have paleolat or long
-  filter(!is.na(plat), !is.na(plng)) %>%
+  # also need to limit to line up with mgca
   # then
   # assign million year bins (decreasing; youngest lowest)
   dplyr::arrange(desc(age)) %>%
-  dplyr::mutate(mybin = ntile(age, bin_number)) %>%
+  dplyr::mutate(mybin = break_my(age, by = 1)) %>%
   # then
   # make a species genus combo
   dplyr::mutate(fullname = str_c(genus, '_', species)) %>% 
@@ -108,9 +107,6 @@ nano <-
 
 # get all the important geographic range information
 # have to summarize the big matrix nano
-
-count.groups <- with(nano, table(fossil.group))
-
 sprange <- nano %>%
   group_by(fullname, mybin) %>%
   dplyr::summarise(nocc = n(),  # number of occurrences in bin
@@ -126,6 +122,23 @@ sprange <- nano %>%
          latext > 0)
 
 
+# want to add in the lear mgca data
+mgca <- read_tsv('../data/cramer/cramer_temp.txt')
+names(mgca) <- str_to_lower(names(mgca))
+names(mgca) <- str_remove_all(names(mgca), '[^[[:alnum:]]]')
+mgca <- mgca %>%
+  mutate(mybin = break_my(age)) %>%
+  group_by(mybin) %>%
+  summarize(temp = mean(temperature, na.rm = TRUE),
+            temp_sd = sd(temperature, na.rm = TRUE)) %>%
+  ungroup()
+
+# put the climate data into the dataframe
+# easy because i've binned them the say way using break_my
+sprange <- left_join(sprange, mgca, by = 'mybin')
+
+
+
 # longitudinal dataset
 # relative age in bins
 longi <- sprange %>%
@@ -138,24 +151,11 @@ ff <- split(longi, longi$fullname)
 ff <- purrr::map(ff, function(x) {
                    x <- x[order(x$relage), ]
                    x})
-# longi $>$ group_by(fullname) %>% arrange(relage)  # should work?
-# longi $>$ group_by(fullname) %>% purr(., ~ .x[order(.x$relage)])
-
-
 longi <- purrr::reduce(ff, bind_rows)
+
 
 # write to file
 write_rds(longi, path = '../data/longitude.rds')
-
-# make a plot of a random selection of species
-randraw <- longi %>%
-  group_by(fullname) %>%
-  mutate(logmaxgcd = log1p(maxgcd)) %>%
-  sample_n_groups(size = 8) %>%
-  ggplot(aes(x = relage, y = logmaxgcd, group = fullname, colour = fullname)) + 
-  geom_line() + 
-  geom_point() +
-  theme(legend.position = 'bottom')
 
 
 # survival dataset
@@ -201,18 +201,6 @@ counti$cc.rescale <- plyr::mapvalues(counti$cc,
 counti$cc.rescale <- with(counti, {
                           factor(cc.rescale, 
                           levels = sort(unique(as.numeric(cc.rescale))))})
-
-# make some data plots
-sf <- with(survi, {survfit(Surv(duration, dead) ~ 1, survi)})
-sfc <- with(counti, {survfit(Surv(time = time1,
-                                  time2 = time2,
-                                  event = event,
-                                  type = 'counting') ~ 1, counti)})
-# survival plot (K-M est)
-gsf <- ggsurvplot(fit = sf, data = survi, fun = 'pct')  
-gsfc <- ggsurvplot(fit = sfc, data = counti, fun = 'pct')  
-# event plot
-gsfe <- ggsurvevents(fit = sf, data = survi)  
 
 # write to file
 write_rds(survi, path = '../data/survival.rds')
