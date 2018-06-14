@@ -33,11 +33,17 @@ octg <- counti %>%
   ggplot(aes(x = mybin, fill = factor(event))) +
   stat_bin() +
   facet_grid(fossil.group ~ ., switch = 'y')
+ggsave(filename = '../doc/figure/occ_time_label.png',
+       plot = octg, width = 4, height = 6)
+
+
 
 # relative "abundance" of microfossil groups over time
 ocag <- counti %>%
   ggplot(aes(x = mybin, fill = fossil.group)) +
   geom_histogram(position = 'fill')
+ggsave(filename = '../doc/figure/abn_time_stack.png',
+       plot = ocag, width = 6, height = 6)
 
 # occurrences by relage
 ocrg <- counti %>% 
@@ -48,6 +54,8 @@ ocrg <- counti %>%
   ggplot(aes(x = maxage, fill = died)) +
   stat_bin() +
   facet_grid(fossil.group ~ ., switch = 'y')
+ggsave(filename = '../doc/figure/age_label.png',
+       plot = ocrg, width = 4, height = 6)
 
 # make a plot of a random selection of species
 srg <- counti %>% 
@@ -59,6 +67,8 @@ srg <- counti %>%
   geom_line() +
   geom_point() +
   theme(legend.position = 'bottom')
+ggsave(filename = '../doc/figure/range_time.png',
+       plot = srg, width = 6, height = 4)
 
 # lots of little code here
 # for FAD/LAD accumulation curves
@@ -91,6 +101,11 @@ ccg <- bind_rows(ft, lt, .id = 'type') %>%
   geom_line() +
   facet_grid(~ fossil.group) +
   labs(x = 'Time (My)', y = 'Cummulative count')
+ggsave(filename = '../doc/figure/fad_lad_count_wide.png',
+       plot = ccg, width = 6, height = 2)
+ccg2 <- ccg + facet_grid(fossil.group ~ ., switch = 'y', scales = 'free_y')
+ggsave(filename = '../doc/figure/fad_lad_count_tall.png',
+       plot = ccg2, width = 2, height = 6)
 
 
 # looking at the temperature data
@@ -120,3 +135,5 @@ tpg <- mg %>%
   geom_line() +
   scale_colour_manual(values = c('goldenrod', 'skyblue')) +
   labs(x = 'Time (My)', y = 'Temperature diff. from modern (C)')
+ggsave(filename = '../doc/figure/cramer_temp.png',
+       plot = tpg, width = 6, height = 3)

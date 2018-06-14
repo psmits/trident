@@ -53,6 +53,8 @@ effect_eye <- disc_best %>%
                  lag1_temp) %>%
   ggplot(aes(y = term, x = estimate)) +
   geom_halfeyeh(.prob = c(0.9, 0.5))
+ggsave(filename = '../doc/figure/effect_est.png',
+       plot = effect_eye, width = 4, height = 6)
 
 vary_eye <- disc_best %>%
   gather_samples(`Sigma[fact_mybin:(Intercept),(Intercept)]`,
@@ -60,6 +62,8 @@ vary_eye <- disc_best %>%
                  `Sigma[fossil.group:(Intercept),(Intercept)]`) %>%
   ggplot(aes(y = term, x = estimate)) +
   geom_halfeyeh(.prob = c(0.9, 0.5))
+ggsave(filename = '../doc/figure/variance_components.png',
+       plot = vary_eye, width = 2, height = 4)
 
 
 # base-line hazard plot
@@ -73,3 +77,5 @@ hazard_plot <-
   stat_lineribbon() +
   scale_fill_brewer() +
   labs(x = 'age (My)', y = 'P(T = t | T >= t, x)')
+ggsave(filename = '../doc/figure/hazard_baseline.png',
+       plot = hazard_plot, width = 6, height = 4)

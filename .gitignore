@@ -1,4 +1,5 @@
 .dropbox
+*.tmp.R
 *.rds
 *.csv
 *.rdata

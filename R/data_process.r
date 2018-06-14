@@ -59,7 +59,6 @@ nano <- nano %>%
   dplyr::mutate(fullname = str_c(genus, '_', species)) %>% 
   arrange(fullname)
 
-
 # assign everything a geographic cell using paleocoordinates
 eq <- CRS("+proj=cea +lat_0=0 +lon_0=0 +lat_ts=30 +a=6371228.0 +units=m")
 globe.map <- readOGR('../data/ne_10m_coastline.shp')  # from natural earth
@@ -71,7 +70,6 @@ ras <- rasterize(spatialref, r)
 # get cell # for each observation
 nano$cell <- cellFromXY(ras, 
                         xy = as.data.frame(nano[, c('plng', 'plat')]))
-
 
 # ecological information
 idinfo <- read_csv('../data/ezard2011/ezard_id2.csv')
@@ -137,7 +135,13 @@ mgca <- mgca %>%
 # easy because i've binned them the say way using break_my
 sprange <- left_join(sprange, mgca, by = 'mybin')
 
-
+# exclude the last cohort because artifact re. never possible to die
+# another example of me not knowing the tidy solution
+# because i'm not excluding rows within groups
+# i'm removing groups based on row value
+r <- split(sprange, sprange$fullname)
+r <- r[map_lgl(r, ~ max(.x$mybin) > 1)]
+sprange <- reduce(r, rbind)
 
 # longitudinal dataset
 # relative age in bins

@@ -29,10 +29,15 @@ form <- formula(event ~ maxgcd * diff_maxgcd +
                 temp + lag1_temp +
                 (1 | fact_relage) + 
                 (1 | fossil.group) + 
-                (1 | fact_mybin))
+                (1 + maxgcd * diff_maxgcd | fact_mybin))
+
 form2 <- update(form, 
-                ~ . - diff_maxgcd - maxgcd:diff_maxgcd - lag1_temp)
-forms <- list(form, form2)
+                ~ . - diff_maxgcd - maxgcd:diff_maxgcd - 
+                  lag1_temp - 
+                  (1 + maxgcd * diff_maxgcd | fact_mybin) + (1 + maxgcd | fact_mybin))
+form3 <- update(form2, 
+                ~ . - (1 + maxgcd | fact_mybin) + (1 | fact_mybin))
+forms <- list(form, form2, form3)
 
 disc_fit <- map(forms, ~ stan_glmer(.x, family = 'binomial', data = counti,
                                     adapt_delta = 0.999, thin = 4))

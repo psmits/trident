@@ -57,13 +57,13 @@ pp_prob <- map(pe, ~ future::value(.x))
 # adequacy of fit ROC
 pp_roc <- map(pp_est, ~ apply(.x, 1, function(y) roc(counti_trans$event, y)))
 pp_auc <- map(pp_roc, function(y) map_dbl(y, ~ auc(.x)))
+map(pp_auc, summary)
 
 
-# break up by point in time
-#tt <- map(pp_est, ~ split(.x, counti_trans$fact_mybin))
-#tt <- map(tt, ~ matrix(.x, nrow = 4000))
-#ee <- split(counti_trans$event, counti_trans$fact_mybin)
-#pp_auc_time <- mcMap(function(x, y) apply(x, 1, function(a) auc(roc(a, y))),
-#                     x = tt, y = ee)
-#pat <- map2(tt, ee, ~ future::future(apply(.x, 1, function(a) auc(roc(a, .y)))))
-#pat <- map(pat, ~ future::value(.x))
+## break up by point in time
+tt <- map(pp_est, ~ split(.x, counti_trans$fact_mybin))
+tt <- map(tt, ~ map(.x, function(y) matrix(y, nrow = 1000)))
+ee <- split(counti_trans$event, counti_trans$fact_mybin)
+row_auc <- function(x, y) apply(x, 1, function(a) auc(roc(a, y)))
+pat <- map(tt, ~ map2(.x, ee, function(a, b) try(row_auc(a, b))))
+map(pat, ~ map(.x, ~ try(summary(.x))))
