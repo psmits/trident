@@ -88,7 +88,7 @@ prepare_analysis <- function(x, fossil.group = NULL) {
 
 #' Break time data up into bins
 #' 
-#' Have fun.
+#' Have fun with this. basic rules. greater than equal to base, less than top.
 #' 
 #' @param x vector of ages
 #' @param by bin width
@@ -111,3 +111,15 @@ break_my <- function(x, by = 1, number = NULL) {
   }
   y
 }
+
+#' Did function return an error?
+#' 
+#' Given result, did it return a try-error? Assumes results wrapped in try(...). 
+#' This is used with purrr::keep to process vectors.
+#' TRUE means there is no error because we're checking for clean. 
+#' FALSE means an error was returned.
+#' This is a clean-ish way of using try(...) when you didn't or can't use purrr::safely.
+#'
+#' @param x element.
+#' @return logical TRUE for no error, FALSE for error.
+check_class <- function(x) class(x) != 'try-error'

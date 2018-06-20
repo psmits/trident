@@ -42,6 +42,11 @@ nano[nano$fossil.group == 'FALSE', 'fossil.group'] <- 'F'
 nano$longitude <- parse_double(nano$longitude)
 nano$latitude <- parse_double(nano$latitude)
 
+nano <- nano %>%
+   filter(#fossil.group == 'F',
+          fossil.group != 'DN')
+
+
 nano <- nano %>% 
   filter(!is.na(plat), 
          !is.na(plng)) %>%

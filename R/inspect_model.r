@@ -39,9 +39,28 @@ interval_est <- disc_best %>%
                  `maxgcd:diff_maxgcd`,
                  temp,
                  lag1_temp,
+                 `Sigma[fossil.group:fact_mybin:(Intercept),(Intercept)]`,
+                 `Sigma[fossil.group:fact_mybin:maxgcd,(Intercept)]`,
+                 `Sigma[fossil.group:fact_mybin:diff_maxgcd,(Intercept)]`,
+                 `Sigma[fossil.group:fact_mybin:maxgcd:diff_maxgcd,(Intercept)]`,
+                 `Sigma[fossil.group:fact_mybin:maxgcd,maxgcd]`,
+                 `Sigma[fossil.group:fact_mybin:diff_maxgcd,maxgcd]`,
+                 `Sigma[fossil.group:fact_mybin:maxgcd:diff_maxgcd,maxgcd]`,
+                 `Sigma[fossil.group:fact_mybin:diff_maxgcd,diff_maxgcd]`,
+                 `Sigma[fossil.group:fact_mybin:maxgcd:diff_maxgcd,diff_maxgcd]`,
+                 `Sigma[fossil.group:fact_mybin:maxgcd:diff_maxgcd,maxgcd:diff_maxgcd]`,
+                 `Sigma[fossil.group:fact_relage:(Intercept),(Intercept)]`,
                  `Sigma[fact_mybin:(Intercept),(Intercept)]`,
-                 `Sigma[fact_relage:(Intercept),(Intercept)]`,
-                 `Sigma[fossil.group:(Intercept),(Intercept)]`) %>%
+                 `Sigma[fact_mybin:maxgcd,(Intercept)]`,
+                 `Sigma[fact_mybin:diff_maxgcd,(Intercept)]`,
+                 `Sigma[fact_mybin:maxgcd:diff_maxgcd,(Intercept)]`,
+                 `Sigma[fact_mybin:maxgcd,maxgcd]`,
+                 `Sigma[fact_mybin:diff_maxgcd,maxgcd]`,
+                 `Sigma[fact_mybin:maxgcd:diff_maxgcd,maxgcd]`,
+                 `Sigma[fact_mybin:diff_maxgcd,diff_maxgcd]`,
+                 `Sigma[fact_mybin:maxgcd:diff_maxgcd,diff_maxgcd]`,
+                 `Sigma[fact_mybin:maxgcd:diff_maxgcd,maxgcd:diff_maxgcd]`,
+                 `Sigma[fact_relage:(Intercept),(Intercept)]`) %>%
   median_qi(.prob = c(0.9, 0.5))
 
 effect_eye <- disc_best %>%
@@ -57,20 +76,39 @@ ggsave(filename = '../doc/figure/effect_est.png',
        plot = effect_eye, width = 4, height = 6)
 
 vary_eye <- disc_best %>%
-  gather_samples(`Sigma[fact_mybin:(Intercept),(Intercept)]`,
-                 `Sigma[fact_relage:(Intercept),(Intercept)]`,
-                 `Sigma[fossil.group:(Intercept),(Intercept)]`) %>%
+  gather_samples(`Sigma[fossil.group:fact_mybin:(Intercept),(Intercept)]`,
+                 `Sigma[fossil.group:fact_mybin:maxgcd,(Intercept)]`,
+                 `Sigma[fossil.group:fact_mybin:diff_maxgcd,(Intercept)]`,
+                 `Sigma[fossil.group:fact_mybin:maxgcd:diff_maxgcd,(Intercept)]`,
+                 `Sigma[fossil.group:fact_mybin:maxgcd,maxgcd]`,
+                 `Sigma[fossil.group:fact_mybin:diff_maxgcd,maxgcd]`,
+                 `Sigma[fossil.group:fact_mybin:maxgcd:diff_maxgcd,maxgcd]`,
+                 `Sigma[fossil.group:fact_mybin:diff_maxgcd,diff_maxgcd]`,
+                 `Sigma[fossil.group:fact_mybin:maxgcd:diff_maxgcd,diff_maxgcd]`,
+                 `Sigma[fossil.group:fact_mybin:maxgcd:diff_maxgcd,maxgcd:diff_maxgcd]`,
+                 `Sigma[fossil.group:fact_relage:(Intercept),(Intercept)]`,
+                 `Sigma[fact_mybin:(Intercept),(Intercept)]`,
+                 `Sigma[fact_mybin:maxgcd,(Intercept)]`,
+                 `Sigma[fact_mybin:diff_maxgcd,(Intercept)]`,
+                 `Sigma[fact_mybin:maxgcd:diff_maxgcd,(Intercept)]`,
+                 `Sigma[fact_mybin:maxgcd,maxgcd]`,
+                 `Sigma[fact_mybin:diff_maxgcd,maxgcd]`,
+                 `Sigma[fact_mybin:maxgcd:diff_maxgcd,maxgcd]`,
+                 `Sigma[fact_mybin:diff_maxgcd,diff_maxgcd]`,
+                 `Sigma[fact_mybin:maxgcd:diff_maxgcd,diff_maxgcd]`,
+                 `Sigma[fact_mybin:maxgcd:diff_maxgcd,maxgcd:diff_maxgcd]`,
+                 `Sigma[fact_relage:(Intercept),(Intercept)]`) %>%
   ggplot(aes(y = term, x = estimate)) +
   geom_halfeyeh(.prob = c(0.9, 0.5))
 ggsave(filename = '../doc/figure/variance_components.png',
        plot = vary_eye, width = 2, height = 4)
 
-
 # base-line hazard plot
 hazard_plot <- 
   disc_best %>%
   spread_samples(b[i, f], `(Intercept)`) %>%
-  filter(str_detect(f, pattern = 'fact_mybin')) %>%
+  filter(str_detect(f, pattern = 'fact_mybin'),
+         !str_detect(f, pattern = 'fossil.group')) %>%
   mutate(cr = invlogit(`(Intercept)` + b)) %>%
   mutate(age = as.numeric(str_extract(f, '[0-9]+'))) %>%
   ggplot(aes(y = cr, x = age)) + 
@@ -79,3 +117,20 @@ hazard_plot <-
   labs(x = 'age (My)', y = 'P(T = t | T >= t, x)')
 ggsave(filename = '../doc/figure/hazard_baseline.png',
        plot = hazard_plot, width = 6, height = 4)
+
+
+comp_const <- disc_best %>%
+  spread_samples(maxgcd, diff_maxgcd, `maxgcd:diff_maxgcd`)
+
+comp_var <- disc_best %>%
+  spread_samples(b[i, f]) %>%
+  spread(i, b) %>%
+  mutate(type = str_remove_all(f, '[0-9]'))
+
+comp <- full_join(comp_const, comp_var, by = c('.chain', '.iteration'))
+
+
+# figure
+# fossil group ~ covariate 
+# each facet is time series
+# 4 fossil groups, 3 covariates of interest
