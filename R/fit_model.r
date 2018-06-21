@@ -25,8 +25,7 @@ counti <- read_rds('../data/counting.rds')
 counti <- prepare_analysis(counti)
 
 # fit the model
-form <- formula(event ~ temp + lag1_temp +
-                maxgcd * diff_maxgcd + 
+form <- formula(event ~ temp + lag1_temp + maxgcd * diff_maxgcd + 
                 (1 + maxgcd * diff_maxgcd | fact_mybin/fossil.group) + 
                 (1 | fact_relage/fossil.group))
 form2 <- update(form, 

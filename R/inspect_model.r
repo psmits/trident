@@ -118,7 +118,7 @@ hazard_plot <-
   labs(x = 'age (My)', y = 'P(T = t | T >= t, x)')
 ggsave(filename = '../doc/figure/hazard_baseline.png',
        plot = hazard_plot, width = 6, height = 4)
-
+# can also then compare between taxonomic groups because i have that calculated
 
 
 
