@@ -15,6 +15,7 @@ source('../R/stan_utility.R')
 # misc
 library(pROC)
 source('../R/process_foo.r')
+source('../R/plot_foo.r')
 
 # important constants
 options(mc.cores = parallel::detectCores())
@@ -119,18 +120,11 @@ ggsave(filename = '../doc/figure/hazard_baseline.png',
        plot = hazard_plot, width = 6, height = 4)
 
 
-comp_const <- disc_best %>%
-  spread_samples(maxgcd, diff_maxgcd, `maxgcd:diff_maxgcd`)
-
-comp_var <- disc_best %>%
-  spread_samples(b[i, f]) %>%
-  spread(i, b) %>%
-  mutate(type = str_remove_all(f, '[0-9]'))
-
-comp <- full_join(comp_const, comp_var, by = c('.chain', '.iteration'))
 
 
-# figure
-# fossil group ~ covariate 
-# each facet is time series
-# 4 fossil groups, 3 covariates of interest
+# make plots of effect change over time for
+#   3 covariates
+#   4 taxonomic groups
+by_taxon <- plot_taxon_covariate_time(disc_best)
+ggsave(filename = '../doc/figure/eff_time_group.png', plot = by_taxon,
+       height = 8, width = 8)

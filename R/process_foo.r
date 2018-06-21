@@ -38,9 +38,6 @@ dist_gcd <- function(x, y) max(distm(cbind(x, y), fun = distGeo))
 #' @return most common entry in vector x
 plurality <- function(x) names(which.max(table(x)))
 
-
-
-
 #' Prepare tibble for analysis
 #'
 #' This is mostly an internal function. Takes a tibble and returns a tibble with some variables transformed.
@@ -82,8 +79,6 @@ prepare_analysis <- function(x, fossil.group = NULL) {
     
   tb
 }
-
-
 
 
 #' Break time data up into bins
