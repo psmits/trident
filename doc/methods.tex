@@ -39,15 +39,35 @@ In survival analysis the hazard function describes the in stannous rate of extin
 
 \(\Theta\) is then parameterized as a hierarchical model with multiple non-nested varying intercepts CITATION. First, we considered two aspects of geographic range as continuous covariates: geographic range \(r\) during interval \(t\), and the difference \(d\) between the geographic range at \(t - 1\) and \(t\). We also considered the interaction between geographic range during intervals \(t\) and \(t - 1\). At the first observation for a taxon, the diff of geographic range is 0.
 
-Second, we considered two aspects of global temperature: mean temperature during interval \(t\), and the mean temperature during interval \(t - 1\). 
+Second, we considered two aspects of global temperature: mean temperature during interval \(t\), and the lag of mean temperature (i.e. mean temperature during interval \(t - 1\).)
+
+% lots of ways of varying
+% maxgcd * diff_maxgcd varies first by when then by fossil group.
+% non-nested varying intercept based on age, then by fossil group.
 
 
-Our model had up to three non-nested varying intercepts: age of observation \(a\), bin of observation \(b\), and taxonomic group of the observation \(c\). Age of observation is a critical varying intercept as this effect, when considered along with the intercept \(\beta_{0}\), captures changes to baseline hazard with species age. Because these factors are modeled as varying intercepts, we are assuming that the effects of geographic range (\(\beta_{1} \dots \beta_{3}\)) and temperature (\(\beta_{4} \dots \beta_{5}\)) are constant over time.
-
+% event ~ temp + lag1_temp + maxgcd * diff_maxgcd + 
+% (1 + maxgcd * diff_maxgcd | fact_mybin/fossil.group) +
+% (1 | fact_relage/fossil.group)
 The logistic regression can thus be expressed as 
+% scripts
+%   t = death? 0 if not last observation
+%   \beta = effect range vars (varies over time and by fossil group)
+%   \gamma = effect temp vars
+%   a = age effect
+% subscripts
+%   w = when in My
+%   f = fossil group
+%   d = age at observation
+% 
 \begin{equation}
   \begin{aligned}
-    t_{i} = logit^{-1}(\beta_{0} + \beta_{1} r_{i} + \beta_{2} d_{i} + \beta_{3} r_{i} d_{i} + a_{j[i]} + b_{k[i]} + c_{f[i]}) \\
+    t_{i} &= logit^{-1}(\beta_{w[i], f[i]} + \beta_{w[i], f[i]} range_{i} + \beta_{w[i], f[i]} rangediff_{i} + \beta_{w[i], f[i]} range_{i} rangediff_{i} + \gamma_{1} temp_{w[i]} + \gamma_{2} templag_{w[i]} + a_{d[i], f[i]}) \\
+    \beta_{w, f} &\sim MVN(\alpha_{f}, \Sigma) \\
+    \alpha_{f} &\sim MVN(0, \Sigma) \\
+    \gamma &\sim N(0, \sigma) \\
+    a_{w, f} &\sim MVN(\delta_{f}, \Sigma) \\
+    \delta_{f} &\sim MVN(0, \Sigma) \\
   \end{aligned}
   \label{eq:core}
 \end{equation}
