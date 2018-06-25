@@ -158,7 +158,7 @@ full_est <- temp %>%
 
 ext_plot <- full_est %>%
   ggplot(aes(x = relage, y = value)) + 
-  stat_pointinterval() +
+  stat_pointinterval(.prob = c(0.5, 0.8)) +
   facet_grid(~ fullname) + 
   labs(x = 'Age (My)', y = 'log-odds extinction')
 ggplot(filename = '../doc/figure/relrisk_ext.png', plot = ext_plot,
@@ -177,7 +177,7 @@ ggplot(filename = '../doc/figure/relrisk_range.png', plot = range_plot,
 full_plot <- full_est %>%
   gather(key, value, -fullname, -iterations, -relage, -row) %>%
   ggplot(aes(x = relage, y = value)) +
-  geom_point() + 
+  geom_point(alpha = 0.01) + 
   facet_grid(key ~ fullname, scales = 'free_y') +
   labs(x = 'Age (My)', y = 'log-odds extinction')
 ggsave(filename = '../doc/figure/relrisk_full.png', plot = full_plot,

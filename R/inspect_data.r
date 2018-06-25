@@ -58,6 +58,7 @@ ggsave(filename = '../doc/figure/age_label.png',
        plot = ocrg, width = 4, height = 6)
 
 # make a plot of a random selection of species
+set.seed(100)
 srg <- counti %>% 
   mutate(logmaxgcd = log1p(maxgcd)) %>%
   group_by(fullname) %>%
