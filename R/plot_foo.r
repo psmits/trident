@@ -68,3 +68,63 @@ plot_taxon_covariate_time <- function(disc_best) {
   
   by_taxon
 }
+
+
+#' Plot risk of extinction for selection of species over time
+#'
+#' Generate a plot of species risk of extinction over duration at each observation.
+#' Risk of extinction is calculated given all covariate information for a species over time.
+#' 
+#' @param data tibble to make plots from
+#' @param model rstanarm object to calculated from
+#' @param nsp number of species to grab
+#' @return ggplot object
+plot_risk_time <- function(data, model, nsp = 4) {
+  temp <- data %>%
+    group_by(fullname) %>%
+    sample_n_groups(size = nsp)
+
+  # estimate log-odds extinction for new species at each time
+  temp_est <- posterior_linpred(object = model, newdata = temp)
+  temp_est <- reshape2::melt(temp_est)
+  names(temp_est) <- c('iterations', 'row', 'value')
+  temp_est <- as.tibble(temp_est) %>% 
+    mutate(fullname = row,
+           relage = row)
+  temp_est$fullname <- plyr::mapvalues(temp_est$fullname, 
+                                       from = unique(temp_est$fullname), 
+                                       to = temp$fullname)
+  temp_est$relage <- plyr::mapvalues(temp_est$relage, 
+                                     from = unique(temp_est$relage), 
+                                     to = temp$relage)
+
+  # now we can combine the empirical data with the linpred values
+  full_est <- temp %>%
+    dplyr::select(fullname, maxgcd, relage) %>% 
+    left_join(., temp_est, by = c('fullname', 'relage'))
+
+  ext_plot <- full_est %>%
+    ggplot(aes(x = relage, y = value)) + 
+    stat_pointinterval(.prob = c(0.5, 0.8)) +
+    facet_grid(~ fullname) + 
+    labs(x = 'Age (My)', y = 'log-odds extinction')
+
+  range_plot <- full_est %>%
+    group_by(fullname, relage) %>%
+    summarise(maxgcd = mean(maxgcd)) %>%
+    ggplot(aes(x = relage, y = maxgcd)) + 
+    geom_line() +
+    facet_grid(~ fullname) + 
+    labs(x = 'Age (My)', y = 'log-odds extinction')
+
+  full_plot <- full_est %>%
+    gather(key, value, -fullname, -iterations, -relage, -row) %>%
+    ggplot(aes(x = relage, y = value)) +
+    geom_point(alpha = 0.01) + 
+    facet_grid(key ~ fullname, scales = 'free_y') +
+    labs(x = 'Age (My)', y = 'log-odds extinction')
+
+
+  out <- list(ext_plot, range_plot, full_plot)
+  out
+}
