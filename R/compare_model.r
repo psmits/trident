@@ -57,7 +57,7 @@ energy <- map2(np, ll, ~ mcmc_nuts_energy(.x, .y))
 
 
 # estimate of out-of-sample performance
-# these should be parallelized
+# these should be parallelized; done using future
 cl <- map(disc_fit, ~ future::future(loo(.x)))
 cl <- map(cl, ~ future::value(.x))
 compare_loo_tab <- loo::compare(x = cl)

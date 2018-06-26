@@ -69,7 +69,7 @@ srg <- counti %>%
   geom_point() +
   theme(legend.position = 'bottom')
 ggsave(filename = '../doc/figure/range_time.png',
-       plot = srg, width = 6, height = 4)
+       plot = srg, width = 8, height = 6)
 
 # lots of little code here
 # for FAD/LAD accumulation curves
@@ -103,10 +103,10 @@ ccg <- bind_rows(ft, lt, .id = 'type') %>%
   facet_grid(~ fossil.group) +
   labs(x = 'Time (My)', y = 'Cummulative count')
 ggsave(filename = '../doc/figure/fad_lad_count_wide.png',
-       plot = ccg, width = 6, height = 2)
+       plot = ccg, width = 6, height = 3)
 ccg2 <- ccg + facet_grid(fossil.group ~ ., switch = 'y', scales = 'free_y')
 ggsave(filename = '../doc/figure/fad_lad_count_tall.png',
-       plot = ccg2, width = 2, height = 6)
+       plot = ccg2, width = 4, height = 6)
 
 
 # looking at the temperature data

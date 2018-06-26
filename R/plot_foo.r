@@ -124,7 +124,54 @@ plot_risk_time <- function(data, model, nsp = 4) {
     facet_grid(key ~ fullname, scales = 'free_y') +
     labs(x = 'Age (My)', y = 'log-odds extinction')
 
-
   out <- list(ext_plot, range_plot, full_plot)
   out
+}
+
+
+
+#' Faceted plot of baseline hazard by fossil group
+#'
+#' Given model fit, produce a faceted plot of discrete time hazard. 
+#' Hazard is presented as a probability of going extinct. 
+#' 
+#' @param model rstanarm object
+#' @return ggplot2 object
+plot_taxon_hazard <- function(model) {
+  # the average
+  haz_avg <- model %>%
+    spread_samples(b[i, f], `(Intercept)`) %>%
+    filter(str_detect(f, pattern = 'fact_relage'),
+           !str_detect(f, pattern = 'fossil.group')) %>%
+    mutate(cr = `(Intercept)` + b) %>%    # keep log-odds scale
+    mutate(age = as.numeric(str_extract(f, '[0-9]+'))) %>%
+      arrange(age)
+
+  # components from fossil groups
+  db <- model %>%
+    spread_samples(b[i, f]) %>%
+    filter(str_detect(f, pattern = 'fact_relage'),
+           str_detect(f, pattern = 'fossil.group')) %>%
+    mutate(type = str_remove_all(f, '[0-9]'),
+           age = as.numeric(str_extract(f, '[0-9]+'))) %>%
+    arrange(age) %>%
+    split(., .$type) %>%
+    map(., ~ left_join(.x, haz_avg, by = c('.chain', '.iteration', 'age'))) %>%
+    map(., ~ .x %>% 
+        ungroup() %>%
+        mutate(effect = b.x + cr) %>%
+        dplyr::select(-.chain, -.iteration,
+                      -i.x, -f.x, -b.x, 
+                      -i.y, -f.y, -b.y, 
+                      -`(Intercept)`, -cr) %>%
+        mutate(type = str_extract(type, pattern = '[A-Z]'))) %>%
+    bind_rows %>%
+    mutate(effect_prob = invlogit(effect)) %>%  # put on prob scale
+    ggplot(aes(x = age, y = effect_prob)) + 
+      stat_lineribbon() +
+      scale_fill_brewer() +
+      facet_grid(type ~ .) +
+      labs(x = 'Age (My)', y = 'P(T = t | T >= t, x)')
+
+  db
 }

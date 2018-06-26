@@ -132,42 +132,10 @@ ggsave(filename = '../doc/figure/hazard_baseline.png',
        plot = hazard_plot, width = 6, height = 4)
 
 # can also then compare between taxonomic groups because i have that calculated
-haz_avg <- disc_best %>%
-  spread_samples(b[i, f], `(Intercept)`) %>%
-  filter(str_detect(f, pattern = 'fact_relage'),
-         !str_detect(f, pattern = 'fossil.group')) %>%
-  mutate(cr = `(Intercept)` + b) %>%    # keep log-odds scale
-  mutate(age = as.numeric(str_extract(f, '[0-9]+'))) %>%
-  arrange(age)
-
-db <- disc_best %>%
-  spread_samples(b[i, f]) %>%
-  filter(str_detect(f, pattern = 'fact_relage'),
-         str_detect(f, pattern = 'fossil.group')) %>%
-  mutate(type = str_remove_all(f, '[0-9]'),
-         age = as.numeric(str_extract(f, '[0-9]+'))) %>%
-  arrange(age) %>%
-  split(., .$type) %>%
-  map(., ~ left_join(.x, haz_avg, by = c('.chain', '.iteration', 'age'))) %>%
-  map(., ~ .x %>% 
-      ungroup() %>%
-      mutate(effect = b.x + cr) %>%
-      dplyr::select(-.chain, -.iteration,
-                    -i.x, -f.x, -b.x, 
-                    -i.y, -f.y, -b.y, 
-                    -`(Intercept)`, -cr) %>%
-      mutate(type = str_extract(type, pattern = '[A-Z]'))) %>%
-  bind_rows %>%
-  mutate(effect_prob = invlogit(effect)) %>%  # put on prob scale
-  ggplot(aes(x = age, y = effect_prob)) + 
-  stat_lineribbon() +
-  scale_fill_brewer() +
-  facet_grid(type ~ .) +
-  labs(x = 'Age (My)', y = 'P(T = t | T >= t, x)')
+# faceted baseline hazard plot by fossil group
+db <- plot_taxon_hazard(disc_best)
 ggsave(filename = '../doc/figure/hazard_bygroup.png', plot = db,
        width = 6, height = 8)
-
-
 
 
 # make plots of effect change over time for
