@@ -136,7 +136,7 @@ haz_avg <- disc_best %>%
   spread_samples(b[i, f], `(Intercept)`) %>%
   filter(str_detect(f, pattern = 'fact_relage'),
          !str_detect(f, pattern = 'fossil.group')) %>%
-  mutate(cr = invlogit(`(Intercept)` + b)) %>%
+  mutate(cr = `(Intercept)` + b) %>%    # keep log-odds scale
   mutate(age = as.numeric(str_extract(f, '[0-9]+'))) %>%
   arrange(age)
 
@@ -158,10 +158,12 @@ db <- disc_best %>%
                     -`(Intercept)`, -cr) %>%
       mutate(type = str_extract(type, pattern = '[A-Z]'))) %>%
   bind_rows %>%
+  mutate(effect_prob = invlogit(effect)) %>%  # put on prob scale
   ggplot(aes(x = age, y = effect)) + 
   stat_lineribbon() +
   scale_fill_brewer() +
-  facet_grid(type ~ .)
+  facet_grid(type ~ .) +
+  labs(x = 'Time (My)', y = 'log-odds extinct')
 ggsave(filename = '../doc/figure/hazard_bygroup.png', plot = db,
        width = 6, height = 8)
 
