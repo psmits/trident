@@ -127,7 +127,7 @@ hazard_plot <- disc_best %>%
   ggplot(aes(y = cr, x = age)) + 
   stat_lineribbon() +
   scale_fill_brewer() +
-  labs(x = 'age (My)', y = 'P(T = t | T >= t, x)')
+  labs(x = 'Age (My)', y = 'P(T = t | T >= t, x)')
 ggsave(filename = '../doc/figure/hazard_baseline.png',
        plot = hazard_plot, width = 6, height = 4)
 
@@ -159,11 +159,11 @@ db <- disc_best %>%
       mutate(type = str_extract(type, pattern = '[A-Z]'))) %>%
   bind_rows %>%
   mutate(effect_prob = invlogit(effect)) %>%  # put on prob scale
-  ggplot(aes(x = age, y = effect)) + 
+  ggplot(aes(x = age, y = effect_prob)) + 
   stat_lineribbon() +
   scale_fill_brewer() +
   facet_grid(type ~ .) +
-  labs(x = 'Time (My)', y = 'log-odds extinct')
+  labs(x = 'Age (My)', y = 'P(T = t | T >= t, x)')
 ggsave(filename = '../doc/figure/hazard_bygroup.png', plot = db,
        width = 6, height = 8)
 
