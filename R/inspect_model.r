@@ -76,6 +76,7 @@ effect_eye <- disc_best %>%
 ggsave(filename = '../doc/figure/effect_est.png',
        plot = effect_eye, width = 4, height = 6)
 
+# variance component
 vary_eye <- disc_best %>%
   gather_samples(`Sigma[fossil.group:fact_mybin:(Intercept),(Intercept)]`,
                  `Sigma[fossil.group:fact_mybin:maxgcd,(Intercept)]`,
@@ -87,7 +88,7 @@ vary_eye <- disc_best %>%
                  `Sigma[fossil.group:fact_mybin:diff_maxgcd,diff_maxgcd]`,
                  `Sigma[fossil.group:fact_mybin:maxgcd:diff_maxgcd,diff_maxgcd]`,
                  `Sigma[fossil.group:fact_mybin:maxgcd:diff_maxgcd,maxgcd:diff_maxgcd]`,
-                 `Sigma[fossil.group:fact_relage:(Intercept),(Intercept)]`,
+
                  `Sigma[fact_mybin:(Intercept),(Intercept)]`,
                  `Sigma[fact_mybin:maxgcd,(Intercept)]`,
                  `Sigma[fact_mybin:diff_maxgcd,(Intercept)]`,
@@ -98,17 +99,28 @@ vary_eye <- disc_best %>%
                  `Sigma[fact_mybin:diff_maxgcd,diff_maxgcd]`,
                  `Sigma[fact_mybin:maxgcd:diff_maxgcd,diff_maxgcd]`,
                  `Sigma[fact_mybin:maxgcd:diff_maxgcd,maxgcd:diff_maxgcd]`,
+
+                 `Sigma[fossil.group:fact_relage:(Intercept),(Intercept)]`,
                  `Sigma[fact_relage:(Intercept),(Intercept)]`) %>%
   ggplot(aes(y = term, x = estimate)) +
   geom_halfeyeh(.prob = c(0.9, 0.5))
 ggsave(filename = '../doc/figure/variance_components.png',
-       plot = vary_eye, width = 2, height = 4)
+       plot = vary_eye, width = 8, height = 4)
+
+
+# probability of overall average ests being greater than 0
+get_percent <- function(x) sum(x > 0) / length(x)
+effect_prob <- disc_best %>%
+  spread_samples(maxgcd, diff_maxgcd, `maxgcd:diff_maxgcd`, temp, lag1_temp) %>%
+  summarize_at(.vars = c('maxgcd', 'diff_maxgcd', 'maxgcd:diff_maxgcd', 
+                         'temp', 'lag1_temp'), 
+               .funs = get_percent)
+
 
 # base-line hazard plot
-hazard_plot <- 
-  disc_best %>%
+hazard_plot <- disc_best %>%
   spread_samples(b[i, f], `(Intercept)`) %>%
-  filter(str_detect(f, pattern = 'fact_mybin'),
+  filter(str_detect(f, pattern = 'fact_relage'),
          !str_detect(f, pattern = 'fossil.group')) %>%
   mutate(cr = invlogit(`(Intercept)` + b)) %>%
   mutate(age = as.numeric(str_extract(f, '[0-9]+'))) %>%
@@ -118,7 +130,41 @@ hazard_plot <-
   labs(x = 'age (My)', y = 'P(T = t | T >= t, x)')
 ggsave(filename = '../doc/figure/hazard_baseline.png',
        plot = hazard_plot, width = 6, height = 4)
+
 # can also then compare between taxonomic groups because i have that calculated
+haz_avg <- disc_best %>%
+  spread_samples(b[i, f], `(Intercept)`) %>%
+  filter(str_detect(f, pattern = 'fact_relage'),
+         !str_detect(f, pattern = 'fossil.group')) %>%
+  mutate(cr = invlogit(`(Intercept)` + b)) %>%
+  mutate(age = as.numeric(str_extract(f, '[0-9]+'))) %>%
+  arrange(age)
+
+db <- disc_best %>%
+  spread_samples(b[i, f]) %>%
+  filter(str_detect(f, pattern = 'fact_relage'),
+         str_detect(f, pattern = 'fossil.group')) %>%
+  mutate(type = str_remove_all(f, '[0-9]'),
+         age = as.numeric(str_extract(f, '[0-9]+'))) %>%
+  arrange(age) %>%
+  split(., .$type) %>%
+  map(., ~ left_join(.x, haz_avg, by = c('.chain', '.iteration', 'age'))) %>%
+  map(., ~ .x %>% 
+      ungroup() %>%
+      mutate(effect = b.x + cr) %>%
+      dplyr::select(-.chain, -.iteration,
+                    -i.x, -f.x, -b.x, 
+                    -i.y, -f.y, -b.y, 
+                    -`(Intercept)`, -cr) %>%
+      mutate(type = str_extract(type, pattern = '[A-Z]'))) %>%
+  bind_rows %>%
+  ggplot(aes(x = age, y = effect)) + 
+  stat_lineribbon() +
+  scale_fill_brewer() +
+  facet_grid(type ~ .)
+ggsave(filename = '../doc/figure/hazard_bygroup.png', plot = db,
+       width = 6, height = 8)
+
 
 
 

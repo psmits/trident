@@ -39,30 +39,29 @@ names(nano)[24] <- 'plng'
 nano[nano$fossil.group == 'FALSE', 'fossil.group'] <- 'F'
 
 # miscoded as strings
-nano$longitude <- parse_double(nano$longitude)
-nano$latitude <- parse_double(nano$latitude)
+nano <- nano %>%
+  mutate_at(c('longitude', 'latitude'), .funs = parse_double)
 
 nano <- nano %>%
-   filter(#fossil.group == 'F',
-          fossil.group != 'DN')
-
+  filter(#fossil.group == 'F',
+         fossil.group != 'DN')
 
 nano <- nano %>% 
   filter(!is.na(plat), 
          !is.na(plng)) %>%
-  group_by(taxon.id) %>%
-  filter(max(age) < age_max) %>%
-  ungroup() %>%
-  # some don't have paleolat or long
-  # also need to limit to line up with mgca
-  # then
-  # assign million year bins (decreasing; youngest lowest)
-  dplyr::arrange(desc(age)) %>%
-  dplyr::mutate(mybin = break_my(age, by = 1)) %>%
-  # then
-  # make a species genus combo
-  dplyr::mutate(fullname = str_c(genus, '_', species)) %>% 
-  arrange(fullname)
+group_by(taxon.id) %>%
+filter(max(age) < age_max) %>%
+ungroup() %>%
+# some don't have paleolat or long
+# also need to limit to line up with mgca
+# then
+# assign million year bins (decreasing; youngest lowest)
+dplyr::arrange(desc(age)) %>%
+dplyr::mutate(mybin = break_my(age, by = 1)) %>%
+# then
+# make a species genus combo
+dplyr::mutate(fullname = str_c(genus, '_', species)) %>% 
+arrange(fullname)
 
 # assign everything a geographic cell using paleocoordinates
 eq <- CRS("+proj=cea +lat_0=0 +lon_0=0 +lat_ts=30 +a=6371228.0 +units=m")
@@ -78,8 +77,7 @@ nano$cell <- cellFromXY(ras,
 
 # ecological information
 idinfo <- read_csv('../data/ezard2011/ezard_id2.csv')
-names(idinfo) <- str_to_lower(names(idinfo))
-names(idinfo) <- str_replace_all(names(idinfo), ' ', '.')
+names(idinfo) <- str_replace_all(str_to_lower(names(idinfo)), ' ', '.')
 idinfo <- idinfo %>% 
   dplyr::mutate(fullname = str_replace_all(species.in.lineage, ' ', '_'),
                 code = str_to_lower(lineage.code))
@@ -88,8 +86,7 @@ idinfo <- idinfo %>% separate_rows(fullname, sep = '-')
 
 # trait information
 trait <- read_csv('../data/2010-09-06_aLext.csv')
-names(trait) <- str_to_lower(names(trait))
-names(trait) <- str_replace_all(names(trait), ' ', '.')
+names(trait) <- str_replace_all(str_to_lower(names(trait)), ' ', '.')
 trait$ec <- fct_collapse(factor(trait$ec),
                          'mixed' = c(1, 2),
                          'thermocline' = '3',
@@ -127,8 +124,7 @@ sprange <- nano %>%
 
 # want to add in the lear mgca data
 mgca <- read_tsv('../data/cramer/cramer_temp.txt')
-names(mgca) <- str_to_lower(names(mgca))
-names(mgca) <- str_remove_all(names(mgca), '[^[[:alnum:]]]')
+names(mgca) <- str_remove_all(str_to_lower(names(mgca)), '[^[[:alnum:]]]')
 mgca <- mgca %>%
   mutate(mybin = break_my(age)) %>%
   group_by(mybin) %>%
@@ -208,8 +204,8 @@ counti$cc.rescale <- plyr::mapvalues(counti$cc,
                                      to = seq(length(unique(counti$cc))))
 # necessary data transform to handle factor
 counti$cc.rescale <- with(counti, {
-                          factor(cc.rescale, 
-                          levels = sort(unique(as.numeric(cc.rescale))))})
+                            factor(cc.rescale, 
+                                   levels = sort(unique(as.numeric(cc.rescale))))})
 
 # write to file
 write_rds(survi, path = '../data/survival.rds')
