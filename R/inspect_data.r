@@ -32,15 +32,15 @@ counti_trans <- prepare_analysis(counti)
 octg <- counti %>%
   ggplot(aes(x = mybin, fill = factor(event))) +
   stat_bin() +
-  facet_grid(fossil.group ~ ., switch = 'y')
+  facet_grid(fossil_group ~ ., switch = 'y')
 ggsave(filename = '../doc/figure/occ_time_label.png',
        plot = octg, width = 4, height = 6)
 
 
 
-# relative "abundance" of microfossil groups over time
+# relative "abundance" of microfossil_groups over time
 ocag <- counti %>%
-  ggplot(aes(x = mybin, fill = fossil.group)) +
+  ggplot(aes(x = mybin, fill = fossil_group)) +
   geom_histogram(position = 'fill')
 ggsave(filename = '../doc/figure/abn_time_stack.png',
        plot = ocag, width = 6, height = 6)
@@ -49,11 +49,11 @@ ggsave(filename = '../doc/figure/abn_time_stack.png',
 ocrg <- counti %>% 
   group_by(fullname) %>%
   dplyr::summarize(maxage = max(relage),
-                   fossil.group = plurality(fossil.group),
+                   fossil_group = plurality(fossil_group),
                    died = any(event == 1)) %>%
   ggplot(aes(x = maxage, fill = died)) +
   stat_bin() +
-  facet_grid(fossil.group ~ ., switch = 'y')
+  facet_grid(fossil_group ~ ., switch = 'y')
 ggsave(filename = '../doc/figure/age_label.png',
        plot = ocrg, width = 4, height = 6)
 
@@ -76,8 +76,8 @@ ggsave(filename = '../doc/figure/range_time.png',
 ft <- counti %>%
   group_by(fullname) %>%
   summarize(fad = max(mybin),
-            fossil.group = plurality(fossil.group)) %>%
-  group_by(fossil.group, fad) %>%
+            fossil_group = plurality(fossil_group)) %>%
+  group_by(fossil_group, fad) %>%
   summarize(n = n()) %>%
   arrange(desc(fad)) %>%
   mutate(nsum = cumsum(n),
@@ -88,8 +88,8 @@ lt <- counti %>%
   group_by(fullname) %>%
   filter(!all(event == 0)) %>%
   summarize(lad = max(mybin),
-            fossil.group = plurality(fossil.group)) %>%
-  group_by(fossil.group, lad) %>%
+            fossil_group = plurality(fossil_group)) %>%
+  group_by(fossil_group, lad) %>%
   summarize(n = n()) %>%
   arrange(desc(lad)) %>%
   mutate(nsum = cumsum(n),
@@ -100,11 +100,11 @@ ccg <- bind_rows(ft, lt, .id = 'type') %>%
   mutate(type = plyr::mapvalues(type, 1:2, c('FAD', 'LAD'))) %>%
   ggplot(aes(x = time, y = nsum, colour = type, group = type)) +
   geom_line() +
-  facet_grid(~ fossil.group) +
+  facet_grid(~ fossil_group) +
   labs(x = 'Time (My)', y = 'Cummulative count')
 ggsave(filename = '../doc/figure/fad_lad_count_wide.png',
        plot = ccg, width = 6, height = 3)
-ccg2 <- ccg + facet_grid(fossil.group ~ ., switch = 'y', scales = 'free_y')
+ccg2 <- ccg + facet_grid(fossil_group ~ ., switch = 'y', scales = 'free_y')
 ggsave(filename = '../doc/figure/fad_lad_count_tall.png',
        plot = ccg2, width = 4, height = 6)
 

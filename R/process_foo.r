@@ -43,15 +43,15 @@ plurality <- function(x) names(which.max(table(x)))
 #' This is mostly an internal function. Takes a tibble and returns a tibble with some variables transformed.
 #'
 #' @param x tibble
-#' @param fossil.group vector of characters defining which fossil groups to include
+#' @param fg vector of characters defining which fossil_groups to include
 #' @return a tibble ready for analysis
-prepare_analysis <- function(x, fossil.group = NULL) {
+prepare_analysis <- function(x, fg = NULL) {
   # do i want to restrict the taxonomic group?
   tb <- x
 
-  if(!is.null(fossil.group)) {
+  if(!is.null(fg)) {
     tb <- tb %>%
-      filter(fossil.group %in% fossil.group)
+      filter(fossil_group %in% fg)
   }
 
   # prep the data

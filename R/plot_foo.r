@@ -142,16 +142,16 @@ plot_taxon_hazard <- function(model) {
   haz_avg <- model %>%
     spread_samples(b[i, f], `(Intercept)`) %>%
     filter(str_detect(f, pattern = 'fact_relage'),
-           !str_detect(f, pattern = 'fossil.group')) %>%
+           !str_detect(f, pattern = 'fossil_group')) %>%
     mutate(cr = `(Intercept)` + b) %>%    # keep log-odds scale
     mutate(age = as.numeric(str_extract(f, '[0-9]+'))) %>%
       arrange(age)
 
-  # components from fossil groups
+  # components from fossil_groups
   db <- model %>%
     spread_samples(b[i, f]) %>%
     filter(str_detect(f, pattern = 'fact_relage'),
-           str_detect(f, pattern = 'fossil.group')) %>%
+           str_detect(f, pattern = 'fossil_group')) %>%
     mutate(type = str_remove_all(f, '[0-9]'),
            age = as.numeric(str_extract(f, '[0-9]+'))) %>%
     arrange(age) %>%

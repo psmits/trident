@@ -1,5 +1,6 @@
 # because of course
 library(tidyverse)
+library(janitor)
 
 # geolocation stuff
 library(sp)
@@ -25,9 +26,7 @@ bin_number <- age_max / bin_width
 # read in data file and clean column names
 neptune <- list.files(path = '../data', pattern = 'nannotax', full.names = TRUE)
 nano <- purrr::map(neptune, read_tsv)
-tt <- purrr::map(nano, ~ str_to_lower(names(.)))
-tt <- purrr::map(tt, ~ str_replace_all(., ' ', '.'))
-nano <- purrr::map2(nano, tt, function(x, y) {names(x) <- y; x})
+nano <- purrr::map(nano, clean_names)
 nano <- purrr::reduce(nano, rbind)
 
 # important but impossible to call variable name
@@ -36,20 +35,20 @@ names(nano)[23] <- 'plat'
 names(nano)[24] <- 'plng'
 
 # one of the fossil group tibble's miscoded fossil group as logical
-nano[nano$fossil.group == 'FALSE', 'fossil.group'] <- 'F'
+nano[nano$fossil_group == 'FALSE', 'fossil_group'] <- 'F'
 
 # miscoded as strings
 nano <- nano %>%
   mutate_at(c('longitude', 'latitude'), .funs = parse_double)
 
 nano <- nano %>%
-  filter(#fossil.group == 'F',
-         fossil.group != 'DN')
+  filter(#fossil_group == 'F',
+         fossil_group != 'DN')
 
 nano <- nano %>% 
   filter(!is.na(plat), 
          !is.na(plng)) %>%
-group_by(taxon.id) %>%
+group_by(taxon_id) %>%
 filter(max(age) < age_max) %>%
 ungroup() %>%
 # some don't have paleolat or long
@@ -77,16 +76,16 @@ nano$cell <- cellFromXY(ras,
 
 # ecological information
 idinfo <- read_csv('../data/ezard2011/ezard_id2.csv')
-names(idinfo) <- str_replace_all(str_to_lower(names(idinfo)), ' ', '.')
+idinfo <- idinfo %>% clean_names
 idinfo <- idinfo %>% 
-  dplyr::mutate(fullname = str_replace_all(species.in.lineage, ' ', '_'),
-                code = str_to_lower(lineage.code))
+  dplyr::mutate(fullname = str_replace_all(species_in_lineage, ' ', '_'),
+                code = str_to_lower(lineage_code))
 idinfo <- idinfo %>% separate_rows(fullname, sep = '-')
 # combine with nano with left join
 
 # trait information
 trait <- read_csv('../data/2010-09-06_aLext.csv')
-names(trait) <- str_replace_all(str_to_lower(names(trait)), ' ', '.')
+trait <- trait %>% clean_names
 trait$ec <- fct_collapse(factor(trait$ec),
                          'mixed' = c(1, 2),
                          'thermocline' = '3',
@@ -116,15 +115,15 @@ sprange <- nano %>%
                    # great circle distance (on ellipsoid) in km in bin
                    area = areaPolygon(cbind(plng, plat)),
                    maxgcd = dist_gcd(plng, plat),
-                   nprov = n_distinct(longhurst.code),
-                   fossil.group = plurality(fossil.group)) %>%
+                   nprov = n_distinct(longhurst_code),
+                   fossil_group = plurality(fossil_group)) %>%
   filter(maxgcd > 0,
          latext > 0)
 
 
 # want to add in the lear mgca data
 mgca <- read_tsv('../data/cramer/cramer_temp.txt')
-names(mgca) <- str_remove_all(str_to_lower(names(mgca)), '[^[[:alnum:]]]')
+mgca <- mgca %>% clean_names
 mgca <- mgca %>%
   mutate(mybin = break_my(age)) %>%
   group_by(mybin) %>%
