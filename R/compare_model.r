@@ -71,9 +71,15 @@ pp_est <- map(pe, ~ future::value(.x))
 pp <- map(disc_fit, ~ future::future(posterior_linpred(.x, transform = TRUE)))
 pp_prob <- map(pe, ~ future::value(.x))
 
+
 # adequacy of fit ROC
 
 pp_roc <- map(pp_est, ~ apply(.x, 1, function(y) roc(counti_trans$event, y)))
+
+#pp_proc <- map(pp_prob, ~ apply(.x, 1, function(y) 
+#                                roc(counti_trans$event, y, 
+#                                    partial.auc = c(0, max(y))))
+
 pp_auc <- map(pp_roc, function(y) map_dbl(y, ~ auc(.x)))
 
 roc_hist <- bind_rows(imap(pp_auc, ~ data.frame(model = .y, roc = .x))) %>%
