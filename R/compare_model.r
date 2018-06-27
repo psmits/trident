@@ -22,6 +22,7 @@ source('../R/stan_utility.R')
 # misc
 library(splines)
 library(pROC)
+library(ROCR)
 source('../R/process_foo.r')
 
 # important constants
@@ -69,10 +70,29 @@ compare_waic_tab <- loo::compare(x = wl)
 pe <- map(disc_fit, ~ future::future(posterior_predict(.x)))
 pp_est <- map(pe, ~ future::value(.x))
 pp <- map(disc_fit, ~ future::future(posterior_linpred(.x, transform = TRUE)))
-pp_prob <- map(pe, ~ future::value(.x))
-
+pp_prob <- map(pp, ~ future::value(.x))
 
 # adequacy of fit ROC
+opt_cut <- function(perf, pred) {
+  cut_ind <- mapply(FUN = function(x, y, p) {
+                      d <- (x - 0)^2 + (y - 1)^2
+                      ind <- which(d == min(d))
+                      c(sensitivity = y[[ind]], 
+                        specificty = 1 - x[[ind]],
+                        cutoff = p[[ind]])
+               }, perf@x.values, perf@y.values, pred@cutoffs)
+  cut_ind
+}
+
+get_cutpoints <- function(pp_prob, target) {
+  pred <- plyr::alply(pp_prob, 1, function(x) prediction(x, target))
+  perf <- map(pred, ~ performance(.x, measure = 'tpr', x.measure = 'fpr'))
+  cutpoints <- map2(pred, perf, cutpoint)
+}
+pgc <- partial(get_cutpoints, target = counti_trans$event)
+list_cutpoint <- map(pp_prob, pgc)
+
+
 
 pp_roc <- map(pp_est, ~ apply(.x, 1, function(y) roc(counti_trans$event, y)))
 
