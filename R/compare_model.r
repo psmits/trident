@@ -87,19 +87,19 @@ opt_cut <- function(perf, pred) {
 get_cutpoints <- function(pp_prob, target) {
   pred <- plyr::alply(pp_prob, 1, function(x) prediction(x, target))
   perf <- map(pred, ~ performance(.x, measure = 'tpr', x.measure = 'fpr'))
-  cutpoints <- map2(pred, perf, cutpoint)
+  cutpoints <- map2(perf, pred, opt_cut)
 }
 pgc <- partial(get_cutpoints, target = counti_trans$event)
-list_cutpoint <- map(pp_prob, pgc)
-
+list_cutpoint <- map(map(pp_prob, pgc), ~ .x[3])
+hits_rescaled <- map2(pp_proc, list_cutpoint[[1]], ~ ifelse(.x > .y, 1, 0))
+# this resets the cutpoint for determining 0 vs 1 by setting it very low.
+# this is a product of really high class imbalance. 
+# cutpoint based on maximizing both sensitivity and specificity.
+# this is calculated for every posterior predictive simulation for each model.
+# these new, rescaled 0-1 results are then fed through the ROC/AUC machine.
 
 
 pp_roc <- map(pp_est, ~ apply(.x, 1, function(y) roc(counti_trans$event, y)))
-
-#pp_proc <- map(pp_prob, ~ apply(.x, 1, function(y) 
-#                                roc(counti_trans$event, y, 
-#                                    partial.auc = c(0, max(y))))
-
 pp_auc <- map(pp_roc, function(y) map_dbl(y, ~ auc(.x)))
 
 roc_hist <- bind_rows(imap(pp_auc, ~ data.frame(model = .y, roc = .x))) %>%
