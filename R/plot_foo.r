@@ -85,7 +85,9 @@ plot_risk_time <- function(data, model, nsp = 4) {
     sample_n_groups(size = nsp)
 
   # estimate log-odds extinction for new species at each time
-  temp_est <- posterior_linpred(object = model, newdata = temp)
+  temp_est <- posterior_linpred(object = model, 
+                                newdata = temp, 
+                                transform = TRUE)
   temp_est <- reshape2::melt(temp_est)
   names(temp_est) <- c('iterations', 'row', 'value')
   temp_est <- as.tibble(temp_est) %>% 
@@ -107,7 +109,7 @@ plot_risk_time <- function(data, model, nsp = 4) {
     ggplot(aes(x = relage, y = value)) + 
     stat_pointinterval(.prob = c(0.5, 0.8)) +
     facet_grid(~ fullname) + 
-    labs(x = 'Age (My)', y = 'log-odds extinction')
+    labs(x = 'Age (My)', y = 'P(T = t | T >= t, x)')
 
   range_plot <- full_est %>%
     group_by(fullname, relage) %>%
@@ -115,14 +117,14 @@ plot_risk_time <- function(data, model, nsp = 4) {
     ggplot(aes(x = relage, y = maxgcd)) + 
     geom_line() +
     facet_grid(~ fullname) + 
-    labs(x = 'Age (My)', y = 'log-odds extinction')
+    labs(x = 'Age (My)', y = 'P(T = t | T >= t, x)')
 
   full_plot <- full_est %>%
     gather(key, value, -fullname, -iterations, -relage, -row) %>%
     ggplot(aes(x = relage, y = value)) +
     geom_point(alpha = 0.01) + 
     facet_grid(key ~ fullname, scales = 'free_y') +
-    labs(x = 'Age (My)', y = 'log-odds extinction')
+    labs(x = 'Age (My)', y = 'P(T = t | T >= t, x)')
 
   out <- list(ext_plot, range_plot, full_plot)
   out
@@ -211,8 +213,7 @@ plot_roc_series <- function(data, model_pp, model_key) {
   }
   # of those that aren't errors, try to get AUC
   es <- map(out, ~ map(.x, ~ map(.x, ~ safe_auc(.x$result)))) %>%
-    map(., ~ map(.x, ~ map(.x, 'result'))) %>%
-    map(., ~ map(.x, ~ reduce(.x, c)))
+    map(., ~ map(.x, ~ reduce(map(.x, 'result'), c)))
 
   # zero out the error-d entries
   tt <- map(es, ~ map_lgl(.x, ~ !is.null(.x)))

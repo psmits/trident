@@ -1,5 +1,6 @@
 # data manipulation
 library(tidyverse)
+library(janitor)
 #devtools::install_github("mjskay/tidybayes")
 library(tidybayes)
 
@@ -146,15 +147,13 @@ ggsave(filename = '../doc/figure/eff_time_group.png', plot = by_taxon,
        height = 8, width = 8)
 
 
-
 # look at hazard over duration for a few examples
 # grab a random selection of species
 set.seed(100)
 risk_plots <- plot_risk_time(counti_trans, disc_best, nsp = 4)
-ggplot(filename = '../doc/figure/relrisk_ext.png', plot = risk_plots[[1]],
-       height = 8, width = 8)
-ggplot(filename = '../doc/figure/relrisk_range.png', plot = risk_plots[[2]],
-       height = 8, width = 8)
+ggsave(filename = '../doc/figure/relrisk_ext.png', plot = risk_plots[[1]],
+       height = 6, width = 8)
+ggsave(filename = '../doc/figure/relrisk_range.png', plot = risk_plots[[2]],
+       height = 6, width = 8)
 ggsave(filename = '../doc/figure/relrisk_full.png', plot = risk_plots[[3]],
        height = 8, width = 8)
-

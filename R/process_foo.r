@@ -128,3 +128,35 @@ break_my <- function(x, by = 1, number = NULL) {
 #' @param x element.
 #' @return logical TRUE for no error, FALSE for error.
 check_class <- function(x) class(x) != 'try-error'
+
+
+
+#' Get optimal cut from ROC results
+#' 
+#' Uses ROCR
+#'
+#' @param perf performance object
+#' @param pred prediction object
+#' @return vector with sensitivity, specificity, and cutpoint
+opt_cut <- function(perf, pred) {
+  cut_ind <- mapply(FUN = function(x, y, p) {
+                      d <- (x - 0)^2 + (y - 1)^2
+                      ind <- which(d == min(d))
+                      c(sensitivity = y[[ind]], 
+                        specificty = 1 - x[[ind]],
+                        cutoff = p[[ind]])
+               }, perf@x.values, perf@y.values, pred@cutoffs)
+  cut_ind
+}
+
+#' Get optimal cutpoints for a lot of ROC results
+#'
+#' Looped wrapper around opt_cut to get optimal cutpoint for a given posterior predictive distribution
+#'
+#' @param pp_prob list of posterior predictive draws, where each list element is the PPD for one model.
+#' @param target the actual values that are being estimated
+get_cutpoints <- function(pp_prob, target) {
+  pred <- plyr::alply(pp_prob, 1, function(x) prediction(x, target))
+  perf <- map(pred, ~ performance(.x, measure = 'tpr', x.measure = 'fpr'))
+  cutpoints <- map2(perf, pred, opt_cut)
+}
