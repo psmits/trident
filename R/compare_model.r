@@ -1,5 +1,6 @@
 # data manipulation
 library(tidyverse)
+library(janitor)
 #devtools::install_github("mjskay/tidybayes")
 library(tidybayes)
 
@@ -57,14 +58,14 @@ treed <- map2(np, ll, ~ mcmc_nuts_treedepth(.x, .y))
 energy <- map2(np, ll, ~ mcmc_nuts_energy(.x, .y))
 
 
-# estimate of out-of-sample performance
-# these should be parallelized; done using future
-cl <- map(disc_fit, ~ future::future(loo(.x)))
-cl <- map(cl, ~ future::value(.x))
-compare_loo_tab <- loo::compare(x = cl)
-wl <- map(disc_fit, ~ future::future(waic(.x)))
-wl <- map(wl, ~ future::value(.x))
-compare_waic_tab <- loo::compare(x = wl)
+## estimate of out-of-sample performance
+## these should be parallelized; done using future
+#cl <- map(disc_fit, ~ future::future(loo(.x)))
+#cl <- map(cl, ~ future::value(.x))
+#compare_loo_tab <- loo::compare(x = cl)
+#wl <- map(disc_fit, ~ future::future(waic(.x)))
+#wl <- map(wl, ~ future::value(.x))
+#compare_waic_tab <- loo::compare(x = wl)
 
 # posterior probability of observation surviving
 pe <- map(disc_fit, ~ future::future(posterior_predict(.x)))
@@ -83,23 +84,29 @@ opt_cut <- function(perf, pred) {
                }, perf@x.values, perf@y.values, pred@cutoffs)
   cut_ind
 }
-
 get_cutpoints <- function(pp_prob, target) {
   pred <- plyr::alply(pp_prob, 1, function(x) prediction(x, target))
   perf <- map(pred, ~ performance(.x, measure = 'tpr', x.measure = 'fpr'))
   cutpoints <- map2(perf, pred, opt_cut)
 }
 pgc <- partial(get_cutpoints, target = counti_trans$event)
-list_cutpoint <- map(map(pp_prob, pgc), ~ .x[3])
-hits_rescaled <- map2(pp_proc, list_cutpoint[[1]], ~ ifelse(.x > .y, 1, 0))
+list_cutpoint <- map(map(pp_prob, pgc), ~ map(.x, ~ .x[3]))
+
+pp_est_new <- list()
+for(jj in seq(length(pp_prob))) {
+  mm <- matrix(ncol = ncol(pp_prob[[jj]]), nrow = nrow(pp_prob[[jj]]))
+  for(ii in seq(nrow(mm))) {
+    mm[ii, ] <- pp_prob[[jj]][ii, ] > list_cutpoint[[jj]][[ii]]
+  }
+  pp_est_new[[jj]] <- mm * 1
+}
 # this resets the cutpoint for determining 0 vs 1 by setting it very low.
 # this is a product of really high class imbalance. 
 # cutpoint based on maximizing both sensitivity and specificity.
 # this is calculated for every posterior predictive simulation for each model.
 # these new, rescaled 0-1 results are then fed through the ROC/AUC machine.
 
-
-pp_roc <- map(pp_est, ~ apply(.x, 1, function(y) roc(counti_trans$event, y)))
+pp_roc <- map(pp_est_new, ~ apply(.x, 1, function(y) roc(counti_trans$event, y)))
 pp_auc <- map(pp_roc, function(y) map_dbl(y, ~ auc(.x)))
 
 roc_hist <- bind_rows(imap(pp_auc, ~ data.frame(model = .y, roc = .x))) %>%
@@ -110,21 +117,7 @@ roc_hist <- bind_rows(imap(pp_auc, ~ data.frame(model = .y, roc = .x))) %>%
 ggsave(filename = '../doc/figure/roc_hist.png', plot = roc_hist,
        width = 6, height = 6)
 
-# break up by point in time and plot
-tt <- map(pp_est, ~ split(.x, counti_trans$fact_mybin))
-tt <- map(tt, ~ map(.x, function(y) matrix(y, nrow = 1000)))
-ee <- split(counti_trans$event, counti_trans$fact_mybin)
-row_auc <- function(x, y) apply(x, 1, function(a) auc(roc(a, y)))
-pat <- map(tt, ~ map2(.x, ee, function(a, b) try(row_auc(a, b))))
-
-
-rr <- map(pat, ~ keep(.x, check_class)) %>%
-  map(., ~ bind_rows(.x)) %>%
-  bind_rows(.id = 'model') %>%
-  gather(when, value, -model) %>%
-  mutate(when = as.numeric(when)) %>%
-  ggplot(aes(x = when, y = value)) +
-  geom_eye() +
-  facet_grid(~ model)
-ggsave(filename = '../doc/figure/roc_time.png', plot = rr,
+# roc as timeseries to see best and worst times
+roc_ts <- plot_roc_series(counti_trans, pp_est_new, model_key)
+ggsave(filename = '../doc/figure/roc_ts.png', plot = roc_ts,
        width = 8, height = 8)

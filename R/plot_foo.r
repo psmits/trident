@@ -175,3 +175,60 @@ plot_taxon_hazard <- function(model) {
 
   db
 }
+
+
+#' Faceted plot of AUC time series
+#' 
+#' This spews a bunch of error messages by they are handeled through exception handling, so the error messages are actually warnings :P.
+#' 
+#' @param data tibble of data used to fit models
+#' @param model_pp list of model posterior predictive draws
+#' @param model_key vector characters naming each model
+#' @return ggplot object
+plot_roc_series <- function(data, model_pp, model_key) {
+  # important exception functions
+  safe_roc <- safely(roc)
+  safe_auc <- safely(auc)
+  
+  out <- list()
+  for(kk in seq(length(model_pp))) {
+    est <- list()
+    for(ii in seq(max(data$mybin))) {
+      tw <- model_pp[[kk]][, data$fact_mybin == ii]
+      ew <- data %>%
+        filter(fact_mybin == ii) %>%
+        dplyr::select(event)
+      ew <- as.data.frame(ew)[, 1]
+      oo <- list()
+      for(jj in seq(nrow(tw))) {
+        # see here for the big source of exceptions...
+        oo[[jj]] <- safe_roc(ew, tw[jj, ])
+      }
+      est[[ii]] <- oo
+    }
+    est <- set_names(est, seq(length(est)))
+    out[[kk]] <- est
+  }
+  # of those that aren't errors, try to get AUC
+  es <- map(out, ~ map(.x, ~ map(.x, ~ safe_auc(.x$result)))) %>%
+    map(., ~ map(.x, ~ map(.x, 'result'))) %>%
+    map(., ~ map(.x, ~ reduce(.x, c)))
+
+  # zero out the error-d entries
+  tt <- map(es, ~ map_lgl(.x, ~ !is.null(.x)))
+  slate <- map2(es, tt, ~ keep(.x, .y))
+
+  # massage into graph
+  roc_ts <- map(slate, bind_rows) %>%
+    map(., ~ .x %>% gather(key, value)) %>%
+    bind_rows(., .id = 'model') %>%
+    mutate(key = parse_integer(key),
+           model = plyr::mapvalues(model, 1:3, model_key)) %>%
+    ggplot(aes(x = key, y = value)) +
+    stat_lineribbon() +
+    scale_fill_brewer() +
+    facet_grid(model ~ .) +
+    labs(x = 'Time (My)', y = 'AUC') +
+    NULL
+  roc_ts
+}
