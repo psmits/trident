@@ -41,6 +41,7 @@ counti_trans <- prepare_analysis(counti)
 
 # read in model fits
 model_key <- c('Past and vary', 
+               'Past and vary (no interaction)',
                'No past but vary', 
                'No past or vary')
 disc_fit <- read_rds('../data/disc_fit.rds')
@@ -68,8 +69,8 @@ wl <- map(disc_fit, ~ future::future(waic(.x)))
 wl <- map(wl, ~ future::value(.x))
 compare_waic_tab <- loo::compare(x = wl)
 # i should find a way to output these nicely
-compare_loo_tab
-compare_waic_tab
+#compare_loo_tab
+#compare_waic_tab
 
 
 # posterior probability of observation surviving
