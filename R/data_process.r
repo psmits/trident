@@ -48,19 +48,19 @@ nano <- nano %>%
 nano <- nano %>% 
   filter(!is.na(plat), 
          !is.na(plng)) %>%
-group_by(taxon_id) %>%
-filter(max(age) < age_max) %>%
-ungroup() %>%
-# some don't have paleolat or long
-# also need to limit to line up with mgca
-# then
-# assign million year bins (decreasing; youngest lowest)
-dplyr::arrange(desc(age)) %>%
-dplyr::mutate(mybin = break_my(age, by = 1)) %>%
-# then
-# make a species genus combo
-dplyr::mutate(fullname = str_c(genus, '_', species)) %>% 
-arrange(fullname)
+  group_by(taxon_id) %>%
+  filter(max(age) < age_max) %>%
+  ungroup() %>%
+  # some don't have paleolat or long
+  # also need to limit to line up with mgca
+  # then
+  # assign million year bins (decreasing; youngest lowest)
+  dplyr::arrange(desc(age)) %>%
+  dplyr::mutate(mybin = break_my(age, by = 1)) %>%
+  # then
+  # make a species genus combo
+  dplyr::mutate(fullname = str_c(genus, '_', species)) %>% 
+  arrange(fullname)
 
 # assign everything a geographic cell using paleocoordinates
 eq <- CRS("+proj=cea +lat_0=0 +lon_0=0 +lat_ts=30 +a=6371228.0 +units=m")

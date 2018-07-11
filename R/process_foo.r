@@ -90,7 +90,6 @@ prepare_analysis <- function(x, fg = NULL) {
   tb
 }
 
-
 #' Break time data up into bins
 #' 
 #' Have fun with this. basic rules. greater than equal to base, less than top.
@@ -98,17 +97,17 @@ prepare_analysis <- function(x, fg = NULL) {
 #' @param x vector of ages
 #' @param by bin width
 #' @return vector of bin memberships
-break_my <- function(x, by = 1, number = NULL) {
+break_my <- function(x, by = NULL, number = NULL) {
   top <- ceiling(max(x))
   bot <- floor(min(x))
   if(!is.null(by)) {
     unt <- seq(from = bot, to = top, by = by)
-  } else {
-    unt <- seq(from = bot, to = top, length.out = number)
+  } else if(!is.null(number)) {
+    unt <- seq(from = bot, to = top, length.out = number + 1)
   }
   unt1 <- unt[-length(unt)]
   unt2 <- unt[-1]
-  uu <- map(map2(unt1, unt2, ~ x >= .x & x < .y), which)
+  uu <- map2(unt1, unt2, ~ which(between(x, left = .x, right = .y)))
 
   y <- x
   for(ii in seq(length(uu))) {
@@ -133,7 +132,7 @@ check_class <- function(x) class(x) != 'try-error'
 
 #' Get optimal cut from ROC results
 #' 
-#' Uses ROCR
+#' Uses ROCR. I got this from somewhere on the internet.
 #'
 #' @param perf performance object
 #' @param pred prediction object
@@ -160,3 +159,54 @@ get_cutpoints <- function(pp_prob, target) {
   perf <- map(pred, ~ performance(.x, measure = 'tpr', x.measure = 'fpr'))
   cutpoints <- map2(perf, pred, opt_cut)
 }
+
+
+#' Reassign class membership based on new cutpoints
+#'
+#' Give probabilities and new cutpoint level, reassigns classes.
+#'
+#' @param pp_prob list of posterior predictive draws, where each list element is the PPD for one model.
+#' @param list_cutpoint list of new cutpoints as estimated from get_cutpoints
+#' @return list of reassigned class predictions
+cut_newpoint <- function(pp_prob, list_cutpoint) {
+  pp_est_new <- list()
+  for(jj in seq(length(pp_prob))) {
+    mm <- matrix(ncol = ncol(pp_prob[[jj]]), nrow = nrow(pp_prob[[jj]]))
+    for(ii in seq(nrow(mm))) {
+      mm[ii, ] <- pp_prob[[jj]][ii, ] > list_cutpoint[[jj]]
+    }
+    pp_est_new[[jj]] <- mm * 1
+  }
+  pp_est_new
+}
+
+#' Posterior roc
+#' 
+#' This is mostly a convenient function to quickly get ROC estimates for entire posterior distribution (awkward matrix form).
+#' 
+#' @param x matrix of posterior 
+#' @param y matrix with true data. named element event is vector of 0/1
+post_roc <- function(x, y) apply(x, 1, function(a) roc(y$event, a))
+
+#' Extract posterior AUC, safely
+#'
+#' Wrapped with safely to prevent response has only 1 level stuff
+#'
+#' @param pred matrix of predicted 0/1 values
+#' @param counti_fold testing dataset
+#' @return list w/ two elements result and error
+get_auc_time <- function(pred, counti_fold) {
+  fold_time <- split(counti_fold, counti_fold$mybin)
+
+  pred_time <- split(t(pred), counti_fold$mybin) %>%
+    map2(., fold_time, ~ matrix(.x, nrow = nrow(.y))) %>%
+    map(., t)
+
+  safe_pr <- safely(post_roc)
+  auc_time <- map2(pred_time, fold_time, safe_pr) %>%
+    map(., function(x) map_dbl(x$result, ~ auc(.x)))
+  auc_time
+}
+
+
+

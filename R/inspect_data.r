@@ -27,6 +27,8 @@ counti <- read_rds('../data/counting.rds')
 # form of data that was analyzed
 counti_trans <- prepare_analysis(counti)
 
+counti_trans %>% dplyr::select(fullname, mybin, relage, maxgcd, diff_maxgcd)
+
 
 # occurrences through time, labeled if LAD
 octg <- counti %>%

@@ -8,12 +8,6 @@ library(tidybayes)
 library(parallel)
 library(future)
 
-# survival
-library(survival)
-library(LTRCtrees)
-library(rpart.plot)
-library(partykit)
-
 # bayes
 library(arm)
 library(rstanarm)
@@ -65,12 +59,21 @@ energy <- map2(np, ll, ~ mcmc_nuts_energy(.x, .y))
 cl <- map(disc_fit, ~ future::future(loo(.x)))
 cl <- map(cl, ~ future::value(.x))
 compare_loo_tab <- loo::compare(x = cl)
+rownames(compare_loo_tab) <- plyr::mapvalues(rownames(compare_loo_tab),
+                                             sort(rownames(compare_loo_tab)),
+                                             model_key)
+xtable::print.xtable(xtable::xtable(compare_loo_tab), 
+                     file = '../doc/loo_tab_draft.tex')
+
 wl <- map(disc_fit, ~ future::future(waic(.x)))
 wl <- map(wl, ~ future::value(.x))
 compare_waic_tab <- loo::compare(x = wl)
+rownames(compare_waic_tab) <- plyr::mapvalues(rownames(compare_waic_tab),
+                                              sort(rownames(compare_waic_tab)),
+                                              model_key)
+xtable::print.xtable(xtable::xtable(compare_waic_tab), 
+                     file = '../doc/waic_tab_draft.tex')
 # i should find a way to output these nicely
-#compare_loo_tab
-#compare_waic_tab
 
 
 # posterior probability of observation surviving
@@ -82,29 +85,21 @@ pp_prob <- map(pp, ~ future::value(.x))
 # adequacy of fit ROC
 pgc <- partial(get_cutpoints, target = counti_trans$event)
 list_cutpoint <- map(map(pp_prob, pgc), ~ map(.x, ~ .x[3]))
-
-pp_est_new <- list()
-for(jj in seq(length(pp_prob))) {
-  mm <- matrix(ncol = ncol(pp_prob[[jj]]), nrow = nrow(pp_prob[[jj]]))
-  for(ii in seq(nrow(mm))) {
-    mm[ii, ] <- pp_prob[[jj]][ii, ] > list_cutpoint[[jj]][[ii]]
-  }
-  pp_est_new[[jj]] <- mm * 1
-}
+pp_est_new <- cut_newpoint(pp_prob, list_cutpoint)
 # this resets the cutpoint for determining 0 vs 1 by setting it very low.
 # this is a product of really high class imbalance. 
 # cutpoint based on maximizing both sensitivity and specificity.
 # this is calculated for every posterior predictive simulation for each model.
 # these new, rescaled 0-1 results are then fed through the ROC/AUC machine.
-
-pp_roc <- map(pp_est_new, ~ apply(.x, 1, function(y) roc(counti_trans$event, y)))
+partial_post_roc <- purrr::partial(post_roc, y = counti_trans$event)
+pp_roc <- map(pp_est_new, partial_post_roc)
 pp_auc <- map(pp_roc, function(y) map_dbl(y, ~ auc(.x)))
 
 roc_hist <- bind_rows(imap(pp_auc, ~ data.frame(model = .y, roc = .x))) %>%
   mutate(model = recode(model, !!!model_key),
          model = fct_relevel(model, !!model_key[2], after = 1)) %>%
-  ggplot(aes(x = roc, y = model)) +
-  geom_eyeh()
+ggplot(aes(x = roc, y = model)) +
+geom_eyeh()
 ggsave(filename = '../doc/figure/roc_hist.png', plot = roc_hist,
        width = 6, height = 6)
 

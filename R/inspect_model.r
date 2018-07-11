@@ -31,37 +31,38 @@ counti_trans <- prepare_analysis(counti)
 
 # read in model fits
 disc_fit <- read_rds('../data/disc_fit.rds')
-disc_best <- disc_fit[[1]]
+#disc_best <- disc_fit[[1]]
+disc_best <- disc_fit[[2]]
 
 # posterior intervals
 interval_est <- disc_best %>%
   spread_samples(`(Intercept)`, 
                  maxgcd, 
                  diff_maxgcd,
-                 `maxgcd:diff_maxgcd`,
+                 #`maxgcd:diff_maxgcd`,
                  temp,
                  lag1_temp,
                  `Sigma[fossil_group:fact_mybin:(Intercept),(Intercept)]`,
                  `Sigma[fossil_group:fact_mybin:maxgcd,(Intercept)]`,
                  `Sigma[fossil_group:fact_mybin:diff_maxgcd,(Intercept)]`,
-                 `Sigma[fossil_group:fact_mybin:maxgcd:diff_maxgcd,(Intercept)]`,
+                 #`Sigma[fossil_group:fact_mybin:maxgcd:diff_maxgcd,(Intercept)]`,
                  `Sigma[fossil_group:fact_mybin:maxgcd,maxgcd]`,
                  `Sigma[fossil_group:fact_mybin:diff_maxgcd,maxgcd]`,
-                 `Sigma[fossil_group:fact_mybin:maxgcd:diff_maxgcd,maxgcd]`,
+                 #`Sigma[fossil_group:fact_mybin:maxgcd:diff_maxgcd,maxgcd]`,
                  `Sigma[fossil_group:fact_mybin:diff_maxgcd,diff_maxgcd]`,
-                 `Sigma[fossil_group:fact_mybin:maxgcd:diff_maxgcd,diff_maxgcd]`,
-                 `Sigma[fossil_group:fact_mybin:maxgcd:diff_maxgcd,maxgcd:diff_maxgcd]`,
+                 #`Sigma[fossil_group:fact_mybin:maxgcd:diff_maxgcd,diff_maxgcd]`,
+                 #`Sigma[fossil_group:fact_mybin:maxgcd:diff_maxgcd,maxgcd:diff_maxgcd]`,
                  `Sigma[fossil_group:fact_relage:(Intercept),(Intercept)]`,
                  `Sigma[fact_mybin:(Intercept),(Intercept)]`,
                  `Sigma[fact_mybin:maxgcd,(Intercept)]`,
                  `Sigma[fact_mybin:diff_maxgcd,(Intercept)]`,
-                 `Sigma[fact_mybin:maxgcd:diff_maxgcd,(Intercept)]`,
+                 #`Sigma[fact_mybin:maxgcd:diff_maxgcd,(Intercept)]`,
                  `Sigma[fact_mybin:maxgcd,maxgcd]`,
                  `Sigma[fact_mybin:diff_maxgcd,maxgcd]`,
-                 `Sigma[fact_mybin:maxgcd:diff_maxgcd,maxgcd]`,
+                 #`Sigma[fact_mybin:maxgcd:diff_maxgcd,maxgcd]`,
                  `Sigma[fact_mybin:diff_maxgcd,diff_maxgcd]`,
-                 `Sigma[fact_mybin:maxgcd:diff_maxgcd,diff_maxgcd]`,
-                 `Sigma[fact_mybin:maxgcd:diff_maxgcd,maxgcd:diff_maxgcd]`,
+                 #`Sigma[fact_mybin:maxgcd:diff_maxgcd,diff_maxgcd]`,
+                 #`Sigma[fact_mybin:maxgcd:diff_maxgcd,maxgcd:diff_maxgcd]`,
                  `Sigma[fact_relage:(Intercept),(Intercept)]`) %>%
   median_qi(.prob = c(0.9, 0.5))
 
@@ -69,7 +70,7 @@ effect_eye <- disc_best %>%
   gather_samples(`(Intercept)`, 
                  maxgcd, 
                  diff_maxgcd,
-                 `maxgcd:diff_maxgcd`,
+                 #`maxgcd:diff_maxgcd`,
                  temp,
                  lag1_temp) %>%
   ggplot(aes(y = term, x = estimate)) +
@@ -82,24 +83,24 @@ vary_eye <- disc_best %>%
   gather_samples(`Sigma[fossil_group:fact_mybin:(Intercept),(Intercept)]`,
                  `Sigma[fossil_group:fact_mybin:maxgcd,(Intercept)]`,
                  `Sigma[fossil_group:fact_mybin:diff_maxgcd,(Intercept)]`,
-                 `Sigma[fossil_group:fact_mybin:maxgcd:diff_maxgcd,(Intercept)]`,
+                 #`Sigma[fossil_group:fact_mybin:maxgcd:diff_maxgcd,(Intercept)]`,
                  `Sigma[fossil_group:fact_mybin:maxgcd,maxgcd]`,
                  `Sigma[fossil_group:fact_mybin:diff_maxgcd,maxgcd]`,
-                 `Sigma[fossil_group:fact_mybin:maxgcd:diff_maxgcd,maxgcd]`,
+                 #`Sigma[fossil_group:fact_mybin:maxgcd:diff_maxgcd,maxgcd]`,
                  `Sigma[fossil_group:fact_mybin:diff_maxgcd,diff_maxgcd]`,
-                 `Sigma[fossil_group:fact_mybin:maxgcd:diff_maxgcd,diff_maxgcd]`,
-                 `Sigma[fossil_group:fact_mybin:maxgcd:diff_maxgcd,maxgcd:diff_maxgcd]`,
+                 #`Sigma[fossil_group:fact_mybin:maxgcd:diff_maxgcd,diff_maxgcd]`,
+                 #`Sigma[fossil_group:fact_mybin:maxgcd:diff_maxgcd,maxgcd:diff_maxgcd]`,
 
                  `Sigma[fact_mybin:(Intercept),(Intercept)]`,
                  `Sigma[fact_mybin:maxgcd,(Intercept)]`,
                  `Sigma[fact_mybin:diff_maxgcd,(Intercept)]`,
-                 `Sigma[fact_mybin:maxgcd:diff_maxgcd,(Intercept)]`,
+                 #`Sigma[fact_mybin:maxgcd:diff_maxgcd,(Intercept)]`,
                  `Sigma[fact_mybin:maxgcd,maxgcd]`,
                  `Sigma[fact_mybin:diff_maxgcd,maxgcd]`,
-                 `Sigma[fact_mybin:maxgcd:diff_maxgcd,maxgcd]`,
+                 #`Sigma[fact_mybin:maxgcd:diff_maxgcd,maxgcd]`,
                  `Sigma[fact_mybin:diff_maxgcd,diff_maxgcd]`,
-                 `Sigma[fact_mybin:maxgcd:diff_maxgcd,diff_maxgcd]`,
-                 `Sigma[fact_mybin:maxgcd:diff_maxgcd,maxgcd:diff_maxgcd]`,
+                 #`Sigma[fact_mybin:maxgcd:diff_maxgcd,diff_maxgcd]`,
+                 #`Sigma[fact_mybin:maxgcd:diff_maxgcd,maxgcd:diff_maxgcd]`,
 
                  `Sigma[fossil_group:fact_relage:(Intercept),(Intercept)]`,
                  `Sigma[fact_relage:(Intercept),(Intercept)]`) %>%
@@ -112,9 +113,16 @@ ggsave(filename = '../doc/figure/variance_components.png',
 # probability of overall average ests being greater than 0
 get_percent <- function(x) sum(x > 0) / length(x)
 effect_prob <- disc_best %>%
-  spread_samples(maxgcd, diff_maxgcd, `maxgcd:diff_maxgcd`, temp, lag1_temp) %>%
-  summarize_at(.vars = c('maxgcd', 'diff_maxgcd', 'maxgcd:diff_maxgcd', 
-                         'temp', 'lag1_temp'), 
+  spread_samples(maxgcd, 
+                 diff_maxgcd, 
+                 #`maxgcd:diff_maxgcd`, 
+                 temp, 
+                 lag1_temp) %>%
+  summarize_at(.vars = c('maxgcd', 
+                         'diff_maxgcd', 
+                         # 'maxgcd:diff_maxgcd', 
+                         'temp', 
+                         'lag1_temp'), 
                .funs = get_percent)
 
 
@@ -144,7 +152,7 @@ ggsave(filename = '../doc/figure/hazard_bygroup.png', plot = db,
 #   4 taxonomic groups
 by_taxon <- plot_taxon_covariate_time(disc_best)
 ggsave(filename = '../doc/figure/eff_time_group.png', plot = by_taxon,
-       height = 8, width = 8)
+       height = 6, width = 8)
 
 
 # look at hazard over duration for a few examples

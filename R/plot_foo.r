@@ -24,7 +24,7 @@ plot_georange_compare <- function(data) {
 #' @return a ggplot object
 plot_taxon_covariate_time <- function(disc_best) {
   comp_const <- disc_best %>%
-    spread_samples(maxgcd, diff_maxgcd, `maxgcd:diff_maxgcd`)
+    spread_samples(maxgcd, diff_maxgcd)
 
   comp_var <- disc_best %>%
     spread_samples(b[i, f]) %>%
@@ -41,30 +41,28 @@ plot_taxon_covariate_time <- function(disc_best) {
   # first element is just temporal effect
   core <- full_join(comp_const, cv[[1]], by = c('.chain', '.iteration')) %>%
     mutate(eff_maxgcd = maxgcd.x + maxgcd.y,
-           eff_diff_maxgcd = diff_maxgcd.x + diff_maxgcd.y,
-           eff_interaction = `maxgcd:diff_maxgcd.x` + `maxgcd:diff_maxgcd.y`) %>%
+           eff_diff_maxgcd = diff_maxgcd.x + diff_maxgcd.y) %>%
   dplyr::select(.chain, .iteration, f, age, 
-                eff_maxgcd, eff_diff_maxgcd, eff_interaction) %>%
+                eff_maxgcd, eff_diff_maxgcd) %>%
   arrange(.chain, .iteration, age)
 
   # need to confirm correct line-up
   by_taxon <- map(cv[-1], ~ full_join(core, .x, by = c('.chain', '.iteration', 'age'))) %>%
     map(., ~ .x %>%
         mutate(taxon_eff_maxgcd = eff_maxgcd + maxgcd,
-               taxon_eff_diff_maxgcd = eff_diff_maxgcd + diff_maxgcd,
-               taxon_eff_interaction = eff_interaction + `maxgcd:diff_maxgcd`))
+               taxon_eff_diff_maxgcd = eff_diff_maxgcd + diff_maxgcd))
   by_taxon <- reduce(by_taxon, bind_rows)
   
   by_taxon <- by_taxon %>%
     gather(key, value, -.chain, -.iteration, -f.x, 
            -age, -f.y, -`(Intercept)`, -type,
-           -eff_maxgcd, -eff_diff_maxgcd, -eff_interaction,
-           -diff_maxgcd, -maxgcd, -`maxgcd:diff_maxgcd`) %>%
+           -eff_maxgcd, -eff_diff_maxgcd,
+           -diff_maxgcd, -maxgcd) %>%
   filter(!is.na(type)) %>%
   ggplot(aes(x = age, y = value)) +
   stat_lineribbon() +
   scale_fill_brewer() +
-  facet_grid(key ~ type)
+  facet_grid(key ~ type, scales = 'free_y')
   
   by_taxon
 }
@@ -188,6 +186,9 @@ plot_taxon_hazard <- function(model) {
 #' @param model_key vector characters naming each model
 #' @return ggplot object
 plot_roc_series <- function(data, model_pp, model_key) {
+#data <- counti_trans
+#model_pp <- pp_est_new
+#model_key <- model_key
   # important exception functions
   safe_roc <- safely(roc)
   safe_auc <- safely(auc)
@@ -220,11 +221,14 @@ plot_roc_series <- function(data, model_pp, model_key) {
   slate <- map2(es, tt, ~ keep(.x, .y))
 
   # massage into graph
-  roc_ts <- map(slate, bind_rows) %>%
+  roc_ts <- 
+    map(slate, bind_rows) %>%
     map(., ~ .x %>% gather(key, value)) %>%
     bind_rows(., .id = 'model') %>%
     mutate(key = parse_integer(key),
-           model = plyr::mapvalues(model, 1:3, model_key)) %>%
+           model = plyr::mapvalues(model, 
+                                   from = seq(length(model_key)), 
+                                   to = model_key)) %>%
     ggplot(aes(x = key, y = value)) +
     stat_lineribbon() +
     scale_fill_brewer() +
