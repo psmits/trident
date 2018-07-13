@@ -78,36 +78,33 @@ effect_eye <- disc_best %>%
 ggsave(filename = '../doc/figure/effect_est.png',
        plot = effect_eye, width = 4, height = 6)
 
+
 # variance component
+interp <- c('time: variance intercept, overall',
+  'time: variance maxgcd, overall',
+  'time: variance diff_maxgcd, overall',
+  'time: variance intercept, within groups',
+  'time: variance maxgcd, within groups',
+  'time: variance diff_maxgcd, within groups',
+  'age: variance intercept, overall',
+  'age: variance intercept, within groups')
+
 vary_eye <- disc_best %>%
-  gather_samples(`Sigma[fossil_group:fact_mybin:(Intercept),(Intercept)]`,
-                 `Sigma[fossil_group:fact_mybin:maxgcd,(Intercept)]`,
-                 `Sigma[fossil_group:fact_mybin:diff_maxgcd,(Intercept)]`,
-                 #`Sigma[fossil_group:fact_mybin:maxgcd:diff_maxgcd,(Intercept)]`,
-                 `Sigma[fossil_group:fact_mybin:maxgcd,maxgcd]`,
-                 `Sigma[fossil_group:fact_mybin:diff_maxgcd,maxgcd]`,
-                 #`Sigma[fossil_group:fact_mybin:maxgcd:diff_maxgcd,maxgcd]`,
-                 `Sigma[fossil_group:fact_mybin:diff_maxgcd,diff_maxgcd]`,
-                 #`Sigma[fossil_group:fact_mybin:maxgcd:diff_maxgcd,diff_maxgcd]`,
-                 #`Sigma[fossil_group:fact_mybin:maxgcd:diff_maxgcd,maxgcd:diff_maxgcd]`,
-
-                 `Sigma[fact_mybin:(Intercept),(Intercept)]`,
-                 `Sigma[fact_mybin:maxgcd,(Intercept)]`,
-                 `Sigma[fact_mybin:diff_maxgcd,(Intercept)]`,
-                 #`Sigma[fact_mybin:maxgcd:diff_maxgcd,(Intercept)]`,
+  gather_samples(`Sigma[fact_mybin:(Intercept),(Intercept)]`,
                  `Sigma[fact_mybin:maxgcd,maxgcd]`,
-                 `Sigma[fact_mybin:diff_maxgcd,maxgcd]`,
-                 #`Sigma[fact_mybin:maxgcd:diff_maxgcd,maxgcd]`,
                  `Sigma[fact_mybin:diff_maxgcd,diff_maxgcd]`,
-                 #`Sigma[fact_mybin:maxgcd:diff_maxgcd,diff_maxgcd]`,
-                 #`Sigma[fact_mybin:maxgcd:diff_maxgcd,maxgcd:diff_maxgcd]`,
-
-                 `Sigma[fossil_group:fact_relage:(Intercept),(Intercept)]`,
-                 `Sigma[fact_relage:(Intercept),(Intercept)]`) %>%
+                 `Sigma[fossil_group:fact_mybin:(Intercept),(Intercept)]`,
+                 `Sigma[fossil_group:fact_mybin:maxgcd,maxgcd]`,
+                 `Sigma[fossil_group:fact_mybin:diff_maxgcd,diff_maxgcd]`,
+                 `Sigma[fact_relage:(Intercept),(Intercept)]`,
+                 `Sigma[fossil_group:fact_relage:(Intercept),(Intercept)]`) %>%
+  ungroup() %>%
+  mutate(term = plyr::mapvalues(term, from = unique(term), to = interp)) %>%
   ggplot(aes(y = term, x = estimate)) +
-  geom_halfeyeh(.prob = c(0.9, 0.5))
+  geom_halfeyeh(.prob = c(0.9, 0.5)) +
+  labs(x = 'Estimate', y = 'Variance component')
 ggsave(filename = '../doc/figure/variance_components.png',
-       plot = vary_eye, width = 8, height = 4)
+       plot = vary_eye, width = 6, height = 6)
 
 
 # probability of overall average ests being greater than 0
