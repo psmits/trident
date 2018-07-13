@@ -28,7 +28,7 @@ counti_trans <- prepare_analysis(counti)
 
 # split the data into temporal folds
 # there are only 63 temporal units
-# assuming 5 folds, that's 12 time units per fold
+# assuming 5 folds, that's 12-13 time units per fold
 # train [1], test [2]
 # train [1,2], test [3]
 # train [1,2,3], test [4]
@@ -37,9 +37,10 @@ counti_trans <- prepare_analysis(counti)
 counti_trans <- counti_trans %>%
   mutate(fold = break_my(mybin, number = 5))
 
-# 1 is young, 5 is old
-counti_fold <- rev(split(counti_trans, counti_trans$fold))  # each fold
-counti_accum <- accumulate(counti_fold, bind_rows) # combine some folds
+# 1 is young, 5 is old; reverse!
+counti_fold <- rev(split(counti_trans, counti_trans$fold))  
+# combine some folds to make training sets
+counti_accum <- accumulate(counti_fold, bind_rows) 
 counti_accum <- counti_accum[-1]
 
 form1 <- formula(event ~ temp + lag1_temp + maxgcd + diff_maxgcd + 
@@ -49,7 +50,7 @@ form1 <- formula(event ~ temp + lag1_temp + maxgcd + diff_maxgcd +
 fit <- map(counti_accum, ~ stan_glmer(form1, 
                                       family = 'binomial', 
                                       data = .x,
-                                      adapt_delta = 0.999, 
+                                      adapt_delta = 0.9999, 
                                       thin = 4))
 
 write_rds(fit, path = '../data/training_fit.rds')

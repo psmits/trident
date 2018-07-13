@@ -44,31 +44,42 @@ counti_accum <- counti_accum[-1]
 fit <- read_rds('../data/training_fit.rds')
 
 # given trained models for the rolled-out folds, estimate the next fold
+
 # first: get the cutpoint from the training data set b/c class imbalance
 plin <- map2(fit, counti_accum, ~ posterior_linpred(object = .x, newdata = .y))
 cut_points <- map2(plin, counti_accum, ~ get_cutpoints(.x, .y$event)) %>%
   map(., ~ .x[[1]][3])
-# second: using the new cutpoints, predict test data
+
+# second: given new cutpoints, predict test data class
 pred <- map2(fit, counti_fold[-1], 
              ~ posterior_linpred(object = .x, newdata = .y)) %>%
   cut_newpoint(., cut_points)
+
 # third: calculate ROC/AUC for the predictions of test data
-pred_roc <- map2(pred, counti_fold[-1], post_roc) %>%
+# to determine how good our out of sample predictions are
+pred_auc <- map2(pred, counti_fold[-1], post_roc) %>%
   map(., function(x) map_dbl(x, ~ auc(.x)))
 
 # now to make a plot about out-of-sample predictive accuracy
-oos_roc <- bind_cols(pred_roc) %>% 
+# because 1000s of numbers are hard to visualize
+oos_auc <- bind_cols(pred_auc) %>% 
   gather() %>%
   mutate(key = str_extract(key, '[0-9]')) %>%
   ggplot(aes(x = value, fill = key)) + 
-  stat_density(alpha = 0.5, position = 'dodge')
+  stat_density(alpha = 0.5) +
+  labs(x = 'AUC', y = 'density')
+ggsave(filename = '../doc/figure/fold_auc.png', plot = oos_auc,
+       width = 6, height = 6)
 
 # then do it for time
 time_auc <- map2(pred, counti_fold[-1], get_auc_time)
 
+# could this be done with enframe?
 ta <- reshape2::melt(time_auc) %>% 
   as.tibble %>%
   mutate(fold = factor(L1),
          time = parse_double(L2)) %>%
   ggplot(aes(x = time, y = value, colour = fold)) +
-  stat_interval(alpha = 0.5, position = 'dodge', .prob = c(0.5, 0.8))
+  stat_interval(alpha = 0.5, .prob = c(0.5, 0.8))
+ggsave(filename = '../doc/figure/fold_auc_time.png', plot = ta,
+       width = 8, height = 6)
