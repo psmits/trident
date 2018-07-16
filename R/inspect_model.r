@@ -122,7 +122,6 @@ effect_prob <- disc_best %>%
                          'lag1_temp'), 
                .funs = get_percent)
 
-
 # base-line hazard plot
 hazard_plot <- disc_best %>%
   spread_samples(b[i, f], `(Intercept)`) %>%
