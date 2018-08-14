@@ -26,24 +26,28 @@ counti <- prepare_analysis(counti)
 
 # fit the model
 
-form <- formula(event ~ temp + lag1_temp + maxgcd * diff_maxgcd + 
-                (1 + maxgcd * diff_maxgcd | fact_mybin/fossil_group) + 
-                (1 | fact_relage/fossil_group))
-
-form1 <- formula(event ~ temp + lag1_temp + maxgcd + diff_maxgcd + 
+# past and vary
+form <- formula(event ~ temp + lag1_temp + maxgcd + diff_maxgcd + 
                 (1 + maxgcd + diff_maxgcd | fact_mybin/fossil_group) + 
                 (1 | fact_relage/fossil_group))
 
+# past but no vary
 form2 <- update(form, 
-                ~ . - diff_maxgcd - maxgcd:diff_maxgcd - 
-                  lag1_temp - (1 + maxgcd * diff_maxgcd | fact_mybin/fossil_group) +
+                ~ . - (1 + maxgcd + diff_maxgcd | fact_mybin/fossil_group)
+                + (1 + maxgcd | fact_mybin/fossil_group))
+
+# no past but vary
+form3 <- update(form, 
+                ~ . - diff_maxgcd - lag1_temp -
+                  (1 + maxgcd + diff_maxgcd | fact_mybin/fossil_group) +
                   (1 + maxgcd | fact_mybin/fossil_group))
 
-form3 <- update(form2, 
+# no past or vary
+form4 <- update(form3, 
                 ~ . - (1 + maxgcd | fact_mybin/fossil_group) + 
                   (1 | fact_mybin/fossil_group))
 
-forms <- list(form, form1, form2, form3)
+forms <- list(form, form2, form3, form4)
 
 disc_fit <- map(forms, ~ stan_glmer(.x, family = 'binomial', data = counti,
                                     adapt_delta = 0.99, thin = 4))
