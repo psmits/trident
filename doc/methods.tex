@@ -26,18 +26,21 @@ A taxon's geographic range during a 1 My bin was calculated as the maximum great
 
 Geographic range was then log-plus-one transformed and then standardized by zero-centering the data and then dividing by its standard deviation so that geographic range had mean 0 and standard deviation 1.
 
-Temperature data is based on estimates from Cramer et al CITATION. These estimates are based on Magnesian/Calcium isotope ratios and are a more accurate estimate of global temperature than the standard Oxygen isotope-based estimates because Mg/Ca based estimates are not effected by ice-volume and fresh-water input (e.g. metioric water). Cramer et al. provide temperature estimates for every 0.1 My from 0 to 63 Mya; we binned these estimates every 1 My in accordance with the way we binned all fossil occurrences.
+Temperature data used as covariates in this analysis are based on Magnesium/Calcium isotope ratios sourced from Cramer et al CITATION. These are considered a more accurate estimate of global temperature than the standard Oxygen isotope-based estimates because Mg/Ca based estimates are not effected by ice-volume and fresh-water input (e.g. metioric water). Our data source, Cramer et al., provides temperature estimates for every 0.1 My from 0 to 63 Mya; we binned these estimates every 1 My to match with how we binned all fossil occurrences. The mean of these values was used as the temperature estimate for that 1 My interval (Fig. \ref{fig:temp_curve}).
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=\textwidth,height=\0.5textheight,keepaspectratio=true]{figure/cramer_temp}
+  \caption{Comparison of initial temperature estimates from Cramer et al. (goldenrod) versus the binned values used in this analysis (blue). The initial values are for every 0.1 My while our bins are defined for every 1 My.}
+  \label{fig:temp_curve}
+\end{figure}
 
 
 \section{Model Specifications}
 
-In survival analysis, the hazard funciton describes the instanenous rate of extinction at time \(t\) given that the species has lived up to that point. For discrete-time survival data, this is expressed as \(\lambda(t | X) = P(T = t | T \geq t, X)\) for \(t = 1, \cdots N\) where \(t\) is the status of a species at a time point, \(T\) is the time of extinction of the species, and \(i = 1, 2, \cdots, N\) with \(N\) being the total number of observations. 
+In survival analysis, the hazard funciton describes the instanenous rate of extinction at time \(t\) given that the species has lived up to that point. For discrete-time survival data, this is expressed as \(\lambda(t | X) = P(T = t | T \geq t, X)\) for \(t = 1, \cdots N\) where \(t\) is the status of a species at a time point, \(T\) is the time of extinction of the species, and \(i = 1, 2, \cdots, N\) with \(N\) being the total number of observations. We parameterized the hazard function as a logistic regression/generalized linear model defined \(\lambda(t | X) = h(\Theta)\) where \(h(.)\) is an inverse logit link function and \(\Theta\) is the probability of a taxon going extinction during interval \(t\). 
 
-In survival analysis the hazard function describes the in stannous rate of extinction for a species given matrix of covariates X, \(\lambda(t | X)\). We parameterized the hazard function as a logistic regression/generalized linear model defined \(\lambda(t | X) = h(\Theta)\) where \(h(.)\) is an inverse logit link function and \(\Theta\) is the probability of a taxon going extinction during interval \(t\). 
-
-\(\Theta\) is then parameterized as a hierarchical model with multiple non-nested varying intercepts CITATION. First, we considered two aspects of geographic range as continuous covariates: geographic range \(r\) during interval \(t\), and the difference \(d\) between the geographic range at \(t - 1\) and \(t\). We also considered the interaction between geographic range during intervals \(t\) and \(t - 1\). At the first observation for a taxon, the diff of geographic range is 0.
-
-Second, we considered two aspects of global temperature: mean temperature during interval \(t\), and the lag of mean temperature (i.e. mean temperature during interval \(t - 1\).)
+\(\Theta\) is then parameterized as a hierarchical model with multiple non-nested varying intercepts CITATION. First, we considered two aspects of geographic range as continuous covariates: geographic range \(r\) during interval \(t\), and the difference \(d\) between the geographic range at \(t - 1\) and \(t\). We also considered the interaction between geographic range during intervals \(t\) and \(t - 1\). At the first observation for a taxon, the diff of geographic range is 0. Secondly, we considered two aspects of global temperature: mean temperature during interval \(t\), and the lag of mean temperature (i.e. mean temperature during interval \(t - 1\).)
 
 The logistic regression can thus be expressed as 
 \begin{equation}
@@ -63,7 +66,7 @@ Posterior convergence was determined using the following general and HMC specifi
 
 \section{Model Selection and Adequacy}
 
-We considered four variants of this model: 1) historical covariates with varying intercepts and slopes, 2) no historical coviarates with varying intercepts and slopes, 3) historical covariates without varying intercepts and slopes, and 4)
+We considered four variants of this model: 1) historical covariates with time-varying intercepts and slopes, 2) no historical coviarates with time-varying intercepts and slopes, 3) historical covariates without time-varying intercepts and slopes, and 4) no historical covariates and no time-varying intercepts and slopes (except age effect).
 
 To determine how many non-nested varying-intercept terms were possible to include without overly biasing out models' parameter estimates, the four variant models described above were compared using both WAIC and LOOIC which are estimates of a model's expected out-of-sample performance; these measures are fully Bayesian, taking into account the entire estimated joint posterior. CITATION. WAIC and LOOIC are interpreted similarly to AIC, with lower values indicating greater expected out-of-sample performance. Additionally, the Bayesian nature of WAIC and LOOIC mean that they are calculated with standard errors allowing for straight forward comparisons. We selected the model with lowest WAIC and LOOIC and all models within one standard error of its WAIC/LOOIC estimate.
 
@@ -79,7 +82,7 @@ When the classes are not approximately balanced, the base probability of 1 versu
 
 \subsection{Cross-validation}
 
-Cross-validation is a procedure for estimating the expected out-of-sample predictive error of a model CITATION. By dividing the data into sub-components (folds), fitting a model to some of the folds folds, and then predicting the response values for the held-out fold. For our dataset, expected out-of-sample AUC was estimated using five-fold cross-validation. For time-series data, the folds are approximately equal segments of time. The model is fit to the first fold and the posterior estimates are used to predict the states of the observations in the second fold, then the model is fit to the first and second fold and the posterior states are used to estimate the states from the third fold, and so on with increasingly large numbers of folds used for fitting a model to predict the states from the subsequent fold. With 63 time points, each of the five folds represents approximately 13 time points. Keep in mind, however, that each time point is represented by many (100-1000) individual observations.
+Cross-validation is a procedure for estimating the expected out-of-sample predictive error of a model CITATION. By dividing the data into sub-components (folds), fitting a model to some of the folds folds, and then predicting the response values for the held-out fold. For our dataset, expected out-of-sample AUC was estimated using five-fold cross-validation. For time-series data, the folds are approximately equal segments of time. The model is fit to the first fold and the posterior estimates are used to predict the states of the observations in the second fold, then the model is fit to the first and second fold and the posterior states are used to estimate the states from the third fold, and so on with increasingly large numbers of folds used for fitting a model to predict the states from the subsequent fold. With 63 time points, each of the five folds represents approximately 13 time points. Keep in mind, however, that each time point corresponds to many (100-1000) individual observations.
 
 For each posterior draw of the cross-validation predictions, the optimal cutpoint was calculated as described above. Given these class assignments based on estimated optimal cutpoint, the AUC value of the out-of-sample estmates was calculated. AUC values are calculated for the entire fold and for each of the individual time points represented within that fold.
 
