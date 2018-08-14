@@ -35,7 +35,7 @@ counti_trans <- prepare_analysis(counti)
 
 # read in model fits
 model_key <- c('Past and vary', 
-               'Past and vary (no interaction)',
+               'Past but no vary',
                'No past but vary', 
                'No past or vary')
 disc_fit <- read_rds('../data/disc_fit.rds')
@@ -91,7 +91,7 @@ pp_est_new <- cut_newpoint(pp_prob, list_cutpoint)
 # cutpoint based on maximizing both sensitivity and specificity.
 # this is calculated for every posterior predictive simulation for each model.
 # these new, rescaled 0-1 results are then fed through the ROC/AUC machine.
-partial_post_roc <- purrr::partial(post_roc, y = counti_trans$event)
+partial_post_roc <- purrr::partial(post_roc, y = counti_trans)
 pp_roc <- map(pp_est_new, partial_post_roc)
 pp_auc <- map(pp_roc, function(y) map_dbl(y, ~ auc(.x)))
 
