@@ -22,30 +22,42 @@ Data was binned into 1 My bins based on the estimated age of the fossil occurren
 
 The survival or extinction of a taxon is determined for each taxons' occurrences. For every occurrence except the last, the taxon has survived which is indicated by a 0. The last occurrence of the taxon is considered the bin in which the taxon has gone extinct. This protocol means that we are reading the fossil record ``as written,'' a practice that is potentially dangerous CITATIONS but is common with marine microfossil data CITATIONS.
 
-A taxon's geographic range during a 1 My bin was calculated as the maximum great circle distance on an ellipsoid between any two occurrences, also called a geodesic. Geographic range was measured in kilometers.
+A taxon's geographic range during a 1 My bin was calculated as the maximum great circle distance on an ellipsoid between any two occurrences, also called a geodesic. Geographic range was measured in kilometers. Geographic range was then log-plus-one transformed and then standardized by zero-centering the data and then dividing by its standard deviation so that geographic range had mean 0 and standard deviation 1. This standardization means that a regression coefficient associated with this covariate describes the change in extinction probability per change in standard deviation of geographic range, and that coefficients associated with similarly standardized covariates will be directly interpretable.
 
-Geographic range was then log-plus-one transformed and then standardized by zero-centering the data and then dividing by its standard deviation so that geographic range had mean 0 and standard deviation 1.
-
-Temperature data used as covariates in this analysis are based on Magnesium/Calcium isotope ratios sourced from Cramer et al CITATION. These are considered a more accurate estimate of global temperature than the standard Oxygen isotope-based estimates because Mg/Ca based estimates are not effected by ice-volume and fresh-water input (e.g. metioric water). Our data source, Cramer et al., provides temperature estimates for every 0.1 My from 0 to 63 Mya; we binned these estimates every 1 My to match with how we binned all fossil occurrences. The mean of these values was used as the temperature estimate for that 1 My interval (Fig. \ref{fig:temp_curve}).
+Temperature data used as covariates in this analysis are based on Magnesium/Calcium isotope ratios sourced from Cramer et al CITATION. These are considered a more accurate estimate of global temperature than the standard Oxygen isotope-based estimates because Mg/Ca based estimates are not effected by ice-volume and fresh-water input (e.g. metioric water). Our data source, Cramer et al., provides temperature estimates for every 0.1 My from 0 to 63 Mya; we binned these estimates every 1 My to match with how we binned all fossil occurrences. The mean of these values was used as the temperature estimate for that 1 My interval (Fig. \ref{fig:temp_curve}). Temperature was transformed and standardized the in the same manner as geographic range.
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=\textwidth,height=\0.5textheight,keepaspectratio=true]{figure/cramer_temp}
-  \caption{Comparison of initial temperature estimates from Cramer et al. (goldenrod) versus the binned values used in this analysis (blue). The initial values are for every 0.1 My while our bins are defined for every 1 My.}
+  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{figure/cramer_temp}
+  \caption{Comparison of initial temperature estimates from Cramer et al. CITATION (goldenrod) versus the binned values used in this analysis (blue). The initial values are for every 0.1 My while our bins are defined for every 1 My.}
   \label{fig:temp_curve}
 \end{figure}
 
 
 \section{Model Specifications}
 
-In survival analysis, the hazard funciton describes the instanenous rate of extinction at time \(t\) given that the species has lived up to that point. For discrete-time survival data, this is expressed as \(\lambda(t | X) = P(T = t | T \geq t, X)\) for \(t = 1, \cdots N\) where \(t\) is the status of a species at a time point, \(T\) is the time of extinction of the species, and \(i = 1, 2, \cdots, N\) with \(N\) being the total number of observations. We parameterized the hazard function as a logistic regression/generalized linear model defined \(\lambda(t | X) = h(\Theta)\) where \(h(.)\) is an inverse logit link function and \(\Theta\) is the probability of a taxon going extinction during interval \(t\). 
+In survival analysis, the hazard funciton describes the instanenous rate of extinction of a species. Species occurrence are recorded for all \(k\) 1 My intervals. For the discrete time intervals \(T = 1, \cdots, k\), extinction is defined as \(T = t\). The discrete-time hazard function is then written 
+\begin{equation}
+  \lambda(t | X) = P(T = t | T \geq t, X), \quad t = 1, \cdots, k \\
+  \label{eq:hazard}
+\end{equation}
+where \(X\) is a matrix of covariates. This statement is the conditional probability of a species going extinct by the end of the \(t\)-th interval given that it survied up until \(t\).
 
-\(\Theta\) is then parameterized as a hierarchical model with multiple non-nested varying intercepts CITATION. First, we considered two aspects of geographic range as continuous covariates: geographic range \(r\) during interval \(t\), and the difference \(d\) between the geographic range at \(t - 1\) and \(t\). We also considered the interaction between geographic range during intervals \(t\) and \(t - 1\). At the first observation for a taxon, the diff of geographic range is 0. Secondly, we considered two aspects of global temperature: mean temperature during interval \(t\), and the lag of mean temperature (i.e. mean temperature during interval \(t - 1\).)
+The corresponding survival function, describing the probability of a species going extinct after time \(t\) is expressed
+\begin{equation}
+  S(t | X) = P(T > t | X) = \prod{i = 1}{t}(1 - \lambda(i | X).
+  \label{eq:surv}
+\end{equation}
+
+Convinently, the hazard function (Eq. \ref{eq:hazard}) is easily reparameterized as logistic regression. This form of logistic regression model defined where \(\lambda(t | X) = h(\Theta)\) where \(h(.)\) is an logit inverse-link function and \(\Theta\) is the probability of a taxon going extinction during interval \(t\). \(\Theta\) is then parameterized as any regression model.
+
+In this case, we opted for a hierarchical/mixed-effects model with multiple non-nested varying intercepts and slopes CITATION. First, we considered two aspects of geographic range as continuous covariates: geographic range \(r\) during interval \(t\), and the difference \(d\) between the geographic range at \(t - 1\) and \(t\). We also considered the interaction between geographic range during intervals \(t\) and \(t - 1\). At the first observation for a taxon, the diff of geographic range is 0. Secondly, we considered two aspects of global temperature: mean temperature during interval \(t\), and the lag of mean temperature (i.e. mean temperature during interval \(t - 1\).)
 
 The logistic regression can thus be expressed as 
 \begin{equation}
   \begin{aligned}
-    t_{i} &= logit^{-1}(\beta_{w[i], f[i]} + \beta_{w[i], f[i]} range_{i} + \beta_{w[i], f[i]} rangediff_{i} + \gamma_{1} temp_{w[i]} + \gamma_{2} templag_{w[i]} + a_{d[i], f[i]}) \\
+    t_{i} &\sim \text{Bernoulli}(\Theta) \\
+    \Theta &= logit^{-1}(\beta_{w[i], f[i]} + \beta_{w[i], f[i]} r_{i} + \beta_{w[i], f[i]} d_{i} + \gamma_{1} c_{w[i]} + \gamma_{2} l_{w[i]} + a_{d[i], f[i]}) \\
     \beta_{w, f} &\sim MVN(\alpha_{f}, \Sigma) \\
     \alpha_{f} &\sim MVN(0, \Sigma) \\
     \gamma &\sim N(0, \sigma) \\
@@ -56,6 +68,18 @@ The logistic regression can thus be expressed as
 \end{equation}
 with \(i\) indexing the observation and bracket subscripts referencing the class of the \(i\)th observation e.g. \(j[i]\) is the age of the \(i\)th observation. \(a_{j[i]}\) is taxon age in bins at time of observation where \(j = 1, 2, \cdots, J\) and \(J\) is the maximum observed age of any taxon. \(b_{k}\) is the time of observation where \(k = 1, 2, \cdots, K\) and \(K\) is the number of time bins observed. Finally, \(c_{f}\) is the taxonomic group of an observation where \(f = 1, 2, \cdots, F)\) and \(F\) is the total number of taxonomic groups analyzed.
 
+% priors
+
+
+The basic core of the model described above \ref{eq:core} can be written in R formula syntax as
+\begin{equation}
+  \begin{aligned}
+    \text{event} &\sim \text{range} + \text{range\_diff} + \text{temp} + \text{temp\_lag} + \\
+    &\quad (1 + \text{range} + \text{range\_diff} | \text{mybin} / \text{phylum}) + \\
+    &\quad (1 | \text{age} / \text{phylum}).
+  \end{aligned}
+\end{equation}
+This formula is then used with a call to \begin{texttt} stan\_glmer \end{texttt} as Bernoulli family model which, along with the relevant data and prior choices, yields parameter estimates.
 
 \section{Model Parameter Estimation}
 

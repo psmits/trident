@@ -34,24 +34,21 @@ disc_fit <- read_rds('../data/disc_fit.rds')
 disc_best <- disc_fit[[1]]
 
 
-# check prior shrinkage to get an idea of "information learned"
+# check how much information learned
 priors <- prior_summary(disc_best)
 prmn <- priors$prior$location
-prsc <- priors$prior$adjusted_scale
+prsc <- priors$prior$scale
 
-po <- disc_best %>% 
+posc <- disc_best %>% 
   spread_samples(maxgcd,
                  diff_maxgcd,
                  temp,
                  lag1_temp) %>% 
-  clean_names
-pomn <- po %>%
-  dplyr::summarize_at(vars(-chain, -iteration), funs(mean(.)))
-posc <- po %>% 
+  clean_names %>% 
   dplyr::summarize_at(vars(-chain, -iteration), funs(sd(.)))
 
-posterior_shrinkage <- 1 - (posc / prsc) ^ 2
 # 1 = lot of shrinkage, 0 = no shrinkage
+posterior_shrinkage <- 1 - (posc / prsc) ^ 2
 
 
 # posterior intervals

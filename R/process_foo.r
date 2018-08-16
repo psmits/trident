@@ -58,7 +58,7 @@ prepare_analysis <- function(x, fg = NULL) {
   tb <- tb %>%
     arrange(fullname, desc(mybin)) %>%
     mutate_at(.vars = vars(ncell, latext, maxgcd, area, temp),
-              .funs = ~ arm::rescale(log1p(.x))) %>%
+              .funs = ~ scale(log1p(.x))) %>%
     group_by(fullname) %>%
     mutate(diff_maxgcd = c(0, diff(maxgcd)),
            lag1_maxgcd = lag(maxgcd, default = 0),

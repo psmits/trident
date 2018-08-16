@@ -2,3 +2,5 @@
 \BOOKMARK [1][-]{section.2}{Model Specifications}{}% 2
 \BOOKMARK [1][-]{section.3}{Model Parameter Estimation}{}% 3
 \BOOKMARK [1][-]{section.4}{Model Selection and Adequacy}{}% 4
+\BOOKMARK [2][-]{subsection.4.1}{Prediction given class imbalance}{section.4}% 5
+\BOOKMARK [2][-]{subsection.4.2}{Cross-validation}{section.4}% 6

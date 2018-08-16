@@ -22,9 +22,9 @@ survi <- read_rds('../data/survival.rds')
 counti <- read_rds('../data/counting.rds')
 
 # transform the data for analysis
-counti <- prepare_analysis(counti)
+counti_trans <- prepare_analysis(counti)
 
-# fit the model
+#pp fit the model
 
 # past and vary
 form <- formula(event ~ temp + lag1_temp + maxgcd + diff_maxgcd + 
@@ -49,6 +49,16 @@ form4 <- update(form3,
 
 forms <- list(form, form2, form3, form4)
 
-disc_fit <- map(forms, ~ stan_glmer(.x, family = 'binomial', data = counti,
-                                    adapt_delta = 0.99, thin = 4))
+# partial evaluation to fill in priors
+glmer_part <- 
+  partial(stan_glmer, 
+          prior = normal(0, 1, autoscale = FALSE),
+          prior_intercept = normal(0, 10, autoscale = FALSE),
+          prior_aux = cauchy(0, 5, autoscale = FALSE))
+disc_fit <- map(forms, ~ glmer_part(.x, 
+                                    family = 'binomial', 
+                                    data = counti_trans,
+                                    adapt_delta = 0.999, 
+                                    thin = 4))
+
 write_rds(disc_fit, path = '../data/disc_fit.rds')
