@@ -57,19 +57,47 @@ The logistic regression can thus be expressed as
 \begin{equation}
   \begin{aligned}
     t_{i} &\sim \text{Bernoulli}(\Theta) \\
-    \Theta &= logit^{-1}(\beta_{w[i], f[i]} + \beta_{w[i], f[i]} r_{i} + \beta_{w[i], f[i]} d_{i} + \gamma_{1} c_{w[i]} + \gamma_{2} l_{w[i]} + a_{d[i], f[i]}) \\
-    \beta_{w, f} &\sim MVN(\alpha_{f}, \Sigma) \\
-    \alpha_{f} &\sim MVN(0, \Sigma) \\
-    \gamma &\sim N(0, \sigma) \\
-    a_{w, f} &\sim MVN(\delta_{f}, \Sigma) \\
-    \delta_{f} &\sim MVN(0, \Sigma) \\
+    \Theta_{i} &= \text{logit}^{-1} (X_{i} B_{w[i], p[i]} + a_{d[i], p[i]}) \\
+    B_{w, p} &\sim MVN(\alpha_{p}, \Sigma_{B}) \\
+    \alpha_{p} &\sim MVN(\mu, \Sigma_{\alpha}) \\
+    a_{w, p} &\sim MVN(\delta_{p}, \Sigma_{a}) \\
+    \delta_{p} &\sim MVN(0, \Sigma_{\delta}) \\
   \end{aligned}
   \label{eq:core}
 \end{equation}
-with \(i\) indexing the observation and bracket subscripts referencing the class of the \(i\)th observation e.g. \(j[i]\) is the age of the \(i\)th observation. \(a_{j[i]}\) is taxon age in bins at time of observation where \(j = 1, 2, \cdots, J\) and \(J\) is the maximum observed age of any taxon. \(b_{k}\) is the time of observation where \(k = 1, 2, \cdots, K\) and \(K\) is the number of time bins observed. Finally, \(c_{f}\) is the taxonomic group of an observation where \(f = 1, 2, \cdots, F)\) and \(F\) is the total number of taxonomic groups analyzed.
+with \(i\) indexing the observation and bracket subscripts referencing the class of the \(i\)th observation where \(w[i]\) is the time of the \(i\)-th observation, \(p[i]\) is the phylum of the \(i\)-th observation, and \(d[i]\) is the age of the \(i\)-th observation.
 
-% priors
+\(B\) is a matrix of regression coefficients indexed by both time of observation and phylum.
 
+\(\mu\) is a vector, the first element of which corresponds to the overall model intercept and the others being the overall average estimate of the regression coefficients.
+
+
+
+To complete the generative model, we need to assign final priors to the ``top level'' parameters
+\begin{equation}
+  \begin{aligned}
+    \mu_{c} &\sim 
+      \begin{cases}
+        N(0, 10) & \text{if } c = 1 \\
+        N(0, 1) & \text{if } c > 1 \\
+      \end{cases}
+    \delta &\sim N(0, 1) \\
+    \Sigma_{B} &= diag(\tau_{B}) \Omega_{B} diag(\tau_{B}) \\
+    \Sigma_{\alpha} &= diag(\tau_{\alpha}) \Omega_{\alpha} diag(\tau_{\alpha}) \\
+    \Sigma_{a} &= diag(\tau_{a}) \Omega_{a} diag(\tau_{a}) \\
+    \Sigma_{\delta} &= diag(\tau_{\delta}) \Omega_{\delta} diag(\tau_{\delta}) \\
+    \tau_{B} &\sim C^{+}(5) \\
+    \tau_{\alpha} &\sim C^{+}(5) \\
+    \tau_{a} &\sim C^{+}(5) \\
+    \tau_{\delta} &\sim C^{+}(5) \\
+    \Omega_{B} &\sim LKJ(1) \\
+    \Omega_{\alpha} &\sim LKJ(1) \\
+    \Omega_{a} &\sim LKJ(1) \\
+    \Omega_{\delta} &\sim LKJ(1). \\
+  \end{aligned}
+  \label{eq:priors}
+\end{equation}
+The decomposition of the covariance matrices (e.g \(\Sigma_{B}\)) allows priors the variance and correlation aspects of covariance to be defined separately. These priors are also slightly more interpretable than a, for example, inverse-Wishart distributed prior for the covariance matrices. This decomposition is recommended by CITATION.
 
 The basic core of the model described above \ref{eq:core} can be written in R formula syntax as
 \begin{equation}
@@ -79,7 +107,20 @@ The basic core of the model described above \ref{eq:core} can be written in R fo
     &\quad (1 | \text{age} / \text{phylum}).
   \end{aligned}
 \end{equation}
-This formula is then used with a call to \begin{texttt} stan\_glmer \end{texttt} as Bernoulli family model which, along with the relevant data and prior choices, yields parameter estimates.
+This formula is then used with a call to \begin{texttt} stan\_glmer \end{texttt} as Bernoulli family model which, along with the relevant data and prior choices, yields parameter estimates. An example line of R code to fit this mode given a data.frame ``data'' could be written as:
+\begin{verbatim}
+  stan_glmer(formula = event ~ range + range_diff + temp + temp_lag + 
+                       (1 + range + range_diff | mybin/phylum) + 
+                       (1 | age/phylum), 
+             prior = normal(0, 1, autoscale = FALSE), 
+             prior_intercept = normal(0, 10, autoscale = FALSE), 
+             prior_aux = cauchy(0, 5, autoscale = FALSE), 
+             data = data, 
+             adapt_delta = 0.9999, 
+             thin = 4)
+\end{verbatim}
+
+See our code repository LINK for full code details. Our code uses ``tidyverse'' tools such as dplyr CITATION, purr CITATION, and tidybayes CITATION, thus some familiarity with that package ecosystem is necessary to fully comprehend how we've processed our data and results.
 
 \section{Model Parameter Estimation}
 
