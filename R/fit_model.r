@@ -52,13 +52,13 @@ forms <- list(form, form2, form3, form4)
 # partial evaluation to fill in priors
 glmer_part <- 
   partial(stan_glmer, 
-          prior = normal(0, 1, autoscale = FALSE),
+          prior = normal(0, 3, autoscale = FALSE),
           prior_intercept = normal(0, 10, autoscale = FALSE),
           prior_aux = cauchy(0, 5, autoscale = FALSE))
 disc_fit <- map(forms, ~ glmer_part(.x, 
                                     family = 'binomial', 
                                     data = counti_trans,
-                                    adapt_delta = 0.9999, 
+                                    adapt_delta = 0.99, 
                                     thin = 4))
 
 write_rds(disc_fit, path = '../data/disc_fit.rds')
