@@ -42,9 +42,9 @@ plot_taxon_covariate_time <- function(disc_best) {
   core <- full_join(comp_const, cv[[1]], by = c('.chain', '.iteration')) %>%
     mutate(eff_maxgcd = maxgcd.x + maxgcd.y,
            eff_diff_maxgcd = diff_maxgcd.x + diff_maxgcd.y) %>%
-  dplyr::select(.chain, .iteration, f, age, 
+    dplyr::select(.chain, .iteration, f, age, 
                 eff_maxgcd, eff_diff_maxgcd) %>%
-  arrange(.chain, .iteration, age)
+    arrange(.chain, .iteration, age)
 
   # need to confirm correct line-up
   by_taxon <- map(cv[-1], ~ full_join(core, .x, by = c('.chain', '.iteration', 'age'))) %>%
@@ -58,11 +58,11 @@ plot_taxon_covariate_time <- function(disc_best) {
            -age, -f.y, -`(Intercept)`, -type,
            -eff_maxgcd, -eff_diff_maxgcd,
            -diff_maxgcd, -maxgcd) %>%
-  filter(!is.na(type)) %>%
-  ggplot(aes(x = age, y = value)) +
-  stat_lineribbon() +
-  scale_fill_brewer() +
-  facet_grid(key ~ type, scales = 'free_y')
+    filter(!is.na(type)) %>%
+    ggplot(aes(x = age, y = value)) +
+    stat_lineribbon() +
+    scale_fill_brewer() +
+    facet_grid(key ~ type, scales = 'free_y')
   
   by_taxon
 }
