@@ -58,7 +58,7 @@ glmer_part <-
 disc_fit <- map(forms, ~ glmer_part(.x, 
                                     family = 'binomial', 
                                     data = counti_trans,
-                                    adapt_delta = 0.99, 
+                                    adapt_delta = 0.9999, 
                                     thin = 4))
 
 write_rds(disc_fit, path = '../data/disc_fit.rds')

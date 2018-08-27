@@ -49,13 +49,13 @@ form1 <- formula(event ~ temp + lag1_temp + maxgcd + diff_maxgcd +
 
 glmer_part <- 
   partial(stan_glmer, 
-          prior = normal(0, 1, autoscale = FALSE),
+          prior = normal(0, 3, autoscale = FALSE),
           prior_intercept = normal(0, 10, autoscale = FALSE),
           prior_aux = cauchy(0, 5, autoscale = FALSE))
 fit <- map(counti_accum, ~ glmer_part(form1, 
                                       family = 'binomial', 
                                       data = .x,
-                                      adapt_delta = 0.9999, 
+                                      adapt_delta = 0.99999, 
                                       thin = 4))
 
 write_rds(fit, path = '../data/training_fit.rds')
