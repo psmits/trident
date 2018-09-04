@@ -43,19 +43,20 @@ counti_fold <- rev(split(counti_trans, counti_trans$fold))
 counti_accum <- accumulate(counti_fold, bind_rows) 
 counti_accum <- counti_accum[-1]
 
-form1 <- formula(event ~ temp + lag1_temp + maxgcd + diff_maxgcd + 
-                 (1 + maxgcd + diff_maxgcd | fact_mybin/fossil_group) + 
-                 (1 | fact_relage/fossil_group))
+form <- formula(event ~ temp + lag1_temp + maxgcd + diff_maxgcd 
+                + (1 | fact_relage/fossil_group)
+                + (1 + temp + lag1_temp + maxgcd + diff_maxgcd | 
+                   fact_mybin/fossil_group))
 
 glmer_part <- 
   partial(stan_glmer, 
-          prior = normal(0, 3, autoscale = FALSE),
+          prior = normal(c(0, 0, -1, 0), rep(3, 4), autoscale = FALSE),
           prior_intercept = normal(0, 10, autoscale = FALSE),
           prior_aux = cauchy(0, 5, autoscale = FALSE))
-fit <- map(counti_accum, ~ glmer_part(form1, 
+fit <- map(counti_accum, ~ glmer_part(form, 
                                       family = 'binomial', 
                                       data = .x,
-                                      adapt_delta = 0.99999, 
+                                      adapt_delta = 0.999999, 
                                       thin = 4))
 
 write_rds(fit, path = '../data/training_fit.rds')

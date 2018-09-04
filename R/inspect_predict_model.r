@@ -80,6 +80,6 @@ ta <- reshape2::melt(time_auc) %>%
   mutate(fold = factor(L1),
          time = parse_double(L2)) %>%
   ggplot(aes(x = time, y = value, colour = fold)) +
-  stat_interval(alpha = 0.5, .prob = c(0.5, 0.8))
+  stat_interval(alpha = 0.5, .width = c(0.5, 0.8))
 ggsave(filename = '../doc/figure/fold_auc_time.png', plot = ta,
        width = 8, height = 6)
