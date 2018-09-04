@@ -50,7 +50,7 @@ The hazard function (Eq. \ref{eq:hazard}) is easily reparameterized as a logisti
 
 Our covariates matrix \(X\) is a \(N \times D\) matrix where \(N\) is the total number of observations and \(D\) is the total number of covariates. The first column of \(X\) is entirely 1's as it corresponds to the intercept term in the regression model. The next two columns of \(X\) are two aspects of geographic range as continuous covariates: geographic range \(r\) during interval \(t\), and the difference \(d\) between the geographic range at \(t - 1\) and \(t\). The difference in geographic range was calculated from the transformed and standardized geographic range values; this means that change in geographic range is in units of changes in standard deviations. The final two columns are two aspects of global temperature: mean temperature during interval \(t\), and the lag of mean temperature (i.e. mean temperature during interval \(t - 1\).) As with change to geographic range, the lag of temperature is based on the transformed and standardized temperature estimates. 
 
-The matrix of time and phylum varying regression coefficients describing the effects of the covariates on a species' risk of extinction is called \(B\). These regression coefficients are themselves modeled as being multivariate normally distributed with vector of means \(\alpha\) describing the average intercept and regression coefficient estimates of each coefficients for each phylum \(p\). These phylum averages are themselves modeled as multivariate normally distributed with mean vector \(\mu\) describing the overall average regression coefficients, including the intercept. 
+The matrix of time and phylum varying regression coefficients describing the effects of the covariates on a species' risk of extinction is called \(B\). These regression coefficients are themselves modeled as being multivariate normally distributed with vector of means \(\alpha\) describing the average intercept and regression coefficient estimates of each coefficients for each phylum \(p\). These phylum averages are themselves modeled as multivariate normally distributed with mean vector \(\mu\) describing the overall average regression coefficients, including the intercept. \(\mu\) has length \(D\) and is ordered intercept, range coefficient, change in range coefficient, temperature coefficient, temperature lag coefficient.
 
 This logistic regression model, minus the final selection of priors, is expressed as 
 \begin{equation}
@@ -66,13 +66,20 @@ This logistic regression model, minus the final selection of priors, is expresse
 \end{equation}
 with \(i\) indexing the observation and bracket subscripts referencing the class of the \(i\)th observation where \(w[i]\) is the time of the \(i\)-th observation, \(p[i]\) is the phylum of the \(i\)-th observation, and \(d[i]\) is the age of the \(i\)-th observation. 
 
-To complete the generative model, we need to assign final priors to the ``top level'' parameters
+To complete the generative model, we need to assign final priors to the ``top level'' parameters. In general we favored weakly informative priors which help regularize our estimates. In the case of a regression coefficient, this means a Normal distribution with mean 0 and a standard deviation of 3. For our scale parameters (e.g. standard deviations), we used half-Cauchy distributed priors with heavy tails but the majority of probability density near 0.
+
+Our top-level intercept was given a more diffuse prior than our regression coefficients, which reflects our greater degree of uncertainty about its value. Our top-level regression coefficient for the effect of geographic range was given an informative prior reflecting the overwhelming amount of evidence that species with a larger than average geographic range have a lower risk of extinction than species with an average or less than average geographic range. In the context of this analysis, this means that we are again using a weakly informative prior but instead of centering the density around -1 (i.e. larger than average geographic range decreases extinction risk).
+
+Instead of assigning a prior distribution for each of the covariance matrices in the model, we instead decomposed the covariance matrices (e.g. \(\Sigma_{B}\)) which allows us to assign independent priors for the scale and correlation aspects of covariance. The scale parameters were assigned half-Cauchy priors as described above in the context of all other scale parameters. The correlation matrices were assigned LKJ priors each with shape parameter set to 1. This choice of shape parameter produces a uniform distribution over possible correlation matrices. These priors are also slightly more interpretable than other common prior distributions for covariance matrices such as the inverse-Wishart distribution. This approach to assigning priors to a covariance matrix is recommended by CITATION.
+
+In total, these prior choices can be expressed as
 \begin{equation}
   \begin{aligned}
-    \mu_{c} &\sim 
+    \mu_{d} &\sim 
       \begin{cases}
-        N(0, 10) & \text{if } c = 1 \\
-        N(0, 3) & \text{if } c > 1 \\
+        N(0, 10) & \text{if } d = 1 \\
+        N(-1, 3) & \text{if } d = 2 \\
+        N(0, 3) & \text{if } d > 2 \\
       \end{cases}
     \delta &\sim N(0, 1) \\
     \Sigma_{B} &= diag(\tau_{B}) \Omega_{B} diag(\tau_{B}) \\
@@ -90,21 +97,20 @@ To complete the generative model, we need to assign final priors to the ``top le
   \end{aligned}
   \label{eq:priors}
 \end{equation}
-The decomposition of the covariance matrices (e.g \(\Sigma_{B}\)) allows priors the variance and correlation aspects of covariance to be defined separately. These priors are also slightly more interpretable than a, for example, inverse-Wishart distributed prior for the covariance matrices. This decomposition is recommended by CITATION.
 
 
 \section{Model Parameter Estimation}
 
-We implemented our model using the \begin{texttt}rstanarm\end{texttt} package for the R programming language CITATION. This package provides an interface to the Stan probabilistic programming language for writing hierarchical/mixed-effects models in native R. Posterior estimates were obtained through Hamiltonian Monte Carlo, using 2000 steps divided equally between warm-up and sampling. In order to prevent divergent transitions the adapt delta value was increased to 0.99; all other HMC/NUTS sampling parameters were kept at the defaults for rstanarm version XX CITATION. An example line of R code to fit this mode given a data.frame of all necessary data called ``data'' could be written as:
+We implemented our model using the \begin{texttt}rstanarm\end{texttt} package for the R programming language CITATION. This package provides an interface to the Stan probabilistic programming language for writing hierarchical/mixed-effects models in native R. Posterior estimates were obtained through Hamiltonian Monte Carlo, using 2000 steps divided equally between warm-up and sampling. In order to prevent divergent transitions the adapt delta value was increased to 0.9999; all other HMC/NUTS sampling parameters were kept at the defaults for rstanarm version XX CITATION. An example line of R code to fit this mode given a data.frame of all necessary data called ``data'' could be written as:
 \begin{verbatim}
   stan_glmer(formula = event ~ range + range_diff + temp + temp_lag + 
-                       (1 + range + range_diff | mybin/phylum) + 
+                       (1 + range + range_diff + temp + temp_lag | mybin/phylum) + 
                        (1 | age/phylum), 
-             prior = normal(0, 3, autoscale = FALSE), 
+             prior = normal(c(-1, 0, 0, 0), rep(3, 4), autoscale = FALSE), 
              prior_intercept = normal(0, 10, autoscale = FALSE), 
              prior_aux = cauchy(0, 5, autoscale = FALSE), 
              data = data, 
-             adapt_delta = 0.99, 
+             adapt_delta = 0.9999, 
              thin = 4)
 \end{verbatim}
 
@@ -113,22 +119,15 @@ Posterior convergence was determined using the following general and HMC specifi
 
 \section{Model Selection and Adequacy}
 
-We considered four variants of this model: 1) historical covariates with time-varying intercepts and slopes, 2) no historical coviarates with time-varying intercepts and slopes, 3) historical covariates without time-varying intercepts and slopes, and 4) no historical covariates and no time-varying intercepts and slopes (except age effect).
+We considered four variants of the model described above: 1) historical covariates with time-varying intercepts and slopes, 2) no historical coviarates with time-varying intercepts and slopes, 3) historical covariates without time-varying intercepts and slopes, and 4) no historical covariates and no time-varying intercepts and slopes (except age effect). The second and fourth models modify the number of columns in \(X\) by removing two of the covariates. The third and fourth model simplify the first model to just varying intercepts without varying slopes.
 
-To determine how many non-nested varying-intercept terms were possible to include without overly biasing out models' parameter estimates, the four variant models described above were compared using both WAIC and LOOIC which are estimates of a model's expected out-of-sample performance; these measures are fully Bayesian, taking into account the entire estimated joint posterior CITATION. WAIC and LOOIC are interpreted similarly to AIC, with lower values indicating greater expected out-of-sample performance. Additionally, the Bayesian nature of WAIC and LOOIC mean that they are calculated with standard errors allowing for a more nuanced understanding the actual amount of difference between the models. We selected the model with the lowest WAIC and LOOIC, which happened to be are most parameter rich model.
+The four variant models were compared using both WAIC and LOOIC which are estimates of a model's expected out-of-sample performance; these measures are fully Bayesian, taking into account the entire estimated joint posterior CITATION. WAIC and LOOIC are interpreted similarly to AIC, with lower values indicating greater expected out-of-sample performance. Additionally, the Bayesian nature of WAIC and LOOIC mean that they are calculated with standard errors allowing for a more nuanced understanding the actual amount of difference between the models. We selected the model with the lowest WAIC and LOOIC, which happened to be are most parameter rich model.
 
-Model adequacy was measured using the area under the receiver operating characteristic curve (AUC). This measure is commonly used in classification problems like this one as it has the desirable characteristic of comparing the model's true positive rate with its false positive rate, as opposed to only true positive rate measured by accuracy CITATION. This value ranges between 0.5 and 1, with 0.5 indicating no improvement in performance from random and 1 indicating perfect performance. AUC was calculated for the dataset as a whole, and for each of time bins. These values are measures of in-sample predictive accuracy.
+Model adequacy was measured using the area under the receiver operating characteristic curve (AUC). This measure is commonly used in classification problems as it has the desirable characteristic of comparing the model's true positive rate with its false positive rate, as opposed to only true positive rate measured by accuracy CITATION. This value ranges between 0.5 and 1, with 0.5 indicating no improvement in performance from random and 1 indicating perfect performance. AUC was calculated for the dataset as a whole, and for each of time bins. This measure was used in two contexts: measuring in-sample and out-of-sample predictive performance. ``In-sample'' means we are estimating how well our model predicts our observed data given that the model was fit to the entire dataset; this is a posterior predictive check in that we are comparing the posterior predictive distribution to our observed data. ``Out-of-sample'' is defined below.
 
-
-\subsection{Prediction given class imbalance}
+We are also interested in understanding how well our model predicts species extinction given new, future data (out-of-sample data). To do this, we estimated average out-of-sample predictive error using 5-fold time-series cross-validation. For time-series data, the folds (data partitions) are approximately equal segments of time. The model is fit to the first fold and the posterior estimates are used to predict the states of the observations in the second fold, then the model is fit to the first and second fold and the posterior states are used to estimate the states from the third fold, and so on with increasingly large numbers of folds used for fitting a model to predict the states from the subsequent fold. With 63 time points, each of the five folds represents approximately 13 time points. Keep in mind, however, that each time point corresponds to many (100-1000) individual observations.
 
 One of the issues with our data set is extreme class imbalance; this means that there are many more survival observations than extinction observations. When the classes are not approximately balanced, the base probability of 1 versus 0 is below 0.5. When the intercept term of the logistic regression is sufficiently negative (-2 or less), the only way to obtain a linear predictor value of 0.5 or greater is if the covariate effects are large or there the covariates are at extreme values. The 0.5 default cut-off point for binary prediction is much to high when events are rare. A method for determining the new ``optimal'' cut-point involves calculating the receiver operating characterist (ROC) curve from the linear predictor estimates and then identifying the point on the ROC curve which maximizes both true positive rate and the false positive rate. The new cut-point is then back-calculated from the true positive and false positive rates. Class membership is then predicted given this new cut-point. This process is done for every posterior draw, as each realization from the posterior predictive distribution has its own optimal cut-point.
-
-\subsection{Cross-validation}
-
-In addition to model selection and adequacy, we are also interested in understanding how well our model predicts species extinction given new,future data. We estimated out-of-sample predictive error using cross-validation. For our dataset, expected out-of-sample AUC was estimated using five-fold cross-validation. For time-series data, the folds (data partitions) are approximately equal segments of time. The model is fit to the first fold and the posterior estimates are used to predict the states of the observations in the second fold, then the model is fit to the first and second fold and the posterior states are used to estimate the states from the third fold, and so on with increasingly large numbers of folds used for fitting a model to predict the states from the subsequent fold. With 63 time points, each of the five folds represents approximately 13 time points. Keep in mind, however, that each time point corresponds to many (100-1000) individual observations.
-
-For each posterior draw of the cross-validation predictions, the optimal cut-point was calculated as described above. Given these class assignments based on estimated optimal cut-point, the AUC value of the out-of-sample estimates was calculated. AUC values are calculated for the entire fold and for each of the individual time points represented within that fold.
 
 See our code repository LINK for full code details. Our code uses ``tidyverse'' tools such as dplyr CITATION, purr CITATION, and tidybayes CITATION, thus some familiarity with that package ecosystem is necessary to fully comprehend how we've processed our data and results.
 
