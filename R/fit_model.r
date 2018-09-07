@@ -54,23 +54,23 @@ part_glmer <- partial(stan_glmer,
                       family = 'binomial',
                       data = counti_trans,
                       prior_intercept = normal(0, 10, autoscale = FALSE),
-                      prior_aux = cauchy(0, 5, autoscale = FALSE),
+                      prior_aux = cauchy(0, 3, autoscale = FALSE),
                       thin = 4, 
-                      adapt_delta = 0.99999999)
+                      adapt_delta = 0.999999)
 
 # some models have differen't priors
 list_part_glmer <- 
   list(partial(part_glmer, prior = normal(c(0, 0, -1, 0), 
-                                          rep(3, 4), 
+                                          rep(1, 4), 
                                           autoscale = FALSE)),
        partial(part_glmer, prior = normal(c(0, 0, -1, 0), 
-                                          rep(3, 4), 
+                                          rep(1, 4), 
                                           autoscale = FALSE)),
        partial(part_glmer, prior = normal(c(0, -1), 
-                                          rep(3, 2), 
+                                          rep(1, 2), 
                                           autoscale = FALSE)),
        partial(part_glmer, prior = normal(c(0, -1), 
-                                          rep(3, 2), 
+                                          rep(1, 2), 
                                           autoscale = FALSE)))
 
 # map the data to the models

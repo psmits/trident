@@ -53,6 +53,9 @@ steps <- map2(np, ll, ~ mcmc_nuts_stepsize(.x, .y))
 treed <- map2(np, ll, ~ mcmc_nuts_treedepth(.x, .y))
 energy <- map2(np, ll, ~ mcmc_nuts_energy(.x, .y))
 
+# bayes R2
+br2 <- map(disc_fit, bayes_R2)
+
 
 # estimate of out-of-sample performance
 # these should be parallelized; done using future

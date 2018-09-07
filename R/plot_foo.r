@@ -115,7 +115,7 @@ plot_risk_time <- function(data, model, nsp = 4) {
     ggplot(aes(x = relage, y = maxgcd)) + 
     geom_line() +
     facet_grid(~ fullname) + 
-    labs(x = 'Age (My)', y = 'P(T = t | T >= t, x)')
+    labs(x = 'Age (My)', y = 'Geographic range (standardized)')
 
   full_plot <- full_est %>%
     gather(key, value, -fullname, -iterations, -relage, -row) %>%
