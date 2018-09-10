@@ -6,8 +6,7 @@ source('../R/sim_foo.r')
 
 nsim <- 1000
 nstep <- 100
-
-simul <- rerun(.n = nsim, sim_range(nstep)) %>%
+simul <- rerun(.n = nsim, sim_walk(nstep)) %>%
   imap(~ tibble(range = .x, 
                 time = seq(length(.x)), 
                 sim = .y)) %>%
@@ -24,7 +23,7 @@ simul <- simul %>%
   mutate(n = map(data, n_distinct)) %>%
   unnest(n = n) %>%
   filter(n > 1,
-         n < nstep) %>%
+         n < (nstep + 1)) %>%
   select(-n) %>%
   unnest() %>%
   group_by(sim) %>%
@@ -44,14 +43,20 @@ simul_avg <- simul %>%
 
 # basic plot of runs
 graph_basic <- simul %>%
-  ggplot(aes(x = time, y = range, group = sim)) + geom_line()
+  ggplot(aes(x = time, y = range, group = sim)) + 
+  geom_line()
+
+ggsave(filename = '../doc/figure/georange_sim_basic.png',
+       plot = graph_basic, width = 6, height = 6)
 
 # normalize by duration
 graph_norm <- simul %>%
   ggplot(aes(x = time_standard, y = range, group = sim)) +
-  geom_line() +
+  geom_line() + 
   geom_line(mapping = aes(x = time_standard, y = range_avg, group = NULL), 
             colour = 'blue', size = 1.2) +
   geom_line(mapping = aes(x = time_standard, y = range_roll, group = NULL),
             data = simul_avg, colour = 'red')
 
+ggsave(filename = '../doc/figure/georange_sim_norm.png',
+       plot = graph_norm, width = 6, height = 6)

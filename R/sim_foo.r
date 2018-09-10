@@ -8,7 +8,7 @@
 #'
 #' @param max_length scalar int for maximum number of discrete time steps.
 #' @return vector of of real values
-sim_range <- function(max_length = 10) {
+sim_walk <- function(max_length = 10) {
 
   # this is easily solved by a fold across a series 
   # that series begins at 0, has max_length changes
@@ -22,7 +22,8 @@ sim_range <- function(max_length = 10) {
   if(death == 0) {
     out <- run 
   } else if(death > 0) {
-    out <- run[1:(death - 1)]
+    out <- run[1:death]
+    out[death] <- 0
   }
 
   out
