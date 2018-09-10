@@ -96,14 +96,14 @@ ggsave(filename = '../doc/figure/effect_est.png',
 
 
 # variance component
-interp <- c('time: variance intercept, overall',
-  'time: variance maxgcd, overall',
-  'time: variance diff_maxgcd, overall',
-  'time: variance intercept, within groups',
-  'time: variance maxgcd, within groups',
-  'time: variance diff_maxgcd, within groups',
+interp <- c('time: variance intercept, between',
+  'time: variance maxgcd, between',
+  'time: variance diff_maxgcd, between',
+  'time: variance intercept, within',
+  'time: variance maxgcd, within',
+  'time: variance diff_maxgcd, within',
   'age: variance intercept, overall',
-  'age: variance intercept, within groups')
+  'age: variance intercept, within')
 
 vary_eye <- disc_best %>%
   gather_samples(`Sigma[fact_mybin:(Intercept),(Intercept)]`,
