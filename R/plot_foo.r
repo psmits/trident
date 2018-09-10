@@ -24,10 +24,10 @@ plot_georange_compare <- function(data) {
 #' @return a ggplot object
 plot_taxon_covariate_time <- function(disc_best) {
   comp_const <- disc_best %>%
-    spread_samples(maxgcd, diff_maxgcd)
+    spread_draws(maxgcd, diff_maxgcd, temp, lag1_temp)
 
   comp_var <- disc_best %>%
-    spread_samples(b[i, f]) %>%
+    spread_draws(b[i, f]) %>%
     spread(i, b) %>%
     filter(str_detect(f, 'fact_mybin')) %>%
     mutate(type = str_remove_all(f, '[0-9]'),
@@ -39,33 +39,60 @@ plot_taxon_covariate_time <- function(disc_best) {
     map(., ~ .x %>% arrange(.chain, .iteration, age))
 
   # first element is just temporal effect
-  core <- full_join(comp_const, cv[[1]], by = c('.chain', '.iteration')) %>%
+  core <- full_join(comp_const, cv[[1]], 
+                    by = c('.chain', '.iteration', '.draw')) %>%
     mutate(eff_maxgcd = maxgcd.x + maxgcd.y,
-           eff_diff_maxgcd = diff_maxgcd.x + diff_maxgcd.y) %>%
-    dplyr::select(.chain, .iteration, f, age, 
-                eff_maxgcd, eff_diff_maxgcd) %>%
-    arrange(.chain, .iteration, age)
+           eff_diff_maxgcd = diff_maxgcd.x + diff_maxgcd.y,
+           eff_temp = temp.x + temp.y,
+           eff_lag1_temp = lag1_temp.x + lag1_temp.y) %>%
+    dplyr::select(.chain, .iteration, .draw, f, age, 
+                eff_maxgcd, eff_diff_maxgcd,
+                eff_temp, eff_lag1_temp) %>%
+    arrange(.chain, .iteration, .draw, age)
 
   # need to confirm correct line-up
   by_taxon <- map(cv[-1], ~ full_join(core, .x, by = c('.chain', '.iteration', 'age'))) %>%
     map(., ~ .x %>%
         mutate(taxon_eff_maxgcd = eff_maxgcd + maxgcd,
-               taxon_eff_diff_maxgcd = eff_diff_maxgcd + diff_maxgcd))
-  by_taxon <- reduce(by_taxon, bind_rows)
-  
-  by_taxon <- by_taxon %>%
-    gather(key, value, -.chain, -.iteration, -f.x, 
-           -age, -f.y, -`(Intercept)`, -type,
+               taxon_eff_diff_maxgcd = eff_diff_maxgcd + diff_maxgcd,
+               taxon_eff_temp = eff_temp + temp,
+               taxon_eff_lag1_temp = eff_lag1_temp + lag1_temp)) %>%
+    reduce(bind_rows) %>%
+    gather(key, value, 
+           -.chain, -.iteration, 
+           -.draw.y, -.draw.x,
+           -f.x, -f.y, 
+           -age, 
+           -`(Intercept)`, -type,
            -eff_maxgcd, -eff_diff_maxgcd,
-           -diff_maxgcd, -maxgcd) %>%
+           -eff_temp, -eff_lag1_temp,
+           -diff_maxgcd, -maxgcd,
+           -lag1_temp, -temp) %>%
     filter(!is.na(type)) %>%
+    mutate(key = fct_recode(key, 
+                            geo_range = 'taxon_eff_maxgcd',
+                            geo_change = 'taxon_eff_diff_maxgcd',
+                            temp_now = 'taxon_eff_temp',
+                            temp_lag = 'taxon_eff_lag1_temp'),
+           key = fct_relevel(key, 
+                             'geo_range', 'geo_change', 
+                             'temp_now', 'temp_lag'),
+           type = fct_recode(type,
+                             diatoms = 'fossil_group:fact_mybin:D:',
+                             forams = 'fossil_group:fact_mybin:F:',
+                             nannofossil_misc = 'fossil_group:fact_mybin:N:',
+                             radiolarians = 'fossil_group:fact_mybin:R:'))
+
+  out <- by_taxon %>%
     ggplot(aes(x = age, y = value)) +
     stat_lineribbon() +
+    geom_hline(yintercept = 0, linetype = 'dashed', alpha = 0.5) +
     scale_fill_brewer() +
-    facet_grid(key ~ type, scales = 'free_y')
+    facet_grid(type ~ key, scales = 'free_y')
   
-  by_taxon
+  out
 }
+
 
 
 #' Plot risk of extinction for selection of species over time
@@ -140,7 +167,7 @@ plot_risk_time <- function(data, model, nsp = 4) {
 plot_taxon_hazard <- function(model) {
   # the average
   haz_avg <- model %>%
-    spread_samples(b[i, f], `(Intercept)`) %>%
+    spread_draws(b[i, f], `(Intercept)`) %>%
     filter(str_detect(f, pattern = 'fact_relage'),
            !str_detect(f, pattern = 'fossil_group')) %>%
     mutate(cr = `(Intercept)` + b) %>%    # keep log-odds scale
@@ -149,7 +176,7 @@ plot_taxon_hazard <- function(model) {
 
   # components from fossil_groups
   db <- model %>%
-    spread_samples(b[i, f]) %>%
+    spread_draws(b[i, f]) %>%
     filter(str_detect(f, pattern = 'fact_relage'),
            str_detect(f, pattern = 'fossil_group')) %>%
     mutate(type = str_remove_all(f, '[0-9]'),

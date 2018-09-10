@@ -24,7 +24,23 @@ counti <- read_rds('../data/counting.rds')
 # transform the data for analysis
 counti_trans <- prepare_analysis(counti)
 
-#pp fit the model
+#priors <- c(set_prior('normal(0, 10)', class= 'Intercept'),
+#            set_prior('normal(0, 1)', class = 'b'),
+#            set_prior('normal(-1, 1)', class = 'b', coef = 'maxgcd'),
+#            set_prior('cauchy(0, 1)', class = 'sd'),
+#            set_prior('lkj(1)', class = 'cor'))
+#
+#form <- bf(event ~ temp + lag1_temp + maxgcd + diff_maxgcd 
+#           + (1 | fact_relage/fossil_group)
+#           + (1 + temp + lag1_temp + maxgcd + diff_maxgcd | 
+#              fact_mybin/fossil_group))
+#
+#brmfit <- brm(formula = form,
+#              data = counti_trans, 
+#              family = bernoulli(), 
+#              chains = 4, 
+#              cores = 4, 
+#              prior = priors)
 
 # past and vary
 form <- formula(event ~ temp + lag1_temp + maxgcd + diff_maxgcd 
@@ -46,6 +62,7 @@ form3 <- update(form, ~ . - diff_maxgcd - lag1_temp
 # no past or vary
 form4 <- update(form3, ~ . - (1 + temp + maxgcd | fact_mybin/fossil_group) 
                        + (1 | fact_mybin/fossil_group))
+
 
 forms <- list(form, form2, form3, form4)
 
