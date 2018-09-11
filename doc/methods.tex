@@ -95,20 +95,42 @@ In total, these prior choices can be expressed as
 
 \section{Model Parameter Estimation}
 
-We implemented our model using the \begin{texttt}rstanarm\end{texttt} package for the R programming language CITATION. This package provides an interface to the Stan probabilistic programming language for writing hierarchical/mixed-effects models in native R. Posterior estimates were obtained through Hamiltonian Monte Carlo, using 2000 steps divided equally between warm-up and sampling. In order to prevent divergent transitions the adapt delta value was increased to 0.9999; all other HMC/NUTS sampling parameters were kept at the defaults for rstanarm version XX CITATION. An example line of R code to fit this mode given a data.frame of all necessary data called ``data'' could be written as:
+We implemented our model using the \begin{texttt}rstanarm\end{texttt} package for the R programming language CITATION. This package provides an interface to the Stan probabilistic programming language for writing hierarchical/mixed-effects models in native R. Posterior estimates were obtained through Hamiltonian Monte Carlo, using 2000 steps divided equally between warm-up and sampling. In order to prevent divergent transitions the adapt delta value was increased to 0.9999; all other HMC/NUTS sampling parameters were kept at the defaults for rstanarm version XX CITATION. 
+
+An implementation of our full model in \begin{texttt}rstanarm\end{texttt}, given a data.frame of all necessary data in a data.frame called ``data'', is coded as
 \begin{verbatim}
   stan_glmer(formula = event ~ range + range_diff + temp + temp_lag + 
                        (1 + range + range_diff + temp + temp_lag | mybin/phylum) + 
                        (1 | age/phylum), 
+             data = data, 
+             family = 'binomial',
              prior = normal(c(-1, 0, 0, 0), rep(3, 4), autoscale = FALSE), 
              prior_intercept = normal(0, 10, autoscale = FALSE), 
-             prior_aux = cauchy(0, 5, autoscale = FALSE), 
-             data = data, 
-             adapt_delta = 0.9999, 
-             thin = 4)
+             prior_aux = cauchy(0, 3, autoscale = FALSE), 
+             chains = 4,
+             thin = 4,
+             adapt_delta = 0.9999).
 \end{verbatim}
 
-Posterior convergence was determined using the following general and HMC specific diagnostic criteria: scale reduction factor (\(\hat{R}\); target \(<1.1\)), effective sample size (eff; target value eff/steps \(<0.0001\)), number of samples that saturated the maximum trajectory length for avoiding infinite loops (treedepth; target value 0), sample divergence, and the energy Bayesian Fraction of Mission Information (E-BFMI; target value \(>0.2\)). For further explanation of these diagnostic criteria, see the Stan Manual CITATION.
+Similarly, our full model can be implemented in \begin{texttt}brms\end{texttt} as
+\begin{verbatim}
+priors <- c(set_prior('normal(0, 10)', class= 'Intercept'),
+            set_prior('normal(0, 1)', class = 'b'),
+            set_prior('normal(-1, 1)', class = 'b', coef = 'range'),
+            set_prior('cauchy(0, 3)', class = 'sd'),
+            set_prior('lkj(1)', class = 'cor'))
+brmfit <- brm(formula = bf(event ~ range + range_diff + temp + temp_lag +
+                           (1 + range + range_diff + temp + temp_lag | mybin/phylum) +
+                           (1 | age/phylum))
+              data = data, 
+              family = bernoulli(), 
+              prior = priors,
+              chains = 4, 
+              thin = 4,
+              control = list(adapt_delta = 0.999999).
+\end{verbatim}
+
+Posterior convergence was determined using the general and HMC-specific diagnostic criteria: scale reduction factor (\(\hat{R}\); target \(<1.1\)), effective sample size (eff; target value eff/steps \(<0.0001\)), number of samples that saturated the maximum trajectory length for avoiding infinite loops (treedepth; target value 0), sample divergence, and the energy Bayesian Fraction of Mission Information (E-BFMI; target value \(>0.2\)). For further explanation of these diagnostic criteria, see the Stan Manual CITATION.
 
 
 \section{Model Selection and Adequacy}
