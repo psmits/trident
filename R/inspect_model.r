@@ -80,7 +80,7 @@ interval_est <- disc_best %>%
                  #`Sigma[fact_mybin:maxgcd:diff_maxgcd,diff_maxgcd]`,
                  #`Sigma[fact_mybin:maxgcd:diff_maxgcd,maxgcd:diff_maxgcd]`,
                  `Sigma[fact_relage:(Intercept),(Intercept)]`) %>%
-  median_qi(.prob = c(0.9, 0.5))
+  median_qi(.prob = c(0.8, 0.5))
 
 effect_eye <- disc_best %>%
   gather_samples(`(Intercept)`, 
@@ -90,7 +90,7 @@ effect_eye <- disc_best %>%
                  temp,
                  lag1_temp) %>%
   ggplot(aes(y = term, x = estimate)) +
-  geom_halfeyeh(.prob = c(0.9, 0.5))
+  geom_halfeyeh(.prob = c(0.8, 0.5))
 ggsave(filename = '../doc/figure/effect_est.png',
        plot = effect_eye, width = 4, height = 6)
 
@@ -117,7 +117,7 @@ vary_eye <- disc_best %>%
   ungroup() %>%
   mutate(term = plyr::mapvalues(term, from = unique(term), to = interp)) %>%
   ggplot(aes(y = term, x = estimate)) +
-  geom_halfeyeh(.prob = c(0.9, 0.5)) +
+  geom_halfeyeh(.prob = c(0.8, 0.5)) +
   labs(x = 'Estimate', y = 'Variance component')
 ggsave(filename = '../doc/figure/variance_components.png',
        plot = vary_eye, width = 6, height = 6)
