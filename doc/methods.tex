@@ -56,10 +56,11 @@ This logistic regression model, minus the final selection of priors, is expresse
 \begin{equation}
   \begin{aligned}
     t_{i} &\sim \text{Bernoulli}(\Theta) \\
-    \Theta_{i} &= \text{logit}^{-1} (X_{i} B_{w[i], p[i]} + a_{d[i], p[i]}) \\
+    \Theta_{i} &= \text{logit}^{-1} (X_{i} B_{w[i], p[i]} + A_{d[i], p[i]}) \\
     B_{w, p} &\sim MVN(\alpha_{p}, \Sigma_{B}) \\
     \alpha_{p} &\sim MVN(\mu, \Sigma_{\alpha}) \\
-    a_{w, p} &\sim \mathrm{N}(\delta_{p}, \sigma_{a}) \\
+    % double check this\dots is A MVN dist?
+    A_{w, p} &\sim MVN(\delta_{p}, \Sigma_{A}) \\
     \delta_{p} &\sim \mathrm{N}(0, \sigma_{\delta}) \\
   \end{aligned}
   \label{eq:core}
@@ -84,10 +85,13 @@ In total, these prior choices can be expressed as
     \delta &\sim N(0, 1) \\
     \Sigma_{B} &= diag(\tau_{B}) \Omega_{B} diag(\tau_{B}) \\
     \Sigma_{\alpha} &= diag(\tau_{\alpha}) \Omega_{\alpha} diag(\tau_{\alpha}) \\
+    \Sigma_{A} &= diag(\tau_{A}) \Omega_{A} diag(\tau_{A}) \\
     \tau_{B} &\sim C^{+}(5) \\
     \tau_{\alpha} &\sim C^{+}(5) \\
+    \tau_{A} &\sim C^{+}(5) \\
     \Omega_{B} &\sim LKJ(1) \\
     \Omega_{\alpha} &\sim LKJ(1) \\
+    \Omega_{A} &\sim LKJ(1) \\
   \end{aligned}
   \label{eq:priors}
 \end{equation}
@@ -143,7 +147,7 @@ Model adequacy was measured using the area under the receiver operating characte
 
 We are also interested in understanding how well our model predicts species extinction given new, future data (out-of-sample data). To do this, we estimated average out-of-sample predictive error using 5-fold time-series cross-validation. For time-series data, the folds (data partitions) are approximately equal segments of time. The model is fit to the first fold and the posterior estimates are used to predict the states of the observations in the second fold, then the model is fit to the first and second fold and the posterior states are used to estimate the states from the third fold, and so on with increasingly large numbers of folds used for fitting a model to predict the states from the subsequent fold. With 63 time points, each of the five folds represents approximately 13 time points. Keep in mind, however, that each time point corresponds to many (100-1000) individual observations.
 
-One of the issues with our data set is extreme class imbalance; this means that there are many more survival observations than extinction observations. When the classes are not approximately balanced, the base probability of 1 versus 0 is below 0.5. When the intercept term of the logistic regression is sufficiently negative (-2 or less), the only way to obtain a linear predictor value of 0.5 or greater is if the covariate effects are large or there the covariates are at extreme values. The 0.5 default cut-off point for binary prediction is much to high when events are rare. A method for determining the new ``optimal'' cut-point involves calculating the receiver operating characterist (ROC) curve from the linear predictor estimates and then identifying the point on the ROC curve which maximizes both true positive rate and the false positive rate. The new cut-point is then back-calculated from the true positive and false positive rates. Class membership is then predicted given this new cut-point. This process is done for every posterior draw, as each realization from the posterior predictive distribution has its own optimal cut-point.
+One of the issues with our data set is extreme class imbalance; this means that there are many more survival observations than extinction observations. When the classes are not approximately balanced, the base probability of 1 versus 0 is below 0.5. When the intercept term of the logistic regression is sufficiently negative (-2 or less), the only way to obtain a linear predictor value of 0.5 or greater is if the covariate effects are large or there the covariates are at extreme values. The 0.5 default cutpoint for binary prediction is much to high when events are rare. A method for determining the new ``optimal'' cutpoint involves calculating the receiver operating characteristic (ROC) curve from the linear predictor estimates and then identifying the point on the ROC curve which maximizes both true positive rate and the false positive rate. The new cutpoint is then back-calculated from the true positive and false positive rates. Class membership is then predicted given this new cutpoint. This process is done for every posterior draw, as each realization from the posterior predictive distribution has its own optimal cutpoint.
 
 %\section{Variance Partioning and Intraclass Correlation Coeficient}
 %

@@ -33,6 +33,19 @@ Our best model, as selected via LOOIC and WAIC, is the parameter rich ``past and
   \label{tab:selection}
 \end{table}
 
+
+
+As described above, our data is extremely unbalanced with respect to the number of extinction events relative to the total number of observations; this reality means that 0.5 is an inappropriate cutpoint for estimating if a species observation is their last (i.e. goes extinct). New, optimal cutpoint were calculated from the ROC curve as the level which maximized the true and false positive rates.
+The distributions of optimal cut-off point estimates for each of the four models are broadly similar, with all 50\% credible intervals overlapping.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{figure/cut_plot}
+  \caption{Posterior estimates of the optimal cutpoints for each of the three models. The optimal cutpoint corresponds to the point which maximizes the true and false positive rates.}
+  \label{fig:cut_point}
+\end{figure}
+
+
 Comparison of the in-sample AUC estimates between the four models reveals similar results as the selection criteria (Fig. \ref{fig:roc_hist}). While the parameter rich ``past and vary'' model has the greatest mean AUC when compared to the other three models, the other three models are quite similar. We chose to base our conclusions on the parameter rich ``past and vary'' model but these comparisons of model selection and adequacy illustrate the very small gain in performance that is achieved by allowing parameter effects to vary through time and including the historical covariates, though it appears that each of these choices on their own yield approximately equivalent models.
 % ROC model comparison
 \begin{figure}[ht]
@@ -107,18 +120,26 @@ The overall effect averages described above do not reflect the between time-inte
 % effect of age at observation
 
 % average hazard
+The hazard function describes how age of observation impacts probability of extinction. Hazard is estimated for each phylum for the range of ages observed within the phylum. The matrix \(A\) describes the effect of age on extinction probability for age at observation (rows) by phylum (columns). The phylum-level averages of the effect of age of observation on extinction \(\delta\) are themselves drawn from a distribution centered around 0.
+
+
+Figure \ref{fig:hazard_baselin} is a graph of the average hazard associated with age of observation. This graph illustrates how average extinction risk increases with age for the first few million years before leveling off. A species reaches highest age-related probability of extinction at 10 million years, after which the median becomes volatile until a duration over 30 million years. The flat-ness of the median estimate and the homogeneity of variance durations between approximately 30 million years to under 60 million years is due to the lack of species having survived over 30 million years, which inherently means that these estimates are based on less information and are shrunk towards the overall average while reflecting more and more of our prior uncertainty over time. 
 
 \begin{figure}[ht]
   \centering
   \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{figure/hazard_baseline}
-  \caption{<+caption text+>}
+  \caption{Average hazard estimates based on all all observed species ages in millions of years. Hazard in discrete-survival analysis is the probability of going extinct at a given age having survived up to that age. Overall hazard was calculated using the phylum average intercept and assuming all covariates equaled 0. The red line is the median hazard estimate along with 50\%, 80\%, and 95\% credible intervals.}
   \label{fig:hazard_baseline}
 \end{figure}
+
+The hazard associated with the individual phyla have broad similarities with the overall hazard estimates (Fig. \ref{fig:hazard_bygroup}). In all four cases, hazard increases over the first 10 million years of a species duration. However, the rate of increase in hazard varies between the phyla, with forams and radiolarians having the most pronounced increase with age. Radiolarians also have the lowest initial hazard of the phyla, followed by forams and calcareous nannoplankton. In contrast, diatoms have the highest initial hazard of the phyla while having the smallest change hazard with age. 
+
+Optimal cutpoint between 0.1 and 0.11 percent. We estimate that the effect of age of observation on extinction can reach this threshold after XX My at ##\% posterior probability.
 
 \begin{figure}[ht]
   \centering
   \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{figure/hazard_bygroup}
-  \caption{<+caption text+>}
+  \caption{Hazard estimates for each of the phyla analyzed here. The red line is the median hazard estimate along with 50\%, 80\%, and 95\% credible intervals.}
   \label{fig:hazard_bygroup}
 \end{figure}
 
@@ -126,7 +147,7 @@ The overall effect averages described above do not reflect the between time-inte
 % variance components
 There are multiple levels and sources of variance in our model. Each of the grouping factors account for some amount of variance in the data. The first ``level'' of variance is the data level or the variance in the observed data (the model response). In the context of regular linear regression, this variance is equivalent to the residual variance. In the context of logistic regression, however, this value is not an inherent part of the model.
 
-There are then two non-nested sources of the second ``level'' of variance: intercept and slopes varying by time of observation, and a mean-zero age at observation varying intercept. Each of the elements of the vector of scale terms \(\tau_{B}\) describe the within-phyla variance for the intercept and the slope terms for the covariates. Similarly, the scale term \(\sigma_{a}\) is a scalar that describes the within-phyla variance of the effect of age at observation. 
+There are then two non-nested sources of the second ``level'' of variance: intercept and slopes varying by time of observation, and a mean-zero age at observation varying intercept. Each of the elements of the vector of scale terms \(\tau_{B}\) describe the within-phyla variance for the intercept and the slope terms for the covariates. Similarly, the scale term \(\sigma_{A}\) is a scalar that describes the within-phyla variance of the effect of age at observation. 
 
 The final ``level'' of variance the phyla-level: the between phyla variance for the intercepts and regression coefficients \(\tau_{\alpha}\), and the between phyla variance for the effect of age at observation \(\sigma_{\delta}\). 
 
