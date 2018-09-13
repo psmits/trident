@@ -1,6 +1,7 @@
 # data manipulation
 library(tidyverse)
 library(janitor)
+library(ggridges)
 #devtools::install_github("mjskay/tidybayes")
 library(tidybayes)
 
@@ -87,7 +88,21 @@ pp_prob <- map(pp, ~ future::value(.x))
 
 # adequacy of fit ROC
 pgc <- partial(get_cutpoints, target = counti_trans$event)
-list_cutpoint <- map(map(pp_prob, pgc), ~ map(.x, ~ .x[3]))
+list_cutpoint <- map(map(pp_prob, pgc), ~ map(.x, ~ .x[3])) %>%
+  purrr::set_names(., model_key)
+
+
+cut_plot <- list_cutpoint %>%
+  reshape2::melt(list_cutpoint) %>%
+  as.tibble(.) %>%
+  magrittr::set_names(., c('value', 'draw', 'model')) %>%
+  dplyr::select(-draw) %>%
+  ggplot(., aes(x = value, y = model)) + 
+  geom_halfeyeh(.width = c(0.5, 0.8))
+ggsave(filename = '../doc/figure/cut_plot.png', plot = cut_plot,
+       width = 6, height = 6)
+
+
 pp_est_new <- cut_newpoint(pp_prob, list_cutpoint)
 # this resets the cutpoint for determining 0 vs 1 by setting it very low.
 # this is a product of really high class imbalance. 
@@ -101,8 +116,8 @@ pp_auc <- map(pp_roc, function(y) map_dbl(y, ~ auc(.x)))
 roc_hist <- bind_rows(imap(pp_auc, ~ data.frame(model = .y, roc = .x))) %>%
   mutate(model = recode(model, !!!model_key),
          model = fct_relevel(model, !!model_key[2], after = 1)) %>%
-ggplot(aes(x = roc, y = model)) +
-geom_eyeh()
+  ggplot(aes(x = roc, y = model)) +
+  geom_halfeyeh(.width = c(0.5, 0.8))
 ggsave(filename = '../doc/figure/roc_hist.png', plot = roc_hist,
        width = 6, height = 6)
 
