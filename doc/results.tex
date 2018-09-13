@@ -24,10 +24,10 @@ Our best model, as selected via LOOIC and WAIC, is the parameter rich ``past and
     \hline
     Model & looic & looic se & waic & waic se \\
     \hline
-    Past and vary & 12789.81 & 178.90 & 12785.51 & 178.84 \\
-    No past but vary & 12820.67 & 178.82 & 12817.49 & 178.77 \\ 
-    Past but no vary & 12847.18 & 179.40 & 12844.88 & 179.36 \\ 
-    No past or vary & 12851.43 & 179.48 & 12849.10 & 179.44 \\ 
+    Past and vary & 12784.04 & 178.71 & 12784.04 & 178.71 \\
+    No past but vary & 12819.01 & 178.80 & 12819.01 & 178.80 \\ 
+    Past but no vary & 12847.00 & 179.38 & 12847.00 & 179.38 \\ 
+    No past or vary & 12851.53 & 179.48 & 12851.53 & 179.48 \\ 
     \hline
   \end{tabular}
   \label{tab:selection}
@@ -36,12 +36,13 @@ Our best model, as selected via LOOIC and WAIC, is the parameter rich ``past and
 
 
 As described above, our data is extremely unbalanced with respect to the number of extinction events relative to the total number of observations; this reality means that 0.5 is an inappropriate cutpoint for estimating if a species observation is their last (i.e. goes extinct). New, optimal cutpoint were calculated from the ROC curve as the level which maximized the true and false positive rates.
+
 The distributions of optimal cut-off point estimates for each of the four models are broadly similar, with all 50\% credible intervals overlapping.
 
 \begin{figure}[ht]
   \centering
   \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{figure/cut_plot}
-  \caption{Posterior estimates of the optimal cutpoints for each of the three models. The optimal cutpoint corresponds to the point which maximizes the true and false positive rates.}
+  \caption{Posterior estimates of the optimal cutpoints for each of the three models. The optimal cutpoint corresponds to the point which maximizes the true and false positive rates; this new cutpoint is used instead of 0.5 when estimating if an observation is the last observation of that species (i.e. goes extinct).}
   \label{fig:cut_point}
 \end{figure}
 
