@@ -39,12 +39,12 @@ prmn <- priors$prior$location
 prsc <- priors$prior$scale
 
 posc <- disc_best %>% 
-  spread_samples(maxgcd,
-                 diff_maxgcd,
-                 temp,
-                 lag1_temp) %>% 
-  clean_names %>% 
-  dplyr::summarize_at(vars(-chain, -iteration), funs(sd(.)))
+  spread_draws(maxgcd,
+               lag1_maxgcd,
+               temp,
+               lag1_temp) %>% 
+clean_names %>% 
+dplyr::summarize_at(vars(-chain, -iteration), funs(sd(.)))
 
 # 1 = lot of shrinkage, 0 = no shrinkage
 posterior_shrinkage <- 1 - (posc / prsc) ^ 2
@@ -52,72 +52,74 @@ posterior_shrinkage <- 1 - (posc / prsc) ^ 2
 
 # posterior intervals
 interval_est <- disc_best %>%
-  spread_samples(`(Intercept)`, 
-                 maxgcd, 
-                 diff_maxgcd,
-                 #`maxgcd:diff_maxgcd`,
-                 temp,
-                 lag1_temp,
-                 `Sigma[fossil_group:fact_mybin:(Intercept),(Intercept)]`,
-                 `Sigma[fossil_group:fact_mybin:maxgcd,(Intercept)]`,
-                 `Sigma[fossil_group:fact_mybin:diff_maxgcd,(Intercept)]`,
-                 #`Sigma[fossil_group:fact_mybin:maxgcd:diff_maxgcd,(Intercept)]`,
-                 `Sigma[fossil_group:fact_mybin:maxgcd,maxgcd]`,
-                 `Sigma[fossil_group:fact_mybin:diff_maxgcd,maxgcd]`,
-                 #`Sigma[fossil_group:fact_mybin:maxgcd:diff_maxgcd,maxgcd]`,
-                 `Sigma[fossil_group:fact_mybin:diff_maxgcd,diff_maxgcd]`,
-                 #`Sigma[fossil_group:fact_mybin:maxgcd:diff_maxgcd,diff_maxgcd]`,
-                 #`Sigma[fossil_group:fact_mybin:maxgcd:diff_maxgcd,maxgcd:diff_maxgcd]`,
-                 `Sigma[fossil_group:fact_relage:(Intercept),(Intercept)]`,
-                 `Sigma[fact_mybin:(Intercept),(Intercept)]`,
-                 `Sigma[fact_mybin:maxgcd,(Intercept)]`,
-                 `Sigma[fact_mybin:diff_maxgcd,(Intercept)]`,
-                 #`Sigma[fact_mybin:maxgcd:diff_maxgcd,(Intercept)]`,
-                 `Sigma[fact_mybin:maxgcd,maxgcd]`,
-                 `Sigma[fact_mybin:diff_maxgcd,maxgcd]`,
-                 #`Sigma[fact_mybin:maxgcd:diff_maxgcd,maxgcd]`,
-                 `Sigma[fact_mybin:diff_maxgcd,diff_maxgcd]`,
-                 #`Sigma[fact_mybin:maxgcd:diff_maxgcd,diff_maxgcd]`,
-                 #`Sigma[fact_mybin:maxgcd:diff_maxgcd,maxgcd:diff_maxgcd]`,
-                 `Sigma[fact_relage:(Intercept),(Intercept)]`) %>%
-  median_qi(.prob = c(0.8, 0.5))
+  spread_draws(`(Intercept)`, 
+               maxgcd, 
+               lag1_maxgcd,
+               #`maxgcd:lag1_maxgcd`,
+               temp,
+               lag1_temp,
+               `Sigma[fossil_group:fact_mybin:(Intercept),(Intercept)]`,
+               `Sigma[fossil_group:fact_mybin:maxgcd,(Intercept)]`,
+               `Sigma[fossil_group:fact_mybin:lag1_maxgcd,(Intercept)]`,
+               #`Sigma[fossil_group:fact_mybin:maxgcd:lag1_maxgcd,(Intercept)]`,
+               `Sigma[fossil_group:fact_mybin:maxgcd,maxgcd]`,
+               `Sigma[fossil_group:fact_mybin:lag1_maxgcd,maxgcd]`,
+               #`Sigma[fossil_group:fact_mybin:maxgcd:lag1_maxgcd,maxgcd]`,
+               `Sigma[fossil_group:fact_mybin:lag1_maxgcd,lag1_maxgcd]`,
+               #`Sigma[fossil_group:fact_mybin:maxgcd:lag1_maxgcd,lag1_maxgcd]`,
+               #`Sigma[fossil_group:fact_mybin:maxgcd:lag1_maxgcd,maxgcd:lag1_maxgcd]`,
+               `Sigma[fossil_group:fact_relage:(Intercept),(Intercept)]`,
+               `Sigma[fact_mybin:(Intercept),(Intercept)]`,
+               `Sigma[fact_mybin:maxgcd,(Intercept)]`,
+               `Sigma[fact_mybin:lag1_maxgcd,(Intercept)]`,
+               #`Sigma[fact_mybin:maxgcd:lag1_maxgcd,(Intercept)]`,
+               `Sigma[fact_mybin:maxgcd,maxgcd]`,
+               `Sigma[fact_mybin:lag1_maxgcd,maxgcd]`,
+               #`Sigma[fact_mybin:maxgcd:lag1_maxgcd,maxgcd]`,
+               `Sigma[fact_mybin:lag1_maxgcd,lag1_maxgcd]`,
+               #`Sigma[fact_mybin:maxgcd:lag1_maxgcd,lag1_maxgcd]`,
+               #`Sigma[fact_mybin:maxgcd:lag1_maxgcd,maxgcd:lag1_maxgcd]`,
+               `Sigma[fact_relage:(Intercept),(Intercept)]`) %>%
+median_qi(.width = c(0.8, 0.5))
 
 effect_eye <- disc_best %>%
-  gather_samples(`(Intercept)`, 
-                 maxgcd, 
-                 diff_maxgcd,
-                 #`maxgcd:diff_maxgcd`,
-                 temp,
-                 lag1_temp) %>%
-  ggplot(aes(y = term, x = estimate)) +
-  geom_halfeyeh(.prob = c(0.8, 0.5))
+  gather_draws(`(Intercept)`, 
+               maxgcd, 
+               lag1_maxgcd,
+               #`maxgcd:lag1_maxgcd`,
+               temp,
+               lag1_temp) %>%
+ggplot(aes(y = .variable, x = .value)) +
+geom_halfeyeh(.width = c(0.8, 0.5))
 ggsave(filename = '../doc/figure/effect_est.png',
        plot = effect_eye, width = 4, height = 6)
 
 
 # variance component
 interp <- c('time: variance intercept, between',
-  'time: variance maxgcd, between',
-  'time: variance diff_maxgcd, between',
-  'time: variance intercept, within',
-  'time: variance maxgcd, within',
-  'time: variance diff_maxgcd, within',
-  'age: variance intercept, overall',
-  'age: variance intercept, within')
+            'time: variance maxgcd, between',
+            'time: variance lag1_maxgcd, between',
+            'time: variance intercept, within',
+            'time: variance maxgcd, within',
+            'time: variance lag1_maxgcd, within',
+            'age: variance intercept, overall',
+            'age: variance intercept, within')
 
 vary_eye <- disc_best %>%
-  gather_samples(`Sigma[fact_mybin:(Intercept),(Intercept)]`,
-                 `Sigma[fact_mybin:maxgcd,maxgcd]`,
-                 `Sigma[fact_mybin:diff_maxgcd,diff_maxgcd]`,
-                 `Sigma[fossil_group:fact_mybin:(Intercept),(Intercept)]`,
-                 `Sigma[fossil_group:fact_mybin:maxgcd,maxgcd]`,
-                 `Sigma[fossil_group:fact_mybin:diff_maxgcd,diff_maxgcd]`,
-                 `Sigma[fact_relage:(Intercept),(Intercept)]`,
-                 `Sigma[fossil_group:fact_relage:(Intercept),(Intercept)]`) %>%
+  gather_draws(`Sigma[fact_mybin:(Intercept),(Intercept)]`,
+               `Sigma[fact_mybin:maxgcd,maxgcd]`,
+               `Sigma[fact_mybin:lag1_maxgcd,lag1_maxgcd]`,
+               `Sigma[fossil_group:fact_mybin:(Intercept),(Intercept)]`,
+               `Sigma[fossil_group:fact_mybin:maxgcd,maxgcd]`,
+               `Sigma[fossil_group:fact_mybin:lag1_maxgcd,lag1_maxgcd]`,
+               `Sigma[fact_relage:(Intercept),(Intercept)]`,
+               `Sigma[fossil_group:fact_relage:(Intercept),(Intercept)]`) %>%
   ungroup() %>%
-  mutate(term = plyr::mapvalues(term, from = unique(term), to = interp)) %>%
-  ggplot(aes(y = term, x = estimate)) +
-  geom_halfeyeh(.prob = c(0.8, 0.5)) +
+  mutate(term = plyr::mapvalues(.variable, 
+                                from = unique(.variable), 
+                                to = interp)) %>%
+  ggplot(aes(y = term, x = .value)) +
+  geom_halfeyeh(.width = c(0.8, 0.5)) +
   labs(x = 'Estimate', y = 'Variance component')
 ggsave(filename = '../doc/figure/variance_components.png',
        plot = vary_eye, width = 6, height = 6)
@@ -126,21 +128,21 @@ ggsave(filename = '../doc/figure/variance_components.png',
 # probability of overall average ests being greater than 0
 get_percent <- function(x) sum(x > 0) / length(x)
 effect_prob <- disc_best %>%
-  spread_samples(maxgcd, 
-                 diff_maxgcd, 
-                 #`maxgcd:diff_maxgcd`, 
-                 temp, 
-                 lag1_temp) %>%
-  summarize_at(.vars = c('maxgcd', 
-                         'diff_maxgcd', 
-                         # 'maxgcd:diff_maxgcd', 
-                         'temp', 
-                         'lag1_temp'), 
-               .funs = get_percent)
+  spread_draws(maxgcd, 
+               lag1_maxgcd, 
+               #`maxgcd:lag1_maxgcd`, 
+               temp, 
+               lag1_temp) %>%
+summarize_at(.vars = c('maxgcd', 
+                       'lag1_maxgcd', 
+                       # 'maxgcd:lag1_maxgcd', 
+                       'temp', 
+                       'lag1_temp'), 
+             .funs = get_percent)
 
 # base-line hazard plot
 hazard_plot <- disc_best %>%
-  spread_samples(b[i, f], `(Intercept)`) %>%
+  spread_draws(b[i, f], `(Intercept)`) %>%
   filter(str_detect(f, pattern = 'fact_relage'),
          !str_detect(f, pattern = 'fossil_group')) %>%
   mutate(cr = invlogit(`(Intercept)` + b)) %>%
