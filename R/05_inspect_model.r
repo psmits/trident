@@ -11,12 +11,12 @@ library(parallel)
 library(arm)
 library(rstanarm)
 library(bayesplot)
-source('../R/stan_utility.R')
+source('../R/helper03_stan_utility.R')
 
 # misc
 library(pROC)
-source('../R/process_foo.r')
-source('../R/plot_foo.r')
+source('../R/helper01_process_foo.r')
+source('../R/helper02_plot_foo.r')
 
 # important constants
 options(mc.cores = parallel::detectCores())

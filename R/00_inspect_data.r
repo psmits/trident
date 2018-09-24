@@ -14,7 +14,7 @@ source('../R/stan_utility.R')
 library(scales)
 library(ggridges)
 library(pROC)
-source('../R/process_foo.r')
+source('../R/helper01_process_foo.r')
 
 # important constants
 options(mc.cores = parallel::detectCores())
