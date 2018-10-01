@@ -8,10 +8,10 @@ library(parallel)
 library(arm)
 library(rstanarm)
 library(bayesplot)
-source('../R/stan_utility.R')
+source('../R/helper03_stan_utility.R')
 
 # misc
-source('../R/process_foo.r')
+source('../R/helper01_process_foo.r')
 
 # important constants
 options(mc.cores = parallel::detectCores())
@@ -24,7 +24,7 @@ counti <- read_rds('../data/counting.rds')
 # transform the data for analysis
 counti_trans <- prepare_analysis(counti)
 
-#priors <- c(set_prior('normal(0, 10)', class= 'Intercept'),
+#priors <- c(set_prior('normal(-2, 1)', class= 'Intercept'),
 #            set_prior('normal(0, 1)', class = 'b'),
 #            set_prior('normal(-1, 1)', class = 'b', coef = 'maxgcd'),
 #            set_prior('cauchy(0, 1)', class = 'sd'),
@@ -43,19 +43,19 @@ counti_trans <- prepare_analysis(counti)
 #              prior = priors)
 
 # past and vary
-form <- formula(event ~ temp + lag1_temp + maxgcd + diff_maxgcd 
+form <- formula(event ~ temp + lag1_temp + maxgcd + lag1_maxgcd 
                 + (1 | fact_relage/fossil_group)
-                + (1 + temp + lag1_temp + maxgcd + diff_maxgcd | 
+                + (1 + temp + lag1_temp + maxgcd + lag1_maxgcd | 
                    fact_mybin/fossil_group))
 
 # past but no vary
-form2 <- update(form, ~ . - (1 + temp + lag1_temp + maxgcd + diff_maxgcd | 
+form2 <- update(form, ~ . - (1 + temp + lag1_temp + maxgcd + lag1_maxgcd | 
                              fact_mybin/fossil_group) 
                       + (1 | fact_mybin/fossil_group))
 
 # no past but vary
-form3 <- update(form, ~ . - diff_maxgcd - lag1_temp 
-                      - (1 + temp + lag1_temp + maxgcd + diff_maxgcd | 
+form3 <- update(form, ~ . - lag1_maxgcd - lag1_temp 
+                      - (1 + temp + lag1_temp + maxgcd + lag1_maxgcd | 
                          fact_mybin/fossil_group) 
                       + (1 + temp + maxgcd | fact_mybin/fossil_group))
 
@@ -70,7 +70,7 @@ forms <- list(form, form2, form3, form4)
 part_glmer <- partial(stan_glmer, 
                       family = 'binomial',
                       data = counti_trans,
-                      prior_intercept = normal(0, 10, autoscale = FALSE),
+                      prior_intercept = normal(-2, 10, autoscale = FALSE),
                       prior_aux = cauchy(0, 3, autoscale = FALSE),
                       thin = 4, 
                       adapt_delta = 0.999999)

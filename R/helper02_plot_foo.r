@@ -24,7 +24,7 @@ plot_georange_compare <- function(data) {
 #' @return a ggplot object
 plot_taxon_covariate_time <- function(disc_best) {
   comp_const <- disc_best %>%
-    spread_draws(maxgcd, diff_maxgcd, temp, lag1_temp)
+    spread_draws(maxgcd, lag1_maxgcd, temp, lag1_temp)
 
   comp_var <- disc_best %>%
     spread_draws(b[i, f]) %>%
@@ -42,11 +42,11 @@ plot_taxon_covariate_time <- function(disc_best) {
   core <- full_join(comp_const, cv[[1]], 
                     by = c('.chain', '.iteration', '.draw')) %>%
     mutate(eff_maxgcd = maxgcd.x + maxgcd.y,
-           eff_diff_maxgcd = diff_maxgcd.x + diff_maxgcd.y,
+           eff_lag1_maxgcd = lag1_maxgcd.x + lag1_maxgcd.y,
            eff_temp = temp.x + temp.y,
            eff_lag1_temp = lag1_temp.x + lag1_temp.y) %>%
     dplyr::select(.chain, .iteration, .draw, f, age, 
-                eff_maxgcd, eff_diff_maxgcd,
+                eff_maxgcd, eff_lag1_maxgcd,
                 eff_temp, eff_lag1_temp) %>%
     arrange(.chain, .iteration, .draw, age)
 
@@ -54,7 +54,7 @@ plot_taxon_covariate_time <- function(disc_best) {
   by_taxon <- map(cv[-1], ~ full_join(core, .x, by = c('.chain', '.iteration', 'age'))) %>%
     map(., ~ .x %>%
         mutate(taxon_eff_maxgcd = eff_maxgcd + maxgcd,
-               taxon_eff_diff_maxgcd = eff_diff_maxgcd + diff_maxgcd,
+               taxon_eff_lag1_maxgcd = eff_lag1_maxgcd + lag1_maxgcd,
                taxon_eff_temp = eff_temp + temp,
                taxon_eff_lag1_temp = eff_lag1_temp + lag1_temp)) %>%
     reduce(bind_rows) %>%
@@ -64,14 +64,14 @@ plot_taxon_covariate_time <- function(disc_best) {
            -f.x, -f.y, 
            -age, 
            -`(Intercept)`, -type,
-           -eff_maxgcd, -eff_diff_maxgcd,
+           -eff_maxgcd, -eff_lag1_maxgcd,
            -eff_temp, -eff_lag1_temp,
-           -diff_maxgcd, -maxgcd,
+           -lag1_maxgcd, -maxgcd,
            -lag1_temp, -temp) %>%
     filter(!is.na(type)) %>%
     mutate(key = fct_recode(key, 
                             geo_range = 'taxon_eff_maxgcd',
-                            geo_change = 'taxon_eff_diff_maxgcd',
+                            geo_change = 'taxon_eff_lag1_maxgcd',
                             temp_now = 'taxon_eff_temp',
                             temp_lag = 'taxon_eff_lag1_temp'),
            key = fct_relevel(key, 
@@ -132,7 +132,7 @@ plot_risk_time <- function(data, model, nsp = 4) {
 
   ext_plot <- full_est %>%
     ggplot(aes(x = relage, y = value)) + 
-    stat_pointinterval(.prob = c(0.5, 0.8)) +
+    stat_pointinterval(.width = c(0.5, 0.8)) +
     facet_grid(~ fullname) + 
     labs(x = 'Age (My)', y = 'P(T = t | T >= t, x)')
 
