@@ -33,8 +33,6 @@ Our best model, as selected via LOOIC and WAIC, is the parameter rich ``past and
   \label{tab:selection}
 \end{table}
 
-
-
 As described above, our data is extremely unbalanced with respect to the number of extinction events relative to the total number of observations; this reality means that 0.5 is an inappropriate cutpoint for estimating if a species observation is their last (i.e. goes extinct). New, optimal cutpoint were calculated from the ROC curve as the level which maximized the true and false positive rates.
 
 The distributions of optimal cut-off point estimates for each of the four models are broadly similar, with all 50\% credible intervals overlapping.
@@ -45,7 +43,6 @@ The distributions of optimal cut-off point estimates for each of the four models
   \caption{Posterior estimates of the optimal cutpoints for each of the three models. The optimal cutpoint corresponds to the point which maximizes the true and false positive rates; this new cutpoint is used instead of 0.5 when estimating if an observation is the last observation of that species (i.e. goes extinct).}
   \label{fig:cut_point}
 \end{figure}
-
 
 Comparison of the in-sample AUC estimates between the four models reveals similar results as the selection criteria (Fig. \ref{fig:roc_hist}). While the parameter rich ``past and vary'' model has the greatest mean AUC when compared to the other three models, the other three models are quite similar. We chose to base our conclusions on the parameter rich ``past and vary'' model but these comparisons of model selection and adequacy illustrate the very small gain in performance that is achieved by allowing parameter effects to vary through time and including the historical covariates, though it appears that each of these choices on their own yield approximately equivalent models.
 % ROC model comparison
@@ -112,7 +109,7 @@ The overall effect averages described above do not reflect the between time-inte
 % effects, time series
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{figure/effect_time_group}
+  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{figure/eff_time_group}
   \caption{Effects of the four covariates as estimated for all time intervals and for each phyla. For each time series, the red line corresponds to the median estimate for each interval, while the envelopes represent various credible intervals as labeled.}
   \label{fig:effect_time_group}
 \end{figure}
@@ -124,7 +121,7 @@ The overall effect averages described above do not reflect the between time-inte
 The hazard function describes how age of observation impacts probability of extinction. Hazard is estimated for each phylum for the range of ages observed within the phylum. The matrix \(A\) describes the effect of age on extinction probability for age at observation (rows) by phylum (columns). The phylum-level averages of the effect of age of observation on extinction \(\delta\) are themselves drawn from a distribution centered around 0.
 
 
-Figure \ref{fig:hazard_baselin} is a graph of the average hazard associated with age of observation. This graph illustrates how average extinction risk increases with age for the first few million years before leveling off. A species reaches highest age-related probability of extinction at 10 million years, after which the median becomes volatile until a duration over 30 million years. The flat-ness of the median estimate and the homogeneity of variance durations between approximately 30 million years to under 60 million years is due to the lack of species having survived over 30 million years, which inherently means that these estimates are based on less information and are shrunk towards the overall average while reflecting more and more of our prior uncertainty over time. 
+Figure \ref{fig:hazard_baseline} is a graph of the average hazard associated with age of observation. This graph illustrates how average extinction risk increases with age for the first few million years before leveling off. A species reaches highest age-related probability of extinction at 10 million years, after which the median becomes volatile until a duration over 30 million years. The flat-ness of the median estimate and the homogeneity of variance durations between approximately 30 million years to under 60 million years is due to the lack of species having survived over 30 million years, which inherently means that these estimates are based on less information and are shrunk towards the overall average while reflecting more and more of our prior uncertainty over time. 
 
 \begin{figure}[ht]
   \centering
@@ -135,7 +132,7 @@ Figure \ref{fig:hazard_baselin} is a graph of the average hazard associated with
 
 The hazard associated with the individual phyla have broad similarities with the overall hazard estimates (Fig. \ref{fig:hazard_bygroup}). In all four cases, hazard increases over the first 10 million years of a species duration. However, the rate of increase in hazard varies between the phyla, with forams and radiolarians having the most pronounced increase with age. Radiolarians also have the lowest initial hazard of the phyla, followed by forams and calcareous nannoplankton. In contrast, diatoms have the highest initial hazard of the phyla while having the smallest change hazard with age. 
 
-Optimal cutpoint between 0.1 and 0.11 percent. We estimate that the effect of age of observation on extinction can reach this threshold after XX My at ##\% posterior probability.
+Optimal cutpoint between 0.1 and 0.11 percent. We estimate that the effect of age of observation on extinction can reach this threshold after XX My at YY\% posterior probability.
 
 \begin{figure}[ht]
   \centering
@@ -154,7 +151,10 @@ The final ``level'' of variance the phyla-level: the between phyla variance for 
 
 The greatest source of variance accounted for by the grouping factors is the between phylum variance in the model intercept (Fig. \ref{fig:variance_components}); this is the first element of \(\tau_{B}\). All of the other scale terms have approximately equal estimates, which means that they contribute a similar amount to the structure underlying the data. For example, the within-phyla effect of geographic range on extinction probability is associated with approximately as much variance as there is between the phyla themselves.
 
-This result means that, given this model, the greatest contributor to changes in extinction risk over time is when a species is present. In comparison, the covariates we studied individually contribute only a limited amount to the variation in extinction. Similarly, while age at observation does contribute to some differences in extinction risk (Fig XXX age effect), this effect is most likely overwhelmed by the importance of when that observation takes place.
+This result means that, given this model, the greatest contributor to differences in extinction risk over time is when a species is present. In comparison, the covariates we studied individually contribute only a limited amount to the variation in extinction. Similarly, while age at observation does contribute to some differences in extinction risk (Fig XXX age effect), this effect is most likely overwhelmed by the importance of when that observation takes place.
+
+The variance in effects contributed by the phyla is approximately equal to the variance in those effects due to differences over time.
+
 
 \begin{figure}[ht]
   \centering
@@ -163,6 +163,9 @@ This result means that, given this model, the greatest contributor to changes in
   \label{fig:variance_components}
 \end{figure}
 
+
+
+Looking at four randomly sampled species, we evaluated their probability of extinction at all times that species was observed. We then compared these estimates to the geographic range trajectory of 
 
 
 % risk estimate compared to change in geo-range

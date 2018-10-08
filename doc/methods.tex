@@ -149,22 +149,6 @@ We are also interested in understanding how well our model predicts species exti
 
 One of the issues with our data set is extreme class imbalance; this means that there are many more survival observations than extinction observations. When the classes are not approximately balanced, the base probability of 1 versus 0 is below 0.5. When the intercept term of the logistic regression is sufficiently negative (-2 or less), the only way to obtain a linear predictor value of 0.5 or greater is if the covariate effects are large or there the covariates are at extreme values. The 0.5 default cutpoint for binary prediction is much to high when events are rare. A method for determining the new ``optimal'' cutpoint involves calculating the receiver operating characteristic (ROC) curve from the linear predictor estimates and then identifying the point on the ROC curve which maximizes both true positive rate and the false positive rate. The new cutpoint is then back-calculated from the true positive and false positive rates. Class membership is then predicted given this new cutpoint. This process is done for every posterior draw, as each realization from the posterior predictive distribution has its own optimal cutpoint.
 
-%\section{Variance Partioning and Intraclass Correlation Coeficient}
-%
-%There are multiple levels and sources of variance in this model. Each of the grouping factors account for some amount of variance in the data. Normalizing that variance by the total variance from all sources, we can see the percent contribution to variance. 
-%
-%``level 1'' is the ``data level.'' in a regular linear regression problem, this would be the residual variance. that's not calculated in logistic regression, which poses a problem. how do we get this value? simulation?
-%
-%``level 2'' is the ``time level.'' the logistic regression coefficients \textbf{vary} through time, we are actually estimating that variance in \(\Sigma_{B}\) and \(\tau_{B}\). there is also the non-nested age-based varying-intercept. this source of variance is in \(\Sigma_{a}\) and \(\tau_{a}\).
-%
-%``level 3'' is the ``phyla level.'' the over-time averages of the regression coefficients further vary between phyla. that variance is part of \(\Sigma_{\alpha}\) and \(\tau_{\alpha}\). there is also the average age effect on extinction probability which is part of \(\Sigma_{\delta}\) and \(\tau_{\delta}\).
-%
-%that's a lot of variance. 
-%
-%we want to figure out what the total variance is, so we can determine the percent contribution for each level and segment of variance. the level 1 issue and the nonnestedness pose potential challenges.
-
-
-
 See our code repository LINK for full code details. Our code uses ``tidyverse'' tools such as dplyr CITATION, purr CITATION, and tidybayes CITATION, thus some familiarity with that package ecosystem is necessary to fully comprehend how we've processed our data and results.
 
 \end{document}
