@@ -11,7 +11,7 @@ library(parallel)
 library(arm)
 library(rstanarm)
 library(bayesplot)
-source('../R/helper03_stan_utility.R')
+source('../R/helper03_stan_utility.r')
 
 # misc
 library(pROC)

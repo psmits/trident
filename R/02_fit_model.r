@@ -8,7 +8,7 @@ library(parallel)
 library(arm)
 library(rstanarm)
 library(bayesplot)
-source('../R/helper03_stan_utility.R')
+source('../R/helper03_stan_utility.r')
 
 # misc
 source('../R/helper01_process_foo.r')
@@ -43,19 +43,19 @@ counti_trans <- prepare_analysis(counti)
 #              prior = priors)
 
 # past and vary
-form <- formula(event ~ temp + lag1_temp + maxgcd + lag1_maxgcd 
+form <- formula(event ~ temp + lag1_temp + maxgcd + diff_maxgcd 
                 + (1 | fact_relage/fossil_group)
-                + (1 + temp + lag1_temp + maxgcd + lag1_maxgcd | 
+                + (1 + temp + lag1_temp + maxgcd + diff_maxgcd | 
                    fact_mybin/fossil_group))
 
 # past but no vary
-form2 <- update(form, ~ . - (1 + temp + lag1_temp + maxgcd + lag1_maxgcd | 
+form2 <- update(form, ~ . - (1 + temp + lag1_temp + maxgcd + diff_maxgcd | 
                              fact_mybin/fossil_group) 
                       + (1 | fact_mybin/fossil_group))
 
 # no past but vary
-form3 <- update(form, ~ . - lag1_maxgcd - lag1_temp 
-                      - (1 + temp + lag1_temp + maxgcd + lag1_maxgcd | 
+form3 <- update(form, ~ . - diff_maxgcd - lag1_temp 
+                      - (1 + temp + lag1_temp + maxgcd + diff_maxgcd | 
                          fact_mybin/fossil_group) 
                       + (1 + temp + maxgcd | fact_mybin/fossil_group))
 
