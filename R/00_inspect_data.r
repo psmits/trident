@@ -16,6 +16,8 @@ library(ggridges)
 library(pROC)
 source('../R/helper01_process_foo.r')
 
+theme_set(theme_bw())
+
 # important constants
 options(mc.cores = parallel::detectCores())
 
@@ -26,25 +28,33 @@ counti <- read_rds('../data/counting.rds')
 
 # form of data that was analyzed
 counti_trans <- prepare_analysis(counti)
-
-counti_trans %>% dplyr::select(fullname, mybin, relage, maxgcd, diff_maxgcd)
+#counti_trans %>% dplyr::select(fullname, mybin, relage, maxgcd, diff_maxgcd)
 
 
 # occurrences through time, labeled if LAD
-octg <- counti %>%
-  ggplot(aes(x = mybin, fill = factor(event))) +
+octg <-  counti %>%
+  mutate(state = case_when(event == 0 ~ 'Standard',
+                           event == 1 ~ 'Last'),
+         fossil_group = case_when(fossil_group == 'D' ~ 'Dinoflagellates',
+                                  fossil_group == 'R' ~ 'Radiolaria',
+                                  fossil_group == 'F' ~ 'Foraminifera',
+                                  fossil_group == 'N' ~ 'Calc. nanno.')) %>%
+  ggplot(aes(x = mybin, fill = state)) +
   stat_bin() +
-  facet_grid(fossil_group ~ ., switch = 'y')
-ggsave(filename = '../doc/figure/occ_time_label.png',
+  facet_grid(fossil_group ~ ., switch = 'y') +
+  scale_fill_manual(name = 'Occurrence type',
+                    values = c('goldenrod', 'skyblue')) +
+  theme(legend.position = 'bottom') +
+  labs(title = 'Occurrences', x = 'Time (My before present)', y = 'Count')
+ggsave(filename = '../results/figure/occ_time_label.png',
        plot = octg, width = 4, height = 6)
-
 
 
 # relative "abundance" of microfossil_groups over time
 ocag <- counti %>%
   ggplot(aes(x = mybin, fill = fossil_group)) +
   geom_histogram(position = 'fill')
-ggsave(filename = '../doc/figure/abn_time_stack.png',
+ggsave(filename = '../results/figure/abn_time_stack.png',
        plot = ocag, width = 6, height = 6)
 
 # occurrences by relage
@@ -53,11 +63,23 @@ ocrg <- counti %>%
   dplyr::summarize(maxage = max(relage),
                    fossil_group = plurality(fossil_group),
                    died = any(event == 1)) %>%
-  ggplot(aes(x = maxage, fill = died)) +
+  mutate(state = case_when(died == 0 ~ 'Extant',
+                           died == 1 ~ 'Extinct'),
+         fossil_group = case_when(fossil_group == 'D' ~ 'Dinoflagellates',
+                                  fossil_group == 'R' ~ 'Radiolaria',
+                                  fossil_group == 'F' ~ 'Foraminifera',
+                                  fossil_group == 'N' ~ 'Calc. nanno.')) %>%
+  ggplot(aes(x = maxage, fill = state)) +
   stat_bin() +
-  facet_grid(fossil_group ~ ., switch = 'y')
-ggsave(filename = '../doc/figure/age_label.png',
+  facet_grid(fossil_group ~ ., switch = 'y') +
+  scale_fill_manual(name = 'State', 
+                    values = c('goldenrod', 'skyblue')) +
+  theme(legend.position = 'bottom') +
+  labs(title = 'Age distribution', x = 'Age (My)', y = 'Count')
+ggsave(filename = '../results/figure/age_label.png',
        plot = ocrg, width = 4, height = 6)
+
+
 
 # make a plot of a random selection of species
 set.seed(100)
@@ -70,7 +92,7 @@ srg <- counti %>%
   geom_line() +
   geom_point() +
   theme(legend.position = 'bottom')
-ggsave(filename = '../doc/figure/range_time.png',
+ggsave(filename = '../results/figure/range_time.png',
        plot = srg, width = 8, height = 6)
 
 # lots of little code here
@@ -104,10 +126,10 @@ ccg <- bind_rows(ft, lt, .id = 'type') %>%
   geom_line() +
   facet_grid(~ fossil_group) +
   labs(x = 'Time (My)', y = 'Cummulative count')
-ggsave(filename = '../doc/figure/fad_lad_count_wide.png',
+ggsave(filename = '../results/figure/fad_lad_count_wide.png',
        plot = ccg, width = 6, height = 3)
 ccg2 <- ccg + facet_grid(fossil_group ~ ., switch = 'y', scales = 'free_y')
-ggsave(filename = '../doc/figure/fad_lad_count_tall.png',
+ggsave(filename = '../results/figure/fad_lad_count_tall.png',
        plot = ccg2, width = 4, height = 6)
 
 
@@ -116,7 +138,7 @@ mgca <- read_tsv('../data/cramer/cramer_temp.txt')
 names(mgca) <- str_to_lower(names(mgca))
 names(mgca) <- str_remove_all(names(mgca), '[^[[:alnum:]]]')
 mgca <- mgca %>%
-  mutate(bin = break_my(age)) %>%
+  mutate(bin = break_my(age, by = 1)) %>%
   group_by(bin) %>%
   mutate(temp_bin = mean(temperature, na.rm = TRUE)) %>%
   ungroup
@@ -138,5 +160,5 @@ tpg <- mg %>%
   geom_line() +
   scale_colour_manual(values = c('goldenrod', 'skyblue')) +
   labs(x = 'Time (My)', y = 'Temperature diff. from modern (C)')
-ggsave(filename = '../doc/figure/cramer_temp.png',
+ggsave(filename = '../results/figure/cramer_temp.png',
        plot = tpg, width = 6, height = 3)

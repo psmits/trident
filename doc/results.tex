@@ -39,7 +39,7 @@ The distributions of optimal cut-off point estimates for each of the four models
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{figure/cut_plot}
+  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/cut_plot}
   \caption{Posterior estimates of the optimal cutpoints for each of the three models. The optimal cutpoint corresponds to the point which maximizes the true and false positive rates; this new cutpoint is used instead of 0.5 when estimating if an observation is the last observation of that species (i.e. goes extinct).}
   \label{fig:cut_point}
 \end{figure}
@@ -48,7 +48,7 @@ Comparison of the in-sample AUC estimates between the four models reveals simila
 % ROC model comparison
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{figure/roc_hist}
+  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/roc_hist}
   \caption{Posterior predictive AUC estimates for each of the four models being compared. These estimates are calculated from each of the models posterior predictive distribution compared to the empirical values. Models with a higher AUC values indicate better performance over models with lower AUC values. AUC is bounded between 0.5 and 1.}
   \label{fig:roc_hist}
 \end{figure}
@@ -57,7 +57,7 @@ Additional comparison of in-sample model performance at each of the time interva
 % ROC model comparison time series
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{figure/roc_ts}
+  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/roc_ts}
   \caption{Comparison between the posterior predictive AUC estimates for each of the time intervals for each of the four models. These estimates are reflections of each model's ability to fit the various time intervals. The red line corresponds to the median AUC value, while the envelopes correspond to multiple credible intervals. In all cases, higher values AUC indicate greater performance versus lower AUC values.}
   \label{fig:roc_ts}
 \end{figure}
@@ -70,7 +70,7 @@ The approximate out-of-sample predictive performance for our selected model, as 
 % ROC OOS estimate
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{figure/fold_auc}
+  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/fold_auc}
   \caption{Results from our five-fold cross-validation of the time-series. Each labeled distribution of AUC values correspond to expected out-of-sample performance as estimated from that fold. Each fold represents a section of data being predicted from a model fit to all data before the start of that fold. Given that there are only five folds, performance is measured from model predictions to 4 of the folds. Folds are labeled from oldest to youngest, with the oldest fold only being predicted by a single previous fold and the youngest fold being predicted by the four previous folds.}
   \label{fig:fold_auc}
 \end{figure}
@@ -79,7 +79,7 @@ The approximate out-of-sample predictive performance for our selected model, as 
 %% ROC OOS estimate time series
 %\begin{figure}[ht]
 %  \centering
-%  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{figure/fold_auc_time}
+%  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/fold_auc_time}
 %  \caption{Approximate out-of-sample AUC values calculated for each of the My intervals using five-fold cross-validation of the time series. The AUC of the individual My intervals within each fold is plotted to highlight the heterogentity in performance within and between folds. The AUC estimates from each fold are labeled and are numbered from oldest to youngest.}
 %  \label{fig:fold_auc_time}
 %\end{figure}
@@ -98,7 +98,7 @@ We estimated an overall positive effect of both global temperature and the lag o
 % effects, average
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{figure/effect_est}
+  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/effect_est}
   \caption{Posterior estimates for the top-level covariate effects. These effect estimates are effectively the weighted average of the estimates for each of the time intervals, for each of the phyla analyzed. Presented are posterior densities with the median estimate labeled along 80\% credible intervals at the bottom of the density.}
   \label{fig:effect_est}
 \end{figure}
@@ -109,7 +109,7 @@ The overall effect averages described above do not reflect the between time-inte
 % effects, time series
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{figure/eff_time_group}
+  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/eff_time_group}
   \caption{Effects of the four covariates as estimated for all time intervals and for each phyla. For each time series, the red line corresponds to the median estimate for each interval, while the envelopes represent various credible intervals as labeled.}
   \label{fig:effect_time_group}
 \end{figure}
@@ -125,7 +125,7 @@ Figure \ref{fig:hazard_baseline} is a graph of the average hazard associated wit
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{figure/hazard_baseline}
+  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/hazard_baseline}
   \caption{Average hazard estimates based on all all observed species ages in millions of years. Hazard in discrete-survival analysis is the probability of going extinct at a given age having survived up to that age. Overall hazard was calculated using the phylum average intercept and assuming all covariates equaled 0. The red line is the median hazard estimate along with 50\%, 80\%, and 95\% credible intervals.}
   \label{fig:hazard_baseline}
 \end{figure}
@@ -136,7 +136,7 @@ Optimal cutpoint between 0.1 and 0.11 percent. We estimate that the effect of ag
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{figure/hazard_bygroup}
+  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/hazard_bygroup}
   \caption{Hazard estimates for each of the phyla analyzed here. The red line is the median hazard estimate along with 50\%, 80\%, and 95\% credible intervals.}
   \label{fig:hazard_bygroup}
 \end{figure}
@@ -158,7 +158,7 @@ The variance in effects contributed by the phyla is approximately equal to the v
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{figure/variance_components}
+  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/variance_components}
   \caption{Contribution of multi-level components to unmodeled variance. Larger values indicate a greater contribution to overall variance. Variance components labeled as ``overall'' represent variance between grouping factors, while those labeled  ``within groups'' correspond to variance within grouping factors. If the overall component is greater than the within component, then the groupings do not structure the overall variance. If the within component is greater than the overall component, then the overall variance is structured by the groupings.}
   \label{fig:variance_components}
 \end{figure}
@@ -172,13 +172,13 @@ Looking at four randomly sampled species, we evaluated their probability of exti
 \begin{figure}[ht]
   \centering
   \begin{subfigure}{\textwidth}
-    \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{figure/relrisk_range}
+    \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/relrisk_range}
     \caption{A}
     \label{fig:relrisk_range}
   \end{subfigure}
 
   \begin{subfigure}{\textwidth}
-    \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{figure/relrisk_ext}
+    \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/relrisk_ext}
     \caption{B}
     \label{fig:relrisk_ext}
   \end{subfigure}

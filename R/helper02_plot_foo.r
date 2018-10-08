@@ -144,14 +144,7 @@ plot_risk_time <- function(data, model, nsp = 4) {
     facet_grid(~ fullname) + 
     labs(x = 'Age (My)', y = 'Geographic range (standardized)')
 
-  full_plot <- full_est %>%
-    gather(key, value, -fullname, -iterations, -relage, -row) %>%
-    ggplot(aes(x = relage, y = value)) +
-    geom_point(alpha = 0.01) + 
-    facet_grid(key ~ fullname, scales = 'free_y') +
-    labs(x = 'Age (My)', y = 'P(T = t | T >= t, x)')
-
-  out <- list(ext_plot, range_plot, full_plot)
+  out <- list(ext_plot, range_plot)
   out
 }
 
@@ -165,6 +158,7 @@ plot_risk_time <- function(data, model, nsp = 4) {
 #' @param model rstanarm object
 #' @return ggplot2 object
 plot_taxon_hazard <- function(model) {
+
   # the average
   haz_avg <- model %>%
     spread_draws(b[i, f], `(Intercept)`) %>%
@@ -223,6 +217,8 @@ plot_roc_series <- function(data, model_pp, model_key) {
   out <- list()
   for(kk in seq(length(model_pp))) {
     est <- list()
+
+    # gather the predicted vs observed event
     for(ii in seq(max(data$mybin))) {
       tw <- model_pp[[kk]][, data$fact_mybin == ii]
       ew <- data %>%
@@ -230,12 +226,16 @@ plot_roc_series <- function(data, model_pp, model_key) {
         dplyr::select(event)
       ew <- as.data.frame(ew)[, 1]
       oo <- list()
+   
+      # calculate roc for each posterior draw
       for(jj in seq(nrow(tw))) {
         # see here for the big source of exceptions...
         oo[[jj]] <- safe_roc(ew, tw[jj, ])
       }
+
       est[[ii]] <- oo
     }
+
     est <- set_names(est, seq(length(est)))
     out[[kk]] <- est
   }

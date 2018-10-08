@@ -67,7 +67,7 @@ rownames(compare_loo_tab) <- plyr::mapvalues(rownames(compare_loo_tab),
                                              sort(rownames(compare_loo_tab)),
                                              model_key)
 xtable::print.xtable(xtable::xtable(compare_loo_tab), 
-                     file = '../doc/loo_tab_draft.tex')
+                     file = '../results/loo_tab_draft.tex')
 
 wl <- map(disc_fit, ~ future::future(waic(.x)))
 wl <- map(wl, ~ future::value(.x))
@@ -76,7 +76,7 @@ rownames(compare_waic_tab) <- plyr::mapvalues(rownames(compare_waic_tab),
                                               sort(rownames(compare_waic_tab)),
                                               model_key)
 xtable::print.xtable(xtable::xtable(compare_waic_tab), 
-                     file = '../doc/waic_tab_draft.tex')
+                     file = '../results/waic_tab_draft.tex')
 # i should find a way to output these nicely
 
 
@@ -99,7 +99,7 @@ cut_plot <- list_cutpoint %>%
   dplyr::select(-draw) %>%
   ggplot(., aes(x = value, y = model)) + 
   geom_halfeyeh(.width = c(0.5, 0.8))
-ggsave(filename = '../doc/figure/cut_plot.png', plot = cut_plot,
+ggsave(filename = '../results/figure/cut_plot.png', plot = cut_plot,
        width = 6, height = 6)
 
 
@@ -118,10 +118,10 @@ roc_hist <- bind_rows(imap(pp_auc, ~ data.frame(model = .y, roc = .x))) %>%
          model = fct_relevel(model, !!model_key[2], after = 1)) %>%
   ggplot(aes(x = roc, y = model)) +
   geom_halfeyeh(.width = c(0.5, 0.8))
-ggsave(filename = '../doc/figure/roc_hist.png', plot = roc_hist,
+ggsave(filename = '../results/figure/roc_hist.png', plot = roc_hist,
        width = 6, height = 6)
 
 # roc as timeseries to see best and worst times
 roc_ts <- plot_roc_series(counti_trans, pp_est_new, model_key)
-ggsave(filename = '../doc/figure/roc_ts.png', plot = roc_ts,
+ggsave(filename = '../results/figure/roc_ts.png', plot = roc_ts,
        width = 8, height = 8)

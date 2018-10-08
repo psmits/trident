@@ -68,7 +68,7 @@ oos_auc <- bind_cols(pred_auc) %>%
   ggplot(aes(x = value, fill = key)) + 
   stat_density(alpha = 0.5) +
   labs(x = 'AUC', y = 'density')
-ggsave(filename = '../doc/figure/fold_auc.png', plot = oos_auc,
+ggsave(filename = '../results/figure/fold_auc.png', plot = oos_auc,
        width = 6, height = 6)
 
 # then do it for time
@@ -81,5 +81,5 @@ ta <- reshape2::melt(time_auc) %>%
          time = parse_double(L2)) %>%
   ggplot(aes(x = time, y = value, colour = fold)) +
   stat_interval(alpha = 0.5, .width = c(0.5, 0.8))
-ggsave(filename = '../doc/figure/fold_auc_time.png', plot = ta,
+ggsave(filename = '../results/figure/fold_auc_time.png', plot = ta,
        width = 8, height = 6)

@@ -100,11 +100,13 @@ prepare_analysis <- function(x, fg = NULL) {
 break_my <- function(x, by = NULL, number = NULL) {
   top <- ceiling(max(x))
   bot <- floor(min(x))
+  
   if(!is.null(by)) {
     unt <- seq(from = bot, to = top, by = by)
   } else if(!is.null(number)) {
     unt <- seq(from = bot, to = top, length.out = number + 1)
   }
+
   unt1 <- unt[-length(unt)]
   unt2 <- unt[-1]
   uu <- map2(unt1, unt2, ~ which(between(x, left = .x, right = .y)))

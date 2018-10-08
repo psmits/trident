@@ -91,7 +91,7 @@ effect_eye <- disc_best %>%
                lag1_temp) %>%
 ggplot(aes(y = .variable, x = .value)) +
 geom_halfeyeh(.width = c(0.8, 0.5))
-ggsave(filename = '../doc/figure/effect_est.png',
+ggsave(filename = '../results/figure/effect_est.png',
        plot = effect_eye, width = 4, height = 6)
 
 
@@ -121,7 +121,7 @@ vary_eye <- disc_best %>%
   ggplot(aes(y = term, x = .value)) +
   geom_halfeyeh(.width = c(0.8, 0.5)) +
   labs(x = 'Estimate', y = 'Variance component')
-ggsave(filename = '../doc/figure/variance_components.png',
+ggsave(filename = '../results/figure/variance_components.png',
        plot = vary_eye, width = 6, height = 6)
 
 
@@ -151,13 +151,13 @@ hazard_plot <- disc_best %>%
   stat_lineribbon() +
   scale_fill_brewer() +
   labs(x = 'Age (My)', y = 'P(T = t | T >= t, x)')
-ggsave(filename = '../doc/figure/hazard_baseline.png',
+ggsave(filename = '../results/figure/hazard_baseline.png',
        plot = hazard_plot, width = 6, height = 4)
 
 # can also then compare between taxonomic groups because i have that calculated
 # faceted baseline hazard plot by fossil_group
 db <- plot_taxon_hazard(disc_best)
-ggsave(filename = '../doc/figure/hazard_bygroup.png', plot = db,
+ggsave(filename = '../results/figure/hazard_bygroup.png', plot = db,
        width = 6, height = 8)
 
 
@@ -165,7 +165,7 @@ ggsave(filename = '../doc/figure/hazard_bygroup.png', plot = db,
 #   3 covariates
 #   4 taxonomic groups
 by_taxon <- plot_taxon_covariate_time(disc_best)
-ggsave(filename = '../doc/figure/eff_time_group.png', plot = by_taxon,
+ggsave(filename = '../results/figure/eff_time_group.png', plot = by_taxon,
        height = 6, width = 8)
 
 
@@ -173,9 +173,7 @@ ggsave(filename = '../doc/figure/eff_time_group.png', plot = by_taxon,
 # grab a random selection of species
 set.seed(100)
 risk_plots <- plot_risk_time(counti_trans, disc_best, nsp = 4)
-ggsave(filename = '../doc/figure/relrisk_ext.png', plot = risk_plots[[1]],
+ggsave(filename = '../results/figure/relrisk_ext.png', plot = risk_plots[[1]],
        height = 6, width = 8)
-ggsave(filename = '../doc/figure/relrisk_range.png', plot = risk_plots[[2]],
+ggsave(filename = '../results/figure/relrisk_range.png', plot = risk_plots[[2]],
        height = 6, width = 8)
-ggsave(filename = '../doc/figure/relrisk_full.png', plot = risk_plots[[3]],
-       height = 8, width = 8)
