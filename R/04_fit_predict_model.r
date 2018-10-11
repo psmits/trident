@@ -68,7 +68,7 @@ form4 <- update(form3, ~ . - (1 + temp + maxgcd | fact_mybin/fossil_group)
 # all of the forms
 forms <- list(form, form2, form3, form4)
 
-# partial evaluation to fill in priors and ancillary details
+# partial evaluation to fill in big details once
 part_glmer <- partial(stan_glmer, 
                       family = 'binomial',
                       prior_intercept = normal(-2, 10, autoscale = FALSE),
@@ -77,26 +77,40 @@ part_glmer <- partial(stan_glmer,
                       adapt_delta = 0.999999)
 
 # some models have differen't priors
-list_part_glmer <- 
-  list(partial(part_glmer, prior = normal(c(0, 0, -1, 0), 
-                                          rep(1, 4), 
-                                          autoscale = FALSE)),
-       partial(part_glmer, prior = normal(c(0, 0, -1, 0), 
-                                          rep(1, 4), 
-                                          autoscale = FALSE)),
-       partial(part_glmer, prior = normal(c(0, -1), 
-                                          rep(1, 2), 
-                                          autoscale = FALSE)),
-       partial(part_glmer, prior = normal(c(0, -1), 
-                                          rep(1, 2), 
-                                          autoscale = FALSE)))
+priors <- list(prior = normal(c(0, 0, -1, 0), 
+                              rep(1, 4), 
+                              autoscale = FALSE),
+               prior = normal(c(0, 0, -1, 0), 
+                              rep(1, 4), 
+                              autoscale = FALSE),
+               prior = normal(c(0, -1), 
+                              rep(1, 2), 
+                              autoscale = FALSE),
+               prior = normal(c(0, -1), 
+                              rep(1, 2), 
+                              autoscale = FALSE))
+# combine formula, prior, and model
+by_formula <- map2(forms, priors, ~ partial(part_glmer, 
+                                            formula = .x, 
+                                            prior = .y))
 
-# list of partially evaluated functions
-fit <- map(list_part_glmer, function(a) 
-           # 4 formulas,
-           # 4 datasets
-           map2(forms, counti_accum, ~ a(formula = .x, data = .y)))
+# by_formula list of (partial) functions
+# counti_accum list of folds
+to_fit <- cross2(by_formula, counti_accum)
 
+# all that is missing is the data
+fit <- map(to_fit, ~ .x[[1]](data = .x[[2]]))
+# everything is multiples of 4
+#   1:4 first form applied to each fold
+#   5:8 second form applied to each fold
+#   9:12 third form applied to each fold
+#   13:16 third form applied to each fold
+
+# help us remember this fact
+#   folds numbered from oldest (1) to youngest (4)
+nn <- c('mod1_', 'mod2_', 'mod3_', 'mod_4') %>%
+  map(., function(a) map(1:4, paste0(a, 'fold', .x)))
+fit <- set_names(fit, nn)
 
 
 write_rds(fit, path = '../data/training_fit.rds')
