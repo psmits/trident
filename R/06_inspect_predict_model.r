@@ -45,6 +45,10 @@ fit <- read_rds('../data/training_fit.rds')
 
 # given trained models for the rolled-out folds, estimate the next fold
 
+# ALL BELOW IS BROKEN
+
+
+
 # first: get the cutpoint from the training data set b/c class imbalance
 plin <- map2(fit, counti_accum, ~ posterior_linpred(object = .x, newdata = .y))
 cut_points <- map2(plin, counti_accum, ~ get_cutpoints(.x, .y$event)) %>%

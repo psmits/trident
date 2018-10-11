@@ -91,15 +91,11 @@ list_part_glmer <-
                                           rep(1, 2), 
                                           autoscale = FALSE)))
 
-
-# partially evaluate in data
-# the single dataset is 4 folds
-# i have four different models to fit to each fold
+# list of partially evaluated functions
 fit <- map(list_part_glmer, function(a) 
+           # 4 formulas,
+           # 4 datasets
            map2(forms, counti_accum, ~ a(formula = .x, data = .y)))
-
-
-
 
 
 
