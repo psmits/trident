@@ -3,6 +3,7 @@
 \usepackage{graphicx,microtype,parskip}
 \usepackage{caption,subcaption,multirow}
 \usepackage{attrib}
+\usepackage{array}
 
 \frenchspacing
 
@@ -20,8 +21,8 @@
 \setbeamercolor{block body alerted}{fg=black,bg=lightgray}
 
 
-\title{The changing functional composition of the North American species pool}
-\subtitle{ }
+\title{How predictable is extinction?} 
+\subtitle{Forecasting species survival at million-year timescales}
 \author{Peter D Smits, Seth Finnegan}
 \institute{Department of Integrative Biology, University of California -- Berkeley}
 \date{}
@@ -52,7 +53,7 @@
   
   \begin{center}
     \begin{LARGE}
-      Extinction is \underline{hard} to predict, \\but is extremely important to conservation.
+      Extinction is \alert{hard} to predict, \\but is extremely \alert{important} to conservation decisions.
     \end{LARGE}
   \end{center}
 
@@ -106,12 +107,12 @@
     \item Bayesian discrete-time survival model.
       \begin{itemize}
         \item<.-> Bernoulli response distribution.
-        \item<.-> Time/phylum varying intercepts and slopes.
-        \item<.-> Taxon age as non-nested varying intercept.
+        \item<.-> Time varying intercepts and slopes; varies by phylum.
+        \item<.-> Taxon age as non-nested varying intercept; varies by phylum.
       \end{itemize}
     \item \alert{Compare} models using WAIC/LOOIC.
     \item Explore model \alert{adequacy} using posterior predictive distribution.
-    \item Estimate \alert{predictive performance} using \(k\)-fold cross-validation.
+    \item Estimate out-of-sample \alert{predictive performance} using \(k\)-fold cross-validation.
   \end{itemize}
 
 \end{frame}
@@ -130,26 +131,40 @@
 
 
 \begin{frame}
+  \frametitle{In-sample predictive performance}
+  \includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{../results/figure/roc_hist}
+
+\end{frame}
+
+
+\begin{frame}
   \frametitle{Comparing our models}
 
-  % table of waic/looic values
-  %   se values come out second to demonstrate how all virtually identical
+  \begin{tabular}{ r c c c c }
+    Model & LOOIC & SE LOOIC & WAIC & SE WAIC \\ 
+    \hline
+    Past and vary & 12790.39 & \alert<2>{178.83} & 12786.06 & \alert<2>{178.77} \\ 
+    No past but vary & 12818.43 & \alert<2>{178.76} & 12815.40 & \alert<2>{178.71} \\ 
+    Past but no vary & 12850.45 & \alert<2>{179.42} & 12848.12 & \alert<2>{179.38} \\ 
+    No past or vary & 12850.87 & \alert<2>{179.46} & 12848.50 & \alert<2>{179.42} \\ 
+    \hline
+  \end{tabular}
 
 \end{frame}
 
 
 \begin{frame}
-  \frametitle{Cross-validation results}
-
-  % figure comparing in-sample AUC to out-of-sample AUC
-  %   they are similar
+  \frametitle{Cross-validation results, full dataset}
+      
+  \includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{../results/figure/fold_auc}
 
 \end{frame}
 
-
 \begin{frame}
-  \frametitle{Tracking extinction risk over time}
+  \frametitle{Cross-validation results, by time}
   
+  \includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{../results/figure/fold_ts}
+
 \end{frame}
 
 
@@ -166,7 +181,9 @@
 
 
 \begin{frame}
-  \frametitle{Effects of age on extinction risk}
+  \frametitle{Effects of age on extinction risk, by phylum}
+  
+  \includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{../results/figure/hazard_bygroup}
 
 \end{frame}
 
@@ -174,12 +191,23 @@
 \begin{frame}
   \frametitle{Summary}
 
+  \begin{itemize}
+    \item extinction is very random and our estimates aren't near perfect
+    \item historical covariates and varying effects seem important
+    \item increasing model complexity has only 
+  \end{itemize}
+
 \end{frame}
 
 
 \begin{frame}
   \frametitle{Conclusions}
 
+  \begin{itemize}
+    \item consider non-linear effects of historical covariates -- thresholds
+    \item at MILLION YEAR timescales past kind of matters, but very marginally
+    \item extinction is hard to predict at million year timescales -- rarity
+  \end{itemize}
 \end{frame}
 
 
