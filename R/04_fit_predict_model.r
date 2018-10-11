@@ -44,21 +44,63 @@ counti_fold <- rev(split(counti_trans, counti_trans$fold))
 counti_accum <- accumulate(counti_fold, bind_rows) 
 counti_accum <- counti_accum[-1]
 
-
+# past and vary
 form <- formula(event ~ temp + lag1_temp + maxgcd + diff_maxgcd 
                 + (1 | fact_relage/fossil_group)
                 + (1 + temp + lag1_temp + maxgcd + diff_maxgcd | 
                    fact_mybin/fossil_group))
 
-glmer_part <- 
-  partial(stan_glmer, 
-          prior = normal(c(0, 0, -1, 0), rep(1, 4), autoscale = FALSE),
-          prior_intercept = normal(0, 10, autoscale = FALSE),
-          prior_aux = cauchy(0, 3, autoscale = FALSE))
-fit <- map(counti_accum, ~ glmer_part(form, 
-                                      family = 'binomial', 
-                                      data = .x,
-                                      adapt_delta = 0.999999, 
-                                      thin = 4))
+# past but no vary
+form2 <- update(form, ~ . - (1 + temp + lag1_temp + maxgcd + diff_maxgcd | 
+                             fact_mybin/fossil_group) 
+                      + (1 | fact_mybin/fossil_group))
+
+# no past but vary
+form3 <- update(form, ~ . - diff_maxgcd - lag1_temp 
+                      - (1 + temp + lag1_temp + maxgcd + diff_maxgcd | 
+                         fact_mybin/fossil_group) 
+                      + (1 + temp + maxgcd | fact_mybin/fossil_group))
+
+# no past or vary
+form4 <- update(form3, ~ . - (1 + temp + maxgcd | fact_mybin/fossil_group) 
+                       + (1 | fact_mybin/fossil_group))
+
+# all of the forms
+forms <- list(form, form2, form3, form4)
+
+# partial evaluation to fill in priors and ancillary details
+part_glmer <- partial(stan_glmer, 
+                      family = 'binomial',
+                      prior_intercept = normal(-2, 10, autoscale = FALSE),
+                      prior_aux = cauchy(0, 3, autoscale = FALSE),
+                      thin = 4, 
+                      adapt_delta = 0.999999)
+
+# some models have differen't priors
+list_part_glmer <- 
+  list(partial(part_glmer, prior = normal(c(0, 0, -1, 0), 
+                                          rep(1, 4), 
+                                          autoscale = FALSE)),
+       partial(part_glmer, prior = normal(c(0, 0, -1, 0), 
+                                          rep(1, 4), 
+                                          autoscale = FALSE)),
+       partial(part_glmer, prior = normal(c(0, -1), 
+                                          rep(1, 2), 
+                                          autoscale = FALSE)),
+       partial(part_glmer, prior = normal(c(0, -1), 
+                                          rep(1, 2), 
+                                          autoscale = FALSE)))
+
+
+# partially evaluate in data
+# the single dataset is 4 folds
+# i have four different models to fit to each fold
+fit <- map(list_part_glmer, function(a) 
+           map2(forms, counti_accum, ~ a(formula = .x, data = .y)))
+
+
+
+
+
 
 write_rds(fit, path = '../data/training_fit.rds')
