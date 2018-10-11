@@ -32,7 +32,8 @@ counti_trans <- prepare_analysis(counti)
 
 
 # occurrences through time, labeled if LAD
-octg <-  counti %>%
+octg <-  
+  counti %>%
   mutate(state = case_when(event == 0 ~ 'Standard',
                            event == 1 ~ 'Last'),
          fossil_group = case_when(fossil_group == 'D' ~ 'Dinoflagellates',
@@ -43,7 +44,7 @@ octg <-  counti %>%
   stat_bin() +
   facet_grid(fossil_group ~ ., switch = 'y') +
   scale_fill_manual(name = 'Occurrence type',
-                    values = c('goldenrod', 'skyblue')) +
+                    values = c('skyblue', 'goldenrod')) +
   theme(legend.position = 'bottom') +
   labs(title = 'Occurrences', x = 'Time (My before present)', y = 'Count')
 ggsave(filename = '../results/figure/occ_time_label.png',
@@ -73,7 +74,7 @@ ocrg <- counti %>%
   stat_bin() +
   facet_grid(fossil_group ~ ., switch = 'y') +
   scale_fill_manual(name = 'State', 
-                    values = c('goldenrod', 'skyblue')) +
+                    values = c('skyblue', 'goldenrod')) +
   theme(legend.position = 'bottom') +
   labs(title = 'Age distribution', x = 'Age (My)', y = 'Count')
 ggsave(filename = '../results/figure/age_label.png',

@@ -98,6 +98,7 @@ prepare_analysis <- function(x, fg = NULL) {
 #' @param by bin width
 #' @return vector of bin memberships
 break_my <- function(x, by = NULL, number = NULL) {
+
   top <- ceiling(max(x))
   bot <- floor(min(x))
   

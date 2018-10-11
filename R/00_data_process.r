@@ -62,6 +62,7 @@ nano <- nano %>%
   dplyr::mutate(fullname = str_c(genus, '_', species)) %>% 
   arrange(fullname)
 
+
 # assign everything a geographic cell using paleocoordinates
 eq <- CRS("+proj=cea +lat_0=0 +lon_0=0 +lat_ts=30 +a=6371228.0 +units=m")
 globe.map <- readOGR('../data/ne_10m_coastline.shp')  # from natural earth
@@ -125,7 +126,7 @@ sprange <- nano %>%
 mgca <- read_tsv('../data/cramer/cramer_temp.txt')
 mgca <- mgca %>% clean_names
 mgca <- mgca %>%
-  mutate(mybin = break_my(age)) %>%
+  mutate(mybin = break_my(age, by = 1)) %>%
   group_by(mybin) %>%
   summarize(temp = mean(temperature, na.rm = TRUE),
             temp_sd = sd(temperature, na.rm = TRUE)) %>%
@@ -205,6 +206,9 @@ counti$cc.rescale <- plyr::mapvalues(counti$cc,
 counti$cc.rescale <- with(counti, {
                             factor(cc.rescale, 
                                    levels = sort(unique(as.numeric(cc.rescale))))})
+
+
+counti
 
 # write to file
 write_rds(survi, path = '../data/survival.rds')
