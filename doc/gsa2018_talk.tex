@@ -50,7 +50,7 @@
 
 \begin{frame}
   \frametitle{What are we predicting?}
-  
+
   \begin{center}
     \begin{LARGE}
       Extinction is \alert{hard} to predict, but is \alert{important} to conservation decisions.
@@ -64,21 +64,9 @@
   \frametitle{Predicting extinction}
 
   \begin{itemize}[<+->]
-    \item A taxon with a \alert{greater than average} global geographic range is likely to survive for longer than a taxon with \alert{less than average} global geographic range.
+    \item A taxon with a \alert{greater than average} global geographic range is likely to \alert{survive for longer} than a taxon with \alert{less than average} global geographic range.
     \item A taxon's global geographic range can change over time.
     \item What happens to extinction risk as a taxon changes geographic range? How is extinction risk impacted if that taxon's global geographic range has recently \alert{increased} or \alert{decreased}?
-  \end{itemize}
-
-\end{frame}
-
-
-\begin{frame}
-  \frametitle{Encoding the past}
-
-  \begin{itemize}
-    \item Change in geographic range between current observation and previous observation.
-    \item Average global temperature at time of previous observation (Mg/Ca isotope).
-    \item Age in millions of years at time of observation.
   \end{itemize}
 
 \end{frame}
@@ -89,10 +77,10 @@
 
   \begin{columns}
     \begin{column}{0.5\textwidth}
-      \includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{../results/figure/occ_time_label}
+      \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio=true]{../results/figure/occ_time_label}
     \end{column}
     \begin{column}{0.5\textwidth}
-      \includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{../results/figure/age_label}
+      \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio=true]{../results/figure/age_label}
     \end{column}
   \end{columns}
 
@@ -102,19 +90,52 @@
 \begin{frame}
   \frametitle{How we're analyzing the data}
 
-  \begin{itemize}[<+->]
-    \item Predictors: geographic range, change in geographic range, global temperature, lag of global temperature.
-    \item Bayesian discrete-time survival model.
+  \begin{itemize}%[<+->]
+    \item Encoding the past
       \begin{itemize}
-        \item<.-> Bernoulli response distribution.
-        \item<.-> Time varying intercepts and slopes; varies by phylum.
-        \item<.-> Taxon age as non-nested varying intercept; varies by phylum.
+        \item Change in geographic range between current observation and previous observation.
+        \item Average global temperature at time of previous observation (Mg/Ca isotope).
+        \item Age in millions of years at time of observation.
       \end{itemize}
-    \item \alert{Compare} models using WAIC/LOOIC.
-    \item Explore model \alert{adequacy} using posterior predictive distribution.
-    \item Estimate out-of-sample \alert{predictive performance} using \(k\)-fold cross-validation.
+    %\item \alert{Compare} models using WAIC/LOOIC.
+    \item Explore model adequacy using posterior predictive distribution.
+    \item Estimate out-of-sample predictive performance using \(k\)-fold cross-validation.
   \end{itemize}
 
+\end{frame}
+
+
+% explain ROC
+% TYPES of errors
+\begin{frame}
+  \frametitle{Measuring performance: Reciever Operating Characteristic}
+
+  \begin{center}
+    \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio=true]{figure/wiki_ROC_space-2}
+  \end{center}
+  
+  \attrib{\footnotesize{wikimedia}}
+
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Measuring performance: Reciever Operating Characteristic}
+  
+  \begin{center}
+    \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio=true]{figure/wiki_709px-ROC_curves}
+  \end{center}
+  
+  \attrib{\footnotesize{wikimedia}}
+  
+  % want to balance two rates: 
+  %   true-positive rate -- predicting extinct when actual is extinct
+  %   false-positive rate -- predicting extinct when actual is extant
+
+  % curve describes these metrics at various thresholds
+
+  % AUC is integral of ROC -- 0.5 is random classification, 1 is perfect classification
+  
 \end{frame}
 
 
@@ -124,103 +145,52 @@
 \end{frame}
 
 
-\begin{frame}
-  \frametitle{A statistical model for predicting extinction}
-
-  \begin{equation}
-  \begin{aligned}
-    t_{i} &\sim \text{Bernoulli}(\Theta) \\
-    \Theta_{i} &= \text{logit}^{-1} (X_{i} B_{w[i], p[i]} + A_{d[i], p[i]}) \\
-    B_{w, p} &\sim MVN(\alpha_{p}, \Sigma_{B}) \\
-    \alpha_{p} &\sim MVN(\mu, \Sigma_{\alpha}) \\
-    % double check this\dots is A MVN dist?
-    A_{w, p} &\sim MVN(\delta_{p}, \Sigma_{A}) \\
-    \delta_{p} &\sim \mathrm{N}(0, \sigma_{\delta}) \\
-    \mu_{d} &\sim 
-      \begin{cases}
-        N(0, 10) & \text{if } d = 1 \\
-        N(-1, 3) & \text{if } d = 2 \\
-        N(0, 3) & \text{if } d > 2 \\
-      \end{cases}
-    \Sigma_{B} &= diag(\tau_{B}) \Omega_{B} diag(\tau_{B}) \\
-    \Sigma_{\alpha} &= diag(\tau_{\alpha}) \Omega_{\alpha} diag(\tau_{\alpha}) \\
-    \Sigma_{A} &= diag(\tau_{A}) \Omega_{A} diag(\tau_{A}) \\
-    \tau_{B} &\sim C^{+}(5) \\
-    \tau_{\alpha} &\sim C^{+}(5) \\
-    \tau_{A} &\sim C^{+}(5) \\
-    \Omega_{B} &\sim LKJ(1) \\
-    \Omega_{\alpha} &\sim LKJ(1) \\
-    \Omega_{A} &\sim LKJ(1) \\
-  \end{aligned}
-\end{equation}
-
-\end{frame}
-
-
+% demonstrate as ROC curve
 \begin{frame}
   \frametitle{In-sample predictive performance, full dataset}
- 
-  \includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{../results/figure/roc_hist}
+
+  \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio=true]{../results/figure/roc_hist}
 
 \end{frame}
 
 
 \begin{frame}
   \frametitle{In-sample predictive performance, by time}
-  
-  \includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{../results/figure/roc_ts}
+
+  \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio=true]{../results/figure/roc_ts}
 
 \end{frame}
 
 
-
-\begin{frame}
-  \frametitle{Comparing our models}
-
-  \begin{tabular}{ r c c c c }
-    Model & LOOIC & SE LOOIC & WAIC & SE WAIC \\ 
-    \hline
-    Past and vary & 12790.39 & \alert<2>{178.83} & 12786.06 & \alert<2>{178.77} \\ 
-    No past but vary & 12818.43 & \alert<2>{178.76} & 12815.40 & \alert<2>{178.71} \\ 
-    Past but no vary & 12850.45 & \alert<2>{179.42} & 12848.12 & \alert<2>{179.38} \\ 
-    No past or vary & 12850.87 & \alert<2>{179.46} & 12848.50 & \alert<2>{179.42} \\ 
-    \hline
-  \end{tabular}
-
-\end{frame}
+%% figure out way to present this graphically
+%\begin{frame}
+%  \frametitle{Comparing our models}
+%
+%  \begin{tabular}{ r c c c c }
+%    Model & LOOIC & SE LOOIC & WAIC & SE WAIC \\ 
+%    \hline
+%    Past and vary & 12790.39 & \alert<2>{178.83} & 12786.06 & \alert<2>{178.77} \\ 
+%    No past but vary & 12818.43 & \alert<2>{178.76} & 12815.40 & \alert<2>{178.71} \\ 
+%    Past but no vary & 12850.45 & \alert<2>{179.42} & 12848.12 & \alert<2>{179.38} \\ 
+%    No past or vary & 12850.87 & \alert<2>{179.46} & 12848.50 & \alert<2>{179.42} \\ 
+%    \hline
+%  \end{tabular}
+%
+%\end{frame}
 
 
 \begin{frame}
   \frametitle{Cross-validation results, full dataset}
-      
-  \includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{../results/figure/fold_auc}
+
+  \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio=true]{../results/figure/fold_auc}
 
 \end{frame}
+
 
 \begin{frame}
   \frametitle{Cross-validation results, by time}
-  
-  \includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{../results/figure/fold_auc_time}
 
-\end{frame}
-
-
-\begin{frame}
-  \frametitle{Overall covariate effects}  
-
-\end{frame}
-
-
-\begin{frame}
-  \frametitle{Covariate effects over time}  
-
-\end{frame}
-
-
-\begin{frame}
-  \frametitle{Effects of age on extinction risk, by phylum}
-  
-  \includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{../results/figure/hazard_bygroup}
+  \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio=true]{../results/figure/fold_auc_time}
 
 \end{frame}
 
@@ -228,23 +198,12 @@
 \begin{frame}
   \frametitle{Summary}
 
-  \begin{itemize}
-    \item extinction is very random and our estimates aren't near perfect
-    \item historical covariates and varying effects seem important
-    \item increasing model complexity has only 
-  \end{itemize}
-
 \end{frame}
 
 
 \begin{frame}
   \frametitle{Conclusions}
 
-  \begin{itemize}
-    \item consider non-linear effects of historical covariates -- thresholds
-    \item at MILLION YEAR timescales past kind of matters, but very marginally
-    \item extinction is hard to predict at million year timescales -- rarity
-  \end{itemize}
 \end{frame}
 
 
@@ -253,5 +212,49 @@
 
 \end{frame}
 
+
+
+\appendix
+
+% move to back
+\begin{frame}
+  \frametitle{A statistical model for predicting extinction}
+
+  \begin{equation}
+    \begin{aligned}
+      t_{i} &\sim \text{Bernoulli}(\Theta) \\
+      \Theta_{i} &= \text{logit}^{-1} (X_{i} B_{w[i], p[i]} + A_{d[i], p[i]}) \\
+      B_{w, p} &\sim MVN(\alpha_{p}, \Sigma_{B}) \\
+      \alpha_{p} &\sim MVN(\mu, \Sigma_{\alpha}) \\
+    % double check this\dots is A MVN dist?
+      A_{w, p} &\sim MVN(\delta_{p}, \Sigma_{A}) \\
+      \delta_{p} &\sim \mathrm{N}(0, \sigma_{\delta}) \\
+      \mu_{d} &\sim 
+      \begin{cases}
+        N(0, 10) & \text{if } d = 1 \\
+        N(-1, 3) & \text{if } d = 2 \\
+        N(0, 3) & \text{if } d > 2 \\
+      \end{cases}
+      \Sigma_{B} &= diag(\tau_{B}) \Omega_{B} diag(\tau_{B}) \\
+      \Sigma_{\alpha} &= diag(\tau_{\alpha}) \Omega_{\alpha} diag(\tau_{\alpha}) \\
+      \Sigma_{A} &= diag(\tau_{A}) \Omega_{A} diag(\tau_{A}) \\
+      \tau_{B} &\sim C^{+}(5) \\
+      \tau_{\alpha} &\sim C^{+}(5) \\
+      \tau_{A} &\sim C^{+}(5) \\
+      \Omega_{B} &\sim LKJ(1) \\
+      \Omega_{\alpha} &\sim LKJ(1) \\
+      \Omega_{A} &\sim LKJ(1) \\
+    \end{aligned}
+  \end{equation}
+
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Effects of age on extinction risk, by phylum}
+
+  \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio=true]{../results/figure/hazard_bygroup}
+
+\end{frame}
 
 \end{document}
