@@ -111,7 +111,48 @@ pp_est_new <- cut_newpoint(pp_prob, list_cutpoint)
 # these new, rescaled 0-1 results are then fed through the ROC/AUC machine.
 partial_post_roc <- purrr::partial(post_roc, y = counti_trans)
 pp_roc <- map(pp_est_new, partial_post_roc)
+
+# extract the parts of the ROC plot
+roc_df <- map(pp_roc, function(x) 
+           imap(x, ~ tibble(sim = .y, 
+                            fpr = 1 - .x$specificities,
+                            tpr = .x$sensitivities))) %>%
+  map(., ~ reduce(.x, rbind)) %>%
+  imap(., ~ cbind(mod = .y, .x)) %>%
+  reduce(., rbind) %>%
+  as.tibble(.) %>%
+  mutate(model = case_when(mod == 1 ~ model_key[1],
+                           mod == 2 ~ model_key[2],
+                           mod == 3 ~ model_key[3],
+                           mod == 4 ~ model_key[4]))
+
+roc_df_back <- roc_df                  # extra for background
+
+# plot the curves from just the binaries
+cur <- roc_df %>%
+  ggplot(aes(x = fpr, 
+             y = tpr, 
+             group = sim)) +
+#  geom_line(data = roc_df_back,
+#            colour = 'grey10') +
+  geom_line(data = roc_df,
+            mapping = aes(colour = model),
+            alpha = 0.01) +
+  facet_wrap(model ~ ., nrow = 2) +
+  coord_equal(ratio = 1) +
+  labs(x = 'False Positive Rate',
+       y = 'True Positive Rate') +
+  theme(legend.position = 'none')
+ggsave(filename = '../results/figure/roc_curve.png', plot = cur,
+       width = 5, height = 8)
+
+
+# get AUC values for the above
 pp_auc <- map(pp_roc, function(y) map_dbl(y, ~ auc(.x)))
+
+
+
+
 
 roc_hist <- bind_rows(imap(pp_auc, ~ data.frame(model = .y, roc = .x))) %>%
   mutate(model = recode(model, !!!model_key),

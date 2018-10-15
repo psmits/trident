@@ -74,7 +74,7 @@ part_glmer <- partial(stan_glmer,
                       prior_intercept = normal(-2, 10, autoscale = FALSE),
                       prior_aux = cauchy(0, 3, autoscale = FALSE),
                       thin = 4, 
-                      adapt_delta = 0.999999)
+                      adapt_delta = 0.99999999)
 
 # some models have differen't priors
 priors <- list(prior = normal(c(0, 0, -1, 0), 
@@ -89,6 +89,7 @@ priors <- list(prior = normal(c(0, 0, -1, 0),
                prior = normal(c(0, -1), 
                               rep(1, 2), 
                               autoscale = FALSE))
+
 # combine formula, prior, and model
 by_formula <- map2(forms, priors, ~ partial(part_glmer, 
                                             formula = .x, 
@@ -109,8 +110,8 @@ fit <- map(to_fit, ~ .x[[1]](data = .x[[2]]))
 # help us remember this fact
 #   folds numbered from oldest (1) to youngest (4)
 nn <- c('mod1_', 'mod2_', 'mod3_', 'mod_4') %>%
-  map(., function(a) map(1:4, paste0(a, 'fold', .x)))
-fit <- set_names(fit, nn)
+  map(., function(a) map(1:4, ~ paste0(a, 'fold', .x)))
+fit <- set_names(fit, flatten(nn))
 
 
 write_rds(fit, path = '../data/training_fit.rds')
