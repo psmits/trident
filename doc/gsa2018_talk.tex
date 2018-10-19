@@ -170,23 +170,6 @@
 \end{frame}
 
 
-%% figure out way to present this graphically
-%\begin{frame}
-%  \frametitle{Comparing our models}
-%
-%  \begin{tabular}{ r c c c c }
-%    Model & LOOIC & SE LOOIC & WAIC & SE WAIC \\ 
-%    \hline
-%    Past and vary & 12790.39 & \alert<2>{178.83} & 12786.06 & \alert<2>{178.77} \\ 
-%    No past but vary & 12818.43 & \alert<2>{178.76} & 12815.40 & \alert<2>{178.71} \\ 
-%    Past but no vary & 12850.45 & \alert<2>{179.42} & 12848.12 & \alert<2>{179.38} \\ 
-%    No past or vary & 12850.87 & \alert<2>{179.46} & 12848.50 & \alert<2>{179.42} \\ 
-%    \hline
-%  \end{tabular}
-%
-%\end{frame}
-
-
 \begin{frame}
   \frametitle{Cross-validation results, full dataset}
 
@@ -204,15 +187,26 @@
 
 
 \begin{frame}
-  \frametitle{Summary}
+  \frametitle{Next steps}
+
+  \begin{itemize}
+    \item Consider non-linear/threshold effects of covariates (e.g. GAMM, etc.).
+    \item What are the possible effects of other, unconsidered covariates (e.g. foram ecology)?
+  \end{itemize}
 
 \end{frame}
 
 
 \begin{frame}
-  \frametitle{Conclusions}
+  \frametitle{Summary}
+
+  \begin{itemize}
+    \item \alert{The past matters.} Our best supported model includes our historical covariates and allows all effects to vary over time.
+    \item 
+  \end{itemize}
 
 \end{frame}
+
 
 
 \begin{frame}
