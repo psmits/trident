@@ -70,10 +70,10 @@ forms <- list(form, form2, form3, form4)
 part_glmer <- partial(stan_glmer, 
                       family = 'binomial',
                       data = counti_trans,
-                      prior_intercept = normal(-2, 10, autoscale = FALSE),
-                      prior_aux = cauchy(0, 3, autoscale = FALSE),
+                      prior_intercept = normal(-2, 5, autoscale = FALSE),
+                      prior_aux = cauchy(0, 1, autoscale = FALSE),
                       thin = 4, 
-                      adapt_delta = 0.99999999)
+                      adapt_delta = 0.999999)
 
 # some models have differen't priors
 list_part_glmer <- 

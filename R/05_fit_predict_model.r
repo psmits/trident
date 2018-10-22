@@ -71,10 +71,10 @@ forms <- list(form, form2, form3, form4)
 # partial evaluation to fill in big details once
 part_glmer <- partial(stan_glmer, 
                       family = 'binomial',
-                      prior_intercept = normal(-2, 10, autoscale = FALSE),
-                      prior_aux = cauchy(0, 3, autoscale = FALSE),
+                      prior_intercept = normal(-2, 5, autoscale = FALSE),
+                      prior_aux = cauchy(0, 1, autoscale = FALSE),
                       thin = 4, 
-                      adapt_delta = 0.99999999)
+                      adapt_delta = 0.999999)
 
 # some models have differen't priors
 priors <- list(prior = normal(c(0, 0, -1, 0), 
@@ -109,7 +109,7 @@ fit <- map(to_fit, ~ .x[[1]](data = .x[[2]]))
 
 # help us remember this fact
 #   folds numbered from oldest (1) to youngest (4)
-nn <- c('mod1_', 'mod2_', 'mod3_', 'mod_4') %>%
+nn <- c('mod1_', 'mod2_', 'mod3_', 'mod4_') %>%
   map(., function(a) map(1:4, ~ paste0(a, 'fold', .x)))
 fit <- set_names(fit, flatten(nn))
 
