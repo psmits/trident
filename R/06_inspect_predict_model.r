@@ -16,6 +16,7 @@ source('../R/helper03_stan_utility.r')
 # misc
 library(pROC)
 library(ROCR)
+library(ggridges)
 source('../R/helper01_process_foo.r')
 source('../R/helper02_plot_foo.r')
 
@@ -41,58 +42,71 @@ counti_accum <- counti_accum[-1]
 
 
 # get in fits and posterior work
+model_key <- c('Past and vary', 
+               'Past but no vary',
+               'No past but vary', 
+               'No past or vary')
 fit <- read_rds('../data/training_fit.rds')
 
 # given trained models for the rolled-out folds, estimate the next fold
 
 # 16 models, 1:4 as formula for each fold etc
-counti_match <- rep(counti_accum, 4)
+counti_accum_match <- rep(counti_accum, 4)
 
 # get estimated linear predictor for each 
-plin <- map2(fit, counti_match, ~ posterior_linpred(object = .x, newdata = .y))
-
-# probability of going extinct
-cut_prob <- map2(plin, counti_match, 
-                 ~ plyr::alply(.x, 1, function(x) prediction(x, .y$event)))
+plin <- map2(fit, counti_match, 
+             ~ posterior_linpred(object = .x, 
+                                 newdata = .y, 
+                                 draws = 1000))
 
 # identify better cutpoints for 0 vs 1
-cut_points <- map2(plin, counti_accum, ~ get_cutpoints(.x, .y$event)) %>%
+cut_points <- map2(plin, counti_accum_match, ~ get_cutpoints(.x, .y$event)) %>%
   map(., ~ .x[[1]][3])
 
+
+counti_fold_match <- rep(counti_fold[-1], 4)
 # given new cutpoints, try predicting the test data
-pred <- map2(fit, counti_fold[-1], 
-             ~ posterior_linpred(object = .x, newdata = .y)) %>%
+pred <- map2(fit, counti_fold_match,
+             ~ posterior_linpred(object = .x, 
+                                 newdata = .y,
+                                 draws = 1000)) %>%
   cut_newpoint(., cut_points)
 
-# everything below here is broken
 
 
 
 # third: calculate ROC/AUC for the predictions of test data
 # to determine how good our out of sample predictions are
-pred_auc <- map2(pred, counti_fold[-1], post_roc) %>%
-  map(., function(x) map_dbl(x, ~ auc(.x)))
+pred_auc <- map2(pred, counti_fold_match, post_roc) %>%
+  map(., function(x) map_dbl(x, ~ auc(.x))) %>%
+  set_names(., names(fit))
 
 # now to make a plot about out-of-sample predictive accuracy
 # because 1000s of numbers are hard to visualize
+
 oos_auc <- bind_cols(pred_auc) %>% 
   gather() %>%
-  mutate(key = str_extract(key, '[0-9]')) %>%
-  ggplot(aes(x = value, fill = key)) + 
-  stat_density(alpha = 0.5) +
+  separate(key, into = c('mod', 'fold'), sep = '\\_',
+           mod = plyr::mapvalues(mod, unique(mod), model_key)) %>%
+  ggplot(aes(x = value, y = mod)) +
+  geom_density_ridges(rel_min_height = 0.01) +
   labs(x = 'AUC', y = 'density')
 ggsave(filename = '../results/figure/fold_auc.png', plot = oos_auc,
        width = 6, height = 6)
 
+
+# below is untested
 # then do it for time
-time_auc <- map2(pred, counti_fold[-1], get_auc_time)
+time_auc <- map2(pred, counti_fold_match, get_auc_time) %>%
+  set_names(., names(fit))
 
 # could this be done with enframe?
 ta <- reshape2::melt(time_auc) %>% 
   as.tibble %>%
-  mutate(fold = factor(L1),
-         time = parse_double(L2)) %>%
-  ggplot(aes(x = time, y = value, colour = fold)) +
-  stat_interval(alpha = 0.5, .width = c(0.5, 0.8))
+  mutate(time = parse_double(L2)) %>%
+  separate(L1, into = c('mod', 'fold'), sep = '\\_') %>%
+  ggplot(aes(x = time, y = value)) +
+  stat_interval(alpha = 0.5, .width = c(0.5, 0.8)) +
+  facet_grid(mod ~ .)
 ggsave(filename = '../results/figure/fold_auc_time.png', plot = ta,
        width = 8, height = 6)
