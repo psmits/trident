@@ -45,19 +45,28 @@ fit <- read_rds('../data/training_fit.rds')
 
 # given trained models for the rolled-out folds, estimate the next fold
 
-# ALL BELOW IS BROKEN
+# 16 models, 1:4 as formula for each fold etc
+counti_match <- rep(counti_accum, 4)
 
+# get estimated linear predictor for each 
+plin <- map2(fit, counti_match, ~ posterior_linpred(object = .x, newdata = .y))
 
+# probability of going extinct
+cut_prob <- map2(plin, counti_match, 
+                 ~ plyr::alply(.x, 1, function(x) prediction(x, .y$event)))
 
-# first: get the cutpoint from the training data set b/c class imbalance
-plin <- map2(fit, counti_accum, ~ posterior_linpred(object = .x, newdata = .y))
+# identify better cutpoints for 0 vs 1
 cut_points <- map2(plin, counti_accum, ~ get_cutpoints(.x, .y$event)) %>%
   map(., ~ .x[[1]][3])
 
-# second: given new cutpoints, predict test data class
+# given new cutpoints, try predicting the test data
 pred <- map2(fit, counti_fold[-1], 
              ~ posterior_linpred(object = .x, newdata = .y)) %>%
   cut_newpoint(., cut_points)
+
+# everything below here is broken
+
+
 
 # third: calculate ROC/AUC for the predictions of test data
 # to determine how good our out of sample predictions are
