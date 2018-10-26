@@ -90,9 +90,12 @@ xtable::print.xtable(xtable::xtable(compare_waic_tab),
 
 
 # posterior probability of observation surviving
-pe <- map(disc_fit, ~ future::future(posterior_predict(.x)))
+pe <- map(disc_fit, ~ future::future(posterior_predict(.x, 
+                                                       draws = 100)))
 pp_est <- map(pe, ~ future::value(.x))
-pp <- map(disc_fit, ~ future::future(posterior_linpred(.x, transform = TRUE)))
+pp <- map(disc_fit, ~ future::future(posterior_linpred(.x, 
+                                                       transform = TRUE, 
+                                                       draws = 100)))
 pp_prob <- map(pp, ~ future::value(.x))
 
 
@@ -116,7 +119,8 @@ roc_df <- map(eroc, function(x)
 
 roc_df_back <- roc_df                  # extra for background
 
-# plot the curves from just the binaries
+
+# plot the curves from the probabilities
 cur <- roc_df %>%
   ggplot(aes(x = fpr, 
              y = tpr, 
@@ -134,7 +138,9 @@ cur <- roc_df %>%
 ggsave(filename = '../results/figure/roc_curve.png', plot = cur,
        width = 5, height = 8)
 
+
 # get AUC values for the above
+# plot as histogram
 auc_hist <- map(eroc, ~ map(.x, function(y) auc(y)[[1]])) %>%
   reshape2::melt(.) %>%
   as.tibble %>%
@@ -149,13 +155,8 @@ ggsave(filename = '../results/figure/auc_hist.png', plot = auc_hist,
        width = 6, height = 6)
 
 
+# auc roc as timeseries to see best and worst times
 
-
-
-
-# roc as timeseries to see best and worst times
-roc_ts <- plot_roc_series(counti_trans, pp_est_new, model_key)
-ggsave(filename = '../results/figure/roc_ts.png', plot = roc_ts,
+auc_ts <- plot_roc_series(counti_trans, pp_prob, model_key)
+ggsave(filename = '../results/figure/auc_ts.png', plot = auc_ts,
        width = 8, height = 8)
-eauc <- map(eroc, ~ map(.x, function(y) auc(y)[[1]]))
-eauc <- map(eroc, ~ map(.x, function(y) auc(y)[[1]]))

@@ -207,9 +207,7 @@ plot_taxon_hazard <- function(model) {
 #' @param model_key vector characters naming each model
 #' @return ggplot object
 plot_roc_series <- function(data, model_pp, model_key) {
-#data <- counti_trans
-#model_pp <- pp_est_new
-#model_key <- model_key
+  
   # important exception functions
   safe_roc <- safely(roc)
   safe_auc <- safely(auc)
