@@ -56,6 +56,15 @@ energy <- map2(np, ll, ~ mcmc_nuts_energy(.x, .y))
 
 # bayes R2
 br2 <- map(disc_fit, bayes_R2)
+br2_gg <- reshape2::melt(br2) %>%
+  rename(model = L1) %>%
+  mutate(model_name = plyr::mapvalues(model, unique(model), model_key),
+         model_name = factor(model_name, levels = model_key)) %>%
+  ggplot(aes(x = value, y = model_name)) +
+  geom_halfeyeh(width = c(0.5, 0.8)) +
+  labs(x = 'Bayesian R^2', y = 'Model')
+ggsave(filename = '../results/figure/bayes_r2.png', plot = br2_gg,
+       width = 6, height = 6)
 
 
 # estimate of out-of-sample performance
@@ -86,34 +95,13 @@ pp_est <- map(pe, ~ future::value(.x))
 pp <- map(disc_fit, ~ future::future(posterior_linpred(.x, transform = TRUE)))
 pp_prob <- map(pp, ~ future::value(.x))
 
-# adequacy of fit ROC
-pgc <- partial(get_cutpoints, target = counti_trans$event)
-list_cutpoint <- map(map(pp_prob, pgc), ~ map(.x, ~ .x[3])) %>%
-  purrr::set_names(., model_key)
 
-
-cut_plot <- list_cutpoint %>%
-  reshape2::melt(list_cutpoint) %>%
-  as.tibble(.) %>%
-  magrittr::set_names(., c('value', 'draw', 'model')) %>%
-  dplyr::select(-draw) %>%
-  ggplot(., aes(x = value, y = model)) + 
-  geom_halfeyeh(.width = c(0.5, 0.8))
-ggsave(filename = '../results/figure/cut_plot.png', plot = cut_plot,
-       width = 6, height = 6)
-
-
-pp_est_new <- cut_newpoint(pp_prob, list_cutpoint)
-# this resets the cutpoint for determining 0 vs 1 by setting it very low.
-# this is a product of really high class imbalance. 
-# cutpoint based on maximizing both sensitivity and specificity.
-# this is calculated for every posterior predictive simulation for each model.
-# these new, rescaled 0-1 results are then fed through the ROC/AUC machine.
-partial_post_roc <- purrr::partial(post_roc, y = counti_trans)
-pp_roc <- map(pp_est_new, partial_post_roc)
+# use linpred to get ROC curve
+# probability gives finer resolution
+eroc <- map(pp_prob, ~ apply(.x, 1, function(y) roc(counti_trans$event, y)))
 
 # extract the parts of the ROC plot
-roc_df <- map(pp_roc, function(x) 
+roc_df <- map(eroc, function(x) 
            imap(x, ~ tibble(sim = .y, 
                             fpr = 1 - .x$specificities,
                             tpr = .x$sensitivities))) %>%
@@ -124,7 +112,7 @@ roc_df <- map(pp_roc, function(x)
   mutate(model = case_when(mod == 1 ~ model_key[1],
                            mod == 2 ~ model_key[2],
                            mod == 3 ~ model_key[3],
-                           mod == 4 ~ model_key[4]))
+                           mod == 4 ~ model_key[4])) # long hand way that doesn't need plyr
 
 roc_df_back <- roc_df                  # extra for background
 
@@ -146,24 +134,28 @@ cur <- roc_df %>%
 ggsave(filename = '../results/figure/roc_curve.png', plot = cur,
        width = 5, height = 8)
 
-
 # get AUC values for the above
-pp_auc <- map(pp_roc, function(y) map_dbl(y, ~ auc(.x)))
-
-
-# plot the ROC AUC values
-roc_hist <- bind_rows(imap(pp_auc, ~ data.frame(model = .y, roc = .x))) %>%
-  mutate(model = plyr::mapvalues(model, 
-                                 from = unique(model),
-                                 to = model_key),
-         model = factor(model, levels = model_key)) %>%
-  ggplot(aes(x = roc, y = model)) +
+auc_hist <- map(eroc, ~ map(.x, function(y) auc(y)[[1]])) %>%
+  reshape2::melt(.) %>%
+  as.tibble %>%
+  rename(model = L1,
+         draw = L2) %>%
+  mutate(model_name = plyr::mapvalues(model, unique(model), model_key),
+         model_name = factor(model_name, levels = model_key)) %>%
+  ggplot(aes(x = value, y = model_name)) +
   geom_halfeyeh(.width = c(0.5, 0.8)) +
-  labs(y = NULL, x = 'AUC ROC')
-ggsave(filename = '../results/figure/roc_hist.png', plot = roc_hist,
+  labs(x = 'AUC ROC', y = NULL)
+ggsave(filename = '../results/figure/auc_hist.png', plot = auc_hist,
        width = 6, height = 6)
+
+
+
+
+
 
 # roc as timeseries to see best and worst times
 roc_ts <- plot_roc_series(counti_trans, pp_est_new, model_key)
 ggsave(filename = '../results/figure/roc_ts.png', plot = roc_ts,
        width = 8, height = 8)
+eauc <- map(eroc, ~ map(.x, function(y) auc(y)[[1]]))
+eauc <- map(eroc, ~ map(.x, function(y) auc(y)[[1]]))

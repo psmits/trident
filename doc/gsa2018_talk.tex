@@ -116,7 +116,7 @@
 
 
 \begin{frame}
-  \frametitle{Measuring performance: Reciever Operating Characteristic}
+  \frametitle{Measuring performance: confusion matrix}
 
   \begin{center}
     \begin{tabular}[c]{ p{2cm} c | p{2cm} | p{2cm} |}
@@ -134,7 +134,7 @@
 
 
 \begin{frame}
-  \frametitle{Measuring performance: Reciever Operating Characteristic}
+  \frametitle{Measuring performance: Receiver Operating Characteristic}
 
   \begin{center}
     \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio=true]{figure/wiki_ROC_space-2}
@@ -146,7 +146,7 @@
 
 
 \begin{frame}
-  \frametitle{Measuring performance: Reciever Operating Characteristic}
+  \frametitle{Measuring performance: Receiver Operating Characteristic}
   
   \begin{center}
     \includegraphics[width=\textwidth,height=0.75\textheight,keepaspectratio=true]{figure/wiki_709px-ROC_curves}
@@ -158,7 +158,7 @@
 
 
 \begin{frame}
-  \frametitle{\textit{k}-fold cross-validation}
+  \frametitle{Measuring performance: \textit{k}-fold cross-validation}
 
   \begin{center}
     \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio=true]{figure/ts_cv}
@@ -203,26 +203,21 @@
 
 
 \begin{frame}
-  \frametitle{Next steps}
-
-  \begin{itemize}
-    \item Consider non-linear/threshold effects of covariates (e.g. GAMM, etc.).
-    \item What are the possible effects of other, unconsidered covariates (e.g. foram ecology)?
-  \end{itemize}
-
-\end{frame}
-
-
-\begin{frame}
   \frametitle{Summary}
 
   \begin{itemize}
-    \item \alert{The past matters.} Our best supported model includes our historical covariates and allows all effects to vary over time.
-    \item 
+    \item \alert{The past matters\dots} 
+      \begin{itemize}
+        \item Our best supported model includes our historical covariates and allows all effects to vary over time.
+      \end{itemize}
+    \item \alert{But not that much\dots}
+      \begin{itemize}
+        \item None of our models are good at predicting extinction.
+      \end{itemize}
+    \item<2-> Mechanisms behind changes to geographic range operate at sub-million year scales. Perhaps their effects are weak/masked at million (or greater) year scales.
   \end{itemize}
 
 \end{frame}
-
 
 
 \begin{frame}

@@ -99,6 +99,14 @@ prepare_analysis <- function(x, fg = NULL) {
 #' @return vector of bin memberships
 break_my <- function(x, by = NULL, number = NULL) {
 
+  if(is.null(by) & is.null(number)) {
+    return('no scheme given. specify either bin width or number of bins.')
+  }
+
+  if(!is.null(by) & !is.null(number)) {
+    return('too much information. specify either bin width OR number of bins, not both.')
+  }
+  
   top <- ceiling(max(x))
   bot <- floor(min(x))
   

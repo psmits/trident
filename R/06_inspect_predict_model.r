@@ -54,7 +54,7 @@ fit <- read_rds('../data/training_fit.rds')
 counti_accum_match <- rep(counti_accum, 4)
 
 # get estimated linear predictor for each 
-plin <- map2(fit, counti_match, 
+plin <- map2(fit, counti_accum_match, 
              ~ posterior_linpred(object = .x, 
                                  newdata = .y, 
                                  draws = 1000))
@@ -73,29 +73,28 @@ pred <- map2(fit, counti_fold_match,
   cut_newpoint(., cut_points)
 
 
-
-
-# third: calculate ROC/AUC for the predictions of test data
+# calculate ROC/AUC for the predictions of test data
 # to determine how good our out of sample predictions are
 pred_auc <- map2(pred, counti_fold_match, post_roc) %>%
   map(., function(x) map_dbl(x, ~ auc(.x))) %>%
   set_names(., names(fit))
+
 
 # now to make a plot about out-of-sample predictive accuracy
 # because 1000s of numbers are hard to visualize
 
 oos_auc <- bind_cols(pred_auc) %>% 
   gather() %>%
-  separate(key, into = c('mod', 'fold'), sep = '\\_',
-           mod = plyr::mapvalues(mod, unique(mod), model_key)) %>%
+  separate(key, into = c('mod', 'fold'), sep = '\\_') %>%
+  mutate(mod = plyr::mapvalues(mod, unique(mod), model_key)) %>%
   ggplot(aes(x = value, y = mod)) +
   geom_density_ridges(rel_min_height = 0.01) +
-  labs(x = 'AUC', y = 'density')
+  labs(x = 'AUC', y = 'density') +
+  scale_colour_brewer()
 ggsave(filename = '../results/figure/fold_auc.png', plot = oos_auc,
        width = 6, height = 6)
 
 
-# below is untested
 # then do it for time
 time_auc <- map2(pred, counti_fold_match, get_auc_time) %>%
   set_names(., names(fit))
@@ -105,8 +104,10 @@ ta <- reshape2::melt(time_auc) %>%
   as.tibble %>%
   mutate(time = parse_double(L2)) %>%
   separate(L1, into = c('mod', 'fold'), sep = '\\_') %>%
+  mutate(mod = plyr::mapvalues(mod, unique(mod), model_key)) %>%
   ggplot(aes(x = time, y = value)) +
   stat_interval(alpha = 0.5, .width = c(0.5, 0.8)) +
-  facet_grid(mod ~ .)
+  facet_grid(mod ~ .) +
+  scale_colour_brewer()
 ggsave(filename = '../results/figure/fold_auc_time.png', plot = ta,
        width = 8, height = 6)
