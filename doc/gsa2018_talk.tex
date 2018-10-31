@@ -119,30 +119,24 @@
   \frametitle{Measuring performance: confusion matrix}
 
   \begin{center}
-    \begin{tabular}[c]{ p{2cm} c | p{2cm} | p{2cm} |}
-      \cline{3-4} 
-      & & \multicolumn{2}{ c |}{Actual class} \\ \cline{3-4}
-      & & 1 & 0 \\ \hline
-      \multicolumn{1}{| c |}{\multirow{2}{*}{Predicted class}}
-      & 1 & TRUE \newline POSITIVE & FALSE \newline POSITIVE \\ \cline{2-4}
-      \multicolumn{1}{| c |}{} & 0 & FALSE \newline NEGATIVE & TRUE \newline NEGATIVE \\
-      \hline
-    \end{tabular}
-  \end{center}
-
-\end{frame}
-
-
-\begin{frame}
-  \frametitle{Measuring performance: Receiver Operating Characteristic}
-
-  \begin{center}
-    \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio=true]{figure/wiki_ROC_space-2}
+    \includegraphics[width=\textwidth,height=0.75\textheight,keepaspectratio=true]{figure/confusion_matrix_wiki}
   \end{center}
   
   \attrib{\footnotesize{wikimedia}}
 
 \end{frame}
+%
+%
+%\begin{frame}
+%  \frametitle{Measuring performance: Receiver Operating Characteristic}
+%
+%  \begin{center}
+%    \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio=true]{figure/wiki_ROC_space-2}
+%  \end{center}
+%  
+%  \attrib{\footnotesize{wikimedia}}
+%
+%\end{frame}
 
 
 \begin{frame}
@@ -156,6 +150,33 @@
   
 \end{frame}
 
+\begin{frame}
+  \frametitle{Measuring performance: AUC ROC}
+
+  \begin{columns}
+    \begin{column}{0.4\textwidth}
+      \includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{figure/AUC}
+  
+      \attrib{\footnotesize{https://goo.gl/91nEpM}}
+  
+    \end{column}
+    \begin{column}{0.6\textwidth}
+      \[
+        \text{AUC} = 
+        \begin{cases} 
+          0.5 & \text{non discrimination}\\
+          0.6-0.7 & \text{poor} \\
+          0.7-0.8 & \text{acceptable/fair} \\
+          0.8-0.9 & \text{excellent/good} \\
+          > 0.9 & \text{outstanding} \\
+        \end{cases}
+      \]
+
+      The area represents the probability of correct ranking of a random ``extinct''-``extant'' pair.
+    \end{column}
+  \end{columns}
+
+\end{frame}
 
 \begin{frame}
   \frametitle{Measuring performance: \textit{k}-fold cross-validation}
@@ -169,11 +190,11 @@
 \end{frame}
 
 
-% demonstrate as ROC curve
+% demonstrate as ROC curve?
 \begin{frame}
   \frametitle{In-sample predictive performance, full dataset}
 
-  \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio=true]{../results/figure/roc_hist}
+  \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio=true]{../results/figure/auc_hist}
 
 \end{frame}
 
@@ -181,7 +202,7 @@
 \begin{frame}
   \frametitle{In-sample predictive performance, by time}
 
-  \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio=true]{../results/figure/roc_ts}
+  \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio=true]{../results/figure/auc_ts}
 
 \end{frame}
 
@@ -214,7 +235,7 @@
       \begin{itemize}
         \item None of our models are good at predicting extinction.
       \end{itemize}
-    \item<2-> Mechanisms behind changes to geographic range operate at sub-million year scales. Perhaps their effects are weak/masked at million (or greater) year scales.
+    \item Perhaps mechanisms behind changes to geographic range operate at sub-million year scales. Perhaps their effects are weak/masked at million (or greater) year scales.
   \end{itemize}
 
 \end{frame}
@@ -222,6 +243,39 @@
 
 \begin{frame}
   \frametitle{Acknowledgements}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \begin{itemize}
+        \item \textbf{Seth Finnegan}
+        \item Adiel Klompmaker 
+        \item Emily Orzechowski
+        \item Larry Taylor
+        \item Sara Kahanamoku
+        \item Josh Zimmt
+        \item Franziska Franeck \\(University of Oslo)
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{center}
+        \includegraphics[height=0.15\textheight,width=\textwidth,keepaspectratio=true]{figure/github-logo}
+
+        psmits.github.io/ \hspace*{0.05\textwidth} \textbf{trident}
+      \end{center}
+      \vspace*{0.02\textheight}
+      \begin{center}
+        \includegraphics[height=0.1\textheight,width=0.5\textwidth,keepaspectratio=true]{figure/twitter} 
+
+        @PeterDSmits
+      \end{center}
+      \vspace*{0.02\textheight}
+      \begin{center}
+        \includegraphics[height=0.25\textheight,width=\textwidth,keepaspectratio=true]{figure/INAlogo}
+      \end{center}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\end{document}
 
 \end{frame}
 

@@ -156,4 +156,5 @@ ggsave(filename = '../results/figure/auc_hist.png', plot = auc_hist,
 # roc as timeseries to see best and worst times
 roc_ts <- plot_roc_series(counti_trans, pp_prob, model_key) +
   scale_x_reverse()
-ggsave(filename = '../results/figure/roc_ts.png', plot = roc_ts,
+ggsave(filename = '../results/figure/auc_ts.png', plot = roc_ts,
+       width = 8, height = 6)

@@ -44,7 +44,7 @@ octg <-
   stat_bin() +
   facet_grid(fossil_group ~ ., switch = 'y') +
   scale_fill_manual(name = 'Occurrence type',
-                    values = c('skyblue', 'goldenrod')) +
+                    values = c('goldenrod', 'skyblue')) +
   theme(legend.position = 'bottom') +
   labs(title = 'Occurrences', x = 'Time (My before present)', y = 'Count')
 ggsave(filename = '../results/figure/occ_time_label.png',
@@ -74,7 +74,7 @@ ocrg <- counti %>%
   stat_bin() +
   facet_grid(fossil_group ~ ., switch = 'y') +
   scale_fill_manual(name = 'State', 
-                    values = c('skyblue', 'goldenrod')) +
+                    values = c('goldenrod', 'skyblue')) +
   theme(legend.position = 'bottom') +
   labs(title = 'Age distribution', x = 'Age (My)', y = 'Count')
 ggsave(filename = '../results/figure/age_label.png',

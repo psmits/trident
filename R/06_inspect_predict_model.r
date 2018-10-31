@@ -75,7 +75,7 @@ oos_auc <- bind_cols(pred_auc) %>%
          mod = factor(mod, levels = model_key)) %>%
   ggplot(aes(x = value, y = mod)) +
   geom_density_ridges(rel_min_height = 0.01) +
-  labs(x = 'AUC', y = 'density') +
+  labs(x = 'AUC', y = 'NULL') +
   scale_colour_brewer() +
   NULL
 ggsave(filename = '../results/figure/fold_auc.png', plot = oos_auc,
