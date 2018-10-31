@@ -37,8 +37,6 @@ counti_trans <- counti_trans %>%
 
 # 1 is young, 5 is old
 counti_fold <- rev(split(counti_trans, counti_trans$fold))  # each fold
-counti_accum <- accumulate(counti_fold, bind_rows) # combine some folds
-counti_accum <- counti_accum[-1]
 
 
 # get in fits and posterior work
@@ -51,26 +49,13 @@ fit <- read_rds('../data/training_fit.rds')
 # given trained models for the rolled-out folds, estimate the next fold
 
 # 16 models, 1:4 as formula for each fold etc
-counti_accum_match <- rep(counti_accum, 4)
-
-# get estimated linear predictor for each 
-plin <- map2(fit, counti_accum_match, 
-             ~ posterior_linpred(object = .x, 
-                                 newdata = .y, 
-                                 draws = 1000))
-
-# identify better cutpoints for 0 vs 1
-cut_points <- map2(plin, counti_accum_match, ~ get_cutpoints(.x, .y$event)) %>%
-  map(., ~ .x[[1]][3])
-
-
 counti_fold_match <- rep(counti_fold[-1], 4)
+
 # given new cutpoints, try predicting the test data
 pred <- map2(fit, counti_fold_match,
              ~ posterior_linpred(object = .x, 
                                  newdata = .y,
-                                 draws = 1000)) %>%
-  cut_newpoint(., cut_points)
+                                 draws = 1000))
 
 
 # calculate ROC/AUC for the predictions of test data
@@ -86,11 +71,13 @@ pred_auc <- map2(pred, counti_fold_match, post_roc) %>%
 oos_auc <- bind_cols(pred_auc) %>% 
   gather() %>%
   separate(key, into = c('mod', 'fold'), sep = '\\_') %>%
-  mutate(mod = plyr::mapvalues(mod, unique(mod), model_key)) %>%
+  mutate(mod = plyr::mapvalues(mod, unique(mod), model_key),
+         mod = factor(mod, levels = model_key)) %>%
   ggplot(aes(x = value, y = mod)) +
   geom_density_ridges(rel_min_height = 0.01) +
   labs(x = 'AUC', y = 'density') +
-  scale_colour_brewer()
+  scale_colour_brewer() +
+  NULL
 ggsave(filename = '../results/figure/fold_auc.png', plot = oos_auc,
        width = 6, height = 6)
 
@@ -104,10 +91,12 @@ ta <- reshape2::melt(time_auc) %>%
   as.tibble %>%
   mutate(time = parse_double(L2)) %>%
   separate(L1, into = c('mod', 'fold'), sep = '\\_') %>%
-  mutate(mod = plyr::mapvalues(mod, unique(mod), model_key)) %>%
+  mutate(mod = plyr::mapvalues(mod, unique(mod), model_key),
+         mod = factor(mod, levels = rev(model_key))) %>%
   ggplot(aes(x = time, y = value)) +
-  stat_interval(alpha = 0.5, .width = c(0.5, 0.8)) +
+  stat_lineribbon() +
   facet_grid(mod ~ .) +
-  scale_colour_brewer()
+  scale_fill_brewer() +
+  scale_x_reverse()
 ggsave(filename = '../results/figure/fold_auc_time.png', plot = ta,
        width = 8, height = 6)

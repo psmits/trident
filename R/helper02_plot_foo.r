@@ -203,13 +203,10 @@ plot_taxon_hazard <- function(model) {
 #' This spews a bunch of error messages by they are handeled through exception handling, so the error messages are actually warnings :P.
 #' 
 #' @param data tibble of data used to fit models
-#' @param model_pp list of model posterior predictive draws
+#' @param model_pp list of model posterior estimates
 #' @param model_key vector characters naming each model
 #' @return ggplot object
 plot_roc_series <- function(data, model_pp, model_key) {
-#data <- counti_trans
-#model_pp <- pp_est_new
-#model_key <- model_key
   # important exception functions
   safe_roc <- safely(roc)
   safe_auc <- safely(auc)
@@ -255,12 +252,14 @@ plot_roc_series <- function(data, model_pp, model_key) {
     mutate(key = parse_integer(key),
            model = plyr::mapvalues(model, 
                                    from = seq(length(model_key)), 
-                                   to = model_key)) %>%
+                                   to = model_key),
+           model = factor(model, levels = rev(model_key))) %>%
     ggplot(aes(x = key, y = value)) +
     stat_lineribbon() +
     scale_fill_brewer() +
     facet_grid(model ~ .) +
     labs(x = 'Time (My)', y = 'AUC') +
     NULL
+
   roc_ts
 }
