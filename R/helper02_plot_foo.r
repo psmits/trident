@@ -258,7 +258,6 @@ plot_roc_series <- function(data, model_pp, model_key) {
     stat_lineribbon() +
     scale_fill_brewer() +
     facet_grid(model ~ .) +
-    labs(x = 'Time (My)', y = 'AUC') +
     NULL
 
   roc_ts

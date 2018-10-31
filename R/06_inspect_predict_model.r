@@ -74,9 +74,11 @@ oos_auc <- bind_cols(pred_auc) %>%
   mutate(mod = plyr::mapvalues(mod, unique(mod), model_key),
          mod = factor(mod, levels = model_key)) %>%
   ggplot(aes(x = value, y = mod)) +
-  geom_density_ridges(rel_min_height = 0.01) +
-  labs(x = 'AUC', y = 'NULL') +
+  geom_halfeyeh(.width = c(0.5, 0.8)) +
+  labs(x = 'AUC ROC', y = NULL) +
   scale_colour_brewer() +
+  theme(axis.text.y = element_text(size = 15),
+        axis.text.x = element_text(size = 15)) +
   NULL
 ggsave(filename = '../results/figure/fold_auc.png', plot = oos_auc,
        width = 6, height = 6)
@@ -97,6 +99,7 @@ ta <- reshape2::melt(time_auc) %>%
   stat_lineribbon() +
   facet_grid(mod ~ .) +
   scale_fill_brewer() +
-  scale_x_reverse()
+  scale_x_reverse() +
+  labs(y = 'AUC ROC', x = 'Time (Mya)')
 ggsave(filename = '../results/figure/fold_auc_time.png', plot = ta,
        width = 8, height = 6)

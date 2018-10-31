@@ -149,12 +149,16 @@ auc_hist <- map(eroc, ~ map(.x, function(y) auc(y)[[1]])) %>%
          model_name = factor(model_name, levels = model_key)) %>%
   ggplot(aes(x = value, y = model_name)) +
   geom_halfeyeh(.width = c(0.5, 0.8)) +
-  labs(x = 'AUC ROC', y = NULL)
+  labs(x = 'AUC ROC', y = NULL) +
+  theme(axis.text.y = element_text(size = 15),
+        axis.text.x = element_text(size = 15)) +
+  NULL
 ggsave(filename = '../results/figure/auc_hist.png', plot = auc_hist,
        width = 6, height = 6)
 
 # roc as timeseries to see best and worst times
 roc_ts <- plot_roc_series(counti_trans, pp_prob, model_key) +
-  scale_x_reverse()
+  scale_x_reverse() +
+  labs(y = 'AUC ROC', x = 'Time (Mya)')
 ggsave(filename = '../results/figure/auc_ts.png', plot = roc_ts,
        width = 8, height = 6)
