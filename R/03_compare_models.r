@@ -118,7 +118,8 @@ roc_df <- map(eroc, function(x)
 
 #roc_df_back <- roc_df                  # extra for background
 
-# plot the curves from just the binaries
+
+# plot the curves from the probabilities
 cur <- roc_df %>%
   ggplot(aes(x = fpr, 
              y = tpr, 
@@ -136,7 +137,9 @@ cur <- roc_df %>%
 ggsave(filename = '../results/figure/roc_curve.png', plot = cur,
        width = 5, height = 8)
 
+
 # get AUC values for the above
+# plot as histogram
 auc_hist <- map(eroc, ~ map(.x, function(y) auc(y)[[1]])) %>%
   reshape2::melt(.) %>%
   as.tibble %>%
@@ -154,4 +157,3 @@ ggsave(filename = '../results/figure/auc_hist.png', plot = auc_hist,
 roc_ts <- plot_roc_series(counti_trans, pp_prob, model_key) +
   scale_x_reverse()
 ggsave(filename = '../results/figure/roc_ts.png', plot = roc_ts,
-       width = 8, height = 8)
