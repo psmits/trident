@@ -258,8 +258,8 @@ plot_roc_series <- function(data, model_pp, model_key) {
     stat_lineribbon() +
     scale_fill_brewer() +
     scale_x_reverse() +
-    facet_grid(model ~ .) +
     NULL
+    
 
   roc_ts
 }

@@ -164,6 +164,18 @@ ggsave(filename = '../results/figure/auc_hist_zoom.png',
 
 # roc as timeseries to see best and worst times
 roc_ts <- plot_roc_series(counti_trans, pp_prob, model_key) +
-  labs(y = 'AUC ROC', x = 'Time (Mya)')
+  coord_cartesian(ylim = c(0.4, 1), xlim = c(0, 62))
+ggsave(filename = '../results/figure/auc_ts_tiny.png', 
+       plot = gggeo_scale(roc_ts, 
+                          dat = 'epochs', 
+                          size = 3, 
+                          rot = 90,
+                          height = 0.2),
+       width = 8, height = 6)
+roc_ts <- roc_ts +
+  facet_grid(model ~ .) +
+  labs(y = 'AUC ROC', x = 'Time (Mya)') +
+  geom_hline(yintercept = 0.5, colour = 'red', linetype = 'dashed') +
+  NULL
 ggsave(filename = '../results/figure/auc_ts.png', plot = roc_ts,
        width = 8, height = 6)

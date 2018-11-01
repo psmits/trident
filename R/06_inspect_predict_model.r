@@ -3,6 +3,7 @@ library(tidyverse)
 library(janitor)
 #devtools::install_github("mjskay/tidybayes")
 library(tidybayes)
+library(deeptime)
 
 # parallel processing
 library(parallel)
@@ -102,9 +103,22 @@ ta <- reshape2::melt(time_auc) %>%
          mod = factor(mod, levels = rev(model_key))) %>%
   ggplot(aes(x = time, y = value)) +
   stat_lineribbon() +
-  facet_grid(mod ~ .) +
   scale_fill_brewer() +
   scale_x_reverse() +
-  labs(y = 'AUC ROC', x = 'Time (Mya)')
-ggsave(filename = '../results/figure/fold_auc_time.png', plot = ta,
+  coord_cartesian(ylim = c(0.4, 1), xlim = c(0, 50)) +
+  labs(y = 'AUC ROC', x = 'Time (Mya)') +
+  NULL
+ggsave(filename = '../results/figure/fold_auc_time_tiny.png', 
+       plot = gggeo_scale(ta, 
+                          dat = 'epochs', 
+                          size = 3, 
+                          rot = 90,
+                          height = 0.2),
+       width = 8, height = 6)
+ta <- ta +
+  facet_grid(mod ~ .) +
+  geom_hline(yintercept = 0.5, colour = 'red', linetype = 'dashed') +
+  NULL
+ggsave(filename = '../results/figure/fold_auc_time.png', 
+       plot = ta,
        width = 8, height = 6)
