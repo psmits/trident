@@ -257,6 +257,7 @@ plot_roc_series <- function(data, model_pp, model_key) {
     ggplot(aes(x = key, y = value)) +
     stat_lineribbon() +
     scale_fill_brewer() +
+    scale_x_reverse() +
     facet_grid(model ~ .) +
     NULL
 

@@ -73,16 +73,31 @@
 
 
 \begin{frame}
-  \frametitle{Data being analyzed}
+  \frametitle{Data being analyzed: Neptune database}
 
   \begin{columns}
-    \begin{column}{0.5\textwidth}
+    \begin{column}{0.1\textwidth}
+      \begin{center}
+        \includegraphics[width=\textwidth,height=0.15\textheight,keepaspectratio=true]{figure/calc}
+
+        \includegraphics[width=\textwidth,height=0.15\textheight,keepaspectratio=true]{figure/dino}
+
+        \includegraphics[width=\textwidth,height=0.15\textheight,keepaspectratio=true]{figure/foram}
+
+        \includegraphics[width=\textwidth,height=0.15\textheight,keepaspectratio=true]{figure/rad}
+
+        \attrib{\footnotesize{UCL}}
+      \end{center}
+    \end{column}
+    \begin{column}{0.4\textwidth}
       \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio=true]{../results/figure/occ_time_label}
     \end{column}
-    \begin{column}{0.5\textwidth}
+    \begin{column}{0.4\textwidth}
       \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio=true]{../results/figure/age_label}
     \end{column}
   \end{columns}
+
+  \footnotesize{Global occurrences from Deep Sea Drilling Program and Ocean Drilling Project. -- Lazarus. 1994. Math. Geo.; Spencer-Cervato. 1999. Palaeo. Elec.}
 
 \end{frame}
 
@@ -94,7 +109,7 @@
     \item Encoding the past
       \begin{itemize}
         \item Change in geographic range between current observation and previous observation.
-        \item Average global temperature at time of previous observation (Mg/Ca isotope).
+        \item Average global temperature at time of previous observation (Mg/Ca elemental ratio).
         \item Age in millions of years at time of observation.
       \end{itemize}
     %\item \alert{Compare} models using WAIC/LOOIC.
@@ -107,7 +122,7 @@
 
 \begin{frame}
   \frametitle{A conceptual model for predicting extinction}
-      
+
   \begin{center}
     \includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{figure/conceptual_diagram}
   \end{center}
@@ -121,7 +136,7 @@
   \begin{center}
     \includegraphics[width=\textwidth,height=0.75\textheight,keepaspectratio=true]{figure/confusion_matrix_wiki}
   \end{center}
-  
+
   \attrib{\footnotesize{wikimedia}}
 
 \end{frame}
@@ -141,13 +156,13 @@
 
 \begin{frame}
   \frametitle{Measuring performance: Receiver Operating Characteristic}
-  
+
   \begin{center}
     \includegraphics[width=\textwidth,height=0.75\textheight,keepaspectratio=true]{figure/wiki_709px-ROC_curves}
   \end{center}
-  
+
   \attrib{\footnotesize{wikimedia}}
-  
+
 \end{frame}
 
 \begin{frame}
@@ -156,9 +171,9 @@
   \begin{columns}
     \begin{column}{0.4\textwidth}
       \includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{figure/AUC}
-  
+
       \attrib{\footnotesize{https://goo.gl/91nEpM}}
-  
+
     \end{column}
     \begin{column}{0.6\textwidth}
       \[
@@ -189,12 +204,27 @@
   \attrib{\footnotesize{Ken Williams, https://goo.gl/qLcfL8}}
 \end{frame}
 
+% demonstrate as ROC curve?
+\begin{frame}
+  \frametitle{In-sample predictive performance, full dataset}
+
+  \begin{center}
+    \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio=true]{../results/figure/auc_hist_zoom}
+
+    \footnotesize{AUC = 0.7-0.8 acceptable/fair}
+  \end{center}
+
+\end{frame}
 
 % demonstrate as ROC curve?
 \begin{frame}
   \frametitle{In-sample predictive performance, full dataset}
 
-  \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio=true]{../results/figure/auc_hist}
+  \begin{center}
+    \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio=true]{../results/figure/auc_hist}
+
+    \footnotesize{AUC = 0.7-0.8 acceptable/fair}
+  \end{center}
 
 \end{frame}
 
@@ -202,23 +232,29 @@
 \begin{frame}
   \frametitle{In-sample predictive performance, by time}
 
-  \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio=true]{../results/figure/auc_ts}
+  \begin{center}
+    \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio=true]{../results/figure/auc_ts}
+  \end{center}
 
 \end{frame}
-
 
 \begin{frame}
   \frametitle{Cross-validation results, full dataset}
 
-  \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio=true]{../results/figure/fold_auc}
+  \begin{center}
+    \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio=true]{../results/figure/fold_auc_zoom}
+
+    \footnotesize{AUC = 0.7-0.8 acceptable/fair}
+  \end{center}
 
 \end{frame}
-
 
 \begin{frame}
   \frametitle{Cross-validation results, by time}
 
-  \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio=true]{../results/figure/fold_auc_time}
+  \begin{center}
+    \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio=true]{../results/figure/fold_auc_time}
+  \end{center}
 
 \end{frame}
 
@@ -233,7 +269,7 @@
       \end{itemize}
     \item \alert{But not that much\dots}
       \begin{itemize}
-        \item None of our models are good at predicting extinction.
+        \item Models only average/fair expected out-of-sample performance.
       \end{itemize}
     \item Mechanisms behind changes to geographic range operate at sub-million year scales. Perhaps their effects are weak/masked at million (or greater) year scales.
   \end{itemize}
@@ -246,13 +282,22 @@
   \begin{columns}
     \begin{column}{0.5\textwidth}
       \begin{itemize}
-        \item \textbf{Seth Finnegan}
-        \item Adiel Klompmaker 
-        \item Emily Orzechowski
-        \item Larry Taylor
-        \item Sara Kahanamoku
-        \item Josh Zimmt
-        \item Franziska Franeck \\(University of Oslo)
+        \item UC Berkeley
+          \begin{itemize}
+            \item Adiel Klompmaker 
+            \item Emily Orzechowski
+            \item Larry Taylor
+            \item Sara Kahanamoku
+            \item Josh Zimmt
+          \end{itemize}
+        \item University of Oslo
+          \begin{itemize}
+            \item Franziska Franeck
+          \end{itemize}
+        \item Neptune DB/MFN - Berlin
+          \begin{itemize}
+            \item David Lazarus
+          \end{itemize}
       \end{itemize}
     \end{column}
     \begin{column}{0.5\textwidth}
@@ -267,9 +312,11 @@
 
         @PeterDSmits
       \end{center}
+
       \vspace*{0.02\textheight}
+
       \begin{center}
-        \includegraphics[height=0.25\textheight,width=\textwidth,keepaspectratio=true]{figure/INAlogo}
+        \includegraphics[height=0.25\textheight,width=\textwidth,keepaspectratio=true]{figure/nsb_logo}
       \end{center}
     \end{column}
   \end{columns}

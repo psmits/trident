@@ -4,6 +4,7 @@ library(janitor)
 library(ggridges)
 #devtools::install_github("mjskay/tidybayes")
 library(tidybayes)
+library(deeptime)
 
 # parallel processing
 library(parallel)
@@ -155,10 +156,14 @@ auc_hist <- map(eroc, ~ map(.x, function(y) auc(y)[[1]])) %>%
   NULL
 ggsave(filename = '../results/figure/auc_hist.png', plot = auc_hist,
        width = 6, height = 6)
+ggsave(filename = '../results/figure/auc_hist_zoom.png', 
+       plot = auc_hist + 
+         xlim(0.5, 1) +
+         geom_vline(xintercept = 0.5, colour = 'red'),
+       width = 6, height = 6)
 
 # roc as timeseries to see best and worst times
 roc_ts <- plot_roc_series(counti_trans, pp_prob, model_key) +
-  scale_x_reverse() +
   labs(y = 'AUC ROC', x = 'Time (Mya)')
 ggsave(filename = '../results/figure/auc_ts.png', plot = roc_ts,
        width = 8, height = 6)

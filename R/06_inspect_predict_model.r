@@ -82,6 +82,11 @@ oos_auc <- bind_cols(pred_auc) %>%
   NULL
 ggsave(filename = '../results/figure/fold_auc.png', plot = oos_auc,
        width = 6, height = 6)
+ggsave(filename = '../results/figure/fold_auc_zoom.png', 
+       plot = oos_auc + 
+         xlim(0.5, 1) +
+         geom_vline(xintercept = 0.5, colour = 'red'),
+       width = 6, height = 6)
 
 
 # then do it for time
