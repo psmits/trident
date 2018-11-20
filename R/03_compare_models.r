@@ -205,11 +205,65 @@ auc_taxon <- map(pp_taxon, function(x)
                            taxon == 'R' ~ 'Radiolaria',
                            taxon == 'F' ~ 'Foraminifera',
                            taxon == 'N' ~ 'Calc. nanno.')) %>%
-  ggplot(aes(x = value, y = taxon)) +
+  ggplot(aes(x = value, y = model)) +
   geom_halfeyeh(.width = c(0.5, 0.8)) +
-  facet_wrap(~ model) +
+  facet_wrap(~ taxon) +
   labs(x = 'AUC ROC', y = NULL) 
 ggsave(filename = '../results/figure/auc_taxon.png', 
        plot = auc_taxon,
          width = 8, height = 8)
-  
+
+
+# taxon and time
+temp <- counti_trans %>%
+  dplyr::select(fossil_group, mybin)
+
+bysplit <- counti_trans %>%
+  dplyr::select(mybin, fossil_group, event) %>%
+  mutate(type = paste0(fossil_group, mybin)) %>%
+  arrange(mybin, fossil_group)
+
+bb <- split(bysplit, bysplit$type)
+
+tt <- map(pp_prob, ~ as.tibble(t(.x)) %>%
+          split(., bysplit$type))
+
+safe_roc <- safely(roc)
+safe_auc <- safely(auc)
+foo <- function(event, prob) {
+  safe_auc(safe_roc(event, prob)$result)
+}
+split_auc <- map(tt, function(x) 
+                 map2(x, bb, ~ apply(.x, 2, function(a) 
+                                     foo(.y$event, a)))) %>%
+  map(., ~ map(.x, ~ reduce(map(.x, 'result'), c)))
+
+
+
+
+
+
+
+#map(pp_prob, ~ as.tibble(t(.x))) %>%
+#  set_names(model_key) %>%
+#  map(., ~ bind_cols(.x, temp)) %>%
+#  imap(., ~ .x %>% mutate(id = .y)) %>%
+#  reduce(., bind_rows) %>%
+#  gather(key = 'sim',
+#         value = 'value',
+#         -fossil_group, -mybin, -id) %>%
+#  mutate(sim = str_remove_all(sim, pattern = 'V'),
+#         fossil_group = case_when(fossil_group == 'D' ~ 'Dinoflagellates',
+#                                  fossil_group == 'R' ~ 'Radiolaria',
+#                                  fossil_group == 'F' ~ 'Foraminifera',
+#                                  fossil_group == 'N' ~ 'Calc. nanno.')) %>%
+#
+# 
+#  
+#  %>%
+#  ggplot(aes(x = mybin, y = value)) +
+#  stat_lineribbon() +
+#  scale_fill_brewer() +
+#  scale_x_reverse() +
+#  facet_grid(fossil_group ~ id)
+#  
