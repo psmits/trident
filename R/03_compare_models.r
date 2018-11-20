@@ -179,3 +179,20 @@ roc_ts <- roc_ts +
   NULL
 ggsave(filename = '../results/figure/auc_ts.png', plot = roc_ts,
        width = 8, height = 6)
+
+
+
+# view through taxonomic window
+pp_taxon <- map(pp_prob, ~ split(data.frame(t(.x)), 
+                                 counti_trans$fossil_group)) %>%
+  map(., function(x) map(x, ~ t(.x)))
+counti_taxon <- split(counti_trans, counti_trans$fossil_group)
+
+
+auc_taxon <- map(pp_taxon, function(x) 
+                 map2(x, counti_taxon, ~ 
+                      apply(.x, 1, function(a) roc(.y$event, a)))) %>%
+  map(., function(a) 
+      map(a, function(d)
+          map_dbl(d, ~ auc(.x)[[1]])))
+
