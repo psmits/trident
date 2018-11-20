@@ -1,5 +1,6 @@
 # data manipulation
 library(tidyverse)
+library(magrittr)
 library(janitor)
 library(ggridges)
 #devtools::install_github("mjskay/tidybayes")
@@ -194,5 +195,21 @@ auc_taxon <- map(pp_taxon, function(x)
                       apply(.x, 1, function(a) roc(.y$event, a)))) %>%
   map(., function(a) 
       map(a, function(d)
-          map_dbl(d, ~ auc(.x)[[1]])))
-
+          map_dbl(d, ~ auc(.x)[[1]]))) %>%
+  set_names(model_key) %>%
+  reshape2::melt(.) %>%                # clean up nested list
+  rename(taxon = L2,
+         model = L1) %>%
+  mutate(model = factor(model, levels = rev(model_key)),
+         taxon = case_when(taxon == 'D' ~ 'Dinoflagellates',
+                           taxon == 'R' ~ 'Radiolaria',
+                           taxon == 'F' ~ 'Foraminifera',
+                           taxon == 'N' ~ 'Calc. nanno.')) %>%
+  ggplot(aes(x = value, y = taxon)) +
+  geom_halfeyeh(.width = c(0.5, 0.8)) +
+  facet_wrap(~ model) +
+  labs(x = 'AUC ROC', y = NULL) 
+ggsave(filename = '../results/figure/auc_taxon.png', 
+       plot = auc_taxon,
+         width = 8, height = 8)
+  
