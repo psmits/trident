@@ -211,7 +211,7 @@ auc_taxon <- map(pp_taxon, function(x)
   labs(x = 'AUC ROC', y = NULL) 
 ggsave(filename = '../results/figure/auc_taxon.png', 
        plot = auc_taxon,
-         width = 8, height = 8)
+       width = 8, height = 8)
 
 
 # taxon and time
@@ -220,7 +220,7 @@ temp <- counti_trans %>%
 
 bysplit <- counti_trans %>%
   dplyr::select(mybin, fossil_group, event) %>%
-  mutate(type = paste0(fossil_group, mybin)) %>%
+  mutate(type = paste0(fossil_group, ':', mybin)) %>% # makes my life easier
   arrange(mybin, fossil_group)
 
 bb <- split(bysplit, bysplit$type)
@@ -239,31 +239,26 @@ split_auc <- map(tt, function(x)
   map(., ~ map(.x, ~ reduce(map(.x, 'result'), c)))
 
 
-
-
-
-
-
-#map(pp_prob, ~ as.tibble(t(.x))) %>%
-#  set_names(model_key) %>%
-#  map(., ~ bind_cols(.x, temp)) %>%
-#  imap(., ~ .x %>% mutate(id = .y)) %>%
-#  reduce(., bind_rows) %>%
-#  gather(key = 'sim',
-#         value = 'value',
-#         -fossil_group, -mybin, -id) %>%
-#  mutate(sim = str_remove_all(sim, pattern = 'V'),
-#         fossil_group = case_when(fossil_group == 'D' ~ 'Dinoflagellates',
-#                                  fossil_group == 'R' ~ 'Radiolaria',
-#                                  fossil_group == 'F' ~ 'Foraminifera',
-#                                  fossil_group == 'N' ~ 'Calc. nanno.')) %>%
-#
-# 
-#  
-#  %>%
-#  ggplot(aes(x = mybin, y = value)) +
-#  stat_lineribbon() +
-#  scale_fill_brewer() +
-#  scale_x_reverse() +
-#  facet_grid(fossil_group ~ id)
-#  
+auc_taxon_time <- map(split_auc, function(x) map(x, ~ as.tibble(x = .x)))%>%
+  map(., ~ bind_rows(.x, .id = 'phyla_time')) %>%
+  bind_rows(., .id = 'model') %>%
+  separate(., col = phyla_time, into = c('phyla', 'time'), sep = ':') %>%
+  mutate(time = as.numeric(time)) %>%
+  mutate(fossil_group = case_when(phyla == 'D' ~ 'Dinoflagellates',
+                                  phyla == 'R' ~ 'Radiolaria',
+                                  phyla == 'F' ~ 'Foraminifera',
+                                  phyla == 'N' ~ 'Calc. nanno.'),
+         model = case_when(model == 1 ~ model_key[1],
+                           model == 2 ~ model_key[2],
+                           model == 3 ~ model_key[3],
+                           model == 4 ~ model_key[4]),
+         model = factor(model, levels = rev(model_key))) %>%
+  ggplot(aes(x = time, y = value)) +
+  geom_hline(yintercept = 0.5, linetype = 'dashed') +
+  stat_lineribbon() +
+  scale_fill_brewer() +
+  scale_x_reverse() +
+  facet_grid(fossil_group ~ model)
+ggsave(filename = '../results/figure/auc_taxon_time.png',
+       plot = auc_taxon_time,
+       width = 8, height = 6)
