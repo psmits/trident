@@ -12,14 +12,17 @@ library(parallel)
 library(arm)
 library(rstanarm)
 library(bayesplot)
-source('../R/helper03_stan_utility.r')
 
 # misc
 library(pROC)
 library(ROCR)
 library(ggridges)
+
+# my function set
 source('../R/helper01_process_foo.r')
 source('../R/helper02_plot_foo.r')
+source('../R/helper03_stan_utility.r')
+source('../R/helper04_roc_utility.r')
 
 # important constants
 options(mc.cores = parallel::detectCores())
@@ -122,3 +125,41 @@ ta <- ta +
 ggsave(filename = '../results/figure/fold_auc_time.png', 
        plot = ta,
        width = 8, height = 6)
+
+
+# by taxonomic group
+pp_taxon <- map2(pred, counti_fold_match, 
+                 ~ split(data.frame(t(.x)), 
+                         .y$fossil_group)) %>%
+  map(., function(x) map(x, ~ t(.x)))
+
+counti_fold_taxon <- map(counti_fold_match, ~ split(.x, .x$fossil_group))
+
+fold_auc_taxon <- map2(pp_taxon, counti_fold_taxon, 
+     ~ map2(.x, .y, 
+            ~ apply(.x, 1, function(a) fast_auc(a, .y$event)))) %>%
+  reshape2::melt(.) %>%
+  as.tibble(.) %>%
+  rename(taxon = L2,
+         model = L1) %>%
+  separate(., col = model, into = c('model', 'fold'), sep = '_') %>%
+  mutate(taxon = case_when(taxon == 'D' ~ 'Dinoflagellates',
+                           taxon == 'R' ~ 'Radiolaria',
+                           taxon == 'F' ~ 'Foraminifera',
+                           taxon == 'N' ~ 'Calc. nanno.'),
+         model = case_when(model == 'mod1' ~ model_key[1],
+                           model == 'mod2' ~ model_key[2],
+                           model == 'mod3' ~ model_key[3],
+                           model == 'mod4' ~ model_key[4]),
+         model = factor(model, levels = rev(model_key))) %>%
+  ggplot(aes(x = value, y = model)) +
+  geom_halfeyeh(.width = c(0.5, 0.8)) +
+  facet_wrap(~ taxon) +
+  labs(x = 'AUC ROC', y = NULL)
+ggsave(filename = '../results/figure/fold_auc_taxon.png',
+       plot = fold_auc_taxon,
+       width = 8, height = 8)
+
+
+# by taxon and time
+
