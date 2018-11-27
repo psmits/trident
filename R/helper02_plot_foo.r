@@ -1,3 +1,44 @@
+#' Plot of stacked Bayes R2 values
+#' 
+#' Given a list of posterior fits, computes bayes r2. returns a plot
+#' @param data list of tibbles
+#' @param model_key model types
+#' @return ggplot object
+plot_bayesr2 <- function(data, model_key) {
+  br2 <- map(data, bayes_R2)
+  br2_gg <- reshape2::melt(br2) %>%
+    rename(model = L1) %>%
+    mutate(model_name = plyr::mapvalues(model, unique(model), model_key),
+           model_name = factor(model_name, levels = model_key)) %>%
+    ggplot(aes(x = value, y = model_name)) +
+    geom_halfeyeh(width = c(0.5, 0.8)) +
+    labs(x = 'Bayesian R^2', y = 'Model')
+  br2_gg
+}
+
+
+#' Plot of stacked Bayes R2 values
+#' 
+#' Given a list of posterior fits, computes bayes r2. returns a plot
+#' @param data an appropriate tibble
+#' @param model_key model types
+#' @return ggplot object
+plot_roc_curve <- function(data, model_key) {
+  cur <- data %>%
+    ggplot(aes(x = fpr, 
+               y = tpr, 
+               group = sim,
+               colour = model)) +
+    geom_line(alpha = 0.01) +
+    facet_wrap(model ~ ., nrow = 2) +
+    coord_equal(ratio = 1) +
+    labs(x = 'False Positive Rate',
+         y = 'True Positive Rate') +
+    theme(legend.position = 'none')
+  cur
+}
+
+
 #' Species' geographic range over time, compared
 #' 
 #' Make a plot comparing species geographic ranges over time, where all species are scaled to duration 1.

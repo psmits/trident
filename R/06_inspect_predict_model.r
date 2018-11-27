@@ -23,16 +23,14 @@ library(ggridges)
 # my function set
 source('../R/helper01_process_foo.r')
 source('../R/helper02_plot_foo.r')
-source('../R/helper03_stan_utility.r')
-source('../R/helper04_roc_utility.r')
+source('../R/helper03_misc_foo.r')
+source('../R/helper04_stan_utility.r')
+source('../R/helper05_roc_utility.r')
 
 # important constants
-options(mc.cores = parallel::detectCores())
-plan(multiprocess)
+future::plan(strategy = multicore)
 
 # get data in
-longi <- read_rds('../data/longitude.rds')
-survi <- read_rds('../data/survival.rds')
 counti <- read_rds('../data/counting.rds')
 
 # form of data that was analyzed
@@ -62,7 +60,7 @@ counti_fold_match <- rep(counti_fold[-1], 4)
 pred <- future_map2(fit, counti_fold_match,
              ~ posterior_linpred(object = .x, 
                                  newdata = .y,
-                                 draws = 1000))
+                                 draws = 100))
 
 
 # calculate ROC/AUC for the predictions of test data

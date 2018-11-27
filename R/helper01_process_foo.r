@@ -19,25 +19,6 @@ sample_n_groups = function(tbl, size, replace = FALSE, weight = NULL) {
   tbl %>% right_join(keep, by=grps) %>% group_by_(.dots = grps)
 }
 
-#' Measure maximum great circle from a geocoordinates
-#'
-#' Uses functions from geosphere to measure maximum great circle distance amoungst a cloud of points. 
-#' Coordinates are in longitude, and latitude. Output is in meters. 
-#'
-#' @param x vector of longitudes
-#' @param y vector of latitudes
-#' @return maximum greater distance measured in meters
-dist_gcd <- function(x, y) max(distm(cbind(x, y), fun = distGeo))
-
-#' Get most common entry of a vector of characters or factors
-#' 
-#' Given a vector of characters or factors, count number of occurrences of each unique entry.
-#' Return most common (using which.max rules).
-#' 
-#' @param x vector of characters or factors
-#' @return most common entry in vector x
-plurality <- function(x) names(which.max(table(x)))
-
 #' Prepare tibble for analysis
 #'
 #' This is mostly an internal function. Takes a tibble and returns a tibble with some variables transformed.
@@ -84,11 +65,12 @@ prepare_analysis <- function(x, fg = NULL) {
     mutate(fact_mybin = as.factor(mybin),
            fact_relage = as.factor(relage))
 
-  tb$fact_mybin <- as.factor(tb$mybin)
-  tb$fact_relage <- as.factor(tb$relage)
-    
-  tb
+    tb$fact_mybin <- as.factor(tb$mybin)
+    tb$fact_relage <- as.factor(tb$relage)
+
+    tb
 }
+
 
 #' Break time data up into bins
 #' 
@@ -106,10 +88,10 @@ break_my <- function(x, by = NULL, number = NULL) {
   if(!is.null(by) & !is.null(number)) {
     return('too much information. specify either bin width OR number of bins, not both.')
   }
-  
+
   top <- ceiling(max(x))
   bot <- floor(min(x))
-  
+
   if(!is.null(by)) {
     unt <- seq(from = bot, to = top, by = by)
   } else if(!is.null(number)) {
@@ -127,97 +109,159 @@ break_my <- function(x, by = NULL, number = NULL) {
   y
 }
 
-#' Did function return an error?
-#' 
-#' Given result, did it return a try-error? Assumes results wrapped in try(...). 
-#' This is used with purrr::keep to process vectors.
-#' TRUE means there is no error because we're checking for clean. 
-#' FALSE means an error was returned.
-#' This is a clean-ish way of using try(...) when you didn't or can't use purrr::safely.
-#'
-#' @param x element.
-#' @return logical TRUE for no error, FALSE for error.
-check_class <- function(x) class(x) != 'try-error'
 
 
 
-#' Get optimal cut from ROC results
-#' 
-#' Uses ROCR. I got this from somewhere on the internet.
+#' Translate raw neptune reads into analyzable forms
 #'
-#' @param perf performance object
-#' @param pred prediction object
-#' @return vector with sensitivity, specificity, and cutpoint
-opt_cut <- function(perf, pred) {
-  cut_ind <- mapply(FUN = function(x, y, p) {
-                      d <- (x - 0)^2 + (y - 1)^2
-                      ind <- which(d == min(d))
-                      c(sensitivity = y[[ind]], 
-                        specificty = 1 - x[[ind]],
-                        cutoff = p[[ind]])
-               }, perf@x.values, perf@y.values, pred@cutoffs)
-  cut_ind
-}
+#' Using neptune database, a map, a climate record, and some information, give the counting form dataframe for further analysis.
+#'
+#' @param nano tibble of neptune data
+#' @param form output format (count is counting format). can also longi(tude)
+#' @param bin_width numeric scalar of how many million years each bin is
+#' @param age_max numeric scalar oldest fossil occurrences allowed
+#' @param restrict logical scalar 
+raw_to_clean <- function(nano, 
+                         form = 'count',
+                         bin_width = 1, 
+                         age_max, 
+                         restrict = FALSE, 
+                         .width = c(0.01, 0.99),
+                         sp,
+                         mgca) {
 
-#' Get optimal cutpoints for a lot of ROC results
-#'
-#' Looped wrapper around opt_cut to get optimal cutpoint for a given posterior predictive distribution
-#'
-#' @param pp_prob list of posterior predictive draws, where each list element is the PPD for one model.
-#' @param target the actual values that are being estimated
-get_cutpoints <- function(pp_prob, target) {
-  pred <- plyr::alply(pp_prob, 1, function(x) prediction(x, target))
-  perf <- map(pred, ~ performance(.x, measure = 'tpr', x.measure = 'fpr'))
-  cutpoints <- map2(perf, pred, opt_cut)
-}
+  bin_number <- age_max / bin_width
 
+  # important but impossible to call variable name
+  names(nano)[19] <- 'age'
+  names(nano)[23] <- 'plat'
+  names(nano)[24] <- 'plng'
 
-#' Reassign class membership based on new cutpoints
-#'
-#' Give probabilities and new cutpoint level, reassigns classes.
-#'
-#' @param pp_prob list of posterior predictive draws, where each list element is the PPD for one model.
-#' @param list_cutpoint list of new cutpoints as estimated from get_cutpoints
-#' @return list of reassigned class predictions
-cut_newpoint <- function(pp_prob, list_cutpoint) {
-  pp_est_new <- list()
-  for(jj in seq(length(pp_prob))) {
-    mm <- matrix(ncol = ncol(pp_prob[[jj]]), nrow = nrow(pp_prob[[jj]]))
-    for(ii in seq(nrow(mm))) {
-      mm[ii, ] <- pp_prob[[jj]][ii, ] > list_cutpoint[[jj]]
-    }
-    pp_est_new[[jj]] <- mm * 1
+  # one of the fossil group tibble's miscoded fossil group as logical
+  nano[nano$fossil_group == 'FALSE', 'fossil_group'] <- 'F'
+
+  # miscoded as strings
+  nano <- nano %>%
+    mutate_at(c('longitude', 'latitude'), .funs = parse_double)
+
+  nano <- nano %>%
+    filter(#fossil_group == 'F',
+           fossil_group != 'DN')
+
+  nano <- nano %>% 
+    filter(!is.na(plat), 
+           !is.na(plng)) %>%
+  group_by(taxon_id) %>%
+  filter(max(age) < age_max) %>%
+  ungroup() %>%
+  # some don't have paleolat or long
+  # also need to limit to line up with mgca
+  # then
+  # assign million year bins (decreasing; youngest lowest)
+  dplyr::arrange(desc(age)) %>%
+  dplyr::mutate(mybin = break_my(age, by = 1)) %>%
+  # then
+  # make a species genus combo
+  dplyr::mutate(fullname = str_c(genus, '_', species)) %>% 
+  arrange(fullname)
+
+  # restrict occurrences to core sequence
+  if(restrict == TRUE) {
+    nano <- nano %>%
+      group_by(fullname) %>%
+      mutate(lower = quantile(age, probs = min(.width)),
+             upper = quantile(age, probs = max(.width))) %>%
+      filter(age > lower,
+             age < upper) %>%
+      ungroup()
   }
-  pp_est_new
+  
+  # assign everything a geographic cell using paleocoordinates
+  spatialref <- SpatialPoints(coords = nano[, c('plng', 'plat')],
+                              proj4string = sp)  # wgs1984.proj
+  r <- raster(globe.map, nrows = 50, ncols = 50)
+  ras <- rasterize(spatialref, r)
+  # get cell # for each observation
+  nano$cell <- cellFromXY(ras, 
+                          xy = as.data.frame(nano[, c('plng', 'plat')]))
+  
+  
+  # get all the important geographic range information
+  # have to summarize the big matrix nano
+  sprange <- nano %>%
+    group_by(fullname, mybin) %>%
+    dplyr::summarise(nocc = n(),  # number of occurrences in bin
+                     ncell = n_distinct(cell),  # number of unique cells in bin
+                     # latitidinal extent in bin
+                     latext = abs(max(plat) - min(plat)),  
+                     # great circle distance (on ellipsoid) in km in bin
+                     area = areaPolygon(cbind(plng, plat)),
+                     maxgcd = dist_gcd(plng, plat),
+                     nprov = n_distinct(longhurst_code),
+                     fossil_group = plurality(fossil_group)) %>%
+    filter(maxgcd > 0,
+           latext > 0)
+
+
+  # want to add in the lear mgca data
+  mgca <- mgca %>%
+    mutate(mybin = break_my(age, by = 1)) %>%
+    group_by(mybin) %>%
+    summarize(temp = mean(temperature, na.rm = TRUE),
+              temp_sd = sd(temperature, na.rm = TRUE)) %>%
+    ungroup()
+
+
+  # put the climate data into the dataframe
+  # easy because i've binned them the say way using break_my
+  sprange <- left_join(sprange, mgca, by = 'mybin')
+  # exclude the last cohort because artifact re. never possible to die
+  # another example of me not knowing the tidy solution
+  # because i'm not excluding rows within groups
+  # i'm removing groups based on row value
+  sprange <- split(sprange, sprange$fullname) %>%
+    .[map_lgl(., ~ max(.x$mybin) > 1)] %>%
+    reduce(., rbind)
+
+
+  # longitudinal dataset
+  # relative age in bins
+  longi <- sprange %>%
+    dplyr::mutate(relage = abs(mybin - max(mybin))) %>%
+    ungroup() %>%
+    dplyr::mutate(id = as.factor(fullname))
+  # longi has a weird data sorting issue i need to figure out
+  # so this is currently "inelegant" (not tidy)
+  ff <- split(longi, longi$fullname)
+  ff <- purrr::map(ff, function(x) {
+                     x <- x[order(x$relage), ]
+                     x})
+  longi <- purrr::reduce(ff, bind_rows)
+
+  # counting process form
+  counti <- longi %>%
+    group_by(fullname) %>%
+    dplyr::mutate(time1 = relage,
+                  time2 = relage + 1,
+                  event = ifelse(relage == max(relage) &
+                                 min(mybin) != 1, 1, 0),
+                  cohort = as.character(max(mybin)),
+                  cc = fct_drop(cohort)) %>%
+    ungroup()
+
+
+  # gaps, names, etc.
+  counti$cc.rescale <- plyr::mapvalues(counti$cc, 
+                                       from = sort(unique(counti$cc)), 
+                                       to = seq(length(unique(counti$cc))))
+  # necessary data transform to handle factor
+  counti$cc.rescale <- with(counti, {
+                              factor(cc.rescale, 
+                                     levels = sort(unique(as.numeric(cc.rescale))))})
+
+  if(form == 'long') {
+    return(longi) 
+  } else if(form == 'count') {
+    return(counti)
+  }
 }
-
-#' Posterior roc
-#' 
-#' This is mostly a convenient function to quickly get ROC estimates for entire posterior distribution (awkward matrix form).
-#' 
-#' @param x matrix of posterior 
-#' @param y matrix with true data. named element event is vector of 0/1
-post_roc <- function(x, y) apply(x, 1, function(a) roc(y$event, a))
-
-#' Extract posterior AUC, safely
-#'
-#' Wrapped with safely to prevent response has only 1 level stuff
-#'
-#' @param pred matrix of predicted 0/1 values
-#' @param counti_fold testing dataset
-#' @return list w/ two elements result and error
-get_auc_time <- function(pred, counti_fold) {
-  fold_time <- split(counti_fold, counti_fold$mybin)
-
-  pred_time <- split(t(pred), counti_fold$mybin) %>%
-    map2(., fold_time, ~ matrix(.x, nrow = nrow(.y))) %>%
-    map(., t)
-
-  safe_pr <- safely(post_roc)
-  auc_time <- map2(pred_time, fold_time, safe_pr) %>%
-    map(., function(x) map_dbl(x$result, ~ auc(.x)))
-  auc_time
-}
-
-
-

@@ -9,19 +9,18 @@ library(arm)
 library(rstanarm)
 library(brms)
 library(bayesplot)
-source('../R/helper03_stan_utility.r')
 
 # misc
 library(pROC)
 library(ROCR)
 source('../R/helper01_process_foo.r')
+source('../R/helper03_misc_foo.r')
+source('../R/helper04_stan_utility.r')
 
 # important constants
 options(mc.cores = parallel::detectCores())
 
 # get data in
-longi <- read_rds('../data/longitude.rds')
-survi <- read_rds('../data/survival.rds')
 counti <- read_rds('../data/counting.rds')
 
 # transform the data for analysis

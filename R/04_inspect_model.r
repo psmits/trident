@@ -6,24 +6,26 @@ library(tidybayes)
 
 # parallel processing
 library(parallel)
+library(furrr)
 
 # bayes
 library(arm)
 library(rstanarm)
 library(bayesplot)
-source('../R/helper03_stan_utility.r')
 
 # misc
 library(pROC)
+
 source('../R/helper01_process_foo.r')
 source('../R/helper02_plot_foo.r')
+source('../R/helper03_misc_foo.r')
+source('../R/helper04_stan_utility.r')
+source('../R/helper05_roc_utility.r')
 
 # important constants
-options(mc.cores = parallel::detectCores())
+future::plan(strategy = multicore)
 
 # get data in
-longi <- read_rds('../data/longitude.rds')
-survi <- read_rds('../data/survival.rds')
 counti <- read_rds('../data/counting.rds')
 
 # form of data that was analyzed

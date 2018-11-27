@@ -8,13 +8,15 @@ library(parallel)
 library(arm)
 library(rstanarm)
 library(bayesplot)
-source('../R/helper03_stan_utility.r')
 
 # misc
 library(scales)
 library(ggridges)
 library(pROC)
+
 source('../R/helper01_process_foo.r')
+source('../R/helper03_misc_foo.r')
+source('../R/helper04_stan_utility.r')
 
 theme_set(theme_bw())
 
@@ -22,8 +24,6 @@ theme_set(theme_bw())
 options(mc.cores = parallel::detectCores())
 
 # get data in
-longi <- read_rds('../data/longitude.rds')
-survi <- read_rds('../data/survival.rds')
 counti <- read_rds('../data/counting.rds')
 
 # form of data that was analyzed
