@@ -39,6 +39,11 @@ proj4string(globe.map) <- sp
 mgca <- read_tsv('../data/cramer/cramer_temp.txt') %>% 
   clean_names
 
+# longhust codes for atlantic
+lnghst_code <- c('FKLD', 'BRAZ', 'BENG', 'GUIN', 'CNRY', 'GUIA', 'NECS', 
+                 'ARCT', 'SARC', 'SATL', 'ETRA', 'WTRA', 'CARB', 'NATR', 
+                 'NASE', 'NASW', 'MEDI', 'GFST', 'NADR', 'NWCS')
+
 # keep something constant across datasets
 partial_raw_to_clean <- partial(raw_to_clean,
                                 nano = neptune,
@@ -47,10 +52,11 @@ partial_raw_to_clean <- partial(raw_to_clean,
                                 age_max = age_max,
                                 sp = sp,
                                 mgca = mgca)
-counti <- partial_raw_to_clean(restrict = FALSE)
-counti_restrict <- partial_raw_to_clean(restrict = TRUE)
+counti <- partial_raw_to_clean()
+counti_restrict_time <- partial_raw_to_clean(restrict = TRUE)
+counti_restrict_local <- partial_raw_to_clean(prov = lnghst_code)
 
 # write to file
 write_rds(counti, path = '../data/counting.rds')
-write_rds(counti_restrict, path = '../data/counting_restrict.rds')
-
+write_rds(counti_restrict_time, path = '../data/counting_restrict_time.rds')
+write_rds(counti_restrict_local, path = '../data/counting_restrict_local.rds')

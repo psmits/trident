@@ -117,10 +117,15 @@ break_my <- function(x, by = NULL, number = NULL) {
 #' Using neptune database, a map, a climate record, and some information, give the counting form dataframe for further analysis.
 #'
 #' @param nano tibble of neptune data
-#' @param form output format (count is counting format). can also longi(tude)
-#' @param bin_width numeric scalar of how many million years each bin is
+#' @param form output format (count is counting format). can also longi(tude) (default count)
+#' @param bin_width numeric scalar of how many million years each bin is (default 1 my)
 #' @param age_max numeric scalar oldest fossil occurrences allowed
-#' @param restrict logical scalar 
+#' @param restrict logical scalar if restricting the duration of individual species (default false)
+#' @param .width length 2 vector with upper and lower percentage for truncating temporal ranges (default 0.01 and 0.99)
+#' @param sp sp object of globe
+#' @param mgca tibble of temperature estiamtes
+#' @param prov character vector of Longhurst codes to KEEP in the dataset (default NULL)
+#' @return a tibble
 raw_to_clean <- function(nano, 
                          form = 'count',
                          bin_width = 1, 
@@ -128,7 +133,8 @@ raw_to_clean <- function(nano,
                          restrict = FALSE, 
                          .width = c(0.01, 0.99),
                          sp,
-                         mgca) {
+                         mgca,
+                         prov = NULL) {
 
   bin_number <- age_max / bin_width
 
@@ -148,6 +154,7 @@ raw_to_clean <- function(nano,
     filter(#fossil_group == 'F',
            fossil_group != 'DN')
 
+  # filter and give ages
   nano <- nano %>% 
     filter(!is.na(plat), 
            !is.na(plng)) %>%
@@ -165,6 +172,7 @@ raw_to_clean <- function(nano,
   dplyr::mutate(fullname = str_c(genus, '_', species)) %>% 
   arrange(fullname)
 
+
   # restrict occurrences to core sequence
   if(restrict == TRUE) {
     nano <- nano %>%
@@ -175,7 +183,14 @@ raw_to_clean <- function(nano,
              age < upper) %>%
       ungroup()
   }
-  
+
+  # remove points not in selected region
+  if(!is.null(prov)) {
+    nano <- nano %>%
+      filter(longhurst_code %in% prov)
+  }
+
+
   # assign everything a geographic cell using paleocoordinates
   spatialref <- SpatialPoints(coords = nano[, c('plng', 'plat')],
                               proj4string = sp)  # wgs1984.proj
