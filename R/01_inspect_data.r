@@ -33,7 +33,7 @@ counti_trans <- prepare_analysis(counti)
 
 # occurrences through time, labeled if LAD
 octg <-  
-  counti %>%
+  counti_trans %>%
   mutate(state = case_when(event == 0 ~ 'Standard',
                            event == 1 ~ 'Last'),
          fossil_group = case_when(fossil_group == 'D' ~ 'Dinoflagellates',
@@ -52,14 +52,14 @@ ggsave(filename = '../results/figure/occ_time_label.png',
 
 
 # relative "abundance" of microfossil_groups over time
-ocag <- counti %>%
+ocag <- counti_trans %>%
   ggplot(aes(x = mybin, fill = fossil_group)) +
   geom_histogram(position = 'fill')
 ggsave(filename = '../results/figure/abn_time_stack.png',
        plot = ocag, width = 6, height = 6)
 
 # occurrences by relage
-ocrg <- counti %>% 
+ocrg <- counti_trans %>% 
   group_by(fullname) %>%
   dplyr::summarize(maxage = max(relage),
                    fossil_group = plurality(fossil_group),
@@ -84,7 +84,7 @@ ggsave(filename = '../results/figure/age_label.png',
 
 # make a plot of a random selection of species
 set.seed(100)
-srg <- counti %>% 
+srg <- counti_trans %>% 
   mutate(logmaxgcd = log1p(maxgcd)) %>%
   group_by(fullname) %>%
   sample_n_groups(size = 8) %>%
@@ -98,7 +98,7 @@ ggsave(filename = '../results/figure/range_time.png',
 
 # lots of little code here
 # for FAD/LAD accumulation curves
-ft <- counti %>%
+ft <- counti_trans %>%
   group_by(fullname) %>%
   summarize(fad = max(mybin),
             fossil_group = plurality(fossil_group)) %>%
@@ -109,7 +109,7 @@ ft <- counti %>%
          time = fad)
 
 # LADs over time
-lt <- counti %>%
+lt <- counti_trans %>%
   group_by(fullname) %>%
   filter(!all(event == 0)) %>%
   summarize(lad = max(mybin),
