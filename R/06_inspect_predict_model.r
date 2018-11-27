@@ -7,6 +7,8 @@ library(deeptime)
 
 # parallel processing
 library(parallel)
+library(future)
+library(furrr)
 
 # bayes
 library(arm)
@@ -26,6 +28,7 @@ source('../R/helper04_roc_utility.r')
 
 # important constants
 options(mc.cores = parallel::detectCores())
+plan(multiprocess)
 
 # get data in
 longi <- read_rds('../data/longitude.rds')
@@ -56,7 +59,7 @@ fit <- read_rds('../data/training_fit.rds')
 counti_fold_match <- rep(counti_fold[-1], 4)
 
 # given new cutpoints, try predicting the test data
-pred <- map2(fit, counti_fold_match,
+pred <- future_map2(fit, counti_fold_match,
              ~ posterior_linpred(object = .x, 
                                  newdata = .y,
                                  draws = 1000))
@@ -162,4 +165,57 @@ ggsave(filename = '../results/figure/fold_auc_taxon.png',
 
 
 # by taxon and time
+# break up the posterior predictive estimates by taxon and time
+# break up the data to match nicely
 
+# prepare the data in format
+bysplit <- counti_fold_match %>%
+  map(., 
+      ~ .x %>%
+        dplyr::select(mybin, fossil_group, event) %>%
+        mutate(type = paste0(fossil_group, ':', mybin)) %>%
+        arrange(mybin, fossil_group))  # relevant info
+bb <- bysplit %>%
+  map(., ~ split(.x, .x$type))         # by taxon and time
+
+# break up probs
+tt <- map(pred, ~ as.tibble(t(.x))) %>%
+  map2(., bysplit, ~ split(.x, .y$type))  
+
+
+# calculate auc for each taxonXtime combo
+safe_roc <- safely(roc)
+safe_auc <- safely(auc)
+foo <- function(event, prob) {
+  safe_auc(safe_roc(event, prob)$result)
+}
+split_auc <- map2(tt, bb, function(xx, yy)
+                  map2(xx, yy, ~ apply(.x, 2, function(aa)
+                                       foo(.y$event, aa)))) %>%
+  map(., ~ map(.x, ~ reduce(map(.x, 'result'), c)))
+
+# recombine and plot
+fold_auc_taxon_time <- map(split_auc, function(x) map(x, ~ as.tibble(x = .x))) %>%
+  map(., ~ bind_rows(.x, .id = 'phyla_time')) %>%
+  bind_rows(., .id = 'model') %>%
+  separate(., col = phyla_time, into = c('phyla', 'time'), sep = ':') %>%
+  separate(., col = model, into = c('model', 'fold'), sep = '_') %>%
+  mutate(time = as.numeric(time),
+         fossil_group = case_when(phyla == 'D' ~ 'Dinoflagellates',
+                                  phyla == 'R' ~ 'Radiolaria',
+                                  phyla == 'F' ~ 'Foraminifera',
+                                  phyla == 'N' ~ 'Calc. nanno.'),
+         model = case_when(model == 'mod1' ~ model_key[1],
+                           model == 'mod2' ~ model_key[2],
+                           model == 'mod3' ~ model_key[3],
+                           model == 'mod4' ~ model_key[4]),
+         model = factor(model, levels = rev(model_key))) %>%
+  ggplot(aes(x = time, y = value)) +
+  geom_hline(yintercept = 0.5, linetype = 'dashed') +
+  stat_lineribbon() +
+  scale_fill_brewer() +
+  scale_x_reverse() +
+  facet_grid(fossil_group ~ model)
+ggsave(filename = '../results/figure/fold_auc_taxon_time.png', 
+       plot = fold_auc_taxon_time,
+       width = 6, height = 6)

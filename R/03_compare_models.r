@@ -215,9 +215,6 @@ ggsave(filename = '../results/figure/auc_taxon.png',
 
 
 # taxon and time
-temp <- counti_trans %>%
-  dplyr::select(fossil_group, mybin)
-
 bysplit <- counti_trans %>%
   dplyr::select(mybin, fossil_group, event) %>%
   mutate(type = paste0(fossil_group, ':', mybin)) %>% # makes my life easier
@@ -234,7 +231,7 @@ foo <- function(event, prob) {
   safe_auc(safe_roc(event, prob)$result)
 }
 split_auc <- map(tt, function(x) 
-                 map2(x, bb, ~ apply(.x, 2, function(a) 
+                 map2(x, bb, ~ apply(.x, 2, function(a)  
                                      foo(.y$event, a)))) %>%
   map(., ~ map(.x, ~ reduce(map(.x, 'result'), c)))
 
@@ -243,8 +240,8 @@ auc_taxon_time <- map(split_auc, function(x) map(x, ~ as.tibble(x = .x)))%>%
   map(., ~ bind_rows(.x, .id = 'phyla_time')) %>%
   bind_rows(., .id = 'model') %>%
   separate(., col = phyla_time, into = c('phyla', 'time'), sep = ':') %>%
-  mutate(time = as.numeric(time)) %>%
-  mutate(fossil_group = case_when(phyla == 'D' ~ 'Dinoflagellates',
+  mutate(time = as.numeric(time),
+         fossil_group = case_when(phyla == 'D' ~ 'Dinoflagellates',
                                   phyla == 'R' ~ 'Radiolaria',
                                   phyla == 'F' ~ 'Foraminifera',
                                   phyla == 'N' ~ 'Calc. nanno.'),
