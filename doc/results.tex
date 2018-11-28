@@ -62,11 +62,17 @@ Additional comparison of in-sample model performance at each of the time interva
   \label{fig:roc_ts}
 \end{figure}
 
-Because of the parameter rich ``past and vary'' model displays some modest improvements over the other models we choose this model for all further analysis.
+We can also compare the by-taxon in-sample performances of the four models. 
+
+
+Finally, we can also examine how the by-taxon in-sample performances of the four models vary over time.
+
+
+
 
 \section{Cross-validation}
 
-The approximate out-of-sample predictive performance for our selected model, as measured by AUC, is approximately identical to our in-sample performance (Fig. \ref{fig:fold_auc}). The quality of performance, however, is not great, with average out-of-sample AUC estimated to be just above 0.7 which is far from perfect. This result means that while we expect our model to yield consistent results when provided with new data, we do not expect that our predictions will be very accurate.
+The approximate out-of-sample predictive performance for each of our four models, as measured by AUC, are approximately identical to each other and to our in-sample performance (Fig. \ref{fig:fold_auc}). The quality of performance, however, is not great, with average out-of-sample AUC for each of our models estimated to be about 0.77 which is far from perfect. This result means that while we expect our model to yield consistent results when provided with new data, we do not expect that our predictions will be very accurate.
 % ROC OOS estimate
 \begin{figure}[ht]
   \centering
@@ -75,7 +81,8 @@ The approximate out-of-sample predictive performance for our selected model, as 
   \label{fig:fold_auc}
 \end{figure}
 
-When our cross-validation estimates are presented for each time interval, 
+
+When our cross-validation estimates are presented for each time interval, the similarity in out-of-sample performance between the models becomes even more obvious -- while there are minor differences in the posterior estimates for individual time points, the overall structures are nearly identical. 
 
 % ROC OOS estimate time series
 \begin{figure}[ht]

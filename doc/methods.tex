@@ -141,6 +141,12 @@ Model adequacy was measured using the area under the receiver operating characte
 
 We are also interested in understanding how well our model predicts species extinction given new, future data (out-of-sample data). To do this, we estimated average out-of-sample predictive error using 5-fold time-series cross-validation. For time-series data, the folds (data partitions) are approximately equal segments of time. The model is fit to the first fold and the posterior estimates are used to predict the states of the observations in the second fold, then the model is fit to the first and second fold and the posterior states are used to estimate the states from the third fold, and so on with increasingly large numbers of folds used for fitting a model to predict the states from the subsequent fold. With 63 time points, each of the five folds represents approximately 13 time points. Keep in mind, however, that each time point corresponds to many (100-1000) individual observations.
 
+The out-of-sample performance estimates can then be compared between the models and by taxonomic groups and over time.
+
+
 See our code repository LINK for full code details. Our code uses ``tidyverse'' tools such as dplyr CITATION, purr CITATION, and tidybayes CITATION, thus some familiarity with that package ecosystem is necessary to fully comprehend how we've processed our data and results.
+
+
+
 
 \end{document}
