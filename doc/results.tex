@@ -16,33 +16,33 @@
 
 \section{Model selection and adequacy}
 
-Our best model, as selected via LOOIC and WAIC, is the parameter rich ``past and vary'' model which includes our historical covariantes and allows all regression parameters to vary through time (Table \ref{tab:selection}). Our best model is an improvement over the next best model by approximately 13 LOOIC and 24 WAIC points. However, the actual differences between these models are minor as revealed by the wide the standard errors. These results mean that while our ``past and vary'' model could be considered the best of the four, all four of the models are very close and only offer incremental improvement but not major differences.
-\begin{table}[ht]
-  \centering
-  \caption{Model comparison using WAIC and LOOIC}
-  \begin{tabular}{ r r r r r }
-    \hline
-    Model & looic & looic se & waic & waic se \\
-    \hline
-    Past and vary & 12784.04 & 178.71 & 12784.04 & 178.71 \\
-    No past but vary & 12819.01 & 178.80 & 12819.01 & 178.80 \\ 
-    Past but no vary & 12847.00 & 179.38 & 12847.00 & 179.38 \\ 
-    No past or vary & 12851.53 & 179.48 & 12851.53 & 179.48 \\ 
-    \hline
-  \end{tabular}
-  \label{tab:selection}
-\end{table}
-
-As described above, our data is extremely unbalanced with respect to the number of extinction events relative to the total number of observations; this reality means that 0.5 is an inappropriate cutpoint for estimating if a species observation is their last (i.e. goes extinct). New, optimal cutpoint were calculated from the ROC curve as the level which maximized the true and false positive rates.
-
-The distributions of optimal cut-off point estimates for each of the four models are broadly similar, with all 50\% credible intervals overlapping.
-
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/cut_plot}
-  \caption{Posterior estimates of the optimal cutpoints for each of the three models. The optimal cutpoint corresponds to the point which maximizes the true and false positive rates; this new cutpoint is used instead of 0.5 when estimating if an observation is the last observation of that species (i.e. goes extinct).}
-  \label{fig:cut_point}
-\end{figure}
+%Our best model, as selected via LOOIC and WAIC, is the parameter rich ``past and vary'' model which includes our historical covariantes and allows all regression parameters to vary through time (Table \ref{tab:selection}). Our best model is an improvement over the next best model by approximately 13 LOOIC and 24 WAIC points. However, the actual differences between these models are minor as revealed by the wide the standard errors. These results mean that while our ``past and vary'' model could be considered the best of the four, all four of the models are very close and only offer incremental improvement but not major differences.
+%\begin{table}[ht]
+%  \centering
+%  \caption{Model comparison using WAIC and LOOIC}
+%  \begin{tabular}{ r r r r r }
+%    \hline
+%    Model & looic & looic se & waic & waic se \\
+%    \hline
+%    Past and vary & 12784.04 & 178.71 & 12784.04 & 178.71 \\
+%    No past but vary & 12819.01 & 178.80 & 12819.01 & 178.80 \\ 
+%    Past but no vary & 12847.00 & 179.38 & 12847.00 & 179.38 \\ 
+%    No past or vary & 12851.53 & 179.48 & 12851.53 & 179.48 \\ 
+%    \hline
+%  \end{tabular}
+%  \label{tab:selection}
+%\end{table}
+%
+%As described above, our data is extremely unbalanced with respect to the number of extinction events relative to the total number of observations; this reality means that 0.5 is an inappropriate cutpoint for estimating if a species observation is their last (i.e. goes extinct). New, optimal cutpoint were calculated from the ROC curve as the level which maximized the true and false positive rates.
+%
+%The distributions of optimal cut-off point estimates for each of the four models are broadly similar, with all 50\% credible intervals overlapping.
+%
+%\begin{figure}[ht]
+%  \centering
+%  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/cut_plot}
+%  \caption{Posterior estimates of the optimal cutpoints for each of the three models. The optimal cutpoint corresponds to the point which maximizes the true and false positive rates; this new cutpoint is used instead of 0.5 when estimating if an observation is the last observation of that species (i.e. goes extinct).}
+%  \label{fig:cut_point}
+%\end{figure}
 
 Comparison of the in-sample AUC estimates between the four models reveals similar results as the selection criteria (Fig. \ref{fig:roc_hist}). While the parameter rich ``past and vary'' model has the greatest mean AUC when compared to the other three models, the other three models are quite similar. We chose to base our conclusions on the parameter rich ``past and vary'' model but these comparisons of model selection and adequacy illustrate the very small gain in performance that is achieved by allowing parameter effects to vary through time and including the historical covariates, though it appears that each of these choices on their own yield approximately equivalent models.
 % ROC model comparison
@@ -75,14 +75,30 @@ The approximate out-of-sample predictive performance for our selected model, as 
   \label{fig:fold_auc}
 \end{figure}
 
-%When our cross-validation estimates are presented for each time interval, 
-%% ROC OOS estimate time series
-%\begin{figure}[ht]
-%  \centering
-%  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/fold_auc_time}
-%  \caption{Approximate out-of-sample AUC values calculated for each of the My intervals using five-fold cross-validation of the time series. The AUC of the individual My intervals within each fold is plotted to highlight the heterogentity in performance within and between folds. The AUC estimates from each fold are labeled and are numbered from oldest to youngest.}
-%  \label{fig:fold_auc_time}
-%\end{figure}
+When our cross-validation estimates are presented for each time interval, 
+
+% ROC OOS estimate time series
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/fold_auc_time}
+  \caption{Approximate out-of-sample AUC values calculated for each of the My intervals using five-fold cross-validation of the time series. The AUC of the individual My intervals within each fold is plotted to highlight the heterogentity in performance within and between folds. The AUC estimates from each fold are labeled and are numbered from oldest to youngest.}
+  \label{fig:fold_auc_time}
+\end{figure}
+
+
+We can also compare expected out-of-sample performance based on taxonomic group
+
+
+Finally, expected out-of-sample performance is compared between taxonomic groups over time.
+
+
+
+
+
+
+
+
+
 
 
 \section{Parameter estimates}
