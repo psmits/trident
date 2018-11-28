@@ -146,10 +146,6 @@ raw_to_clean <- function(nano,
   # one of the fossil group tibble's miscoded fossil group as logical
   nano[nano$fossil_group == 'FALSE', 'fossil_group'] <- 'F'
 
-  # miscoded as strings
-  nano <- nano %>%
-    mutate_at(c('longitude', 'latitude'), .funs = parse_double)
-
   nano <- nano %>%
     filter(#fossil_group == 'F',
            fossil_group != 'DN')

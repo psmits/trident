@@ -17,12 +17,6 @@ source('../R/helper04_stan_utility.r')
 # important constants
 options(mc.cores = parallel::detectCores())
 
-# get data in
-counti <- read_rds('../data/counting.rds')
-
-# transform the data for analysis
-counti_trans <- prepare_analysis(counti)
-
 #priors <- c(set_prior('normal(-2, 1)', class= 'Intercept'),
 #            set_prior('normal(0, 1)', class = 'b'),
 #            set_prior('normal(-1, 1)', class = 'b', coef = 'maxgcd'),
@@ -68,7 +62,6 @@ forms <- list(form, form2, form3, form4)
 # partial evaluation to fill in priors and ancillary details
 part_glmer <- partial(stan_glmer, 
                       family = 'binomial',
-                      data = counti_trans,
                       prior_intercept = normal(-2, 5, autoscale = FALSE),
                       prior_aux = cauchy(0, 1, autoscale = FALSE),
                       thin = 4, 
@@ -89,7 +82,21 @@ list_part_glmer <-
                                           rep(1, 2), 
                                           autoscale = FALSE)))
 
+# get data in
+counti <- read_rds('../data/counting.rds')
+counti_restrict_time <- read_rds('../data/counting_restrict_time.rds')
+counti_restrict_local <- read_rds('../data/counting_restrict_local.rds')
+
+# transform the data for analysis
+counti_trans <- prepare_analysis(counti)
+counti_rt_trans <- prepare_analysis(counti_restrict_time)
+counti_rl_trans <- prepare_analysis(counti_restrict_local)
+
 # map the data to the models
-disc_fit <- map2(forms, list_part_glmer, ~ .y(.x))
+disc_fit <- map2(forms, list_part_glmer, ~ .y(.x, data = counti_trans))
+disc_fit_rt <- map2(forms, list_part_glmer, ~ .y(.x, data = counti_rt_trans))
+disc_fit_rl <- map2(forms, list_part_glmer, ~ .y(.x, data = counti_rl_trans))
 
 write_rds(disc_fit, path = '../data/disc_fit.rds')
+write_rds(disc_fit_rt, path = '../data/disc_fit_rt.rds')
+write_rds(disc_fit_rl, path = '../data/disc_fit_rl.rds')

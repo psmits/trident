@@ -15,6 +15,7 @@ library(ggridges)
 library(pROC)
 
 source('../R/helper01_process_foo.r')
+source('../R/helper02_plot_foo.r')
 source('../R/helper03_misc_foo.r')
 source('../R/helper04_stan_utility.r')
 
@@ -25,113 +26,23 @@ options(mc.cores = parallel::detectCores())
 
 # get data in
 counti <- read_rds('../data/counting.rds')
+counti_rt <- read_rds('../data/counting_restrict_time.rds')
+counti_rl <- read_rds('../data/counting_restrict_local.rds')
 
 # form of data that was analyzed
 counti_trans <- prepare_analysis(counti)
-#counti_trans %>% dplyr::select(fullname, mybin, relage, maxgcd, diff_maxgcd)
+counti_rt_trans <- prepare_analysis(counti_rt)
+counti_rl_trans <- prepare_analysis(counti_rl)
 
-
-# occurrences through time, labeled if LAD
-octg <-  
-  counti_trans %>%
-  mutate(state = case_when(event == 0 ~ 'Standard',
-                           event == 1 ~ 'Last'),
-         fossil_group = case_when(fossil_group == 'D' ~ 'Dinoflagellates',
-                                  fossil_group == 'R' ~ 'Radiolaria',
-                                  fossil_group == 'F' ~ 'Foraminifera',
-                                  fossil_group == 'N' ~ 'Calc. nanno.')) %>%
-  ggplot(aes(x = mybin, fill = state)) +
-  stat_bin() +
-  facet_grid(fossil_group ~ ., switch = 'y') +
-  scale_fill_manual(name = 'Occurrence type',
-                    values = c('goldenrod', 'skyblue')) +
-  theme(legend.position = 'bottom') +
-  labs(title = 'Occurrences', x = 'Time (My before present)', y = 'Count')
-ggsave(filename = '../results/figure/occ_time_label.png',
-       plot = octg, width = 4, height = 6)
-
-
-# relative "abundance" of microfossil_groups over time
-ocag <- counti_trans %>%
-  ggplot(aes(x = mybin, fill = fossil_group)) +
-  geom_histogram(position = 'fill')
-ggsave(filename = '../results/figure/abn_time_stack.png',
-       plot = ocag, width = 6, height = 6)
-
-# occurrences by relage
-ocrg <- counti_trans %>% 
-  group_by(fullname) %>%
-  dplyr::summarize(maxage = max(relage),
-                   fossil_group = plurality(fossil_group),
-                   died = any(event == 1)) %>%
-  mutate(state = case_when(died == 0 ~ 'Extant',
-                           died == 1 ~ 'Extinct'),
-         fossil_group = case_when(fossil_group == 'D' ~ 'Dinoflagellates',
-                                  fossil_group == 'R' ~ 'Radiolaria',
-                                  fossil_group == 'F' ~ 'Foraminifera',
-                                  fossil_group == 'N' ~ 'Calc. nanno.')) %>%
-  ggplot(aes(x = maxage, fill = state)) +
-  stat_bin() +
-  facet_grid(fossil_group ~ ., switch = 'y') +
-  scale_fill_manual(name = 'State', 
-                    values = c('goldenrod', 'skyblue')) +
-  theme(legend.position = 'bottom') +
-  labs(title = 'Age distribution', x = 'Age (My)', y = 'Count')
-ggsave(filename = '../results/figure/age_label.png',
-       plot = ocrg, width = 4, height = 6)
-
-
-
-# make a plot of a random selection of species
-set.seed(100)
-srg <- counti_trans %>% 
-  mutate(logmaxgcd = log1p(maxgcd)) %>%
-  group_by(fullname) %>%
-  sample_n_groups(size = 8) %>%
-  ungroup %>%
-  ggplot(aes(x = relage, y = logmaxgcd, group = fullname, colour = fullname)) +
-  geom_line() +
-  geom_point() +
-  theme(legend.position = 'bottom')
-ggsave(filename = '../results/figure/range_time.png',
-       plot = srg, width = 8, height = 6)
-
-# lots of little code here
-# for FAD/LAD accumulation curves
-ft <- counti_trans %>%
-  group_by(fullname) %>%
-  summarize(fad = max(mybin),
-            fossil_group = plurality(fossil_group)) %>%
-  group_by(fossil_group, fad) %>%
-  summarize(n = n()) %>%
-  arrange(desc(fad)) %>%
-  mutate(nsum = cumsum(n),
-         time = fad)
-
-# LADs over time
-lt <- counti_trans %>%
-  group_by(fullname) %>%
-  filter(!all(event == 0)) %>%
-  summarize(lad = max(mybin),
-            fossil_group = plurality(fossil_group)) %>%
-  group_by(fossil_group, lad) %>%
-  summarize(n = n()) %>%
-  arrange(desc(lad)) %>%
-  mutate(nsum = cumsum(n),
-         time = lad)
-
-# put them together
-ccg <- bind_rows(ft, lt, .id = 'type') %>%
-  mutate(type = plyr::mapvalues(type, 1:2, c('FAD', 'LAD'))) %>%
-  ggplot(aes(x = time, y = nsum, colour = type, group = type)) +
-  geom_line() +
-  facet_grid(~ fossil_group) +
-  labs(x = 'Time (My)', y = 'Cummulative count')
-ggsave(filename = '../results/figure/fad_lad_count_wide.png',
-       plot = ccg, width = 6, height = 3)
-ccg2 <- ccg + facet_grid(fossil_group ~ ., switch = 'y', scales = 'free_y')
-ggsave(filename = '../results/figure/fad_lad_count_tall.png',
-       plot = ccg2, width = 4, height = 6)
+view_neptune(.data = counti_trans, 
+             name = 'full',
+             path = '../results/figure/')
+view_neptune(.data = counti_rt_trans, 
+             name = 'restrict_time',
+             path = '../results/figure/')
+view_neptune(.data = counti_rl_trans, 
+             name = 'restrict_local',
+             path = '../results/figure/')
 
 
 # looking at the temperature data
@@ -163,3 +74,5 @@ tpg <- mg %>%
   labs(x = 'Time (My)', y = 'Temperature diff. from modern (C)')
 ggsave(filename = '../results/figure/cramer_temp.png',
        plot = tpg, width = 6, height = 3)
+
+
