@@ -44,7 +44,7 @@
 %  \label{fig:cut_point}
 %\end{figure}
 
-Comparison of the in-sample AUC estimates between the four models reveals similar results as the selection criteria (Fig. \ref{fig:roc_hist}). While the parameter rich ``past and vary'' model has the greatest mean AUC when compared to the other three models, the other three models are quite similar. We chose to base our conclusions on the parameter rich ``past and vary'' model but these comparisons of model selection and adequacy illustrate the very small gain in performance that is achieved by allowing parameter effects to vary through time and including the historical covariates, though it appears that each of these choices on their own yield approximately equivalent models.
+Our first model comparison is based on in-sample AUC estiamtes. These estimates describe the relative and absolute adequacy of our models to describe the data to which they were fit. Comparison of the in-sample AUC estimates between the four models reveals similar results as the selection criteria (Fig. \ref{fig:roc_hist}). While the parameter rich ``past and vary'' model has the greatest mean AUC when compared to the other three models, there is substantial overlap in their posterior distributions. Additionally, all of our models are concentrated around an AUC of 0.77 which is interpreted as ``fine but not good'' performance. It is hard, then, to conclude that there is one ``best'' model when all of them are approximately equivalent. However, our mode complex models have relatively higher performance than our simplest models -- in particular, allowing covariate effects to vary over time appears to improve in-sample model performance as much as including the historical covariates.
 % ROC model comparison
 \begin{figure}[ht]
   \centering
@@ -53,7 +53,7 @@ Comparison of the in-sample AUC estimates between the four models reveals simila
   \label{fig:roc_hist}
 \end{figure}
 
-Additional comparison of in-sample model performance at each of the time intervals reveals just how similar our four models are to each other (Fig. \ref{fig:roc_ts}). There are few if any obvious differences between the models in their performances.
+Additional comparison of in-sample model performance at each of the time intervals reveals just how similar in adequacy our models performance are to each other (Fig. \ref{fig:roc_ts}). There are few if any obvious differences between the models in their performances.
 % ROC model comparison time series
 \begin{figure}[ht]
   \centering
@@ -106,11 +106,7 @@ Finally, expected out-of-sample performance is compared between taxonomic groups
 
 
 
-
-
 \section{Parameter estimates}
-
-The overall average probability of a species going extinct during any interval is very low (Fig. \ref{fig:effect_est}). This result means that even if covariate effects are very large on the log-odds scale, when compared on the probability scale will only produce a minor change in probability of extinction. This is one of the hardest parts of logistic regression for people to understand. Effect sizes are on the log-odds scale but prediction is on the probability scale. When the intercept term is very negative or positive (greater than 2), covariate effects are fighting over an increasingly small amount of probability. Logistic regressions are easiest to interpret when the intercept term is approximately 0; this is a fundamental difficulty of dealing with very uneven data sets.
 
 As expected, a species with greater than average geographic range is expected to have a greater probability of surviving than a species with average or less than average geographic range (Fig. \ref{fig:effect_est})
 
