@@ -22,7 +22,7 @@ All occurrences were binned into 1 My bins based on the estimated age of the fos
 
 A taxon's geographic range was calculated for each of the 1 My bins in which it occurred. Geographic range was calculated as the maximum great circle distance on an ellipsoid (i.e. the globe) between any two occurrences; this measure is also called a geodesic. This distance was measured in kilometers. The geodesic distance was then log-plus-one transformed and then standardized by zero-centering the data and then dividing by its standard deviation so that geographic range had mean 0 and standard deviation 1. This standardization means that a regression coefficient associated with this covariate describes the change in extinction probability per change in standard deviation of geographic range, and that coefficients associated with similarly standardized covariates will be directly comparable in magnitude.
 
-Temperature data used as covariates in this analysis are based on Magnesium/Calcium isotope ratios sourced from Cramer et al CITATION. These are considered a more accurate estimate of global temperature than the standard Oxygen isotope-based estimates because Mg/Ca based estimates are not effected by ice-volume and fresh-water input (e.g. meteoric water). This property is of particular importance for this analysis as polar ice-caps develop midway through the Cenozoic. Our data source, Cramer et al., provides temperature estimates for every 0.1 My from 0 to 63 Mya. We binned these estimates into 1 My intervals as we did with the fossil occurrences. The temperature estimate for each 1 My interval was calculated as the mean of all estimates within that interval (Fig. \ref{fig:temp_curve}). Temperature was then transformed and standardized the in the same manner as geographic range (above).
+Temperature data used as covariates in this analysis are based on Magnesium/Calcium isotope ratios sourced from Cramer et al CITATION. These elemental ratios are considered more accurate estimates of past global temperature when compared to the frequently used Oxygen isotope-based estimates; this is because Mg/Ca based estimates are not effected by ice-volume and fresh-water input (e.g. meteoric water) which can alter Oxygen isotope ratios without reflecting changes to the climate itself. This property is of particular importance for this analysis as polar ice-caps develop midway through the Cenozoic. Our data source, Cramer et al., provides temperature estimates for every 0.1 My from 0 to 63 Mya. We binned these estimates into 1 My intervals as we did with the fossil occurrences. The temperature estimate for each 1 My interval was calculated as the mean of all estimates within that interval (Fig. \ref{fig:temp_curve}). Temperature was then transformed and standardized the in the same manner as geographic range (above).
 
 \begin{figure}[ht]
   \centering
@@ -91,11 +91,14 @@ In total, these prior choices can be expressed as
 \end{equation}
 
 
+We considered four variants of the model described above: 1) historical covariates with time-varying intercepts and slopes, 2) no historical coviarates with time-varying intercepts and slopes, 3) historical covariates without time-varying intercepts and slopes, and 4) no historical covariates and no time-varying intercepts and slopes (except age effect). The second and fourth models modify the number of columns in \(X\) by removing two of the covariates. The third and fourth model simplify the first model to just varying intercepts without varying slopes.
+
+
 \section{Model Parameter Estimation}
 
 We implemented our model using the \begin{texttt}rstanarm\end{texttt} package for the R programming language CITATION. This package provides an interface to the Stan probabilistic programming language for writing hierarchical/mixed-effects models in native R. Posterior estimates were obtained through Hamiltonian Monte Carlo, using 2000 steps divided equally between warm-up and sampling. In order to prevent divergent transitions the adapt delta value was increased to 0.9999; all other HMC/NUTS sampling parameters were kept at the defaults for rstanarm version XX CITATION. 
 
-An implementation of our full model in \begin{texttt}rstanarm\end{texttt}, given a data.frame of all necessary data in a data.frame called ``data'', is coded as
+An implementation of our full model in \begin{texttt}rstanarm\end{texttt}, given a data.frame of all necessary data in a data.frame called ``data'', is coded as:
 \begin{verbatim}
   stan_glmer(formula = event ~ range + range_diff + temp + temp_lag + 
                        (1 + range + range_diff + temp + temp_lag | mybin/phylum) + 
@@ -107,10 +110,10 @@ An implementation of our full model in \begin{texttt}rstanarm\end{texttt}, given
              prior_aux = cauchy(0, 3, autoscale = FALSE), 
              chains = 4,
              thin = 4,
-             adapt_delta = 0.999999).
+             adapt_delta = 0.999999)
 \end{verbatim}
 
-Similarly, our full model can be implemented in \begin{texttt}brms\end{texttt} as
+Similarly, our full model can be implemented in \begin{texttt}brms\end{texttt} CITATION as:
 \begin{verbatim}
 priors <- c(set_prior('normal(0, 10)', class= 'Intercept'),
             set_prior('normal(0, 1)', class = 'b'),
@@ -125,7 +128,7 @@ brmfit <- brm(formula = bf(event ~ range + range_diff + temp + temp_lag +
               prior = priors,
               chains = 4, 
               thin = 4,
-              control = list(adapt_delta = 0.999999).
+              control = list(adapt_delta = 0.999999)
 \end{verbatim}
 
 Posterior convergence was determined using the general and HMC-specific diagnostic criteria: scale reduction factor (\(\hat{R}\); target \(<1.1\)), effective sample size (eff; target value eff/steps \(<0.0001\)), number of samples that saturated the maximum trajectory length for avoiding infinite loops (treedepth; target value 0), sample divergence, and the energy Bayesian Fraction of Mission Information (E-BFMI; target value \(>0.2\)). For further explanation of these diagnostic criteria, see the Stan Manual CITATION.
@@ -133,20 +136,16 @@ Posterior convergence was determined using the general and HMC-specific diagnost
 
 \section{Model Selection and Adequacy}
 
-We considered four variants of the model described above: 1) historical covariates with time-varying intercepts and slopes, 2) no historical coviarates with time-varying intercepts and slopes, 3) historical covariates without time-varying intercepts and slopes, and 4) no historical covariates and no time-varying intercepts and slopes (except age effect). The second and fourth models modify the number of columns in \(X\) by removing two of the covariates. The third and fourth model simplify the first model to just varying intercepts without varying slopes.
+We are interested in model adequacy and performance into two contexts: in-sample and out-of-sample predictive performance. ``In-sample'' means we are estimating how well our model predicts our observed data given that the model was fit to the entire dataset; this is a posterior predictive check in that we are comparing the posterior predictive distribution to our observed data. ``Out-of-sample'' is defined below.
 
-The four variant models were compared using both WAIC and LOOIC which are estimates of a model's expected out-of-sample performance; these measures are fully Bayesian, taking into account the entire estimated joint posterior CITATION. WAIC and LOOIC are interpreted similarly to AIC, with lower values indicating greater expected out-of-sample performance. Additionally, the Bayesian nature of WAIC and LOOIC mean that they are calculated with standard errors allowing for a more nuanced understanding the actual amount of difference between the models. We selected the model with the lowest WAIC and LOOIC, which happened to be are most parameter rich model.
+Relative and absolute model adequacy of the four variant models was compared using the area under the receiver operating characteristic curve (AUC). This measure is commonly used in classification problems as it has the desirable characteristic of comparing the model's true positive rate with its false positive rate, as opposed to accuracy which only considers the count of true positives. AUC ranges between 0.5 and 1, with 0.5 indicating no improvement in performance from random and 1 indicating perfect performance. 
 
-Model adequacy was measured using the area under the receiver operating characteristic curve (AUC). This measure is commonly used in classification problems as it has the desirable characteristic of comparing the model's true positive rate with its false positive rate, as opposed to only true positive rate measured by accuracy CITATION. This value ranges between 0.5 and 1, with 0.5 indicating no improvement in performance from random and 1 indicating perfect performance. AUC was calculated for the dataset as a whole, and for each of time bins. This measure was used in two contexts: measuring in-sample and out-of-sample predictive performance. ``In-sample'' means we are estimating how well our model predicts our observed data given that the model was fit to the entire dataset; this is a posterior predictive check in that we are comparing the posterior predictive distribution to our observed data. ``Out-of-sample'' is defined below.
+The differences in in-sample predictive performance between the models was visualized in multiple ways: whole data set by model, taxonomic group by model, model performance over time, and model performance by taxonomic groups over time. These comparisons demonstrate the relative and absolute adequacy of the models in describing the dataset they were fit to.
 
-We are also interested in understanding how well our model predicts species extinction given new, future data (out-of-sample data). To do this, we estimated average out-of-sample predictive error using 5-fold time-series cross-validation. For time-series data, the folds (data partitions) are approximately equal segments of time. The model is fit to the first fold and the posterior estimates are used to predict the states of the observations in the second fold, then the model is fit to the first and second fold and the posterior states are used to estimate the states from the third fold, and so on with increasingly large numbers of folds used for fitting a model to predict the states from the subsequent fold. With 63 time points, each of the five folds represents approximately 13 time points. Keep in mind, however, that each time point corresponds to many (100-1000) individual observations.
-
-The out-of-sample performance estimates can then be compared between the models and by taxonomic groups and over time.
+We are particularly interested in understanding how well our model predicts species extinction given new, future data (out-of-sample data). To do this, we estimated average out-of-sample predictive error using 5-fold time-series cross-validation. For time-series data, the folds (data partitions) are approximately equal segments of time. The model is fit to the first fold and the posterior estimates are used to predict the states of the observations in the second fold, then the model is fit to the first and second fold and the posterior states are used to estimate the states from the third fold, and so on with increasingly large numbers of folds used for fitting a model to predict the states from the subsequent fold. With 63 time points, each of the five folds represents approximately 13 time points. Keep in mind, however, that each time point corresponds to many (100-1000) individual observations.
 
 
 See our code repository LINK for full code details. Our code uses ``tidyverse'' tools such as dplyr CITATION, purr CITATION, and tidybayes CITATION, thus some familiarity with that package ecosystem is necessary to fully comprehend how we've processed our data and results.
-
-
 
 
 \end{document}

@@ -30,36 +30,13 @@ Ultimately, we find that including information on a species' change in geographi
 
 
 
-Species global geographic range changes over time due to both local and global processes.
-
-An old assumption in paleobiology was that species quickly obtained their maximum global geographic range and then maintained that range till their decline eventual extinction. Observation of species distribution records does not support this assumption. Instead, changes to a species' global geographic range is currently theorized to follow one of two general patterns: hat or hump PERFECT TIME FOR A FIGURE. Both are symmetric patterns but have different shapes. The hat pattern is characterized by an increase in geographic range for the first half a species' duration followed by a brief peak in geographic range, and the a decrease in geographic range for the second half of that species' duration. The hump pattern is instead characterized by a brief period of increasing species geographic range, an extended period of that species' duration at its maximum geographic range, and finally a quick decline and extinction of the species.
-
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{figure/range_time}
-  \caption{Geographic range over time for a selection of eight random species included in this analysis. Geographic range is measured as the maximum geodesic distance between two occurrences of that species during a given time interval. The time axis corresponds to species age in millions of years (My). Because each species has a different duration, not all of these trajectories are of equivalent duration.}
-  \label{fig:range_real}
-\end{figure}
-
-Measuring this pattern is extremely difficult for multiple reasons. Species are not observed continuously through time, species geographic ranges are based on what samples are available, and species are harder to observe at the tails of their duration because they are rare (small geographic range, small population sizes).
-
-Additionally, neither of these patterns are necessarily different from a Markovian process with a lower bound. A random walk beginning at 0 will most likely be unimodal with a period of increase followed by a period of decrease and then eventually reaching 0. This can be demonstrated through a simple simulation PERFECT PLACE FOR A SIMULATION. 
-
-Our simulations are of a random walk with a lower bound of 0. Each individual simulation begins with a value of 0, and for each time step that value is modified by a single realization from a standard Normal distribution. Each simulation had a maximum of 100 time steps beyond the initial point. For each simulation, the first time the value is less than or equal to 0 is considered the stopping point, with that last value set to 0. We retained all simulations which returned to 0, which would be the equivalent of a species going extinct. While we attempted 1000 simulations, not all of these fulfilled this criteria as they did not had a value greater than 0 at their final time step. Finally, the duration of all simulations was rescaled to be between 0 and 1 so that their trajectories are directly comparable. A binned average and moving-window average are calculated from the population of simulations. 
-
-The binned average and moving-window averages are nearly identical to figure 1 from the original rise-and-fall paper by Foote et al. The results from these simulations show that for a random walk bounded at 0, the average trajectory is symmetrical and virtually identical to either the ``hat'' or ``hump'' models and was generated without any deterministic process; the pattern is unimodal and intermediate between ``strict'' hat or hump models. Thus, a hat or hump trajectory demonstrates nothing about process or determinism but could just result from entirely stochastic processes.
-
- \begin{figure}[ht]
-  \centering
-  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{figure/georange_sim_norm}
-  \caption{Simulation of a bounded random walk. The blue line is a binned average of all simulations while the red line is a moving-window average of those averages.}
-  \label{fig:range_sim}
-\end{figure}
-
 Instead of modeling geographic range through time, we instead model extinction probability as a function of change in geographic range. This formulation means that, if there if geographic range trajectory is deterministic and not entirely Markovian, that past geographic range, specifically the change in geographic range, and not just current geographic range predicts the probability of extinction. For example, is extinction probability affected by a species has been decreasing in geographic range over time or does it just matter if that species has below average geographic range regardless of how it got there?
 
 
+Rarely are we able to analyze long periods of geological time at fine resolutions -- below the 5-10 My scale. Due to substantial effort and the unique biology of the system, the microfossil provides us the unique opportunity to analyze ecological and evolutionary patterns at approximately million-year time scales. Typical ``exceptional'' fossil records tend to be of individual taxonomic groups and for rarely longer than 10 million years. The Neptune database records multiple phyla-scale taxonomic groups for over 60 million years, with incredible temporal resolution supported by the various age-models of the deep-sea cores the occurrences are recorded from -- there is no equivalent fossil record. By analyzing patterns of extinction and global occurrence at fine temporal scales, we can better elucidate how well we can predict species extinction at human-relevant scales.
 
 
 
-\end{document}
+
+
+
