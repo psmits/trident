@@ -32,9 +32,13 @@ future::plan(strategy = multicore)
 
 # get data in
 counti <- read_rds('../data/counting.rds')
+counti_restrict_time <- read_rds('../data/counting_restrict_time.rds')
+counti_restrict_local <- read_rds('../data/counting_restrict_local.rds')
 
 # form of data that was analyzed
 counti_trans <- prepare_analysis(counti)
+counti_rt_trans <- prepare_analysis(counti_restrict_time)
+counti_rl_trans <- prepare_analysis(counti_restrict_local)
 
 # read in model fits
 model_key <- c('Past and vary', 
@@ -42,6 +46,14 @@ model_key <- c('Past and vary',
                'No past but vary', 
                'No past or vary')
 disc_fit <- read_rds('../data/disc_fit.rds')
+disc_fit_rt <- read_rds('../data/disc_fit_rt.rds')
+disc_fit_rl <- read_rds('../data/disc_fit_rl.rds')
+
+
+
+
+
+
 
 # bayes R2
 br2_gg <- plot_bayesr2(disc_fit, model_key)

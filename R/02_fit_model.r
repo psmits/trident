@@ -64,6 +64,7 @@ part_glmer <- partial(stan_glmer,
                       family = 'binomial',
                       prior_intercept = normal(-2, 5, autoscale = FALSE),
                       prior_aux = cauchy(0, 1, autoscale = FALSE),
+                      prior_covariance = decov(regularization = 2),
                       thin = 4, 
                       adapt_delta = 0.999999)
 
@@ -97,6 +98,7 @@ disc_fit <- map2(forms, list_part_glmer, ~ .y(.x, data = counti_trans))
 disc_fit_rt <- map2(forms, list_part_glmer, ~ .y(.x, data = counti_rt_trans))
 disc_fit_rl <- map2(forms, list_part_glmer, ~ .y(.x, data = counti_rl_trans))
 
+# write out the model fits
 write_rds(disc_fit, path = '../data/disc_fit.rds')
 write_rds(disc_fit_rt, path = '../data/disc_fit_rt.rds')
 write_rds(disc_fit_rl, path = '../data/disc_fit_rl.rds')

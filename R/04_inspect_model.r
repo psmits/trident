@@ -33,7 +33,6 @@ counti_trans <- prepare_analysis(counti)
 
 # read in model fits
 disc_fit <- read_rds('../data/disc_fit.rds')
-disc_best <- disc_fit[[1]]
 
 # check how much information learned
 priors <- prior_summary(disc_best)
