@@ -74,5 +74,3 @@ tpg <- mg %>%
   labs(x = 'Time (My)', y = 'Temperature diff. from modern (C)')
 ggsave(filename = '../results/figure/cramer_temp.png',
        plot = tpg, width = 6, height = 3)
-
-
