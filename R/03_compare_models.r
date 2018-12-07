@@ -52,9 +52,6 @@ disc_fit_rl <- read_rds('../data/disc_fit_rl.rds')
 
 
 
-
-
-
 # bayes R2
 br2_gg <- plot_bayesr2(disc_fit, model_key)
 ggsave(filename = '../results/figure/bayes_r2.png', plot = br2_gg,
