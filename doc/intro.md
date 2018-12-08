@@ -1,21 +1,3 @@
-\documentclass[12pt,letterpaper]{article}
-
-\usepackage{amsmath, amsthm, amsfonts, amssymb}
-\usepackage{microtype, parskip, graphicx}
-\usepackage[comma,numbers,sort&compress]{natbib}
-\usepackage{lineno}
-\usepackage{longtable}
-\usepackage{docmute}
-\usepackage{caption, subcaption, multirow, morefloats, rotating}
-\usepackage{wrapfig}
-\usepackage{hyperref}
-
-\frenchspacing
-
-\begin{document}
-
-\section{Introduction}
-
 Paleobiology is concerned with understanding why certain species go extinct while others do not CITATIOn. Being able to predict which species are more likely to go extinct than others is critical for making good conservation decisions to limit the impact of the current biodiversity crisis. We cannot know, however, we do not yet know which species are going to go extinct because this has not happened yet -- it is unobservable. One way of approaching this problem is the analyze the past and use that to predict the future. The fossil record preserves past extinction events, allowing us to develop a predictive model of species extinction based on this record and the properties of the observed species, both extinct and extant. By assessing the predictive performance of this model on unobserved data, we can quantify how precise our best estimates will be for future extinctions. 
 
 By studying how species vary in their extinction risk over time and we can assess which species are at greater risk under unobserved conditions. We that that extinction risk varies over time in both intensity (average rate) and selectivity (difference in risk between taxa). Species, after all, can go extinct at any ``moment'' and the relative risk of extinction exhibited by different taxonomic groups and how that varies over time is an important dynamic which shapes the rate and structure of extinction CITATION. What has not been evaluated is as extinction intensity and selectivity change over time, how accurate are our assessments based on past events likely to be when applied to the future? By specifically including and modeling the temporal variation in extinction risk, we are able to improve our overall predictions because we incorporate and explicitly model differences between observations from across a range of possible intensities and selectivies
@@ -29,8 +11,3 @@ For this kind of exercise, we chose to analyze what is the longest continuous an
 In particular, there have been multiple major climatic and oceanographic events, both short and protracted in duration, over the course of the Cenozoic. For example, the Paleocene-Eocene Thermal Maximum (PETM) was an geologically close-to instantaneous global warming event believed to have been caused by a massive injection of carbon into the atmosphere over a 20,000 year period which rapidly warmed and is associated with substantial changes to the global distribution of species CITATION. In contrast, the Eocene-Oligocene boundary is associated with a protracted global cooling event caused by the slow opening of Drake's passage and the development of the Antarctic ice sheet CITATION. These moments of large scale global change are inherently ``different,'' so predicting extinction before, during, and after these is important -- especially if those events are analogous to future climate change.
 
 Additionally, we would expect that our model's predictive performance is best during prolonged periods of similar stress, such as the Eocene-Miocene transition -- more samples from similar environments inherently improves future predictions in unobserved, but similar conditions. Alternatively, we would expect our model based predictions of extinction surrounding the PETM may be less accurate because there are inherently fewer samples from the climatic event.
-
-
-
-
-\end{document}
