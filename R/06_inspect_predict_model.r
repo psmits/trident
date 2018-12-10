@@ -43,6 +43,8 @@ counti_trans <- counti_trans %>%
 # 1 is young, 5 is old
 counti_fold <- rev(split(counti_trans, counti_trans$fold))  # each fold
 
+# 16 models, 1:4 as formula for each fold etc
+counti_fold_match <- rep(counti_fold[-1], 4)
 
 # get in fits and posterior work
 model_key <- c('Past and vary', 
@@ -51,17 +53,11 @@ model_key <- c('Past and vary',
                'No past or vary')
 fit <- read_rds('../data/training_fit.rds')
 
-# given trained models for the rolled-out folds, estimate the next fold
-
-# 16 models, 1:4 as formula for each fold etc
-counti_fold_match <- rep(counti_fold[-1], 4)
-
-# given new cutpoints, try predicting the test data
+# predict the test data
 pred <- future_map2(fit, counti_fold_match,
              ~ posterior_linpred(object = .x, 
                                  newdata = .y,
                                  draws = 100))
-
 
 # calculate ROC/AUC for the predictions of test data
 # to determine how good our out of sample predictions are
@@ -69,10 +65,7 @@ pred_auc <- map2(pred, counti_fold_match, post_roc) %>%
   map(., function(x) map_dbl(x, ~ auc(.x))) %>%
   set_names(., names(fit))
 
-
-# now to make a plot about out-of-sample predictive accuracy
-# because 1000s of numbers are hard to visualize
-
+# make a plot about out-of-sample predictive accuracy
 oos_auc <- bind_cols(pred_auc) %>% 
   gather() %>%
   separate(key, into = c('mod', 'fold'), sep = '\\_') %>%
@@ -118,14 +111,14 @@ ggsave(filename = '../results/figure/fold_auc_time_tiny.png',
                           size = 3, 
                           rot = 90,
                           height = 0.2),
-       width = 8, height = 6)
+       width = 11, height = 8.5)
 ta <- ta +
   facet_grid(mod ~ .) +
   geom_hline(yintercept = 0.5, colour = 'red', linetype = 'dashed') +
   NULL
 ggsave(filename = '../results/figure/fold_auc_time.png', 
        plot = ta,
-       width = 8, height = 6)
+       width = 11, height = 8.5)
 
 
 # by taxonomic group
@@ -171,8 +164,7 @@ bysplit <- counti_fold_match %>%
   map(., 
       ~ .x %>%
         dplyr::select(mybin, fossil_group, event) %>%
-        mutate(type = paste0(fossil_group, ':', mybin)) %>%
-        arrange(mybin, fossil_group))  # relevant info
+        mutate(type = paste0(fossil_group, ':', mybin)))
 bb <- bysplit %>%
   map(., ~ split(.x, .x$type))         # by taxon and time
 
@@ -216,4 +208,4 @@ fold_auc_taxon_time <- map(split_auc, function(x) map(x, ~ as.tibble(x = .x))) %
   facet_grid(fossil_group ~ model)
 ggsave(filename = '../results/figure/fold_auc_taxon_time.png', 
        plot = fold_auc_taxon_time,
-       width = 6, height = 6)
+       width = 11, height = 8.5)

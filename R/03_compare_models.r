@@ -124,7 +124,7 @@ roc_ts <- roc_ts +
   geom_hline(yintercept = 0.5, colour = 'red', linetype = 'dashed') +
   NULL
 ggsave(filename = '../results/figure/auc_ts.png', plot = roc_ts,
-       width = 8, height = 6)
+       width = 11, height = 8.5)
 
 
 
@@ -162,8 +162,7 @@ ggsave(filename = '../results/figure/auc_taxon.png',
 # taxon and time
 bysplit <- counti_trans %>%
   dplyr::select(mybin, fossil_group, event) %>%
-  mutate(type = paste0(fossil_group, ':', mybin)) %>% # makes my life easier
-  arrange(mybin, fossil_group)
+  mutate(type = paste0(fossil_group, ':', mybin)) # makes my life easier
 
 bb <- split(bysplit, bysplit$type)
 
@@ -203,4 +202,4 @@ auc_taxon_time <- map(split_auc, function(x) map(x, ~ as.tibble(x = .x)))%>%
   facet_grid(fossil_group ~ model)
 ggsave(filename = '../results/figure/auc_taxon_time.png',
        plot = auc_taxon_time,
-       width = 8, height = 6)
+       width = 11, height = 8.5)
