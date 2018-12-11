@@ -26,6 +26,7 @@ source('../R/helper02_plot_foo.r')
 source('../R/helper03_misc_foo.r')
 source('../R/helper04_stan_utility.r')
 source('../R/helper05_roc_utility.r')
+source('../R/helper06_geotime.r')
 
 # important constants
 future::plan(strategy = multicore)
@@ -97,9 +98,16 @@ ta <- reshape2::melt(time_auc) %>%
   mutate(time = parse_double(L2)) %>%
   separate(L1, into = c('mod', 'fold'), sep = '\\_') %>%
   mutate(mod = plyr::mapvalues(mod, unique(mod), model_key),
-         mod = factor(mod, levels = rev(model_key))) %>%
-  ggplot(aes(x = time, y = value)) +
-  stat_lineribbon() +
+         mod = factor(mod, levels = rev(model_key)))
+
+rects <- get_geotime_box(range(ta$time))
+
+ta <- ta %>%
+  ggplot() +
+  geom_rect(data = rects,
+            aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
+            fill = 'gray80', alpha = 0.8) +
+  stat_lineribbon(aes(x = time, y = value)) +
   scale_fill_brewer() +
   scale_x_reverse() +
   coord_cartesian(ylim = c(0.4, 1), xlim = c(0, 50)) +
@@ -199,10 +207,17 @@ fold_auc_taxon_time <- map(split_auc, function(x) map(x, ~ as.tibble(x = .x))) %
                            model == 'mod2' ~ model_key[2],
                            model == 'mod3' ~ model_key[3],
                            model == 'mod4' ~ model_key[4]),
-         model = factor(model, levels = rev(model_key))) %>%
-  ggplot(aes(x = time, y = value)) +
+         model = factor(model, levels = rev(model_key)))
+
+rects <- get_geotime_box(range(fold_auc_taxon_time$time))
+
+fold_auc_taxon_time <- fold_auc_taxon_time %>%
+  ggplot() +
+  geom_rect(data = rects,
+            aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
+            fill = 'gray80', alpha = 0.8) +
   geom_hline(yintercept = 0.5, linetype = 'dashed') +
-  stat_lineribbon() +
+  stat_lineribbon(aes(x = time, y = value)) +
   scale_fill_brewer() +
   scale_x_reverse() +
   facet_grid(fossil_group ~ model)

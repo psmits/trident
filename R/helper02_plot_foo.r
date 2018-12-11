@@ -294,14 +294,20 @@ plot_roc_series <- function(data, model_pp, model_key) {
            model = plyr::mapvalues(model, 
                                    from = seq(length(model_key)), 
                                    to = model_key),
-           model = factor(model, levels = rev(model_key))) %>%
-    ggplot(aes(x = key, y = value)) +
-    stat_lineribbon() +
-    scale_fill_brewer() +
+           model = factor(model, levels = rev(model_key)))
+
+  rects <- get_geotime_box(range(roc_ts$key))
+
+  roc_ts <- roc_ts %>%
+    ggplot() +
+    geom_rect(data = rects,
+              aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
+              fill = 'gray80', alpha = 0.8) +
+    stat_lineribbon(aes(x = key, y = value)) +
+    scale_fill_brewer(aes(x = key, y = value)) + 
     scale_x_reverse() +
     NULL
     
-
   roc_ts
 }
 

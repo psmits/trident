@@ -26,6 +26,7 @@ source('../R/helper02_plot_foo.r')
 source('../R/helper03_misc_foo.r')
 source('../R/helper04_stan_utility.r')
 source('../R/helper05_roc_utility.r')
+source('../R/helper06_geotime.r')
 
 # important constants
 future::plan(strategy = multicore)
@@ -193,11 +194,18 @@ auc_taxon_time <- map(split_auc, function(x) map(x, ~ as.tibble(x = .x)))%>%
                            model == 2 ~ model_key[2],
                            model == 3 ~ model_key[3],
                            model == 4 ~ model_key[4]),
-         model = factor(model, levels = rev(model_key))) %>%
-  ggplot(aes(x = time, y = value)) +
+         model = factor(model, levels = rev(model_key)))
+
+rects <- get_geotime_box(range(auc_taxon_time$time))
+
+auc_taxon_time <- auc_taxon_time %>%
+  ggplot() +
+  geom_rect(data = rects,
+            aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
+            fill = 'gray80', alpha = 0.8) +
   geom_hline(yintercept = 0.5, linetype = 'dashed') +
-  stat_lineribbon() +
-  scale_fill_brewer() +
+  stat_lineribbon(aes(x = time, y = value)) + 
+  scale_fill_brewer(aes(x = time, y = value)) + 
   scale_x_reverse() +
   facet_grid(fossil_group ~ model)
 ggsave(filename = '../results/figure/auc_taxon_time.png',

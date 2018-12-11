@@ -18,6 +18,11 @@ library(scales)
 source('../R/helper01_process_foo.r')
 source('../R/helper03_misc_foo.r')
 
+# process timescale information
+gts <- read_csv("https://raw.githubusercontent.com/japhir/stratPlot/master/GTS_colours.csv") %>%
+  mutate_if(is.character, str_to_lower)
+write_csv(gts, path = '../data/geologic_time_scale.csv')
+
 # process the raw data into an anlyzable format
 
 bin_width <- 1
