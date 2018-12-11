@@ -16,7 +16,7 @@
 
 \section{Model adequacy}
 
-Our first model comparison is based on in-sample AUC estiamtes. These estimates describe the relative and absolute adequacy of our models to describe the data to which they were fit. Comparison of the in-sample AUC estimates between the four models reveals similar results as the selection criteria (Fig. \ref{fig:auc_hist}). While the parameter rich ``past and vary'' model has the greatest mean AUC when compared to the other three models, there is substantial overlap in their posterior distributions. Additionally, all of our models are concentrated around an AUC of 0.77 which is interpreted as ``fine but not good'' performance. It is hard, then, to conclude that there is one ``best'' model when all of them are approximately equivalent. However, our mode complex models have relatively higher performance than our simplest models -- in particular, allowing covariate effects to vary over time appears to improve in-sample model performance as much as including the historical covariates.
+The in-sample model comparisons are for determining their relative adequacy, or a model's ability to represent the data it was fit to. Comparison between the posterior predictive estimates of in-sample AUC for each of the four models demonstrates that, overall, all of the models have approximately equal in-sample performance (Fig. \ref{fig:auc_hist}). The parameter rich ``past and vary'' model has the greatest median in-sample AUC when compared to the other three models, but there is substantial overlap in their posterior distributions. Additionally, while our parameter rich ``past and vary'' model is possibly the most adequately performing model, the difference or improvement to performance is minimal at best -- all four models have approximately equal in-sample AUC posterior distributions. All of the in-sample AUC estimates from our models are concentrated around an AUC of 0.77 which is interpreted as ``fine but not good'' performance. It is then hard to conclude that there is one ``best'' model which we can rely upon. 
 % ROC model comparison
 \begin{figure}[ht]
   \centering
@@ -25,7 +25,8 @@ Our first model comparison is based on in-sample AUC estiamtes. These estimates 
   \label{fig:auc_hist}
 \end{figure}
 
-Additional comparison of in-sample model performance at each of the time intervals reveals just how similar in adequacy our models performance are to each other (Fig. \ref{fig:auc_ts}). There are few if any obvious differences between the models in their performances.
+
+When the posterior predictive distributions of the in-sample AUC estimates are presented over time, the similarity in adequacy between the models becomes more apparent (Fig. \ref{fig:auc_ts}). There are few major or obvious differences in model adequacy between the four models.
 % ROC model comparison time series
 \begin{figure}[ht]
   \centering
@@ -34,7 +35,8 @@ Additional comparison of in-sample model performance at each of the time interva
   \label{fig:auc_ts}
 \end{figure}
 
-We can also compare the by-taxon in-sample performances of the four models. 
+
+When the posterior predictive distributions of the in-sample AUC estimates are presented by taxonomic group, some heterogeneity in model adequacy is revealed (Fig. \ref{fig:auc_taxon}).
 \begin{figure}[ht]
   \centering
   \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/auc_taxon}
@@ -42,7 +44,7 @@ We can also compare the by-taxon in-sample performances of the four models.
   \label{fig:auc_taxon}
 \end{figure}
 
-Finally, we can also examine how the by-taxon in-sample performances of the four models vary over time.
+Finally, when the posterior predictive distributions of the in-sample AUC estimates are presented over time and by taxonomic group, SOMETHING (Fig. \ref{fig:auc_taxon_time}).
 \begin{figure}[ht]
   \centering
   \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/auc_taxon_time}
