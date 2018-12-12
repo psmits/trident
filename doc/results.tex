@@ -37,7 +37,6 @@ When the posterior predictive distributions of the in-sample AUC estimates are p
 
 
 When the posterior predictive distributions of the in-sample AUC estimates are presented by taxonomic group, some heterogeneity in model adequacy is revealed (Fig. \ref{fig:auc_taxon}). While in all cases the model with the highest average in-sample AUC is the parameter-rich ``past and vary'' model, the amount of difference between the models varies by taxonomic group in ways not observable from the pooled estimates (Fig. \ref{fig:auc_hist}). For example, the difference between the ``past and vary'' model and the others is more pronouced for Calcareous nannoplankton and Dinoflagellates, and smaller for the Foraminifera and Radiolaria. 
-
 \begin{figure}[ht]
   \centering
   \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/auc_taxon}
@@ -45,7 +44,9 @@ When the posterior predictive distributions of the in-sample AUC estimates are p
   \label{fig:auc_taxon}
 \end{figure}
 
-Finally, when the posterior predictive distributions of the in-sample AUC estimates are presented over time and by taxonomic group, SOMETHING (Fig. \ref{fig:auc_taxon_time}). 
+Finally, when the posterior predictive distributions of the in-sample AUC estimates are presented over time and by taxonomic group, the reasons for the differences in model adequacy between the taxonomic groups becomes more apparent (Fig. \ref{fig:auc_taxon_time}), in particular the marginally better performance of the ``past and vary'' model over the other three. 
+
+For many taxon/model combinations there are one or more time periods where posterior predictive in-sample AUC has a median value less than or equal to 0.5 -- AUC value of 0.5 indicates that the model's predictions are no better than random (Fig. \ref{fig:auc_taxon_time}). However, this pattern is absent for the posterior predictive distribution of Foraminfera and Radiolaria for the ``past and vary'' model. Additionally, these periods of low model performance are rarer for the posterior predictive distribution of the ``past and vary'' model for calcareous nannoplankton and Dinoflagellates when compared to the other three models.
 \begin{figure}[ht]
   \centering
   \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/auc_taxon_time}
@@ -57,8 +58,11 @@ Finally, when the posterior predictive distributions of the in-sample AUC estima
 
 \section{Cross-validation}
 
-The approximate out-of-sample predictive performance for each of our four models, as measured by AUC, are approximately identical to each other and to our in-sample performance (Fig. \ref{fig:fold_auc}). The quality of performance, however, is not great, with average out-of-sample AUC for each of our models estimated to be about 0.77 which is far from perfect. This result means that while we expect our model to yield consistent results when provided with new data, we do not expect that our predictions will be very accurate.
-% ROC OOS estimate
+Expected out-of-sample predictive performance was estimated using five-fold cross-validation, modified for time series data CITATION. This procedure yields four posterior (predictive) distributions, each corresponding to AUC values calculated from model-based predictions compared to the extinction state of the hold-out data. These four posterior predictive distributions are pooled to yield a posterior predictive distribution of expected out-of-sample performance -- the resulting distributions tend to be very multimodal due to their very nature being fit to and estimated from different data sets and amounts of data CITATION. Additionally, multimodality increases with model complexity (Fig. \ref{fig:fold_auc}) -- this makes sense as the more complex models allow for predictor effects to vary with time, allowing for a greater range in possible parameter values which in turn yield a greater range of posterior predictions.
+
+Comparison between the posterior predictive distributions of expected out-of-sample AUC (Fig. \ref{fig:fold_auc}) reveals a similar range in plausible values for all models as the in-sample AUC posterior predictive distributions (Fig. \ref{fig:auc_hist}). Interestingly, the differences between the posterior predictive distributions for the models have decreased. For example, the ``past and vary'' model not clearly better than either of the ``no past or vary'' and ``past and no vary'' models (Fig. \ref{fig:fold_auc}), which were shown earlier to be obviously worse-performing models based on in-sample performance (Fig. \ref{fig:auc_hist}). These differences means that the rank order of median out-of-sample AUC is different from the rank order of median in-sample AUC. However, the shapes of the posterior distributions means interepting from the median values is incorrect -- the models are effectively indistinguishable in their expected out-of-sample AUC values.
+
+Additionally, the quality of expected out-of-sample performance is not great, with average out-of-sample AUC for each of our models estimated to be between 0.7 and 0.8 which is far from perfect. This result means that we would expect to correctly rank two species in order of most to least likely to go extinct 70-80\% of the time. However, this expected out-of-sample performance is approximately the same as the in-sample performance results (Fig. \ref{fig:auc_hist}), indicating that our models would yield consistent results when generalized to future extinctions.
 \begin{figure}[ht]
   \centering
   \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/fold_auc}
@@ -66,9 +70,7 @@ The approximate out-of-sample predictive performance for each of our four models
   \label{fig:fold_auc}
 \end{figure}
 
-When our cross-validation estimates are presented for each time interval, the similarity in out-of-sample performance between the models becomes even more obvious -- while there are minor differences in the posterior estimates for individual time points, the overall structures are nearly identical. 
-
-% ROC OOS estimate time series
+When the posterior predictive distribution of expected out-of-sample AUC is presented as a time series, the similarity between the models is even more apparent (Fig. \ref{fig:fold_auc_time}). While the width of the credible intervals at various time points varies between the models, the overall picture of expected out-of-sample AUC is almost identical when you compare the models -- periods of relatively better or worse performance map identically between the time series.
 \begin{figure}[ht]
   \centering
   \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/fold_auc_time}
@@ -76,7 +78,7 @@ When our cross-validation estimates are presented for each time interval, the si
   \label{fig:fold_auc_time}
 \end{figure}
 
-We can also compare expected out-of-sample performance based on taxonomic group
+We can also compare expected out-of-sample AUC by taxonomic group for each of the models (Fig. \ref{fig:fold_auc_taxon}). These comparisons reveal a lot about the differences in predictive potential of the taxonomic groups. For example, the posterior predictive distributions of out-of-sample AUC for Foraminifera from all four models are approximately identical. In contrast, expected out-of-sample AUC for Radiolaria exhibits the same or similar pattern in relative model performance to the pooled comparisons (Fig. \ref{fig:fold_auc}). Additionally, we can state that our out-of-sample predictions for calcareous nannoplankton and dinoflagellates are not necessarily as precise as our estimates for Foraminifera or even Radiolaria. These results indicate that out-of-sample predictions may be easier for some taxonomic groups than others (e.g. Foraminifera versus Dinoflagellates.
 \begin{figure}[ht]
   \centering
   \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/fold_auc_taxon}
@@ -84,7 +86,10 @@ We can also compare expected out-of-sample performance based on taxonomic group
   \label{fig:fold_auc_taxon}
 \end{figure}
 
-Finally, expected out-of-sample performance is compared between taxonomic groups over time.
+
+Finally, we can present the posterior predictive distribution of expected out-of-sample AUC over time and taxonomic group for each of the four models (Fig. \ref{fig:fold_auc_taxon_time}). For each taxonomic group, the time-series of posterior predictive values for each model are broadly congruent. 
+
+In the analysis of the posterior predictive distributions of the in-sample AUC values for the four models, we noted that there were time intervals where the models' predictions were no better than random (Fig. \ref{fig:auc_taxon_time}). This occurrence is generally much rarer for the posterior predictive distribution of out-of-sample AUC values -- the major exception to this is Dinoflagellates, which for all four models has at least one time interval where the median the AUC of out-of-sample data were no better random. In contrast, the only other group for which median posterior predictive estimate of out-of-sample AUC reaches 0.5 is calcareous nannoplankton, and then only with the ``no past or vary'' model.
 \begin{figure}[ht]
   \centering
   \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/fold_auc_taxon_time}
