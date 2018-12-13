@@ -440,3 +440,225 @@ view_neptune <- function(.data, name = 'full', path = '../results/figure/') {
          plot = ccg2, 
          width = 4, height = 6)
 }
+
+
+#' Visualize aspects of model fit
+#'
+#' This function is only called for its side effects!
+#'
+#' @param fit_list list of model fits
+#' @param .data tibble of neptune data
+#' @param key vector of model names
+#' @param name character length 1 vector describing data
+#' @param path character length 1 vector describing directory to drop figures into -- needs trailing slash!
+#' @return NULL
+p_model <- function(fit_list, .data, key, name, path) {
+  # posterior probability of observation surviving
+  pp_prob <- future_map(fit_list, 
+                        ~ posterior_linpred(.x, transform = TRUE, draws = 100))
+ 
+  eroc <- map(pp_prob, ~ apply(.x, 1, function(y) roc(.data$event, y)))
+  
+  # ROC curve plot
+  roc_df <- map(eroc, function(x) 
+             imap(x, ~ tibble(sim = .y, 
+                              fpr = 1 - .x$specificities,
+                              tpr = .x$sensitivities))) %>%
+    map(., ~ reduce(.x, rbind)) %>%
+    imap(., ~ add_column(.x, mod = .y)) %>%
+    reduce(., rbind) %>%
+    as.tibble(.) %>%
+    # long hand way that doesn't need plyr
+    mutate(model = case_when(mod == 1 ~ key[1],
+                             mod == 2 ~ key[2],
+                             mod == 3 ~ key[3],
+                             mod == 4 ~ key[4])) 
+  cur <- plot_roc_curve(roc_df)
+  fn <- paste0(path, 'roc_curve_', name, '.png')
+  ggsave(filename = fn,
+         plot = cur,
+         width = 5, height = 8)
+  
+  # get AUC values for the above
+  # plot as histogram
+  auc_hist <- map(eroc, ~ map(.x, function(y) auc(y)[[1]])) %>%
+    reshape2::melt(.) %>%
+    as.tibble %>%
+    rename(model = L1,
+           draw = L2) %>%
+    mutate(model_name = plyr::mapvalues(model, unique(model), key),
+           model_name = factor(model_name, levels = key)) %>%
+    ggplot(aes(x = value, y = model_name)) +
+    geom_halfeyeh(.width = c(0.5, 0.8)) +
+    labs(x = 'AUC ROC', y = NULL) +
+    theme(axis.text.y = element_text(size = 15),
+          axis.text.x = element_text(size = 15)) +
+    NULL
+  fn <- paste0(path, 'auc_hist_', name, '.png')
+  ggsave(filename = fn,
+         plot = auc_hist,
+         width = 6, height = 6)
+  fn <- paste0(path, 'auc_hist_zoom_', name, '.png')
+  ggsave(filename = fn,
+         plot = auc_hist + 
+           xlim(0.5, 1) +
+           geom_vline(xintercept = 0.5, colour = 'red'),
+         width = 6, height = 6)
+}
+
+
+#' Visualize aspects of model fit
+#'
+#' This function is only called for its side effects!
+#'
+#' @param fit_list list of model fits
+#' @param fit_list list of model fits
+#' @param .data tibble of neptune data
+#' @param key vector of model names
+#' @param name character length 1 vector describing data
+#' @param path character length 1 vector describing directory to drop figures into -- needs trailing slash!
+#' @return NULL
+p_model_time <- function(fit_list, .data, key, name, path) {
+  # posterior probability of observation surviving
+  pp_prob <- future_map(fit_list, 
+                        ~ posterior_linpred(.x, transform = TRUE, draws = 100))
+  eroc <- map(pp_prob, ~ apply(.x, 1, function(y) roc(.data$event, y)))
+  
+  # roc as timeseries to see best and worst times
+  roc_ts <- plot_roc_series(.data, pp_prob, key) +
+    coord_cartesian(ylim = c(0.4, 1), xlim = c(0, 62))
+  fn <- paste0(path, 'auc_ts_tiny_', name, '.png')
+  ggsave(filename = fn,
+         plot = gggeo_scale(roc_ts, 
+                            dat = 'epochs', 
+                            size = 3, 
+                            rot = 90,
+                            height = 0.2),
+         width = 8, height = 6)
+  roc_ts <- roc_ts +
+    facet_grid(model ~ .) +
+    labs(y = 'AUC ROC', x = 'Time (Mya)') +
+    geom_hline(yintercept = 0.5, colour = 'red', linetype = 'dashed') +
+    NULL
+  fn <- paste0(path, 'auc_ts_', name, '.png')
+  ggsave(filename = fn,
+         plot = roc_ts,
+         width = 11, height = 8.5)
+}
+
+#' Visualize aspects of model fit
+#'
+#' This function is only called for its side effects!
+#'
+#' @param fit_list list of model fits
+#' @param fit_list list of model fits
+#' @param .data tibble of neptune data
+#' @param key vector of model names
+#' @param name character length 1 vector describing data
+#' @param path character length 1 vector describing directory to drop figures into -- needs trailing slash!
+#' @return NULL
+p_model_taxon <- function(fit_list, .data, key, name, path) {
+  # posterior probability of observation surviving
+  pp_prob <- future_map(fit_list, 
+                        ~ posterior_linpred(.x, transform = TRUE, draws = 100))
+  # view through taxonomic window
+  pp_taxon <- map(pp_prob, ~ split(data.frame(t(.x)), 
+                                   .data$fossil_group)) %>%
+    map(., function(x) map(x, ~ t(.x)))
+  counti_taxon <- split(.data, .data$fossil_group)
+  
+  
+  auc_taxon <- map(pp_taxon, function(x) 
+                   map2(x, counti_taxon, ~ 
+                        apply(.x, 1, function(a) roc(.y$event, a)))) %>%
+    map(., function(a) 
+        map(a, function(d)
+            map_dbl(d, ~ auc(.x)[[1]]))) %>%
+    set_names(key) %>%
+    reshape2::melt(.) %>%                # clean up nested list
+    rename(taxon = L2,
+           model = L1) %>%
+    mutate(model = factor(model, levels = rev(key)),
+           taxon = case_when(taxon == 'D' ~ 'Dinoflagellates',
+                             taxon == 'R' ~ 'Radiolaria',
+                             taxon == 'F' ~ 'Foraminifera',
+                             taxon == 'N' ~ 'Calc. nanno.')) %>%
+    ggplot(aes(x = value, y = model)) +
+    geom_halfeyeh(.width = c(0.5, 0.8)) +
+    facet_wrap(~ taxon) +
+    labs(x = 'AUC ROC', y = NULL) 
+  fn <- paste0(path, 'auc_taxon_', name, '.png')
+  ggsave(filename = fn,
+         plot = auc_taxon,
+         width = 8, height = 8)
+}
+
+#' Visualize aspects of model fit
+#'
+#' This function is only called for its side effects!
+#'
+#' @param fit_list list of model fits
+#' @param fit_list list of model fits
+#' @param .data tibble of neptune data
+#' @param key vector of model names
+#' @param name character length 1 vector describing data
+#' @param path character length 1 vector describing directory to drop figures into -- needs trailing slash!
+#' @return NULL
+p_model_taxon_time <- function(fit_list, .data, key, name, path) {
+  # posterior probability of observation surviving
+  pp_prob <- future_map(fit_list, 
+                        ~ posterior_linpred(.x, transform = TRUE, draws = 100))
+
+  # taxon and time
+  bysplit <- .data %>%
+    dplyr::select(mybin, fossil_group, event) %>%
+    mutate(type = paste0(fossil_group, ':', mybin)) # makes my life easier
+  
+  bb <- split(bysplit, bysplit$type)
+  
+  tt <- map(pp_prob, ~ as.tibble(t(.x)) %>%
+            split(., bysplit$type))
+  
+  safe_roc <- safely(roc)
+  safe_auc <- safely(auc)
+  foo <- function(event, prob) {
+    safe_auc(safe_roc(event, prob)$result)
+  }
+  split_auc <- map(tt, function(x) 
+                   map2(x, bb, ~ apply(.x, 2, function(a)  
+                                       foo(.y$event, a)))) %>%
+    map(., ~ map(.x, ~ reduce(map(.x, 'result'), c)))
+  
+  
+  auc_taxon_time <- map(split_auc, function(x) map(x, ~ as.tibble(x = .x)))%>%
+    map(., ~ bind_rows(.x, .id = 'phyla_time')) %>%
+    bind_rows(., .id = 'model') %>%
+    separate(., col = phyla_time, into = c('phyla', 'time'), sep = ':') %>%
+    mutate(time = as.numeric(time),
+           fossil_group = case_when(phyla == 'D' ~ 'Dinoflagellates',
+                                    phyla == 'R' ~ 'Radiolaria',
+                                    phyla == 'F' ~ 'Foraminifera',
+                                    phyla == 'N' ~ 'Calc. nanno.'),
+           model = case_when(model == 1 ~ key[1],
+                             model == 2 ~ key[2],
+                             model == 3 ~ key[3],
+                             model == 4 ~ key[4]),
+           model = factor(model, levels = rev(key)))
+  
+  rects <- get_geotime_box(range(auc_taxon_time$time))
+  
+  auc_taxon_time <- auc_taxon_time %>%
+    ggplot() +
+    geom_rect(data = rects,
+              aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
+              fill = 'gray80', alpha = 0.8) +
+    geom_hline(yintercept = 0.5, linetype = 'dashed') +
+    stat_lineribbon(aes(x = time, y = value)) + 
+    scale_fill_brewer(aes(x = time, y = value)) + 
+    scale_x_reverse() +
+    facet_grid(fossil_group ~ model)
+  fn <- paste0(path, 'auc_taxon_time_', name, '.png')
+  ggsave(filename = fn,
+         plot = auc_taxon_time,
+         width = 11, height = 8.5)
+}
