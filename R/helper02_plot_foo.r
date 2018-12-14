@@ -662,3 +662,256 @@ p_model_taxon_time <- function(fit_list, .data, key, name, path) {
          plot = auc_taxon_time,
          width = 11, height = 8.5)
 }
+
+
+
+
+
+#' convenience function to get posterior predictive distribution
+#' 
+#' convenience function to get posterior predictive distribution
+#'
+#' @param fit list of model fits
+#' @param .data tibble of neptune data
+#' @return list
+get_pred <- function(fit, .data) {
+  future_map2(fit, .data,
+              ~ posterior_linpred(object = .x, 
+                                  newdata = .y,
+                                  draws = 100))
+}
+
+#' Visualize aspects of cross-validation fit
+#'
+#' This function is only called for its side effects!
+#'
+#' @param fit list of model fits
+#' @param .data list of tibbles
+#' @param key vector of model names
+#' @param name character length 1 vector describing data
+#' @param path character length 1 vector describing directory to drop figures into -- needs trailing slash!
+#' @return NULL
+cv_model <- function(fit, .data, key, name, path) {
+  # predict the test data
+  pred <- get_pred(fig, .data)
+  
+  # calculate ROC/AUC for the predictions of test data
+  # to determine how good our out of sample predictions are
+  pred_auc <- map2(pred, .data, post_roc) %>%
+    map(., function(x) map_dbl(x, ~ auc(.x))) %>%
+    set_names(., names(fit))
+  
+  # make a plot about out-of-sample predictive accuracy
+  oos_auc <- bind_cols(pred_auc) %>% 
+    gather() %>%
+    separate(key, into = c('mod', 'fold'), sep = '\\_') %>%
+    mutate(mod = plyr::mapvalues(mod, unique(mod), key),
+           mod = factor(mod, levels = key)) %>%
+    ggplot(aes(x = value, y = mod)) +
+    geom_halfeyeh(.width = c(0.5, 0.8)) +
+    labs(x = 'AUC ROC', y = NULL) +
+    scale_colour_brewer() +
+    theme(axis.text.y = element_text(size = 15),
+          axis.text.x = element_text(size = 15)) +
+    NULL
+  fn <- paste0(path, 'fold_auc_', name, '.png')
+  ggsave(filename = fn,
+         plot = oos_auc,
+         width = 6, height = 6)
+  fn <- paste0(path, 'fold_auc_zoom_', name, '.png')
+  ggsave(filename = fn,
+         plot = oos_auc + 
+           xlim(0.5, 1) +
+           geom_vline(xintercept = 0.5, colour = 'red'),
+         width = 6, height = 6)
+}
+
+
+
+
+
+#' Visualize aspects of cross-validation fit -- by time
+#'
+#' This function is only called for its side effects!
+#'
+#' @param fit list of model fits
+#' @param .data list of tibbles
+#' @param key vector of model names
+#' @param name character length 1 vector describing data
+#' @param path character length 1 vector describing directory to drop figures into -- needs trailing slash!
+#' @return NULL
+cv_model_time <- function(fit, .data, key, name, path) {
+  # predict the test data
+  pred <- get_pred(fig, .data)
+  
+  time_auc <- map2(pred, .data, get_auc_time) %>%
+    set_names(., names(fit))
+  
+  # could this be done with enframe?
+  ta <- reshape2::melt(time_auc) %>% 
+    as.tibble %>%
+    mutate(time = parse_double(L2)) %>%
+    separate(L1, into = c('mod', 'fold'), sep = '\\_') %>%
+    mutate(mod = plyr::mapvalues(mod, unique(mod), key),
+           mod = factor(mod, levels = rev(key)))
+  
+  rects <- get_geotime_box(range(ta$time))
+  
+  ta <- ta %>%
+    ggplot() +
+    geom_rect(data = rects,
+              aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
+              fill = 'gray80', alpha = 0.8) +
+    stat_lineribbon(aes(x = time, y = value)) +
+    scale_fill_brewer() +
+    scale_x_reverse() +
+    coord_cartesian(ylim = c(0.4, 1), xlim = c(0, 50)) +
+    labs(y = 'AUC ROC', x = 'Time (Mya)') +
+    NULL
+  fn <- pasteo(path, 'fold_auc_time_tiny_', name, '.png')
+  ggsave(filename = fn,
+         plot = gggeo_scale(ta, 
+                            dat = 'epochs', 
+                            size = 3, 
+                            rot = 90,
+                            height = 0.2),
+         width = 11, height = 8.5)
+  ta <- ta +
+    facet_grid(mod ~ .) +
+    geom_hline(yintercept = 0.5, colour = 'red', linetype = 'dashed') +
+    NULL
+  fn <- pasteo(path, 'fold_auc_time_', name, '.png')
+  ggsave(filename = fn,
+         plot = ta,
+         width = 11, height = 8.5)
+}
+
+
+
+#' Visualize aspects of cross-validation fit -- by taxon
+#'
+#' This function is only called for its side effects!
+#'
+#' @param fit list of model fits
+#' @param .data list of tibbles
+#' @param key vector of model names
+#' @param name character length 1 vector describing data
+#' @param path character length 1 vector describing directory to drop figures into -- needs trailing slash!
+#' @return NULL
+cv_model_taxon <- function(fit, .data, key, name, path) {
+  # predict the test data
+  pred <- get_pred(fig, .data)
+  
+  pp_taxon <- map2(pred, .data
+                   ~ split(data.frame(t(.x)), 
+                           .y$fossil_group)) %>%
+    map(., function(x) map(x, ~ t(.x)))
+  
+  counti_fold_taxon <- map(.data, ~ split(.x, .x$fossil_group))
+  
+  fold_auc_taxon <- map2(pp_taxon, counti_fold_taxon, 
+       ~ map2(.x, .y, 
+              ~ apply(.x, 1, function(a) fast_auc(a, .y$event)))) %>%
+    reshape2::melt(.) %>%
+    as.tibble(.) %>%
+    rename(taxon = L2,
+           model = L1) %>%
+    separate(., col = model, into = c('model', 'fold'), sep = '_') %>%
+    mutate(taxon = case_when(taxon == 'D' ~ 'Dinoflagellates',
+                             taxon == 'R' ~ 'Radiolaria',
+                             taxon == 'F' ~ 'Foraminifera',
+                             taxon == 'N' ~ 'Calc. nanno.'),
+           model = case_when(model == 'mod1' ~ key[1],
+                             model == 'mod2' ~ key[2],
+                             model == 'mod3' ~ key[3],
+                             model == 'mod4' ~ key[4]),
+           model = factor(model, levels = rev(key))) %>%
+    ggplot(aes(x = value, y = model)) +
+    geom_halfeyeh(.width = c(0.5, 0.8)) +
+    facet_wrap(~ taxon) +
+    labs(x = 'AUC ROC', y = NULL)
+  fn <- paste0(path, 'fold_auc_taxon_', name, '.png')
+  ggsave(filename = fn,
+         plot = fold_auc_taxon,
+         width = 8, height = 8)
+}
+
+
+#' Visualize aspects of cross-validation fit -- by taxon/time
+#'
+#' This function is only called for its side effects!
+#'
+#' @param fit list of model fits
+#' @param .data list of tibbles
+#' @param key vector of model names
+#' @param name character length 1 vector describing data
+#' @param path character length 1 vector describing directory to drop figures into -- needs trailing slash!
+#' @return NULL
+cv_model_taxon <- function(fit, .data, key, name, path) {
+
+cv_model_taxon_time <- function(fit, .data, key, name, path) {
+  # predict the test data
+  pred <- get_pred(fig, .data)
+
+  # break up the posterior predictive estimates by taxon and time
+  # break up the data to match nicely
+  
+  # prepare the data in format
+  bysplit <- .data %>%
+    map(., 
+        ~ .x %>%
+          dplyr::select(mybin, fossil_group, event) %>%
+          mutate(type = paste0(fossil_group, ':', mybin)))
+  bb <- bysplit %>%
+    map(., ~ split(.x, .x$type))         # by taxon and time
+  
+  # break up probs
+  tt <- map(pred, ~ as.tibble(t(.x))) %>%
+    map2(., bysplit, ~ split(.x, .y$type))  
+  
+  
+  # calculate auc for each taxonXtime combo
+  safe_roc <- safely(roc)
+  safe_auc <- safely(auc)
+  foo <- function(event, prob) {
+    safe_auc(safe_roc(event, prob)$result)
+  }
+  split_auc <- map2(tt, bb, function(xx, yy)
+                    map2(xx, yy, ~ apply(.x, 2, function(aa)
+                                         foo(.y$event, aa)))) %>%
+    map(., ~ map(.x, ~ reduce(map(.x, 'result'), c)))
+  
+  # recombine and plot
+  fold_auc_taxon_time <- map(split_auc, function(x) map(x, ~ as.tibble(x = .x))) %>%
+    map(., ~ bind_rows(.x, .id = 'phyla_time')) %>%
+    bind_rows(., .id = 'model') %>%
+    separate(., col = phyla_time, into = c('phyla', 'time'), sep = ':') %>%
+    separate(., col = model, into = c('model', 'fold'), sep = '_') %>%
+    mutate(time = as.numeric(time),
+           fossil_group = case_when(phyla == 'D' ~ 'Dinoflagellates',
+                                    phyla == 'R' ~ 'Radiolaria',
+                                    phyla == 'F' ~ 'Foraminifera',
+                                    phyla == 'N' ~ 'Calc. nanno.'),
+           model = case_when(model == 'mod1' ~ key[1],
+                             model == 'mod2' ~ key[2],
+                             model == 'mod3' ~ key[3],
+                             model == 'mod4' ~ key[4]),
+           model = factor(model, levels = rev(key)))
+  
+  rects <- get_geotime_box(range(fold_auc_taxon_time$time))
+  
+  fold_auc_taxon_time <- fold_auc_taxon_time %>%
+    ggplot() +
+    geom_rect(data = rects,
+              aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
+              fill = 'gray80', alpha = 0.8) +
+    geom_hline(yintercept = 0.5, linetype = 'dashed') +
+    stat_lineribbon(aes(x = time, y = value)) +
+    scale_fill_brewer() +
+    scale_x_reverse() +
+    facet_grid(fossil_group ~ model)
+  fn <- paste0(path, 'fold_auc_taxon_time_', name, '.png')
+  ggsave(filename = fn,
+         plot = fold_auc_taxon_time,
+         width = 11, height = 8.5)
+}
