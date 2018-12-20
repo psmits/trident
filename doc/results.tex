@@ -17,6 +17,8 @@
 \section{Model adequacy}
 
 The in-sample model comparisons are for determining their relative adequacy, or a model's ability to represent the data it was fit to. Comparison between the posterior predictive estimates of in-sample AUC for each of the four models demonstrates that, overall, all of the models have approximately equal in-sample performance (Fig. \ref{fig:auc_hist}). The parameter rich ``past and vary'' model has the greatest median in-sample AUC when compared to the other three models, but there is substantial overlap in their posterior distributions. Additionally, while our parameter rich ``past and vary'' model is possibly the most adequately performing model, the difference or improvement to performance is minimal at best -- all four models have approximately equal in-sample AUC posterior distributions. All of the in-sample AUC estimates from our models are concentrated around an AUC of 0.77 which is interpreted as ``fine but not good'' performance. It is then hard to conclude that there is one ``best'' model which we can rely upon. 
+
+
 % ROC model comparison
 \begin{figure}[ht]
   \centering
@@ -37,6 +39,21 @@ When the posterior predictive distributions of the in-sample AUC estimates are p
 
 
 When the posterior predictive distributions of the in-sample AUC estimates are presented by taxonomic group, some heterogeneity in model adequacy is revealed (Fig. \ref{fig:auc_taxon}). While in all cases the model with the highest average in-sample AUC is the parameter-rich ``past and vary'' model, the amount of difference between the models varies by taxonomic group in ways not observable from the pooled estimates (Fig. \ref{fig:auc_hist}). For example, the difference between the ``past and vary'' model and the others is more pronouced for Calcareous nannoplankton and Dinoflagellates, and smaller for the Foraminifera and Radiolaria. 
+
+
+We can also compare the by-taxon in-sample performances of the four models. 
+
+
+Finally, we can also examine how the by-taxon in-sample performances of the four models vary over time.
+
+
+
+
+\section{Cross-validation}
+
+The approximate out-of-sample predictive performance for each of our four models, as measured by AUC, are approximately identical to each other and to our in-sample performance (Fig. \ref{fig:fold_auc}). The quality of performance, however, is not great, with average out-of-sample AUC for each of our models estimated to be about 0.77 which is far from perfect. This result means that while we expect our model to yield consistent results when provided with new data, we do not expect that our predictions will be very accurate.
+% ROC OOS estimate
+
 \begin{figure}[ht]
   \centering
   \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/auc_taxon}
@@ -44,7 +61,6 @@ When the posterior predictive distributions of the in-sample AUC estimates are p
   \label{fig:auc_taxon}
 \end{figure}
 
-Finally, when the posterior predictive distributions of the in-sample AUC estimates are presented over time and by taxonomic group, the reasons for the differences in model adequacy between the taxonomic groups becomes more apparent (Fig. \ref{fig:auc_taxon_time}), in particular the marginally better performance of the ``past and vary'' model over the other three. 
 
 For many taxon/model combinations there are one or more time periods where posterior predictive in-sample AUC has a median value less than or equal to 0.5 -- AUC value of 0.5 indicates that the model's predictions are no better than random (Fig. \ref{fig:auc_taxon_time}). However, this pattern is absent for the posterior predictive distribution of Foraminfera and Radiolaria for the ``past and vary'' model. Additionally, these periods of low model performance are rarer for the posterior predictive distribution of the ``past and vary'' model for calcareous nannoplankton and Dinoflagellates when compared to the other three models.
 \begin{figure}[ht]
@@ -53,6 +69,14 @@ For many taxon/model combinations there are one or more time periods where poste
   \caption{Comparison of posterior predictive AUC estimates for each of the four models, arranged over time and by taxonomic group. These estimates reflect each model's fit to the various taxonomic groups over time. The red line corresponds to the median AUC value, while the envelopes correspond to multiple credible intervals as indicated in the legend. In all cases, higher AUC values indicate greater predictive performance versus lower AUC values.}
   \label{fig:auc_taxon_time}
 \end{figure}
+
+
+
+We can also compare expected out-of-sample performance based on taxonomic group
+
+
+Finally, expected out-of-sample performance is compared between taxonomic groups over time.
+
 
 
 
