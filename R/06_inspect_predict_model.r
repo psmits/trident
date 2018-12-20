@@ -63,6 +63,7 @@ fit <- read_rds('../data/training_fit.rds')
 fit_rt <- read_rds('../data/training_fit_rt.rds')
 fit_rl <- read_rds('../data/training_fit_rl.rds')
 
+# the following is called entirely for its side effects
 # general summary
 cv_model(fit, counti_fold_match, 
          model_key, 'full', '../results/figure/')

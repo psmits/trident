@@ -79,6 +79,7 @@ fit_models <- function(.data) {
   to_fit <- cross2(by_formula, counti_accum)
 
   # all that is missing is the data
+  # i have to admit that this is really cool -- beginning me would never have figured this out!
   fit <- map(to_fit, ~ .x[[1]](data = .x[[2]]))
   # everything is multiples of 4
   #   1:4 first form applied to each fold

@@ -693,7 +693,7 @@ get_pred <- function(fit, .data) {
 #' @return NULL
 cv_model <- function(fit, .data, key, name, path) {
   # predict the test data
-  pred <- get_pred(fig, .data)
+  pred <- get_pred(fit, .data)
   
   # calculate ROC/AUC for the predictions of test data
   # to determine how good our out of sample predictions are
@@ -742,7 +742,7 @@ cv_model <- function(fit, .data, key, name, path) {
 #' @return NULL
 cv_model_time <- function(fit, .data, key, name, path) {
   # predict the test data
-  pred <- get_pred(fig, .data)
+  pred <- get_pred(fit, .data)
   
   time_auc <- map2(pred, .data, get_auc_time) %>%
     set_names(., names(fit))
@@ -768,7 +768,7 @@ cv_model_time <- function(fit, .data, key, name, path) {
     coord_cartesian(ylim = c(0.4, 1), xlim = c(0, 50)) +
     labs(y = 'AUC ROC', x = 'Time (Mya)') +
     NULL
-  fn <- pasteo(path, 'fold_auc_time_tiny_', name, '.png')
+  fn <- paste0(path, 'fold_auc_time_tiny_', name, '.png')
   ggsave(filename = fn,
          plot = gggeo_scale(ta, 
                             dat = 'epochs', 
@@ -780,7 +780,7 @@ cv_model_time <- function(fit, .data, key, name, path) {
     facet_grid(mod ~ .) +
     geom_hline(yintercept = 0.5, colour = 'red', linetype = 'dashed') +
     NULL
-  fn <- pasteo(path, 'fold_auc_time_', name, '.png')
+  fn <- paste0(path, 'fold_auc_time_', name, '.png')
   ggsave(filename = fn,
          plot = ta,
          width = 11, height = 8.5)
@@ -800,9 +800,9 @@ cv_model_time <- function(fit, .data, key, name, path) {
 #' @return NULL
 cv_model_taxon <- function(fit, .data, key, name, path) {
   # predict the test data
-  pred <- get_pred(fig, .data)
-  
-  pp_taxon <- map2(pred, .data
+  pred <- get_pred(fit, .data)
+ 
+  pp_taxon <- map2(pred, .data, 
                    ~ split(data.frame(t(.x)), 
                            .y$fossil_group)) %>%
     map(., function(x) map(x, ~ t(.x)))
@@ -847,11 +847,9 @@ cv_model_taxon <- function(fit, .data, key, name, path) {
 #' @param name character length 1 vector describing data
 #' @param path character length 1 vector describing directory to drop figures into -- needs trailing slash!
 #' @return NULL
-cv_model_taxon <- function(fit, .data, key, name, path) {
-
 cv_model_taxon_time <- function(fit, .data, key, name, path) {
   # predict the test data
-  pred <- get_pred(fig, .data)
+  pred <- get_pred(fit, .data)
 
   # break up the posterior predictive estimates by taxon and time
   # break up the data to match nicely
