@@ -1,4 +1,4 @@
-\begin{thebibliography}{46}
+\begin{thebibliography}{50}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -125,6 +125,14 @@ T.~H.~G. Ezard, P.~N. Pearson, T.~Aze, and A.~Purvis.
 \newblock URL
   \url{http://rsbl.royalsocietypublishing.org/cgi/doi/10.1098/rsbl.2011.0699}.
 
+\bibitem[Fawcett(2006)]{Fawcett2006}
+T.~Fawcett.
+\newblock {An introduction to ROC analysis}.
+\newblock \emph{Pattern Recognition Letters}, 27\penalty0 (8):\penalty0
+  861--874, 2006.
+\newblock ISSN 01678655.
+\newblock \doi{10.1016/j.patrec.2005.10.010}.
+
 \bibitem[Finnegan et~al.(2008)Finnegan, Payne, and Wang]{Finnegan2008}
 S.~Finnegan, J.~L. Payne, and S.~C. Wang.
 \newblock {The Red Queen revisited: reevaluating the age selectivity of
@@ -217,6 +225,15 @@ P.~G. Harnik, C.~Simpson, and J.~L. Payne.
 \newblock \doi{10.1098/rspb.2012.1902}.
 \newblock URL
   \url{http://rspb.royalsocietypublishing.org/cgi/doi/10.1098/rspb.2012.1902}.
+
+\bibitem[Hastie et~al.(2009)Hastie, Tibshirani, and Friedman]{ESL}
+T.~Hastie, R.~Tibshirani, and J.~Friedman.
+\newblock {The Elements of Statistical Learning}.
+\newblock \emph{Bayesian Forecasting and Dynamic Models}, 1:\penalty0 1--694,
+  2009.
+\newblock ISSN 0172-7397.
+\newblock \doi{10.1007/b94608}.
+\newblock URL \url{http://www.springerlink.com/index/10.1007/b94608}.
 
 \bibitem[Henry and Wickham(2018)]{purrr}
 L.~Henry and H.~Wickham.
@@ -324,6 +341,14 @@ C.~R. Marshall.
 \newblock ISSN 00917613.
 \newblock \doi{10.1130/0091-7613(1995)023<0731:DBSAGE>2.3.CO}.
 
+\bibitem[Mason and Graham(2002)]{Mason2002}
+S.~J. Mason and N.~Graham.
+\newblock {Areas beneath the relative operating characteristics (ROC) and
+  relative operating levels (ROL) curves: Statistical signicance and
+  interpretation}.
+\newblock \emph{Quarterly Journal of the Royal Metorological Society},
+  128:\penalty0 2145--2166, 2002.
+
 \bibitem[Payne and Finnegan(2007)]{Payne2007}
 J.~L. Payne and S.~Finnegan.
 \newblock {The effect of geographic range on extinction risk during background
@@ -392,5 +417,13 @@ H.~Wickham, R.~François, L.~Henry, and K.~Müller.
 \newblock \emph{dplyr: A Grammar of Data Manipulation}, 2018.
 \newblock URL \url{https://CRAN.R-project.org/package=dplyr}.
 \newblock R package version 0.7.8.
+
+\bibitem[Zachos et~al.(2008)Zachos, Dickens, and Zeebe]{Zachos2008}
+J.~C. Zachos, G.~R. Dickens, and R.~E. Zeebe.
+\newblock {An early Cenozoic perspective on greenhouse warming and carbon-cycle
+  dynamics.}
+\newblock \emph{Nature}, 451\penalty0 (7176):\penalty0 279--283, jan 2008.
+\newblock ISSN 1476-4687.
+\newblock \doi{10.1038/nature06588}.
 
 \end{thebibliography}

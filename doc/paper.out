@@ -1,8 +1,9 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
-\BOOKMARK [1][-]{section.2}{Data Specifications}{}% 2
-\BOOKMARK [1][-]{section.3}{Model Specifications}{}% 3
-\BOOKMARK [1][-]{section.4}{Model Parameter Estimation}{}% 4
-\BOOKMARK [1][-]{section.5}{Model adequacy}{}% 5
-\BOOKMARK [1][-]{section.6}{Model adequacy}{}% 6
-\BOOKMARK [1][-]{section.7}{Cross-validation}{}% 7
-\BOOKMARK [1][-]{section.8}{Cross-validation}{}% 8
+\BOOKMARK [1][-]{section.2}{Materials and Methods}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Data Specifications}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Model Specifications}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Model Parameter Estimation}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.4}{Model adequacy}{section.2}% 6
+\BOOKMARK [1][-]{section.3}{Results}{}% 7
+\BOOKMARK [2][-]{subsection.3.1}{Model adequacy}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.2}{Cross-validation}{section.3}% 9
