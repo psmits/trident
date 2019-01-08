@@ -1,0 +1,55 @@
+This is BibTeX, Version 0.99d (TeX Live 2017/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: paper.aux
+The style file: abbrvnat.bst
+Database file #1: citations.bib
+Repeated entry---line 62 of file citations.bib
+ : @article{Alroy2010
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 689 of file citations.bib
+ : @article{Harnik2012
+ :                    ,
+I'm skipping whatever remains of this entry
+You've used 46 entries,
+            2773 wiz_defined-function locations,
+            983 strings with 15613 characters,
+and the built_in function-call counts, 23464 in all, are:
+= -- 2254
+> -- 1324
+< -- 32
++ -- 454
+- -- 408
+* -- 2053
+:= -- 3710
+add.period$ -- 221
+call.type$ -- 46
+change.case$ -- 269
+chr.to.int$ -- 46
+cite$ -- 92
+duplicate$ -- 923
+empty$ -- 1787
+format.name$ -- 478
+if$ -- 4827
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 42
+newline$ -- 321
+num.names$ -- 184
+pop$ -- 403
+preamble$ -- 1
+purify$ -- 228
+quote$ -- 0
+skip$ -- 718
+stack$ -- 0
+substring$ -- 1101
+swap$ -- 56
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 501
+warning$ -- 0
+while$ -- 216
+width$ -- 0
+write$ -- 766
+(There were 2 error messages)

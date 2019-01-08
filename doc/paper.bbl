@@ -1,0 +1,396 @@
+\begin{thebibliography}{46}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Alroy(2000)]{Alroy2000b}
+J.~Alroy.
+\newblock {New methods for quantifying macroevolutionary patterns and
+  processes}.
+\newblock \emph{Paleobiology}, 26\penalty0 (4):\penalty0 707--733, 2000.
+\newblock ISSN 0094-8373.
+\newblock \doi{10.1666/0094-8373(2000)026<0707:NMFQMP>2.0.CO;2}.
+
+\bibitem[Alroy(2010)]{Alroy2010}
+J.~Alroy.
+\newblock {Fair sampling of taxonomic richness and unbiased estimation of
+  origination and extinction rates}.
+\newblock \emph{Quantitative methods in paleobiology. Paleontological Society
+  Papers.}, 16:\penalty0 55--80, 2010.
+\newblock URL
+  \url{https://www.nceas.ucsb.edu/{~}alroy/pdfs/2010-PSPapers-16-55.pdf{\%}5Cnfile:///Users/tmsmiley/Documents/Papers2/Articles/2010/Alroy/Quantitative
+  methods in paleobiology. Paleontological Society Papers. 2010
+  Alroy.pdf{\%}5Cnpapers2://publication/uuid/E23F7702-48A8}.
+
+\bibitem[Alroy(2014)]{Alroy2014}
+J.~Alroy.
+\newblock {Accurate and precise estimates of origination and extinction rates}.
+\newblock \emph{Paleobiology}, 40\penalty0 (03):\penalty0 374--397, 2014.
+\newblock ISSN 0094-8373.
+\newblock \doi{10.1666/13036}.
+\newblock URL
+  \url{https://www.cambridge.org/core/product/identifier/S0094837300001871/type/journal{\_}article}.
+
+\bibitem[Alroy et~al.(2000)Alroy, Koch, and Zachos]{Alroy2000}
+J.~Alroy, P.~L. Koch, and J.~C. Zachos.
+\newblock {Global Climate Change and North American Mammalian Evolution}.
+\newblock \emph{Paleotological Society}, 26\penalty0 (4):\penalty0 259--288,
+  2000.
+\newblock \doi{10.1666/0094-8373(2000)26}.
+
+\bibitem[Alroy et~al.(2001)Alroy, Marshall, Bambach, Bezusko, Foote, Fursich,
+  Hansen, Holland, Ivany, Jablonski, Jacobs, Jones, Kosnik, Lidgard, Low,
+  Miller, Novack-Gottshall, Olszewski, Patzkowsky, Raup, Roy, Sepkoski,
+  Sommers, Wagner, and Webber]{Alroy2001}
+J.~Alroy, C.~R. Marshall, R.~K. Bambach, K.~Bezusko, M.~Foote, F.~T. Fursich,
+  T.~A. Hansen, S.~M. Holland, L.~C. Ivany, D.~Jablonski, D.~K. Jacobs, D.~C.
+  Jones, M.~A. Kosnik, S.~Lidgard, S.~Low, A.~I. Miller, P.~M.
+  Novack-Gottshall, T.~D. Olszewski, M.~E. Patzkowsky, D.~M. Raup, K.~Roy,
+  J.~J. Sepkoski, M.~G. Sommers, P.~J. Wagner, and A.~Webber.
+\newblock {Effects of sampling standardization on estimates of Phanerozoic
+  marine diversification}.
+\newblock \emph{Proceedings of the National Academy of Sciences}, 98\penalty0
+  (11):\penalty0 6261--6266, 2001.
+\newblock ISSN 0027-8424.
+\newblock \doi{10.1073/pnas.111144698}.
+\newblock URL \url{http://www.pnas.org/cgi/doi/10.1073/pnas.111144698}.
+
+\bibitem[Bürkner(2017)]{brms2017}
+P.-C. Bürkner.
+\newblock {brms}: An {R} package for {Bayesian} multilevel models using {Stan}.
+\newblock \emph{Journal of Statistical Software}, 80\penalty0 (1):\penalty0
+  1--28, 2017.
+\newblock \doi{10.18637/jss.v080.i01}.
+
+\bibitem[Bürkner(2018)]{brms2018}
+P.-C. Bürkner.
+\newblock Advanced {Bayesian} multilevel modeling with the {R} package {brms}.
+\newblock \emph{The R Journal}, 10\penalty0 (1):\penalty0 395--411, 2018.
+
+\bibitem[Cramer et~al.(2011)Cramer, Miller, Barrett, and Wright]{Cramer2011}
+B.~S. Cramer, K.~G. Miller, P.~J. Barrett, and J.~D. Wright.
+\newblock {Late Cretaceous-Neogene trends in deep ocean temperature and
+  continental ice volume: Reconciling records of benthic foraminiferal
+  geochemistry ($\delta$18O and Mg/Ca) with sea level history}.
+\newblock \emph{Journal of Geophysical Research: Oceans}, 116\penalty0
+  (12):\penalty0 1--23, 2011.
+\newblock ISSN 21699291.
+\newblock \doi{10.1029/2011JC007255}.
+
+\bibitem[Crampton et~al.(2016)Crampton, Cooper, Sadler, and
+  Foote]{Crampton2016}
+J.~S. Crampton, R.~A. Cooper, P.~M. Sadler, and M.~Foote.
+\newblock {Greenhouse--icehouse transition in the Late Ordovician marks a step
+  change in extinction regime in the marine plankton}.
+\newblock \emph{Proceedings of the National Academy of Sciences}, 113\penalty0
+  (6):\penalty0 1498--1503, 2016.
+\newblock ISSN 0027-8424.
+\newblock \doi{10.1073/pnas.1519092113}.
+
+\bibitem[Ezard and Purvis(2016)]{Ezard2016}
+T.~H. Ezard and A.~Purvis.
+\newblock {Environmental changes define ecological limits to species richness
+  and reveal the mode of macroevolutionary competition}.
+\newblock \emph{Ecology Letters}, pages 1--8, 2016.
+\newblock ISSN 14610248.
+\newblock \doi{10.1111/ele.12626}.
+
+\bibitem[Ezard et~al.(2013)Ezard, Thomas, and Purvis]{Ezard2013}
+T.~H. Ezard, G.~H. Thomas, and A.~Purvis.
+\newblock {Inclusion of a near-complete fossil record reveals
+  speciation-related molecular evolution}.
+\newblock \emph{Methods in Ecology and Evolution}, 4\penalty0 (8):\penalty0
+  745--753, 2013.
+\newblock ISSN 2041210X.
+\newblock \doi{10.1111/2041-210X.12089}.
+
+\bibitem[Ezard et~al.(2011)Ezard, Aze, Pearson, and Purvis]{Ezard2011}
+T.~H.~G. Ezard, T.~Aze, P.~N. Pearson, and A.~Purvis.
+\newblock {Interplay Between Changing Climate and Species' Ecology Drives
+  Macroevolutionary Dynamics}.
+\newblock \emph{Science}, 332\penalty0 (6027):\penalty0 349--351, 2011.
+\newblock ISSN 0036-8075.
+\newblock \doi{10.1126/science.1203060}.
+\newblock URL \url{http://www.sciencemag.org/cgi/doi/10.1126/science.1203060}.
+
+\bibitem[Ezard et~al.(2012)Ezard, Pearson, Aze, and Purvis]{Ezard2012}
+T.~H.~G. Ezard, P.~N. Pearson, T.~Aze, and A.~Purvis.
+\newblock {The meaning of birth and death (in macroevolutionary birth-death
+  models)}.
+\newblock \emph{Biology Letters}, 8\penalty0 (1):\penalty0 139--142, 2012.
+\newblock ISSN 1744-9561.
+\newblock \doi{10.1098/rsbl.2011.0699}.
+\newblock URL
+  \url{http://rsbl.royalsocietypublishing.org/cgi/doi/10.1098/rsbl.2011.0699}.
+
+\bibitem[Finnegan et~al.(2008)Finnegan, Payne, and Wang]{Finnegan2008}
+S.~Finnegan, J.~L. Payne, and S.~C. Wang.
+\newblock {The Red Queen revisited: reevaluating the age selectivity of
+  Phanerozoic marine genus extinctions}.
+\newblock \emph{Paleobiology}, 34\penalty0 (3):\penalty0 318--341, 2008.
+\newblock ISSN 0094-8373.
+\newblock \doi{10.1666/07008.1}.
+
+\bibitem[Finnegan et~al.(2015)Finnegan, Anderson, Harnik, Simpson, Tittensor,
+  Byrnes, Finkley, Lindberg, Liow, O'Dea, and Pandolfi]{Finnegan2015}
+S.~Finnegan, S.~C. Anderson, P.~G. Harnik, C.~Simpson, D.~P. Tittensor, J.~E.
+  Byrnes, Z.~V. Finkley, D.~R. Lindberg, L.~H. Liow, A.~O'Dea, and J.~M.
+  Pandolfi.
+\newblock {Paleontological baselines for evaluating extinction risk in the
+  modern oceans}.
+\newblock \emph{Science}, 348\penalty0 (6234):\penalty0 567--570, 2015.
+
+\bibitem[Foote(1997)]{Foote1997}
+M.~Foote.
+\newblock {Estimating Taxonomic Durations and Preservation Probability}.
+\newblock \emph{Paleobiology}, 23\penalty0 (3):\penalty0 278--300, 1997.
+\newblock ISSN 0094-8373.
+\newblock \doi{10.1017/S0094837300019692}.
+
+\bibitem[Foote(2001)]{Foote2001}
+M.~Foote.
+\newblock {Inferring temporal patterns of preservation, origination, and
+  extinction from taxonomic survivorship analysis}.
+\newblock \emph{Paleobiology}, 27\penalty0 (4):\penalty0 602--630, 2001.
+\newblock ISSN 0094-8373.
+\newblock \doi{10.1666/0094-8373(2001)027<0602:ITPOPO>2.0.CO;2}.
+
+\bibitem[Foote(2006)]{Foote2006}
+M.~Foote.
+\newblock {Substrate affinity and diversity dynamics of Paleozoic marine
+  animals}.
+\newblock \emph{Paleobiology}, 32\penalty0 (3):\penalty0 345--366, 2006.
+\newblock ISSN 0094-8373.
+\newblock \doi{10.1666/05062.1}.
+\newblock URL \url{http://www.bioone.org/doi/abs/10.1666/05062.1}.
+
+\bibitem[Foote(2007)]{Foote2007}
+M.~Foote.
+\newblock {Symmetric waxing and waning of marine invertebrate genera}.
+\newblock \emph{Palaeobiology}, 33\penalty0 (4):\penalty0 517--529, 2007.
+\newblock ISSN 0094-8373.
+\newblock \doi{10.1666/06084.1}.
+
+\bibitem[Foote and Raup(1996)]{Foote1996e}
+M.~Foote and D.~M. Raup.
+\newblock {Fossil preservation and the stratigraphic ranges of taxa}.
+\newblock \emph{Paleobiology}, 22\penalty0 (2):\penalty0 121--140, 1996.
+
+\bibitem[Foote and Sepkoski(1999)]{Foote1999a}
+M.~Foote and J.~J. Sepkoski.
+\newblock {Absolute measures of the completeness of the fossil record.}
+\newblock \emph{Nature}, 398\penalty0 (6726):\penalty0 415--417, apr 1999.
+\newblock ISSN 0028-0836.
+\newblock \doi{10.1038/18872}.
+
+\bibitem[Gabry and Goodrich(2018)]{rstanarm}
+J.~Gabry and B.~Goodrich.
+\newblock \emph{rstanarm: Bayesian Applied Regression Modeling via Stan}, 2018.
+\newblock URL \url{https://CRAN.R-project.org/package=rstanarm}.
+\newblock R package version 2.18.2.
+
+\bibitem[Gelman and Hill(2006)]{ARM}
+A.~Gelman and J.~Hill.
+\newblock \emph{{Data Analysis Using Regression and Multilevel/Hierarchical
+  Models}}.
+\newblock Cambridge University Press, Cambridge, 2006.
+
+\bibitem[Harnik(2011)]{Harnik2011}
+P.~G. Harnik.
+\newblock {Direct and indirect effects of biological factors on extinction risk
+  in fossil bivalves}.
+\newblock \emph{Proceedings of the National Academy of Science}, 108\penalty0
+  (33):\penalty0 13594--13599, 2011.
+\newblock ISSN 0027-8424.
+\newblock
+  \doi{10.1073/pnas.1100572108/-/DCSupplemental.www.pnas.org/cgi/doi/10.1073/pnas.1100572108}.
+
+\bibitem[Harnik et~al.(2012)Harnik, Simpson, and Payne]{Harnik2012}
+P.~G. Harnik, C.~Simpson, and J.~L. Payne.
+\newblock {Long-term differences in extinction risk among the seven forms of
+  rarity}.
+\newblock \emph{Proceedings of the Royal Society B: Biological Sciences},
+  279\penalty0 (1749):\penalty0 4969--4976, 2012.
+\newblock ISSN 0962-8452.
+\newblock \doi{10.1098/rspb.2012.1902}.
+\newblock URL
+  \url{http://rspb.royalsocietypublishing.org/cgi/doi/10.1098/rspb.2012.1902}.
+
+\bibitem[Henry and Wickham(2018)]{purrr}
+L.~Henry and H.~Wickham.
+\newblock \emph{purrr: Functional Programming Tools}, 2018.
+\newblock URL \url{https://CRAN.R-project.org/package=purrr}.
+\newblock R package version 0.2.5.
+
+\bibitem[Jablonski(2008)]{Jablonski2008}
+D.~Jablonski.
+\newblock {Species Selection: Theory and Data}.
+\newblock \emph{Annual Review of Ecology, Evolution, and Systematics},
+  39\penalty0 (1):\penalty0 501--524, 2008.
+\newblock ISSN 1543-592X.
+\newblock \doi{10.1146/annurev.ecolsys.39.110707.173510}.
+\newblock URL
+  \url{http://www.annualreviews.org/doi/10.1146/annurev.ecolsys.39.110707.173510}.
+
+\bibitem[Jablonski and Hunt(2006)]{Jablonski2006}
+D.~Jablonski and G.~Hunt.
+\newblock {Larval Ecology, Geographic Range, and Species Survivorship in
+  Cretaceous Mollusks: Organismic versus Species‐Level Explanations}.
+\newblock \emph{The American Naturalist}, 168\penalty0 (4):\penalty0 556--564,
+  2006.
+\newblock ISSN 0003-0147.
+\newblock \doi{10.1086/507994}.
+\newblock URL \url{http://www.journals.uchicago.edu/doi/10.1086/507994}.
+
+\bibitem[Jablonski and Roy(2003)]{Jablonski2003}
+D.~Jablonski and K.~Roy.
+\newblock {Geographical range and speciation in fossil and living molluscs}.
+\newblock \emph{Proceedings of the Royal Society B: Biological Sciences},
+  270\penalty0 (1513):\penalty0 401--406, 2003.
+\newblock ISSN 0962-8452.
+\newblock \doi{10.1098/rspb.2002.2243}.
+\newblock URL
+  \url{http://rspb.royalsocietypublishing.org/cgi/doi/10.1098/rspb.2002.2243}.
+
+\bibitem[Kay(2018)]{tidybayes}
+M.~Kay.
+\newblock \emph{{tidybayes}: Tidy Data and Geoms for {Bayesian} Models}, 2018.
+\newblock URL \url{http://mjskay.github.io/tidybayes/}.
+\newblock R package version 1.0.3.
+
+\bibitem[Kiessling and Kocsis(2016)]{Kiessling2013}
+W.~Kiessling and {\'{A}}.~T. Kocsis.
+\newblock {Adding fossil occupancy trajectories to the assessment of modern
+  extinction risk}.
+\newblock \emph{Biology Letters}, 12\penalty0 (10):\penalty0 20150813, 2016.
+\newblock ISSN 1744-9561.
+\newblock \doi{10.1098/rsbl.2015.0813}.
+\newblock URL
+  \url{http://www.ncbi.nlm.nih.gov/pubmed/28120797{\%}0Ahttp://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=PMC5095184{\%}0Ahttp://rsbl.royalsocietypublishing.org/lookup/doi/10.1098/rsbl.2015.0813}.
+
+\bibitem[Lazarus(1994)]{Lazarus1994}
+D.~Lazarus.
+\newblock {Neptune: A marine micropaleontology database}.
+\newblock \emph{Mathematical Geology}, 26\penalty0 (7):\penalty0 817--832,
+  1994.
+\newblock ISSN 08828121.
+\newblock \doi{10.1007/BF02083119}.
+
+\bibitem[Liow and Stenseth(2007)]{Liow2007}
+L.~H. Liow and N.~C. Stenseth.
+\newblock {The rise and fall of species: implications for macroevolutionary and
+  macroecological studies}.
+\newblock \emph{Proceedings of the Royal Society B: Biological Sciences},
+  274\penalty0 (1626):\penalty0 2745--2752, 2007.
+\newblock ISSN 0962-8452.
+\newblock \doi{10.1098/rspb.2007.1006}.
+\newblock URL
+  \url{http://rspb.royalsocietypublishing.org/cgi/doi/10.1098/rspb.2007.1006}.
+
+\bibitem[Liow et~al.(2010)Liow, Skaug, Ergon, and Schweder]{Liow2010}
+L.~H. Liow, H.~J. Skaug, T.~Ergon, and T.~Schweder.
+\newblock {Global occurrence trajectories of microfossils: environmental
+  volatility and the rise and fall of individual species}.
+\newblock \emph{Paleobiology}, 36\penalty0 (2):\penalty0 224--252, 2010.
+\newblock ISSN 0094-8373.
+\newblock \doi{10.1666/08080.1}.
+
+\bibitem[Liow et~al.(2011)Liow, Simpson, Bouchard, Damuth, Hallgrimsson, Hunt,
+  McShea, Powell, Stenseth, Stoller, and Wagner]{Liow2011}
+L.~H. Liow, C.~Simpson, F.~Bouchard, J.~Damuth, B.~Hallgrimsson, G.~Hunt, D.~W.
+  McShea, J.~R. Powell, N.~C. Stenseth, M.~K. Stoller, and G.~Wagner.
+\newblock {Pioneering paradigms and magnificent manifestos--Leigh Van Valen's
+  priceless contributions to evolutionary biology.}
+\newblock \emph{Evolution; international journal of organic evolution},
+  65\penalty0 (4):\penalty0 917--922, 2011.
+\newblock ISSN 15585646.
+\newblock \doi{10.1111/j.1558-5646.2011.01242.x}.
+
+\bibitem[Lloyd et~al.(2012)Lloyd, Pearson, Young, and Smith]{Lloyd2012b}
+G.~T. Lloyd, P.~N. Pearson, J.~R. Young, and A.~B. Smith.
+\newblock {Sampling bias and the fossil record of planktonic foraminifera on
+  land and in the deep sea}.
+\newblock \emph{Paleobiology}, 38\penalty0 (4):\penalty0 569--584, 2012.
+\newblock \doi{10.5061/dryad.8ts3p}.
+
+\bibitem[Marshall(1995)]{Marshall1995}
+C.~R. Marshall.
+\newblock {Distinguishing between sudden and gradual extinctions in the fossil
+  record: predicting the position of the Cretaceous-Tertiary iridium anomaly
+  using the ammonite fossil record on Seymour Island, Antarctica}.
+\newblock \emph{Geology}, 23\penalty0 (8):\penalty0 731--734, 1995.
+\newblock ISSN 00917613.
+\newblock \doi{10.1130/0091-7613(1995)023<0731:DBSAGE>2.3.CO}.
+
+\bibitem[Payne and Finnegan(2007)]{Payne2007}
+J.~L. Payne and S.~Finnegan.
+\newblock {The effect of geographic range on extinction risk during background
+  and mass extinction.}
+\newblock \emph{Proceedings of the National Academy of Sciences}, 104\penalty0
+  (25):\penalty0 10506--10511, 2007.
+\newblock ISSN 0027-8424.
+\newblock \doi{10.1073/pnas.0701257104}.
+
+\bibitem[Payne et~al.(2016)Payne, Bush, Chang, Heim, Knope, and
+  Pruss]{Payne2016}
+J.~L. Payne, A.~M. Bush, E.~T. Chang, N.~A. Heim, M.~L. Knope, and S.~B. Pruss.
+\newblock {Extinction intensity, selectivity and their combined
+  macroevolutionary influence in the fossil record}.
+\newblock \emph{Biology Letters}, 12\penalty0 (10):\penalty0 20160202, 2016.
+\newblock ISSN 1744-9561.
+\newblock \doi{10.1098/rsbl.2016.0202}.
+\newblock URL
+  \url{http://rsbl.royalsocietypublishing.org/lookup/doi/10.1098/rsbl.2016.0202}.
+
+\bibitem[Peters(2008)]{Peters2008}
+S.~E. Peters.
+\newblock {Environmental determinants of extinction selectivity in the fossil
+  record}.
+\newblock \emph{Nature}, 454\penalty0 (7204):\penalty0 626--629, 2008.
+\newblock ISSN 00280836.
+\newblock \doi{10.1038/nature07032}.
+
+\bibitem[Smits(2015)]{Smits2015}
+P.~D. Smits.
+\newblock {Expected time-invariant effects of biological traits on mammal
+  species duration}.
+\newblock \emph{Proceedings of the National Academy of Sciences}, 112\penalty0
+  (42):\penalty0 13015--13020, 2015.
+\newblock ISSN 0027-8424.
+\newblock \doi{10.1073/pnas.1510482112}.
+\newblock URL \url{http://www.pnas.org/lookup/doi/10.1073/pnas.1510482112}.
+
+\bibitem[Spencer-Cervato(1999)]{SpencerCervato1999}
+C.~Spencer-Cervato.
+\newblock {The Cenozoic deep sea microfossil record: explorations of the
+  DSDP/ODP sample set using the Neptune database}.
+\newblock \emph{Palaeontologia Electronica}, 2\penalty0 (2):\penalty0 4--286,
+  1999.
+\newblock ISSN 10948074.
+\newblock URL
+  \url{http://scholar.google.com/scholar?hl=en{\&}btnG=Search{\&}q=intitle:THE+CENOZOIC+DEEP+SEA+MICROFOSSIL+RECORD+:+EXPLORATIONS+OF+THE+DSDP+/+ODP+SAMPLE+SET+USING+THE+NEPTUNE+DATABASE{\#}0}.
+
+\bibitem[Team(2017)]{StanManual}
+S.~D. Team.
+\newblock {Stan Modeling Language Users Guide and Reference Manual}, 2017.
+\newblock URL \url{http://mc-stan.org}.
+
+\bibitem[{Van Valen}(1973)]{VanValen1973}
+L.~{Van Valen}.
+\newblock {A new evolutionary law}.
+\newblock \emph{Evolutionary Theory}, 1:\penalty0 1--30, 1973.
+
+\bibitem[Wang and Marshall(2016)]{Wang2016}
+S.~C. Wang and C.~R. Marshall.
+\newblock {Estimating times of extinction in the fossil record}.
+\newblock \emph{Biology Letters}, 12\penalty0 (4):\penalty0 20150989, 2016.
+
+\bibitem[Wickham et~al.(2018)Wickham, François, Henry, and Müller]{dplyr}
+H.~Wickham, R.~François, L.~Henry, and K.~Müller.
+\newblock \emph{dplyr: A Grammar of Data Manipulation}, 2018.
+\newblock URL \url{https://CRAN.R-project.org/package=dplyr}.
+\newblock R package version 0.7.8.
+
+\end{thebibliography}
