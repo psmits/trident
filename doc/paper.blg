@@ -11,45 +11,45 @@ Repeated entry---line 709 of file citations.bib
  : @article{Harnik2012
  :                    ,
 I'm skipping whatever remains of this entry
-You've used 50 entries,
+You've used 51 entries,
             2773 wiz_defined-function locations,
-            1019 strings with 16449 characters,
-and the built_in function-call counts, 25410 in all, are:
-= -- 2449
-> -- 1415
-< -- 34
-+ -- 485
-- -- 435
-* -- 2222
-:= -- 4012
-add.period$ -- 240
-call.type$ -- 50
-change.case$ -- 290
-chr.to.int$ -- 50
-cite$ -- 100
-duplicate$ -- 1005
-empty$ -- 1947
-format.name$ -- 511
-if$ -- 5232
+            1026 strings with 16611 characters,
+and the built_in function-call counts, 25794 in all, are:
+= -- 2483
+> -- 1436
+< -- 35
++ -- 492
+- -- 441
+* -- 2248
+:= -- 4075
+add.period$ -- 245
+call.type$ -- 51
+change.case$ -- 294
+chr.to.int$ -- 51
+cite$ -- 102
+duplicate$ -- 1025
+empty$ -- 1979
+format.name$ -- 520
+if$ -- 5313
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 46
-newline$ -- 348
-num.names$ -- 200
-pop$ -- 431
+missing$ -- 48
+newline$ -- 355
+num.names$ -- 204
+pop$ -- 442
 preamble$ -- 1
-purify$ -- 245
+purify$ -- 249
 quote$ -- 0
-skip$ -- 776
+skip$ -- 791
 stack$ -- 0
-substring$ -- 1209
-swap$ -- 61
+substring$ -- 1211
+swap$ -- 62
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 545
+type$ -- 551
 warning$ -- 0
-while$ -- 236
+while$ -- 239
 width$ -- 0
-write$ -- 832
+write$ -- 848
 (There were 2 error messages)
