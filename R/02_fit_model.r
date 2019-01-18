@@ -10,9 +10,10 @@ library(rstanarm)
 library(bayesplot)
 
 # misc
-source('../R/helper01_process_foo.r')
-source('../R/helper03_misc_foo.r')
-source('../R/helper04_stan_utility.r')
+library(here)
+source(here('R', 'helper01_process_foo.r'))
+source(here('R', 'helper03_misc_foo.r'))
+source(here('R', 'helper04_stan_utility.r'))
 
 # important constants
 options(mc.cores = parallel::detectCores())
@@ -84,9 +85,9 @@ list_part_glmer <-
                                           autoscale = FALSE)))
 
 # get data in
-counti <- read_rds('../data/counting.rds')
-counti_restrict_time <- read_rds('../data/counting_restrict_time.rds')
-counti_restrict_local <- read_rds('../data/counting_restrict_local.rds')
+counti <- read_rds(here('data', 'counting.rds'))
+counti_restrict_time <- read_rds(here('data', 'counting_restrict_time.rds'))
+counti_restrict_local <- read_rds(here('data', 'counting_restrict_local.rds'))
 
 # transform the data for analysis
 counti_trans <- prepare_analysis(counti)
@@ -99,6 +100,6 @@ disc_fit_rt <- map2(forms, list_part_glmer, ~ .y(.x, data = counti_rt_trans))
 disc_fit_rl <- map2(forms, list_part_glmer, ~ .y(.x, data = counti_rl_trans))
 
 # write out the model fits
-write_rds(disc_fit, path = '../data/disc_fit.rds')
-write_rds(disc_fit_rt, path = '../data/disc_fit_rt.rds')
-write_rds(disc_fit_rl, path = '../data/disc_fit_rl.rds')
+write_rds(disc_fit, path = here('results', 'disc_fit.rds'))
+write_rds(disc_fit_rt, path = here('results', 'disc_fit_rt.rds'))
+write_rds(disc_fit_rl, path = here('results', 'disc_fit_rl.rds'))

@@ -15,24 +15,25 @@ library(bayesplot)
 
 # misc
 library(pROC)
+library(here)
 
-source('../R/helper01_process_foo.r')
-source('../R/helper02_plot_foo.r')
-source('../R/helper03_misc_foo.r')
-source('../R/helper04_stan_utility.r')
-source('../R/helper05_roc_utility.r')
+source(here('R', 'helper01_process_foo.r'))
+source(here('R', 'helper02_plot_foo.r'))
+source(here('R', 'helper03_misc_foo.r'))
+source(here('R', 'helper04_stan_utility.r'))
+source(here('R', 'helper05_roc_utility.r'))
 
 # important constants
 future::plan(strategy = multicore)
 
 # get data in
-counti <- read_rds('../data/counting.rds')
+counti <- read_rds(here('data', 'counting.rds'))
 
 # form of data that was analyzed
 counti_trans <- prepare_analysis(counti)
 
 # read in model fits
-disc_fit <- read_rds('../data/disc_fit.rds')
+disc_fit <- read_rds(here('results', 'disc_fit.rds')
 
 # check how much information learned
 priors <- prior_summary(disc_best)
@@ -92,7 +93,7 @@ effect_eye <- disc_best %>%
                lag1_temp) %>%
 ggplot(aes(y = .variable, x = .value)) +
 geom_halfeyeh(.width = c(0.8, 0.5))
-ggsave(filename = '../results/figure/effect_est.png',
+ggsave(filename = here('results', 'figure', 'effect_est.png'),
        plot = effect_eye, width = 4, height = 6)
 
 
@@ -122,7 +123,7 @@ vary_eye <- disc_best %>%
   ggplot(aes(y = term, x = .value)) +
   geom_halfeyeh(.width = c(0.8, 0.5)) +
   labs(x = 'Estimate', y = 'Variance component')
-ggsave(filename = '../results/figure/variance_components.png',
+ggsave(filename = here('results', 'figure', 'variance_components.png'),
        plot = vary_eye, width = 6, height = 6)
 
 
@@ -152,13 +153,14 @@ hazard_plot <- disc_best %>%
   stat_lineribbon() +
   scale_fill_brewer() +
   labs(x = 'Age (My)', y = 'P(T = t | T >= t, x)')
-ggsave(filename = '../results/figure/hazard_baseline.png',
+ggsave(filename = here('results', 'figure', 'hazard_baseline.png'),
        plot = hazard_plot, width = 6, height = 4)
 
 # can also then compare between taxonomic groups because i have that calculated
 # faceted baseline hazard plot by fossil_group
 db <- plot_taxon_hazard(disc_best)
-ggsave(filename = '../results/figure/hazard_bygroup.png', plot = db,
+ggsave(filename = here('results', 'figure', 'hazard_bygroup.png'), 
+       plot = db,
        width = 6, height = 8)
 
 
@@ -166,7 +168,8 @@ ggsave(filename = '../results/figure/hazard_bygroup.png', plot = db,
 #   3 covariates
 #   4 taxonomic groups
 by_taxon <- plot_taxon_covariate_time(disc_best)
-ggsave(filename = '../results/figure/eff_time_group.png', plot = by_taxon,
+ggsave(filename = here('results', 'figure', 'eff_time_group.png'), 
+       plot = by_taxon,
        height = 6, width = 8)
 
 
@@ -174,7 +177,9 @@ ggsave(filename = '../results/figure/eff_time_group.png', plot = by_taxon,
 # grab a random selection of species
 set.seed(100)
 risk_plots <- plot_risk_time(counti_trans, disc_best, nsp = 4)
-ggsave(filename = '../results/figure/relrisk_ext.png', plot = risk_plots[[1]],
+ggsave(filename = here('results', 'figure', 'relrisk_ext.png'), 
+       plot = risk_plots[[1]],
        height = 6, width = 8)
-ggsave(filename = '../results/figure/relrisk_range.png', plot = risk_plots[[2]],
+ggsave(filename = here('results', 'figure', 'relrisk_range.png'), 
+       plot = risk_plots[[2]],
        height = 6, width = 8)

@@ -13,9 +13,10 @@ library(bayesplot)
 # misc
 library(pROC)
 library(ROCR)
-source('../R/helper01_process_foo.r')
-source('../R/helper03_misc_foo.r')
-source('../R/helper04_stan_utility.r')
+library(here)
+source(here('R', 'helper01_process_foo.r'))
+source(here('R', 'helper03_misc_foo.r'))
+source(here('R', 'helper04_stan_utility.r'))
 
 # important constants
 options(mc.cores = parallel::detectCores())
@@ -108,19 +109,19 @@ fit_models <- function(.data) {
 # train [1,2,3], test [4]
 # train [1,2,3,4], test [5]
 # 1 is young, 5 is old; reverse!
-counti_fold <- read_rds('../data/counting.rds') %>%
+counti_fold <- read_rds(here('data', 'counting.rds')) %>%
   prepare_analysis(.) %>%
   mutate(fold = break_my(mybin, number = 5)) %>%
   split(., .$fold) %>%
   rev(.)
 
-counti_fold_rt <- read_rds('../data/counting_restrict_time.rds') %>%
+counti_fold_rt <- read_rds(here('data', 'counting_restrict_time.rds')) %>%
   prepare_analysis(.) %>%
   mutate(fold = break_my(mybin, number = 5)) %>%
   split(., .$fold) %>%
   rev(.)
 
-counti_fold_rl <- read_rds('../data/counting_restrict_local.rds') %>%
+counti_fold_rl <- read_rds(here('data', 'counting_restrict_local.rds')) %>%
   prepare_analysis(.) %>%
   mutate(fold = break_my(mybin, number = 5)) %>%
   split(., .$fold) %>%
@@ -137,6 +138,6 @@ fit_rt <- fit_models(.data = counti_accum_rt)
 fit_rl <- fit_models(.data = counti_accum_rl)
 
 # write out cross-validation fits
-write_rds(fit_full, path = '../data/training_fit.rds')
-write_rds(fit_rt, path = '../data/training_fit_rt.rds')
-write_rds(fit_rl, path = '../data/training_fit_rl.rds')
+write_rds(fit_full, path = here('results', 'training_fit.rds'))
+write_rds(fit_rt, path = here('results', 'training_fit_rt.rds'))
+write_rds(fit_rl, path = here('results', 'training_fit_rl.rds'))

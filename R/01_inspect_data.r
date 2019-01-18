@@ -13,11 +13,12 @@ library(bayesplot)
 library(scales)
 library(ggridges)
 library(pROC)
+library(here)
 
-source('../R/helper01_process_foo.r')
-source('../R/helper02_plot_foo.r')
-source('../R/helper03_misc_foo.r')
-source('../R/helper04_stan_utility.r')
+source(here('R', 'helper01_process_foo.r'))
+source(here('R', 'helper02_plot_foo.r'))
+source(here('R', 'helper03_misc_foo.r'))
+source(here('R', 'helper04_stan_utility.r'))
 
 theme_set(theme_bw())
 
@@ -25,9 +26,9 @@ theme_set(theme_bw())
 options(mc.cores = parallel::detectCores())
 
 # get data in
-counti <- read_rds('../data/counting.rds')
-counti_rt <- read_rds('../data/counting_restrict_time.rds')
-counti_rl <- read_rds('../data/counting_restrict_local.rds')
+counti <- read_rds(here('data', 'counting.rds'))
+counti_rt <- read_rds(here('data', 'counting_restrict_time.rds'))
+counti_rl <- read_rds(here('data', 'counting_restrict_local.rds'))
 
 # form of data that was analyzed
 counti_trans <- prepare_analysis(counti)
@@ -36,17 +37,17 @@ counti_rl_trans <- prepare_analysis(counti_rl)
 
 view_neptune(.data = counti_trans, 
              name = 'full',
-             path = '../results/figure/')
+             path = here('results', 'figure'))
 view_neptune(.data = counti_rt_trans, 
              name = 'restrict_time',
-             path = '../results/figure/')
+             path = here('results', 'figure'))
 view_neptune(.data = counti_rl_trans, 
              name = 'restrict_local',
-             path = '../results/figure/')
+             path = here('results', 'figure'))
 
 
 # looking at the temperature data
-mgca <- read_tsv('../data/cramer/cramer_temp.txt')
+mgca <- read_tsv(here('data', 'cramer', 'cramer_temp.txt'))
 names(mgca) <- str_to_lower(names(mgca))
 names(mgca) <- str_remove_all(names(mgca), '[^[[:alnum:]]]')
 mgca <- mgca %>%
@@ -72,5 +73,5 @@ tpg <- mg %>%
   geom_line() +
   scale_colour_manual(values = c('goldenrod', 'skyblue')) +
   labs(x = 'Time (My)', y = 'Temperature diff. from modern (C)')
-ggsave(filename = '../results/figure/cramer_temp.png',
+ggsave(filename = here('results', 'figure', 'cramer_temp.png'),
        plot = tpg, width = 6, height = 3)
