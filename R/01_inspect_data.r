@@ -75,3 +75,14 @@ tpg <- mg %>%
   labs(x = 'Time (My)', y = 'Temperature diff. from modern (C)')
 ggsave(filename = here('results', 'figure', 'cramer_temp.png'),
        plot = tpg, width = 6, height = 3)
+
+
+
+
+
+
+# number of observations per time bin as we change binning scheme
+# calculate
+#  number of observations
+#  number of observations per species
+#  geographic range of species

@@ -62,7 +62,52 @@ counti <- partial_raw_to_clean()
 counti_restrict_time <- partial_raw_to_clean(restrict = TRUE)
 counti_restrict_local <- partial_raw_to_clean(prov = lnghst_code)
 
+
+# try with multiple bin_width -s
+partial_short_bin <- partial(raw_to_clean,
+                             nano = neptune,
+                             form = 'count',
+                             age_max = age_max,
+                             sp = sp,
+                             mgca = mgca)
+
+
+prep_short <- function(width = bin_width) {
+
+  varname <- paste0("bin_", width)
+
+  partial_short_bin(bin_width = width)  %>%
+  dplyr::select(fullname, mybin, maxgcd) %>%
+  rename(!!varname := mybin) %>%
+  gather(key = 'key', value = 'value', -fullname, -maxgcd) %>%
+  separate(key, c('bin', 'width'), sep = '_') %>%
+  mutate(width = parse_number(width)) %>%
+  dplyr::select(maxgcd, width)
+
+}
+
+counti_01 <- prep_short(0.1) 
+
+counti_05 <- prep_short(0.5)
+
+counti_1 <- prep_short(1)
+
+counti_2 <- prep_short(2)
+
+counti_25 <- prep_short(2.5)
+
+counti_5 <- prep_short(5)
+
+vary_bin <- bind_rows(counti_01, 
+                      counti_05, 
+                      counti_1, 
+                      counti_2, 
+                      counti_25, 
+                      counti_5)
+
+
 # write to file
 write_rds(counti, path = here('data', 'counting.rds'))
 write_rds(counti_restrict_time, path = here('data', 'counting_restrict_time.rds'))
 write_rds(counti_restrict_local, path = here('data', 'counting_restrict_local.rds'))
+write_rds(vary_bin, path = here('data', 'counting_vary_binwidth.rds'))

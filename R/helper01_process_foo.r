@@ -78,8 +78,10 @@ prepare_analysis <- function(x, fg = NULL) {
 #' 
 #' @param x vector of ages
 #' @param by bin width
+#' @param age logical bin age returned, not number (default FALSE, return bin number)
 #' @return vector of bin memberships
-break_my <- function(x, by = NULL, number = NULL) {
+#' @author Peter D Smits <peterdavidsmits@gmail.com>
+break_my <- function(x, by = NULL, number = NULL, age = FALSE) {
 
   if(is.null(by) & is.null(number)) {
     return('no scheme given. specify either bin width or number of bins.')
@@ -89,26 +91,40 @@ break_my <- function(x, by = NULL, number = NULL) {
     return('too much information. specify either bin width OR number of bins, not both.')
   }
 
+  # range to bin
   top <- ceiling(max(x))
   bot <- floor(min(x))
 
+  # create bins
   if(!is.null(by)) {
     unt <- seq(from = bot, to = top, by = by)
   } else if(!is.null(number)) {
     unt <- seq(from = bot, to = top, length.out = number + 1)
   }
 
+  # bin top and bottom
   unt1 <- unt[-length(unt)]
   unt2 <- unt[-1]
+
+  # assign memberships
   uu <- map2(unt1, unt2, ~ which(between(x, left = .x, right = .y)))
 
+  # what if we want the "age" of the bin, not just number?
+  if(age == TRUE) {
+    unt_age <- map2_dbl(unt1, unt2, ~ median(c(.x, .y)))
+  }
+
+  # create output vector
   y <- x
   for(ii in seq(length(uu))) {
-    y[uu[[ii]]] <- ii
+    if(age == FALSE) {
+      y[uu[[ii]]] <- ii
+    } else if(age == TRUE) {
+      y[uu[[ii]]] <- unt_age[ii]
+    }
   }
   y
 }
-
 
 
 
@@ -136,7 +152,7 @@ raw_to_clean <- function(nano,
                          mgca,
                          prov = NULL) {
 
-  bin_number <- age_max / bin_width
+  #bin_number <- age_max / bin_width
 
   # important but impossible to call variable name
   names(nano)[19] <- 'age'
@@ -154,19 +170,19 @@ raw_to_clean <- function(nano,
   nano <- nano %>% 
     filter(!is.na(plat), 
            !is.na(plng)) %>%
-  group_by(taxon_id) %>%
-  filter(max(age) < age_max) %>%
-  ungroup() %>%
-  # some don't have paleolat or long
-  # also need to limit to line up with mgca
-  # then
-  # assign million year bins (decreasing; youngest lowest)
-  dplyr::arrange(desc(age)) %>%
-  dplyr::mutate(mybin = break_my(age, by = 1)) %>%
-  # then
-  # make a species genus combo
-  dplyr::mutate(fullname = str_c(genus, '_', species)) %>% 
-  arrange(fullname)
+    group_by(taxon_id) %>%
+    filter(max(age) < age_max) %>%
+    ungroup() %>%
+    # some don't have paleolat or long
+    # also need to limit to line up with mgca
+    # then
+    # assign million year bins (decreasing; youngest lowest)
+    dplyr::arrange(desc(age)) %>%
+    dplyr::mutate(mybin = break_my(age, by = bin_width)) %>%
+    # then
+    # make a species genus combo
+    dplyr::mutate(fullname = str_c(genus, '_', species)) %>% 
+    arrange(fullname)
 
 
   # restrict occurrences to core sequence
@@ -216,7 +232,7 @@ raw_to_clean <- function(nano,
 
   # want to add in the lear mgca data
   mgca <- mgca %>%
-    mutate(mybin = break_my(age, by = 1)) %>%
+    mutate(mybin = break_my(age, by = bin_width)) %>%
     group_by(mybin) %>%
     summarize(temp = mean(temperature, na.rm = TRUE),
               temp_sd = sd(temperature, na.rm = TRUE)) %>%
