@@ -86,3 +86,10 @@ ggsave(filename = here('results', 'figure', 'cramer_temp.png'),
 #  number of observations
 #  number of observations per species
 #  geographic range of species
+vary_width <- read_rds(here('data', 'counting_vary_binwidth.rds'))
+
+
+vary_width %>%
+  mutate(maxgcd_log = log(maxgcd)) %>%
+  ggplot(aes(x = width, y = maxgcd_log)) +
+  geom_jitter(alpha = 0.1, height = 0, width = 0.1)

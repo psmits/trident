@@ -77,32 +77,41 @@ prep_short <- function(width = bin_width) {
   varname <- paste0("bin_", width)
 
   partial_short_bin(bin_width = width)  %>%
-  dplyr::select(fullname, mybin, maxgcd) %>%
+  dplyr::select(fullname, mybin, latext, nocc, ncell, maxgcd) %>%
   rename(!!varname := mybin) %>%
-  gather(key = 'key', value = 'value', -fullname, -maxgcd) %>%
+  gather(key = 'key', value = 'value', -fullname, -maxgcd, -latext, -nocc, -ncell) %>%
   separate(key, c('bin', 'width'), sep = '_') %>%
   mutate(width = parse_number(width)) %>%
-  dplyr::select(maxgcd, width)
+  dplyr::select(maxgcd, latext, nocc, ncell, width)
 
 }
 
 counti_01 <- prep_short(0.1) 
 
+counti_025 <- prep_short(0.25) 
+
 counti_05 <- prep_short(0.5)
 
 counti_1 <- prep_short(1)
+
+counti_15 <- prep_short(1.5)
 
 counti_2 <- prep_short(2)
 
 counti_25 <- prep_short(2.5)
 
+counti_3 <- prep_short(3)
+
 counti_5 <- prep_short(5)
 
 vary_bin <- bind_rows(counti_01, 
+                      counti_025, 
                       counti_05, 
                       counti_1, 
+                      counti_15, 
                       counti_2, 
                       counti_25, 
+                      counti_3, 
                       counti_5)
 
 
