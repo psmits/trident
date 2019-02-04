@@ -89,7 +89,20 @@ ggsave(filename = here('results', 'figure', 'cramer_temp.png'),
 vary_width <- read_rds(here('data', 'counting_vary_binwidth.rds'))
 
 
-vary_width %>%
-  mutate(maxgcd_log = log(maxgcd)) %>%
-  ggplot(aes(x = width, y = maxgcd_log)) +
-  geom_jitter(alpha = 0.1, height = 0, width = 0.1)
+inplace <- compose(~ .x / length(.x), log)
+
+
+
+width_effect <- 
+  vary_width %>%
+  dplyr::select(-latext) %>%
+  group_by(width) %>%
+  mutate_at(vars(-width), funs(inplace(.))) %>%
+  gather(key = 'key', value = 'value', -width) %>%
+  ggplot(aes(x = width, y = value)) +
+  geom_jitter(height = 0, width = 0.05, alpha = 0.01) +
+  facet_grid(key ~ ., scales = 'free', switch = 'y') + 
+  labs(x = 'Timebin width', y = 'log(value) / n observations') +
+  NULL
+ggsave(filename = here('results', 'figure', 'binwidth_effect.png'),
+       plot = width_effect, width = 8, height = 6)
