@@ -27,6 +27,9 @@
 
 \maketitle
 
+\linenumbers{}
+\modulolinenumbers[3]
+
 \begin{abstract}
   One of the great promises of paleobiology is that by studying the past we can better predict the future.  This promise is particularly pertinent given as risk assessments for some modern species could potentially be improved by examining past extinction patterns and by using paleontological records to establish geographic range and abundance trajectories on geological timescales.  Any effort to assess future risk based on past extinctions and range trajectories must address two key questions:  (1) At a given timescale, are geographic range and extinction risk trajectories deterministic (past trends are likely to continue into the future) or Markovian (the future depends only on the present state)? (2) Given knowledge of past extinction/survival patterns and the present geographic ranges of extant taxa, how accurate are extinction risk predictions?  
 
@@ -313,7 +316,30 @@ In the analysis of the posterior predictive distributions of the in-sample AUC v
 
 \section{Discussion}
 
+The results of this paper are a measure of baseline ability to predict relative differences in extinction risk. By focusing on two aspects of species macroecology -- geographic range and global temperature -- we developed a rather naive model for estimating the probability of a species extinction based on their occurrence records.
 
+We find that all of our model have an approximate 77\% to 79\% probability of correctly rank the extinction risk of two randomly selected in-sample observations. Similarly, these models are expected to correctly rank the extinction risk of two randomly selected out-of-sample observations approximately 70\% to 80\% of the time. A slight decrease in performance when dealing with out-of-sample observations makes sense: each of the models fit during cross-validation is based on less data than the model fit on the full data (between 1/5th to 4/5ths of the original). The similarly between the in-sample and out-of-sample results indicates that our model is fairly robust to how extinction intensity has changed over the Cenozoic.
+
+
+The striking aspects of our in-sample results are the statistical differences in AUC between the models, and the incredible narrow band of estimated AUC values. For our in-sample results, while the statistically best model does include the historical covariates and allows all covariate effects to vary over time, its practical difference in performance compared to the other models is virtually negligible. This means that even though one model has a statistically greater AUC, the practical difference between the models is not scientifically significant. 
+
+This result is an important reminder about understanding the practical interpretation of our analyses, which can be lost when we do not consider the predictive aspects of our analyses. By focusing on determining which covariates are ``significant'' and which model is best through simple comparisons means that the practical importance of the results are ignored. For example, in logistic regression a covariate can be considered significant on the log-odds scale but have no practical difference on the probability scale because the range of values is too small as to matter such as when the inverse-logit of the intercept is close to 0 or 1 CITATION.
+
+The success of model is partially driven by the size of our dataset and the structure of our model. Our estimates are based on rather limited information about the taxa themselves, and our model only takes into account some aspects of species geographic range and their rough taxonomic grouping. Instead of relying on large amounts of ecological information to shape individual differences, our model leverages the entire Neptune dataset through a multilevel model to constrain and improve our parameter estimates by sharing information about those parameters across taxa and time.
+
+The reason we were not able to include more biological information in our models about the species studied is that we lack most any life history or ecological information on most marine micro- and nano-plankton. Forams are the exception to this problem -- there is life history, ecological, and physiological information for a selection of foram species.
+
+If we want to include this type of information in a predictive model of extinction risk, we would be able to analyze only a subset of the fossil occurrences present the Neptune Database. This means ignoring the vast trove of occurrence information present in the rest of the database.
+
+This presents an interesting conundrum about how to improve upon our results. A simple hypothesis for how to improve upon our results is that if we were to include more biological information in our model, our estimates of species relative extinction risk would be improved. However, if we decrease the amount of data in our model, our results by definition decrease in their quality. For example, compare the results from our models fit using full in-sample dataset, and the results from the cross-validation where the fit to each fold is by definition based on less than full information.)
+
+
+
+
+In conclusion, our results provide a promising picture of our ability to predict the relative extinction risk of two randomly selected species. Considering that conservation decisions are made based on a continuum of risk, from most to least, this means that our results are in the same language as how conservation resources are allocated.
+
+
+% bibliographic information
 \bibliographystyle{abbrvnat}
 \bibliography{citations}
 
