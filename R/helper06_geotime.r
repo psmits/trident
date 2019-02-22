@@ -2,7 +2,7 @@
 
 #' Highlight timeseries using geological time scale
 get_geotime_box <- function(time_range, type = 'age', alternate = 'even') {
-  gts <- read_csv(here('data', 'geologic_time_scale.csv')
+  gts <- read_csv(here('data', 'geologic_time_scale.csv'))
 
   lts <- 
     gts %>%
