@@ -126,7 +126,7 @@ plot_taxon_covariate_time <- function(disc_best) {
 
   out <- by_taxon %>%
     ggplot(aes(x = age, y = value)) +
-    stat_lineribbon() +
+    stat_lineribbon(size = 0.5) +
     geom_hline(yintercept = 0, linetype = 'dashed', alpha = 0.5) +
     scale_fill_brewer() +
     facet_grid(type ~ key, scales = 'free_y')
@@ -156,7 +156,7 @@ plot_risk_time <- function(data, model, nsp = 4) {
                                 transform = TRUE)
   temp_est <- reshape2::melt(temp_est)
   names(temp_est) <- c('iterations', 'row', 'value')
-  temp_est <- as.tibble(temp_est) %>% 
+  temp_est <- as_tibble(temp_est) %>% 
     mutate(fullname = row,
            relage = row)
   temp_est$fullname <- plyr::mapvalues(temp_est$fullname, 
@@ -230,7 +230,7 @@ plot_taxon_hazard <- function(model) {
     bind_rows %>%
     mutate(effect_prob = invlogit(effect)) %>%  # put on prob scale
     ggplot(aes(x = age, y = effect_prob)) + 
-      stat_lineribbon() +
+      stat_lineribbon(size = 0.5) +
       scale_fill_brewer() +
       facet_grid(type ~ .) +
       labs(x = 'Age (My)', y = 'P(T = t | T >= t, x)')
@@ -303,9 +303,10 @@ plot_roc_series <- function(data, model_pp, model_key) {
     geom_rect(data = rects,
               aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
               fill = 'gray80', alpha = 0.8) +
-    stat_lineribbon(aes(x = key, y = value)) +
+    stat_lineribbon(aes(x = key, y = value), size = 0.5) +
     scale_fill_brewer(aes(x = key, y = value)) + 
     scale_x_reverse() +
+    theme(legend.position = 'bottom') +
     NULL
     
   roc_ts
@@ -338,7 +339,7 @@ view_neptune <- function(.data, name = 'full', path = '../results/figure/') {
     theme(legend.position = 'bottom') +
     labs(title = 'Occurrences', x = 'Time (My before present)', y = 'Count')
 
-  filename <- paste0(path, 'occ_time_label_', name, '.png')
+  filename <- paste0(path, '/occ_time_label_', name, '.png')
   ggsave(filename = filename,
          plot = octg, 
          width = 4, height = 6)
@@ -349,7 +350,7 @@ view_neptune <- function(.data, name = 'full', path = '../results/figure/') {
     ggplot(aes(x = mybin, fill = fossil_group)) +
     geom_histogram(position = 'fill')
   
-  filename <- paste0(path, 'abn_time_stack_', name, '.png')
+  filename <- paste0(path, '/abn_time_stack_', name, '.png')
   ggsave(filename = filename,
          plot = ocag, 
          width = 6, height = 6)
@@ -374,7 +375,7 @@ view_neptune <- function(.data, name = 'full', path = '../results/figure/') {
     theme(legend.position = 'bottom') +
     labs(title = 'Age distribution', x = 'Age (My)', y = 'Count')
   
-  filename <- paste0(path, 'age_label_', name, '.png')
+  filename <- paste0(path, '/age_label_', name, '.png')
   ggsave(filename = filename,
          plot = ocrg, 
          width = 4, height = 6)
@@ -392,7 +393,7 @@ view_neptune <- function(.data, name = 'full', path = '../results/figure/') {
     geom_point() +
     theme(legend.position = 'bottom')
 
-  filename <- paste0(path, 'range_time_', name, '.png')
+  filename <- paste0(path, '/range_time_', name, '.png')
   ggsave(filename = filename,
          plot = srg, 
          width = 8, height = 6)
@@ -429,13 +430,13 @@ view_neptune <- function(.data, name = 'full', path = '../results/figure/') {
     facet_grid(~ fossil_group) +
     labs(x = 'Time (My)', y = 'Cummulative count')
 
-  filename <- paste0(path, 'fad_lad_count_wide_', name, '.png')
+  filename <- paste0(path, '/fad_lad_count_wide_', name, '.png')
   ggsave(filename = filename,
          plot = ccg, 
          width = 6, height = 3)
   
   ccg2 <- ccg + facet_grid(fossil_group ~ ., switch = 'y', scales = 'free_y')
-  filename <- paste0(path, 'fad_lad_count_tall_', name, '.png')
+  filename <- paste0(path, '/fad_lad_count_tall_', name, '.png')
   ggsave(filename = filename,
          plot = ccg2, 
          width = 4, height = 6)
@@ -467,14 +468,14 @@ p_model <- function(fit_list, .data, key, name, path) {
     map(., ~ reduce(.x, rbind)) %>%
     imap(., ~ add_column(.x, mod = .y)) %>%
     reduce(., rbind) %>%
-    as.tibble(.) %>%
+    as_tibble(.) %>%
     # long hand way that doesn't need plyr
     mutate(model = case_when(mod == 1 ~ key[1],
                              mod == 2 ~ key[2],
                              mod == 3 ~ key[3],
                              mod == 4 ~ key[4])) 
   cur <- plot_roc_curve(roc_df)
-  fn <- paste0(path, 'roc_curve_', name, '.png')
+  fn <- paste0(path, '/roc_curve_', name, '.png')
   ggsave(filename = fn,
          plot = cur,
          width = 5, height = 8)
@@ -483,7 +484,7 @@ p_model <- function(fit_list, .data, key, name, path) {
   # plot as histogram
   auc_hist <- map(eroc, ~ map(.x, function(y) auc(y)[[1]])) %>%
     reshape2::melt(.) %>%
-    as.tibble %>%
+    as_tibble %>%
     rename(model = L1,
            draw = L2) %>%
     mutate(model_name = plyr::mapvalues(model, unique(model), key),
@@ -494,11 +495,11 @@ p_model <- function(fit_list, .data, key, name, path) {
     theme(axis.text.y = element_text(size = 15),
           axis.text.x = element_text(size = 15)) +
     NULL
-  fn <- paste0(path, 'auc_hist_', name, '.png')
+  fn <- paste0(path, '/auc_hist_', name, '.png')
   ggsave(filename = fn,
          plot = auc_hist,
          width = 6, height = 6)
-  fn <- paste0(path, 'auc_hist_zoom_', name, '.png')
+  fn <- paste0(path, '/auc_hist_zoom_', name, '.png')
   ggsave(filename = fn,
          plot = auc_hist + 
            xlim(0.5, 1) +
@@ -527,22 +528,29 @@ p_model_time <- function(fit_list, .data, key, name, path) {
   # roc as timeseries to see best and worst times
   roc_ts <- plot_roc_series(.data, pp_prob, key) +
     coord_cartesian(ylim = c(0.4, 1), xlim = c(0, 62))
-  fn <- paste0(path, 'auc_ts_tiny_', name, '.png')
-  ggsave(filename = fn,
-         plot = gggeo_scale(roc_ts, 
-                            dat = 'epochs', 
-                            size = 3, 
-                            rot = 90,
-                            height = 0.2),
-         width = 8, height = 6)
+  fn <- paste0(path, '/auc_ts_tiny_', name, '.png')
+
+  ## kludge to generate pastable geotime scale
+  #ggsave(filename = fn,
+  #       plot = gggeo_scale(roc_ts, 
+  #                          dat = 'epochs', 
+  #                          size = 3, 
+  #                          rot = 90,
+  #                          height = 0.2),
+  #       width = 8, height = 6)
+  
+  # facet
   roc_ts <- roc_ts +
     facet_grid(model ~ .) +
     labs(y = 'AUC ROC', x = 'Time (Mya)') +
     geom_hline(yintercept = 0.5, colour = 'red', linetype = 'dashed') +
     NULL
-  fn <- paste0(path, 'auc_ts_', name, '.png')
+
+  #srts <- gggeo_scale(roc_ts, dat = 'epochs', size = 3, rot = 90, height = 0.2)
+
+  fn <- paste0(path, '/auc_ts_', name, '.png')
   ggsave(filename = fn,
-         plot = roc_ts,
+         plot = roc_ts, #srts
          width = 11, height = 8.5)
 }
 
@@ -587,7 +595,7 @@ p_model_taxon <- function(fit_list, .data, key, name, path) {
     geom_halfeyeh(.width = c(0.5, 0.8)) +
     facet_wrap(~ taxon) +
     labs(x = 'AUC ROC', y = NULL) 
-  fn <- paste0(path, 'auc_taxon_', name, '.png')
+  fn <- paste0(path, '/auc_taxon_', name, '.png')
   ggsave(filename = fn,
          plot = auc_taxon,
          width = 8, height = 8)
@@ -616,7 +624,7 @@ p_model_taxon_time <- function(fit_list, .data, key, name, path) {
   
   bb <- split(bysplit, bysplit$type)
   
-  tt <- map(pp_prob, ~ as.tibble(t(.x)) %>%
+  tt <- map(pp_prob, ~ as_tibble(t(.x)) %>%
             split(., bysplit$type))
   
   safe_roc <- safely(roc)
@@ -630,7 +638,7 @@ p_model_taxon_time <- function(fit_list, .data, key, name, path) {
     map(., ~ map(.x, ~ reduce(map(.x, 'result'), c)))
   
   
-  auc_taxon_time <- map(split_auc, function(x) map(x, ~ as.tibble(x = .x)))%>%
+  auc_taxon_time <- map(split_auc, function(x) map(x, ~ as_tibble(x = .x)))%>%
     map(., ~ bind_rows(.x, .id = 'phyla_time')) %>%
     bind_rows(., .id = 'model') %>%
     separate(., col = phyla_time, into = c('phyla', 'time'), sep = ':') %>%
@@ -653,11 +661,13 @@ p_model_taxon_time <- function(fit_list, .data, key, name, path) {
               aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
               fill = 'gray80', alpha = 0.8) +
     geom_hline(yintercept = 0.5, linetype = 'dashed') +
-    stat_lineribbon(aes(x = time, y = value)) + 
+    stat_lineribbon(aes(x = time, y = value), size = 0.5) + 
     scale_fill_brewer(aes(x = time, y = value)) + 
     scale_x_reverse() +
-    facet_grid(fossil_group ~ model)
-  fn <- paste0(path, 'auc_taxon_time_', name, '.png')
+    facet_grid(fossil_group ~ model) +
+    theme(legend.position = 'bottom') +
+    NULL
+  fn <- paste0(path, '/auc_taxon_time_', name, '.png')
   ggsave(filename = fn,
          plot = auc_taxon_time,
          width = 11, height = 8.5)
@@ -714,11 +724,11 @@ cv_model <- function(fit, .data, key, name, path) {
     theme(axis.text.y = element_text(size = 15),
           axis.text.x = element_text(size = 15)) +
     NULL
-  fn <- paste0(path, 'fold_auc_', name, '.png')
+  fn <- paste0(path, '/fold_auc_', name, '.png')
   ggsave(filename = fn,
          plot = oos_auc,
          width = 6, height = 6)
-  fn <- paste0(path, 'fold_auc_zoom_', name, '.png')
+  fn <- paste0(path, '/fold_auc_zoom_', name, '.png')
   ggsave(filename = fn,
          plot = oos_auc + 
            xlim(0.5, 1) +
@@ -749,7 +759,7 @@ cv_model_time <- function(fit, .data, key, name, path) {
   
   # could this be done with enframe?
   ta <- reshape2::melt(time_auc) %>% 
-    as.tibble %>%
+    as_tibble %>%
     mutate(time = parse_double(L2)) %>%
     separate(L1, into = c('mod', 'fold'), sep = '\\_') %>%
     mutate(mod = plyr::mapvalues(mod, unique(mod), key),
@@ -762,27 +772,33 @@ cv_model_time <- function(fit, .data, key, name, path) {
     geom_rect(data = rects,
               aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
               fill = 'gray80', alpha = 0.8) +
-    stat_lineribbon(aes(x = time, y = value)) +
+    stat_lineribbon(aes(x = time, y = value), size = 0.5) +
     scale_fill_brewer() +
     scale_x_reverse() +
     coord_cartesian(ylim = c(0.4, 1), xlim = c(0, 50)) +
     labs(y = 'AUC ROC', x = 'Time (Mya)') +
     NULL
-  fn <- paste0(path, 'fold_auc_time_tiny_', name, '.png')
-  ggsave(filename = fn,
-         plot = gggeo_scale(ta, 
-                            dat = 'epochs', 
-                            size = 3, 
-                            rot = 90,
-                            height = 0.2),
-         width = 11, height = 8.5)
+  fn <- paste0(path, '/fold_auc_time_tiny_', name, '.png')
+
+  ## kludge to generate pastable geotime scale
+  #ggsave(filename = fn,
+  #       plot = gggeo_scale(ta, 
+  #                          dat = 'epochs', 
+  #                          size = 3, 
+  #                          rot = 90,
+  #                          height = 0.2),
+  #       width = 11, height = 8.5)
+
   ta <- ta +
     facet_grid(mod ~ .) +
     geom_hline(yintercept = 0.5, colour = 'red', linetype = 'dashed') +
     NULL
-  fn <- paste0(path, 'fold_auc_time_', name, '.png')
+  
+  #sta <- gggeo_scale(roc_ts, dat = 'epochs', size = 3, rot = 90, height = 0.2)
+
+  fn <- paste0(path, '/fold_auc_time_', name, '.png')
   ggsave(filename = fn,
-         plot = ta,
+         plot = ta, #sta,
          width = 11, height = 8.5)
 }
 
@@ -813,7 +829,7 @@ cv_model_taxon <- function(fit, .data, key, name, path) {
        ~ map2(.x, .y, 
               ~ apply(.x, 1, function(a) fast_auc(a, .y$event)))) %>%
     reshape2::melt(.) %>%
-    as.tibble(.) %>%
+    as_tibble(.) %>%
     rename(taxon = L2,
            model = L1) %>%
     separate(., col = model, into = c('model', 'fold'), sep = '_') %>%
@@ -830,7 +846,7 @@ cv_model_taxon <- function(fit, .data, key, name, path) {
     geom_halfeyeh(.width = c(0.5, 0.8)) +
     facet_wrap(~ taxon) +
     labs(x = 'AUC ROC', y = NULL)
-  fn <- paste0(path, 'fold_auc_taxon_', name, '.png')
+  fn <- paste0(path, '/fold_auc_taxon_', name, '.png')
   ggsave(filename = fn,
          plot = fold_auc_taxon,
          width = 8, height = 8)
@@ -864,7 +880,7 @@ cv_model_taxon_time <- function(fit, .data, key, name, path) {
     map(., ~ split(.x, .x$type))         # by taxon and time
   
   # break up probs
-  tt <- map(pred, ~ as.tibble(t(.x))) %>%
+  tt <- map(pred, ~ as_tibble(t(.x))) %>%
     map2(., bysplit, ~ split(.x, .y$type))  
   
   
@@ -880,7 +896,7 @@ cv_model_taxon_time <- function(fit, .data, key, name, path) {
     map(., ~ map(.x, ~ reduce(map(.x, 'result'), c)))
   
   # recombine and plot
-  fold_auc_taxon_time <- map(split_auc, function(x) map(x, ~ as.tibble(x = .x))) %>%
+  fold_auc_taxon_time <- map(split_auc, function(x) map(x, ~ as_tibble(x = .x))) %>%
     map(., ~ bind_rows(.x, .id = 'phyla_time')) %>%
     bind_rows(., .id = 'model') %>%
     separate(., col = phyla_time, into = c('phyla', 'time'), sep = ':') %>%
@@ -904,11 +920,11 @@ cv_model_taxon_time <- function(fit, .data, key, name, path) {
               aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
               fill = 'gray80', alpha = 0.8) +
     geom_hline(yintercept = 0.5, linetype = 'dashed') +
-    stat_lineribbon(aes(x = time, y = value)) +
+    stat_lineribbon(aes(x = time, y = value), size = 0.5) +
     scale_fill_brewer() +
     scale_x_reverse() +
     facet_grid(fossil_group ~ model)
-  fn <- paste0(path, 'fold_auc_taxon_time_', name, '.png')
+  fn <- paste0(path, '/fold_auc_taxon_time_', name, '.png')
   ggsave(filename = fn,
          plot = fold_auc_taxon_time,
          width = 11, height = 8.5)

@@ -1,23 +1,16 @@
-# because of course
-library(tidyverse)
-library(janitor)
+library(pacman)
 
-# geolocation stuff
-library(sp)
-library(dismo)
-library(raster)
-library(rgdal)
-library(XML)
-library(maptools)
-library(geosphere)
-
-# plotting stuff
-library(scales)
+p_load(tidyverse, janitor, here, furrr,
+       sp, dismo, raster, rgdal, XML, maptools, geosphere, 
+       scales)
 
 # misc
-library(here)
 source(here('R', 'helper01_process_foo.r'))
 source(here('R', 'helper03_misc_foo.r'))
+
+# parallel set up
+plan(multiprocess)
+
 
 # process timescale information
 gts <- read_csv("https://raw.githubusercontent.com/japhir/stratPlot/master/GTS_colours.csv") %>%
@@ -74,45 +67,48 @@ partial_short_bin <- partial(raw_to_clean,
 
 prep_short <- function(width = bin_width) {
 
-  varname <- paste0("bin_", width)
+  varname <- paste0("bin_", width)     # tidy eval stuff
 
   partial_short_bin(bin_width = width)  %>%
   dplyr::select(fullname, mybin, latext, nocc, ncell, maxgcd) %>%
-  rename(!!varname := mybin) %>%
-  gather(key = 'key', value = 'value', -fullname, -maxgcd, -latext, -nocc, -ncell) %>%
+  rename(!!varname := mybin) %>%       # tidy eval stuff
+  gather(key = 'key', value = 'value', 
+         -fullname, -maxgcd, -latext, -nocc, -ncell) %>%
   separate(key, c('bin', 'width'), sep = '_') %>%
   mutate(width = parse_number(width)) %>%
   dplyr::select(maxgcd, latext, nocc, ncell, width)
 
 }
 
-counti_01 <- prep_short(0.1) 
-
-counti_025 <- prep_short(0.25) 
-
-counti_05 <- prep_short(0.5)
-
-counti_1 <- prep_short(1)
-
-counti_15 <- prep_short(1.5)
-
-counti_2 <- prep_short(2)
-
-counti_25 <- prep_short(2.5)
-
-counti_3 <- prep_short(3)
-
-counti_5 <- prep_short(5)
-
-vary_bin <- bind_rows(counti_01, 
-                      counti_025, 
-                      counti_05, 
-                      counti_1, 
-                      counti_15, 
-                      counti_2, 
-                      counti_25, 
-                      counti_3, 
-                      counti_5)
+widths <- c(0.1, 0.25, 0.5, 1, 1.5, 2, 2.5, 3, 5)
+vary_bin <- future_map_dfr(widths, ~ prep_short(.x))
+#counti_01 <- prep_short(0.1) 
+#
+#counti_025 <- prep_short(0.25) 
+#
+#counti_05 <- prep_short(0.5)
+#
+#counti_1 <- prep_short(1)
+#
+#counti_15 <- prep_short(1.5)
+#
+#counti_2 <- prep_short(2)
+#
+#counti_25 <- prep_short(2.5)
+#
+#counti_3 <- prep_short(3)
+#
+#counti_5 <- prep_short(5)
+#
+#vary_bin <- bind_rows(counti_01, 
+#                      counti_025, 
+#                      counti_05, 
+#                      counti_1, 
+#                      counti_15, 
+#                      counti_2, 
+#                      counti_25, 
+#                      counti_3, 
+#                      counti_5)
 
 
 # write to file

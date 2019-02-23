@@ -1,25 +1,7 @@
-# data manipulation
-library(tidyverse)
-library(janitor)
-#devtools::install_github("mjskay/tidybayes")
-library(tidybayes)
-library(deeptime)
+library(pacman)
 
-# parallel processing
-library(parallel)
-library(future)
-library(furrr)
-
-# bayes
-library(arm)
-library(rstanarm)
-library(bayesplot)
-
-# misc
-library(pROC)
-library(ROCR)
-library(ggridges)
-library(here)
+p_load(tidyverse, readr, janitor, tidybayes, deeptime, furrr, arm, rstanarm, 
+       bayesplot, pROC, ROCR, ggridges, here)
 
 # my function set
 source(here('R', 'helper01_process_foo.r'))
@@ -30,7 +12,7 @@ source(here('R', 'helper05_roc_utility.r'))
 source(here('R', 'helper06_geotime.r'))
 
 # important constants
-future::plan(strategy = multicore)
+plan(multiprocess)
 
 # get data in
 counti_fold <- read_rds(here('data', 'counting.rds')) %>%

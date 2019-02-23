@@ -1,29 +1,19 @@
-# data manipulation
-library(tidyverse)
+library(pacman)
 
-# parallel processing
-library(parallel)
-
-# bayes
-library(arm)
-library(rstanarm)
-library(bayesplot)
-
-# misc
-library(scales)
-library(ggridges)
-library(pROC)
-library(here)
+p_load(tidyverse, furrr, here,
+       arm, rstanarm, bayesplot,
+       scales, ggridges,
+       pROC)
 
 source(here('R', 'helper01_process_foo.r'))
 source(here('R', 'helper02_plot_foo.r'))
 source(here('R', 'helper03_misc_foo.r'))
 source(here('R', 'helper04_stan_utility.r'))
 
-theme_set(theme_bw())
-
 # important constants
-options(mc.cores = parallel::detectCores())
+theme_set(theme_bw())
+plan(multiprocess)
+
 
 # get data in
 counti <- read_rds(here('data', 'counting.rds'))
@@ -88,10 +78,11 @@ ggsave(filename = here('results', 'figure', 'cramer_temp.png'),
 #  geographic range of species
 vary_width <- read_rds(here('data', 'counting_vary_binwidth.rds'))
 
-
-inplace <- compose(~ .x / length(.x), log)
-
-
+inplace <- function(x) {
+  xx <- log(x)
+  out <- xx / length(xx)
+  out
+}
 
 width_effect <- 
   vary_width %>%

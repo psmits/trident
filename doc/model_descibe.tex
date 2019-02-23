@@ -1,0 +1,29 @@
+\documentclass[12pt,letterpaper]{article}
+
+\usepackage[margin=1cm]{geometry}
+
+
+\begin{document}
+
+\begin{tabular}[ht]{ l l l l }
+  Code & Description & Covariates & Formula \\
+  \hline
+  C & Constant effects, no historical covariates & Geographic range, global temperature & $ event \sim range + temp + (1 | age/phylum) $ \\
+  V & Varying effects, no historical covariates & Geographic range, global temperature  & $ event \sim range + temp + (1 + range + temp | mybin/phylum) + (1 | age/phylum) $ \\
+  CP & Constant effects, historical covariates & Geographic range, change in geographic range, global temperature, previous temperature & $ event \sim range + range\_diff + temp + temp\_lag + (1 | age/phylum) $ \\
+  VP & Varying effects, historical covariates & Geographic range, change in geographic range, global temperature, previous temperature & $ event \sim range + range\_diff + temp + temp\_lag + (1 + range + range\_diff + temp + temp\_lag | mybin/phylum) + (1 | age/phylum) $ \\
+\end{tabular}
+
+{
+  \def\arraystretch{1.5}
+  \begin{tabular}[ht]{ l p{3cm} l l }
+    Code & Description & Covariates & Formula \\
+    \hline
+    C & Constant effects, no historical cov. & \parbox[t]{0.25\textwidth}{Geographic range,\\temperature} & \parbox[t]{0.33\textwidth}{event $\sim$ range + temp +\\(1 $|$ age/phylum)} \\
+    V & Varying effects, no historical cov. & \parbox[t]{0.25\textwidth}{Geographic range,\\temperature} & \parbox[t]{0.33\textwidth}{event $\sim$ range + temp +\\(1 + range + temp $|$ phylum) +\\(1 $|$ age/phylum)} \\ 
+    CP & Constant effects, historical cov. & \parbox[t]{0.25\textwidth}{Geographic range,\\change in geographic range,\\temperature,\\previous temperature} & \parbox[t]{0.33\textwidth}{event $\sim$ range + range\_diff +\\temp + temp\_lag +\\(1 $|$ age/phylum)} \\
+    VP & Varying effects, historical cov. & \parbox[t]{0.25\textwidth}{Geographic range,\\change in geographic range,\\temperature,\\previous temperature} & \parbox[t]{0.33\textwidth}{event $\sim$ range + range\_diff +\\temp + temp\_lag +\\(1 + range + range\_diff + temp + temp\_lag $|$ phylum) +\\(1 $|$ age/phylum)} \\
+  \end{tabular}
+}
+
+\end{document}

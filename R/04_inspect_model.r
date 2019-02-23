@@ -1,21 +1,7 @@
-# data manipulation
-library(tidyverse)
-library(janitor)
-#devtools::install_github("mjskay/tidybayes")
-library(tidybayes)
+library(pacman)
 
-# parallel processing
-library(parallel)
-library(furrr)
-
-# bayes
-library(arm)
-library(rstanarm)
-library(bayesplot)
-
-# misc
-library(pROC)
-library(here)
+p_load(tidyverse, janitor, tidybayes, furrr, arm, rstanarm, 
+       bayesplot, pROC, here)
 
 source(here('R', 'helper01_process_foo.r'))
 source(here('R', 'helper02_plot_foo.r'))
@@ -24,7 +10,7 @@ source(here('R', 'helper04_stan_utility.r'))
 source(here('R', 'helper05_roc_utility.r'))
 
 # important constants
-future::plan(strategy = multicore)
+plan(multiprocess)
 
 # get data in
 counti <- read_rds(here('data', 'counting.rds'))
@@ -33,7 +19,8 @@ counti <- read_rds(here('data', 'counting.rds'))
 counti_trans <- prepare_analysis(counti)
 
 # read in model fits
-disc_fit <- read_rds(here('results', 'disc_fit.rds')
+disc_fit <- read_rds(here('results', 'disc_fit.rds'))
+disc_best <- disc_fit[[1]]
 
 # check how much information learned
 priors <- prior_summary(disc_best)

@@ -1,26 +1,9 @@
-# data manipulation
-library(tidyverse)
-library(magrittr)
-library(janitor)
-library(ggridges)
-#devtools::install_github("mjskay/tidybayes")
-library(tidybayes)
-library(deeptime)
+library(pacman)
 
-# parallel processing
-library(parallel)
-library(furrr)
+p_load(tidyverse, magrittr, janitor, ggridges, furrr, tidybayes, 
+       arm, rstanarm, bayesplot, splines, pROC, ROCR, here)
 
-# bayes
-library(arm)
-library(rstanarm)
-library(bayesplot)
-
-# misc
-library(splines)
-library(pROC)
-library(ROCR)
-library(here)
+p_load_gh('willgearty/deeptime')
 
 source(here('R', 'helper01_process_foo.r'))
 source(here('R', 'helper02_plot_foo.r'))
@@ -30,7 +13,7 @@ source(here('R', 'helper05_roc_utility.r'))
 source(here('R', 'helper06_geotime.r'))
 
 # important constants
-future::plan(strategy = multicore)
+plan(multiprocess)
 
 # get data in
 counti <- read_rds(here('data', 'counting.rds'))
