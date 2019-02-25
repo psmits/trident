@@ -26,10 +26,11 @@ counti_trans_rt <- prepare_analysis(counti_restrict_time)
 counti_trans_rl <- prepare_analysis(counti_restrict_local)
 
 # read in model fits
-model_key <- c('Past and vary', 
-               'Past but no vary',
-               'No past but vary', 
-               'No past or vary')
+#model_key <- c('Past and vary', 
+#               'Past but no vary',
+#               'No past but vary', 
+#               'No past or vary')
+model_key <- c('VP', 'CP', 'V', 'C')
 disc_fit <- read_rds(here('results', 'disc_fit.rds'))
 disc_fit_rt <- read_rds(here('results', 'disc_fit_rt.rds'))
 disc_fit_rl <- read_rds(here('results', 'disc_fit_rl.rds'))

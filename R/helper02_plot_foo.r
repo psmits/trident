@@ -491,7 +491,7 @@ p_model <- function(fit_list, .data, key, name, path) {
            model_name = factor(model_name, levels = key)) %>%
     ggplot(aes(x = value, y = model_name)) +
     geom_halfeyeh(.width = c(0.5, 0.8)) +
-    labs(x = 'AUC ROC', y = NULL) +
+    labs(x = 'AUC', y = NULL) +
     theme(axis.text.y = element_text(size = 15),
           axis.text.x = element_text(size = 15)) +
     NULL
@@ -542,7 +542,7 @@ p_model_time <- function(fit_list, .data, key, name, path) {
   # facet
   roc_ts <- roc_ts +
     facet_grid(model ~ .) +
-    labs(y = 'AUC ROC', x = 'Time (Mya)') +
+    labs(y = 'AUC', x = 'Time (Mya)') +
     geom_hline(yintercept = 0.5, colour = 'red', linetype = 'dashed') +
     NULL
 
@@ -594,7 +594,7 @@ p_model_taxon <- function(fit_list, .data, key, name, path) {
     ggplot(aes(x = value, y = model)) +
     geom_halfeyeh(.width = c(0.5, 0.8)) +
     facet_wrap(~ taxon) +
-    labs(x = 'AUC ROC', y = NULL) 
+    labs(x = 'AUC', y = NULL) 
   fn <- paste0(path, '/auc_taxon_', name, '.png')
   ggsave(filename = fn,
          plot = auc_taxon,
@@ -662,10 +662,11 @@ p_model_taxon_time <- function(fit_list, .data, key, name, path) {
               fill = 'gray80', alpha = 0.8) +
     geom_hline(yintercept = 0.5, linetype = 'dashed') +
     stat_lineribbon(aes(x = time, y = value), size = 0.5) + 
-    scale_fill_brewer(aes(x = time, y = value)) + 
+    scale_fill_brewer() +
     scale_x_reverse() +
     facet_grid(fossil_group ~ model) +
     theme(legend.position = 'bottom') +
+    labs(x = 'Time (Mya)', y = 'AUC') +
     NULL
   fn <- paste0(path, '/auc_taxon_time_', name, '.png')
   ggsave(filename = fn,
@@ -719,7 +720,7 @@ cv_model <- function(fit, .data, key, name, path) {
            mod = factor(mod, levels = key)) %>%
     ggplot(aes(x = value, y = mod)) +
     geom_halfeyeh(.width = c(0.5, 0.8)) +
-    labs(x = 'AUC ROC', y = NULL) +
+    labs(x = 'AUC', y = NULL) +
     scale_colour_brewer() +
     theme(axis.text.y = element_text(size = 15),
           axis.text.x = element_text(size = 15)) +
@@ -776,7 +777,7 @@ cv_model_time <- function(fit, .data, key, name, path) {
     scale_fill_brewer() +
     scale_x_reverse() +
     coord_cartesian(ylim = c(0.4, 1), xlim = c(0, 50)) +
-    labs(y = 'AUC ROC', x = 'Time (Mya)') +
+    labs(y = 'AUC', x = 'Time (Mya)') +
     NULL
   fn <- paste0(path, '/fold_auc_time_tiny_', name, '.png')
 
@@ -845,7 +846,7 @@ cv_model_taxon <- function(fit, .data, key, name, path) {
     ggplot(aes(x = value, y = model)) +
     geom_halfeyeh(.width = c(0.5, 0.8)) +
     facet_wrap(~ taxon) +
-    labs(x = 'AUC ROC', y = NULL)
+    labs(x = 'AUC', y = NULL)
   fn <- paste0(path, '/fold_auc_taxon_', name, '.png')
   ggsave(filename = fn,
          plot = fold_auc_taxon,
@@ -923,7 +924,9 @@ cv_model_taxon_time <- function(fit, .data, key, name, path) {
     stat_lineribbon(aes(x = time, y = value), size = 0.5) +
     scale_fill_brewer() +
     scale_x_reverse() +
-    facet_grid(fossil_group ~ model)
+    facet_grid(fossil_group ~ model) +
+    labs(x = 'Time (Mya)', y = 'AUC') +
+    NULL
   fn <- paste0(path, '/fold_auc_taxon_time_', name, '.png')
   ggsave(filename = fn,
          plot = fold_auc_taxon_time,

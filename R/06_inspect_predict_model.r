@@ -38,10 +38,11 @@ counti_fold_match_rt <- rep(counti_fold_rt[-1], 4)
 counti_fold_match_rl <- rep(counti_fold_rl[-1], 4)
 
 # get in fits and posterior work
-model_key <- c('Past and vary', 
-               'Past but no vary',
-               'No past but vary', 
-               'No past or vary')
+#model_key <- c('Past and vary', 
+#               'Past but no vary',
+#               'No past but vary', 
+#               'No past or vary')
+model_key <- c('VP', 'CP', 'V', 'C')
 fit <- read_rds(here('results', 'training_fit.rds'))
 fit_rt <- read_rds(here('results', 'training_fit_rt.rds'))
 fit_rl <- read_rds(here('results', 'training_fit_rl.rds'))
