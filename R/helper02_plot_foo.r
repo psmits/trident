@@ -298,14 +298,20 @@ plot_roc_series <- function(data, model_pp, model_key) {
 
   rects <- get_geotime_box(range(roc_ts$key))
 
+
+  # calculate breaks
+  brks <- seq(min(roc_ts$key), max(roc_ts$key), by = 5) %>%
+    round(., -1) %>%
+    unique(.)
+  
   roc_ts <- roc_ts %>%
     ggplot() +
     geom_rect(data = rects,
               aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
               fill = 'gray80', alpha = 0.8) +
     stat_lineribbon(aes(x = key, y = value), size = 0.5) +
-    scale_fill_brewer(aes(x = key, y = value)) + 
-    scale_x_reverse() +
+    scale_fill_brewer(name = 'CI', aes(x = key, y = value)) + 
+    scale_x_reverse(breaks = brks) +
     theme(legend.position = 'bottom') +
     NULL
     
@@ -527,7 +533,8 @@ p_model_time <- function(fit_list, .data, key, name, path) {
   
   # roc as timeseries to see best and worst times
   roc_ts <- plot_roc_series(.data, pp_prob, key) +
-    coord_cartesian(ylim = c(0.4, 1), xlim = c(0, 62))
+    NULL
+    #coord_cartesian(ylim = c(0.4, 1), xlim = c(0, 62)) +
   fn <- paste0(path, '/auc_ts_tiny_', name, '.png')
 
   ## kludge to generate pastable geotime scale
@@ -655,6 +662,10 @@ p_model_taxon_time <- function(fit_list, .data, key, name, path) {
   
   rects <- get_geotime_box(range(auc_taxon_time$time))
   
+  brks <- seq(min(auc_taxon_time$time), max(auc_taxon_time$time), by = 5) %>%
+    round(., -1) %>%
+    unique(.)
+  
   auc_taxon_time <- auc_taxon_time %>%
     ggplot() +
     geom_rect(data = rects,
@@ -663,7 +674,7 @@ p_model_taxon_time <- function(fit_list, .data, key, name, path) {
     geom_hline(yintercept = 0.5, linetype = 'dashed') +
     stat_lineribbon(aes(x = time, y = value), size = 0.5) + 
     scale_fill_brewer() +
-    scale_x_reverse() +
+    scale_x_reverse(name = 'CI', breaks = brks) +
     facet_grid(fossil_group ~ model) +
     theme(legend.position = 'bottom') +
     labs(x = 'Time (Mya)', y = 'AUC') +
@@ -768,6 +779,10 @@ cv_model_time <- function(fit, .data, key, name, path) {
   
   rects <- get_geotime_box(range(ta$time))
   
+  brks <- seq(min(ta$time), max(ta$time), by = 5) %>%
+    round(., -1) %>%
+    unique(.)
+  
   ta <- ta %>%
     ggplot() +
     geom_rect(data = rects,
@@ -775,10 +790,10 @@ cv_model_time <- function(fit, .data, key, name, path) {
               fill = 'gray80', alpha = 0.8) +
     stat_lineribbon(aes(x = time, y = value), size = 0.5) +
     scale_fill_brewer() +
-    scale_x_reverse() +
-    coord_cartesian(ylim = c(0.4, 1), xlim = c(0, 50)) +
+    scale_x_reverse(breaks = brks) +
     labs(y = 'AUC', x = 'Time (Mya)') +
     NULL
+    #coord_cartesian(ylim = c(0.4, 1), xlim = c(0, 50)) +
   fn <- paste0(path, '/fold_auc_time_tiny_', name, '.png')
 
   ## kludge to generate pastable geotime scale
@@ -914,7 +929,12 @@ cv_model_taxon_time <- function(fit, .data, key, name, path) {
            model = factor(model, levels = rev(key)))
   
   rects <- get_geotime_box(range(fold_auc_taxon_time$time))
-  
+ 
+  brks <- seq(min(fold_auc_taxon_time$time), 
+              max(fold_auc_taxon_time$time), by = 5) %>%
+    round(., -1) %>%
+    unique(.)
+
   fold_auc_taxon_time <- fold_auc_taxon_time %>%
     ggplot() +
     geom_rect(data = rects,
@@ -923,7 +943,7 @@ cv_model_taxon_time <- function(fit, .data, key, name, path) {
     geom_hline(yintercept = 0.5, linetype = 'dashed') +
     stat_lineribbon(aes(x = time, y = value), size = 0.5) +
     scale_fill_brewer() +
-    scale_x_reverse() +
+    scale_x_reverse(breaks = brks) +
     facet_grid(fossil_group ~ model) +
     labs(x = 'Time (Mya)', y = 'AUC') +
     NULL
