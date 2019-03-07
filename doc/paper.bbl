@@ -1,4 +1,4 @@
-\begin{thebibliography}{51}
+\begin{thebibliography}{52}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -396,6 +396,11 @@ C.~Spencer-Cervato.
 \newblock ISSN 10948074.
 \newblock URL
   \url{http://scholar.google.com/scholar?hl=en{\&}btnG=Search{\&}q=intitle:THE+CENOZOIC+DEEP+SEA+MICROFOSSIL+RECORD+:+EXPLORATIONS+OF+THE+DSDP+/+ODP+SAMPLE+SET+USING+THE+NEPTUNE+DATABASE{\#}0}.
+
+\bibitem[Tang et~al.(2012)Tang, He, and Tu]{ACCDA}
+W.~Tang, H.~He, and X.~M. Tu.
+\newblock \emph{{Applied categorical and count data analysis}}.
+\newblock CRC Press, Boca Raton, FL, 2012.
 
 \bibitem[Team(2017)]{StanManual}
 S.~D. Team.
