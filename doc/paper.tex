@@ -59,6 +59,8 @@
 
 \begin{document}
 
+\begin{refsection}
+
 \maketitle
 
 \linenumbers{}
@@ -115,8 +117,7 @@ The Neptune database records multiple phyla-scale taxonomic groups for over 60 m
 We analyzed microfossil occurrence information which was downloaded from the Neptune Database \url{http://www.nsb-mfn-berlin.de/nannotax} \citep{Lazarus1994,SpencerCervato1999}. All occurrence information was downloaded for calcareous nannofossils, diatoms, foraminifera, and radiolarians.% -- these occurrences span the entire globe between 120 and 0 million years ago (Mya). 
 This dataset of occurrences was then filtered to just those species which have their first occurrence at most 63 Mya. This choice means that our analysis avoids those taxa which survived the K/Pg boundary, those taxa which arose just after the K/Pg boundary, and means that our occurrence histories line up with the temperature time-series which was used as a predictor of extinction as discussed below.
 
-All fossil occurrences were assigned to 1 My bins based on the estimated age of the fossil occurrence. 
-After binning, each taxon's geographic range was calculated for each of the 1 My bins in which it occurred. Geographic range was calculated as the maximum great circle distance on an ellipsoid (i.e. the Earth) between any two occurrences of that species; this distance was measured in kilometers. 
+All fossil occurrences were assigned to 1 My bins based on the estimated age of the fossil occurrence. After binning, each taxon's geographic range was calculated for each of the 1 My bins in which it occurred. Geographic range was calculated as the maximum great circle distance on an ellipsoid (i.e. the Earth) between any two occurrences of that species; this distance was measured in kilometers. 
 
 Temperature data used as covariates in this analysis are based on Magnesium/Calcium isotope ratios sourced from \citet{Cramer2011}. These elemental ratios are considered more accurate estimates of past global temperature when compared to the frequently used Oxygen isotope-based estimates; this is because Mg/Ca based estimates are not effected by ice-volume and fresh-water input (e.g. meteoric water) which can alter Oxygen isotope ratios without reflecting changes to the climate itself. This property is of particular importance for this analysis as polar ice-caps develop midway through the Cenozoic. Our data source, \citet{Cramer2011}, provides temperature estimates for every 0.1 My from 0 to 63 Mya. We binned these estimates into 1 My intervals as we did with the fossil occurrences. The temperature estimate for each 1 My interval was calculated as the mean of all estimates within that interval. 
 
@@ -311,9 +312,11 @@ In conclusion, our results provide a promising picture of our ability to predict
 
 
 \printbibliography
+\end{refsection}
 
 
 \beginsupplement
+\begin{refsection}
 \section{Supplementary Material}
 
 \subsection{Data Specifications} \label{sec:data_desc}
@@ -427,7 +430,8 @@ brmfit <- brm(formula = form,
 Posterior convergence was determined using the general and HMC-specific diagnostic criteria: scale reduction factor (\(\hat{R}\); target \(<1.1\)), effective sample size (eff; target value eff/steps \(<0.0001\)), number of samples that saturated the maximum trajectory length for avoiding infinite loops (treedepth; target value 0), sample divergence, and the energy Bayesian Fraction of Mission Information (E-BFMI; target value \(>0.2\)). For further explanation of these diagnostic criteria, see the Stan Manual \citep{StanManual}.
 
 
-
+\printbibliography[title={Supplementary References}]
+\end{refsection}
 
 \end{document}
 

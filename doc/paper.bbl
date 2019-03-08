@@ -17,7 +17,7 @@
 \endgroup
 
 
-\refsection{0}
+\refsection{1}
   \datalist[entry]{none/global//global/global}
     \entry{Harnik2012a}{article}{}
       \name{author}{14}{}{%
@@ -2106,6 +2106,11 @@
       \verb http://www.springerlink.com/index/10.1007/b94608
       \endverb
     \endentry
+  \enddatalist
+\endrefsection
+
+\refsection{2}
+  \datalist[entry]{none/global//global/global}
     \entry{Alroy2010}{article}{}
       \name{author}{1}{}{%
         {{uniquename=0,uniquepart=base,hash=b30184a386a012803c89be9cc3548827}{%
@@ -2121,8 +2126,8 @@
       \strng{authorbibnamehash}{b30184a386a012803c89be9cc3548827}
       \strng{authornamehash}{b30184a386a012803c89be9cc3548827}
       \strng{authorfullhash}{b30184a386a012803c89be9cc3548827}
-      \field{sortinit}{2}
-      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{sortinit}{1}
+      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{ABSTRACT.----Paleobiologists are reaching a consensus that biases in diversity curves, origination rates, and extinction rates need to be removed using statistical estimation methods. Diversity estimates are biased both by methods of counting and by variation in ...$\backslash$n}
@@ -2142,6 +2147,84 @@
       \verb https://www.nceas.ucsb.edu/%7B~%7Dalroy/pdfs/2010-PSPapers-16-55.pdf%7B%5C%%7D5Cnfile:///Users/tmsmiley/Documents/Papers2/Articles/2010/Alroy/Quantitative%20methods%20in%20paleobiology.%20Paleontological%20Society%20Papers.%202010%20Alroy.pdf%7B%5C%%7D5Cnpapers2://publication/uuid/E23F7702-48A8
       \endverb
     \endentry
+    \entry{Alroy2000b}{article}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,uniquepart=base,hash=139258ecb448cbdd5d01bef611b8d985}{%
+           family={Alroy},
+           familyi={A\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{139258ecb448cbdd5d01bef611b8d985}
+      \strng{fullhash}{139258ecb448cbdd5d01bef611b8d985}
+      \strng{bibnamehash}{139258ecb448cbdd5d01bef611b8d985}
+      \strng{authorbibnamehash}{139258ecb448cbdd5d01bef611b8d985}
+      \strng{authornamehash}{139258ecb448cbdd5d01bef611b8d985}
+      \strng{authorfullhash}{139258ecb448cbdd5d01bef611b8d985}
+      \field{sortinit}{1}
+      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This paper documents a series of methodological innovations that are relevant to macroevolutionary studies. The new methods are applied to updated faunal and body mass data sets for North American fossil mammals, documenting several key trends across the late Cretaceous and Cenozoic. The methods are (1) A maximum likelihood formulation of appearance event ordination. The reformulated criterion involves generating a maximally likely hypothesized relative ordering of first and last appearances (i.e., an age range chart). The criterion takes faunal occurrences, stratigraphic relationships, and the sampling probability of individual genera and species into account. (2) A nonparametric temporal interpolation method called \textquoteleft{}\textquoteleft{}shrink-wrapping'' that makes it possible to employ the greatest possible number of tie points without violating monotonicity or allowing abrupt changes in slopes. The new calibration method is used in computing provisional definitions of boundaries among North American land mammal ages. (3) Additionalmethods for randomized subsampling of faunal lists, one weighting the number of lists that have been drawn by the sum of the square of the number of occurrences in each list, and one further modifying this approach to account for long-term changes in average local species richness. (4) Foote's new equations for instantaneous speciation and extinction rates. The equations are rederived and used to generate time series, confirm that logistic dynamics result from the diversity dependence of speciation but not extinction, and define the median duration of species (i.e., 2.6 m.y. for Eocene-- Pleistocene mammals). (5) A method employing the G likelihood ratio statistic that is used to quantify the volatility of changes in the relative proportion of species falling in each of several major taxonomic groups. (6) Univariate measures of body mass distributions based on ordinary moment statistics (mean, standard deviation, skewness, kurtosis). These measures are favored over the method of cenogram analysis. Data are presented showing that even diverse individual fossil collections merely yield a noisy version of the same pattern seen in the overall continental data set. Peaks in speciation rates, extinction rates, proportional volatility, and shifts in body mass distributions occur at different times, suggesting that environmental perturbations do not have simple effects on the biota.}
+      \field{isbn}{00948373}
+      \field{issn}{0094-8373}
+      \field{journaltitle}{Paleobiology}
+      \field{number}{4}
+      \field{title}{{New methods for quantifying macroevolutionary patterns and processes}}
+      \field{volume}{26}
+      \field{year}{2000}
+      \field{pages}{707\bibrangedash 733}
+      \range{pages}{27}
+      \verb{doi}
+      \verb 10.1666/0094-8373(2000)026<0707:NMFQMP>2.0.CO;2
+      \endverb
+      \verb{file}
+      \verb :home/peter/Documents/Mendeley Desktop/Alroy/Paleobiology/Alroy - 2000 - Paleobiology.pdf:pdf
+      \endverb
+      \keyw{2000,26,4,707,733,eobiology,macroevolutionary,new methods for quantifying,patterns and processes,pp}
+    \endentry
+    \entry{Alroy2014}{article}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,uniquepart=base,hash=139258ecb448cbdd5d01bef611b8d985}{%
+           family={Alroy},
+           familyi={A\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{139258ecb448cbdd5d01bef611b8d985}
+      \strng{fullhash}{139258ecb448cbdd5d01bef611b8d985}
+      \strng{bibnamehash}{139258ecb448cbdd5d01bef611b8d985}
+      \strng{authorbibnamehash}{139258ecb448cbdd5d01bef611b8d985}
+      \strng{authornamehash}{139258ecb448cbdd5d01bef611b8d985}
+      \strng{authorfullhash}{139258ecb448cbdd5d01bef611b8d985}
+      \field{sortinit}{1}
+      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Paleobiologists have used many different methods for estimating rates of origination and extinction. Unfortunately, all equations that consider entire age ranges are distorted by the Pull of the Recent, the Signor-Lipps effect, and simple edge effects. Attention has been paid recently to an equation of Foote's that considers counts of taxa either crossing the bottom and top of an interval or crossing one boundary but not the other. This generalized boundary-crosser (BC) method has important advantages but is still potentially subject to the major biases. The only published equation that circumvents all of them is the three-timer (3T) log ratio, which does so by focusing on a four-interval moving window. Although it is highly accurate it is noisy when turnover rates are very high or sampling is very poor. More precise values are yielded by a newly derived equation that uses the same counts. However, it also considers taxa sampled in a window's first and fourth intervals but missing from the third (i.e., gap-fillers). Simulations show that the 3T, gap-filler (GF), and BC equations yield identical values when sampling and turnover are uniform through time. When applied to Phanerozoic-scale marine animal data, 3T and GF agree well but the BC rates are systematically lower. The apparent reason is that (1) long-ranging but infrequently sampled genera are less likely to be split up by taxonomists and (2) the BC equation overweights taxa with long ranges. Thus, BC rates pertain more to rare genera that are likely to represent large clades whereas GF rates pertain more to actual species-level patterns. Given these results, all published turnover rates based either on genus-level data or on age ranges must be reconsidered because they may reflect taxonomic practices more strongly than the species-level dynamics of interest to biologists.}
+      \field{issn}{0094-8373}
+      \field{journaltitle}{Paleobiology}
+      \field{number}{03}
+      \field{title}{{Accurate and precise estimates of origination and extinction rates}}
+      \field{volume}{40}
+      \field{year}{2014}
+      \field{pages}{374\bibrangedash 397}
+      \range{pages}{24}
+      \verb{doi}
+      \verb 10.1666/13036
+      \endverb
+      \verb{file}
+      \verb :home/peter/Documents/Mendeley Desktop/Alroy/Paleobiology/Alroy - 2014 - Paleobiology.pdf:pdf;:home/peter/Documents/Mendeley Desktop/Alroy/Paleobiology/Alroy - 2014 - Paleobiology.pdf:pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.cambridge.org/core/product/identifier/S0094837300001871/type/journal{\_}article
+      \endverb
+      \verb{url}
+      \verb https://www.cambridge.org/core/product/identifier/S0094837300001871/type/journal%7B%5C_%7Darticle
+      \endverb
+    \endentry
     \entry{Foote1997}{article}{}
       \name{author}{1}{}{%
         {{uniquename=0,uniquepart=base,hash=9f3261d2f7f87edc777d866121f12f72}{%
@@ -2157,8 +2240,8 @@
       \strng{authorbibnamehash}{9f3261d2f7f87edc777d866121f12f72}
       \strng{authornamehash}{9f3261d2f7f87edc777d866121f12f72}
       \strng{authorfullhash}{9f3261d2f7f87edc777d866121f12f72}
-      \field{sortinit}{2}
-      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{sortinit}{1}
+      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Paleontological completeness and stratigraphic ranges depend on$\backslash$nextinction rate, origination rate, preservation rate, and the length of$\backslash$nthe interval of time over which observations can be made. I derive$\backslash$nexpressions for completeness and the distribution of durations and$\backslash$nranges as functions of these parameters, considering bath continuous-and$\backslash$ndiscrete-time models. Previous work has shown that, if stratigraphic$\backslash$nranges can be followed indefinitely forward, and if extinction and$\backslash$npreservation occur at stochastically constant rates, then extinction$\backslash$nrate and preservability can be estimated from (1) discrete (binned)$\backslash$nstratigraphic ranges even if data on occurrences within ranges are$\backslash$nunknown, and (2) continuous ranges if the number of occurrences within$\backslash$neach range is known. I show that, regardless of whether the window of$\backslash$nobservation is finite or infinite, extinction and preservation rates fan$\backslash$nalso be estimated from (3) continuous ranges when the number of$\backslash$noccurrences-is not known, and (4) discrete ranges when the number of$\backslash$noccurrences is not known. One previous estimation method for binned data$\backslash$ninvolves a sample-size bias. This is circumvented by using maximum$\backslash$nLikelihood parameter estimation. It is worth exploiting data on$\backslash$noccurrences within ranges when these are available, since they allow$\backslash$npreservation rate to be estimated with less variance. The various$\backslash$nmethods yield comparable parameter estimates when applied to$\backslash$nCambro-Ordovician trilobite species and Cenozoic mammal species.$\backslash$nStratigraphic gaps and variable preservation affect stratigraphic ranges$\backslash$npredictably. In many eases, accurate parameter estimation is possible$\backslash$neven in the face of these complications. The distribution of$\backslash$nstratigraphic ranges can be used to estimate the sizes of gaps if their$\backslash$nexistence is known.}
@@ -2199,8 +2282,8 @@
       \strng{authorbibnamehash}{88d0a71fa3fcce4d48477b8a678f24e0}
       \strng{authornamehash}{88d0a71fa3fcce4d48477b8a678f24e0}
       \strng{authorfullhash}{88d0a71fa3fcce4d48477b8a678f24e0}
-      \field{sortinit}{2}
-      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{sortinit}{1}
+      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Measuring the completeness of the fossil record is essential to understanding evolution over long timescales, particularly when comparing evolutionary patterns among biological groups with different preservational properties. Completeness measures have been presented for various groups based on gaps in the stratigraphic ranges of fossil taxa and on hypothetical lineages implied by estimated evolutionary trees. Here we present and compare quantitative, widely applicable absolute measures of completeness at two taxonomic levels for a broader sample of higher taxa of marine animals than has previously been available. We provide an estimate of the probability of genus preservation per stratigraphic interval, and determine the proportion of living families with some fossil record. The two completeness measures use very different data and calculations. The probability of genus preservation depends almost entirely on the Palaeozoic and Mesozoic records, whereas the proportion of living families with a fossil record is influenced largely by Cenozoic data. These measurements are nonetheless highly correlated, with outliers quite explicable, and we find that completeness is rather high for many animal groups.}
@@ -2216,6 +2299,42 @@
       \verb 10.1038/18872
       \endverb
       \keyw{Animals,Biological Evolution,Ecosystem,Fossils,Invertebrates,Marine Biology,Mollusca,Paleontology,Paleontology: methods,Phylogeny}
+    \endentry
+    \entry{Foote2001}{article}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,uniquepart=base,hash=ab99be064192f9409924032ef936a04f}{%
+           family={Foote},
+           familyi={F\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{ab99be064192f9409924032ef936a04f}
+      \strng{fullhash}{ab99be064192f9409924032ef936a04f}
+      \strng{bibnamehash}{ab99be064192f9409924032ef936a04f}
+      \strng{authorbibnamehash}{ab99be064192f9409924032ef936a04f}
+      \strng{authornamehash}{ab99be064192f9409924032ef936a04f}
+      \strng{authorfullhash}{ab99be064192f9409924032ef936a04f}
+      \field{sortinit}{1}
+      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Apparent variation in rates of origination and extinction reflects the true temporal pat- tern of taxonomic rates as well as the distorting effects of incomplete and variable preservation, effects that are themselves exacerbated by true variation in taxonomic rates. Here I present an ap- proach that can undo these distortions and thus permit estimates of true taxonomic rates, while providing estimates of preservation in the process. Standard survivorship probabilities are mod- ified to incorporate variable taxonomic rates and rates of fossil recovery. Time series of these rates are explored by numerical optimization until the set of rates that best explains the observed data is found. If internal occurrences within stratigraphic ranges are available, or if temporal patterns of fossil recovery can otherwise be assumed, these constraints can be exploited, but they are by no means necessary. In its most general form, the approach requires no data other than first and last appearances. When tested against simulated data, the method is able to recover temporal patterns in rates of origination, extinction, and preservation. With empirical data, it yields estimates of pres- ervation rate that agree with those obtained independently by tabulating internal occurrences with- in stratigraphic ranges. Moreover, when empirical occurrence data are artificially degraded, the method detects the resulting gaps in sampling and corrects taxonomic rates. Preliminary appli- cation to data on Paleozoic marine animals suggests that some features of the apparent record, such as the forward smearing of true origination events and the backward smearing of true extinction events, can be detected and corrected. Other features, such as the end-Ordovician extinction, may be fairly accurate at face value.}
+      \field{isbn}{0094-8373}
+      \field{issn}{0094-8373}
+      \field{journaltitle}{Paleobiology}
+      \field{number}{4}
+      \field{title}{{Inferring temporal patterns of preservation, origination, and extinction from taxonomic survivorship analysis}}
+      \field{volume}{27}
+      \field{year}{2001}
+      \field{pages}{602\bibrangedash 630}
+      \range{pages}{29}
+      \verb{doi}
+      \verb 10.1666/0094-8373(2001)027<0602:ITPOPO>2.0.CO;2
+      \endverb
+      \verb{file}
+      \verb :home/peter/Documents/Mendeley Desktop/Foote/Paleobiology/Foote - 2001 - Paleobiology.pdf:pdf
+      \endverb
     \endentry
     \entry{Foote1996e}{article}{}
       \name{author}{2}{}{%
@@ -2238,8 +2357,8 @@
       \strng{authorbibnamehash}{da6bba2d3f9f6d7ee8395b307680774c}
       \strng{authornamehash}{da6bba2d3f9f6d7ee8395b307680774c}
       \strng{authorfullhash}{da6bba2d3f9f6d7ee8395b307680774c}
-      \field{sortinit}{2}
-      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{sortinit}{1}
+      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Paleobiology}
@@ -2283,8 +2402,8 @@
       \strng{authorbibnamehash}{60518284f03e8c1ac60e8e4ebd2fb2c9}
       \strng{authornamehash}{60518284f03e8c1ac60e8e4ebd2fb2c9}
       \strng{authorfullhash}{d2af831ce79d5f4861d1a3049d3935d5}
-      \field{sortinit}{2}
-      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{sortinit}{1}
+      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Paleobiology}
@@ -2313,8 +2432,8 @@
       \strng{authorbibnamehash}{10eae49031a3150179da5bf63bfbfb73}
       \strng{authornamehash}{10eae49031a3150179da5bf63bfbfb73}
       \strng{authorfullhash}{10eae49031a3150179da5bf63bfbfb73}
-      \field{sortinit}{2}
-      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{sortinit}{1}
+      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{A simple method, employing 50{\%} confidence intervals, may be used to distinguish sudden from gradual extinctions, In cases where the fossil record is consistent with a sudden disappearance, the expected position of the extinction horizon may also be determined, Analysis of the fossil ammonites on Seymour Island shows that their pattern of disappearances is consistent with a sudden mass extinction at the Cretaceous-Tertiary (K-T) boundary, even though a literal reading of the fossil record shows they disappeared gradually over a stratigraphic interval 10-50 m below the boundary. It is striking that the iridium anomaly on Seymour Island falls within the stratigraphic interval determined by the 50{\%} confidence intervals to be the most likely place for the K-T boundary (assuming there was a sudden disappearance of ammonites at the boundary), However, a computer simulation of the Seymour Island ammonite fossil record indicates a wide range of other extinction scenarios, including gradual extinctions ranging over as much as 20 m (alpha = 0.05), that are consistent with the ammonite fossil record; without saturation collecting near the K-T boundary it will be impossible to distinguish between gradual and sudden extinction scenarios for the Seymour Island ammonites based on the ammonite fossil record alone.}
@@ -2355,8 +2474,8 @@
       \strng{authorbibnamehash}{e78864cc6c13a17e121a998041e7d785}
       \strng{authornamehash}{e78864cc6c13a17e121a998041e7d785}
       \strng{authorfullhash}{e78864cc6c13a17e121a998041e7d785}
-      \field{sortinit}{2}
-      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{sortinit}{1}
+      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Biology Letters}
@@ -2461,6 +2580,189 @@
       \endverb
       \keyw{Beverton-Holt,Contest competition,Diversification,Diversity-dependence,Ecological limits,Microfossil,Ricker,Scramble competition}
     \endentry
+    \entry{Ezard2011}{article}{}
+      \name{author}{4}{}{%
+        {{uniquename=0,uniquepart=base,hash=576cd575f9bdd9996bad797a163a6dd8}{%
+           family={Ezard},
+           familyi={E\bibinitperiod},
+           given={Thomas\bibnamedelimb H\bibnamedelima G},
+           giveni={T\bibinitperiod\bibinitdelim H\bibinitperiod\bibinitdelim G\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=0a928933f80f5037f8bfa0a5071e7caa}{%
+           family={Aze},
+           familyi={A\bibinitperiod},
+           given={Tracy},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=8ebfdea7bfcd3c0f51f1afc7a2a04a00}{%
+           family={Pearson},
+           familyi={P\bibinitperiod},
+           given={Paul\bibnamedelima N},
+           giveni={P\bibinitperiod\bibinitdelim N\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=bb735b8020f240a8c2ce5678ea07a18b}{%
+           family={Purvis},
+           familyi={P\bibinitperiod},
+           given={Andy},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{07cffea7b3e24d86003a05dc73aeb38e}
+      \strng{fullhash}{15ad5c4fe6bc76218ae1d511c6f47bc2}
+      \strng{bibnamehash}{07cffea7b3e24d86003a05dc73aeb38e}
+      \strng{authorbibnamehash}{07cffea7b3e24d86003a05dc73aeb38e}
+      \strng{authornamehash}{07cffea7b3e24d86003a05dc73aeb38e}
+      \strng{authorfullhash}{15ad5c4fe6bc76218ae1d511c6f47bc2}
+      \field{sortinit}{2}
+      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Ecological change provokes speciation and extinction, but our knowledge of the interplay among the biotic and abiotic drivers of macroevolution remains limited. Using the unparalleled fossil record of Cenozoic macroperforate planktonic foraminifera, we demonstrate that macroevolutionary dynamics depend on the interaction between species' ecology and the changing climate. This interplay drives diversification but differs between speciation probability and extinction risk: Speciation was more strongly shaped by diversity dependence than by climate change, whereas the reverse was true for extinction. Crucially, no single ecology was optimal in all environments, and species with distinct ecologies had significantly different probabilities of speciation and extinction. The ensuing macroevolutionary dynamics depend fundamentally on the ecological structure of species' assemblages.}
+      \field{isbn}{1095-9203 (Electronic)$\backslash$r0036-8075 (Linking)}
+      \field{issn}{0036-8075}
+      \field{journaltitle}{Science}
+      \field{number}{6027}
+      \field{title}{{Interplay Between Changing Climate and Species' Ecology Drives Macroevolutionary Dynamics}}
+      \field{volume}{332}
+      \field{year}{2011}
+      \field{pages}{349\bibrangedash 351}
+      \range{pages}{3}
+      \verb{doi}
+      \verb 10.1126/science.1203060
+      \endverb
+      \verb{file}
+      \verb :home/peter/Documents/Mendeley Desktop/Ezard et al/Science/Ezard et al. - 2011 - Science.pdf:pdf;:home/peter/Documents/Mendeley Desktop/Ezard et al/Science/Ezard et al. - 2011 - Science(2).pdf:pdf
+      \endverb
+      \verb{urlraw}
+      \verb http://www.sciencemag.org/cgi/doi/10.1126/science.1203060
+      \endverb
+      \verb{url}
+      \verb http://www.sciencemag.org/cgi/doi/10.1126/science.1203060
+      \endverb
+    \endentry
+    \entry{Liow2010}{article}{}
+      \name{author}{4}{}{%
+        {{uniquename=0,uniquepart=base,hash=8c6b4cf0c42a9827fa59a7ccd6a10b2e}{%
+           family={Liow},
+           familyi={L\bibinitperiod},
+           given={Lee\bibnamedelima Hsiang},
+           giveni={L\bibinitperiod\bibinitdelim H\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=1e972d2bee4422fa9d16740738e11e55}{%
+           family={Skaug},
+           familyi={S\bibinitperiod},
+           given={Hans\bibnamedelima Julius},
+           giveni={H\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=f6d901516aed21e7a1ebb934bb0ef784}{%
+           family={Ergon},
+           familyi={E\bibinitperiod},
+           given={Torbj\o{}rn},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=8f77d6ea02b777a4287fe1e0ed298908}{%
+           family={Schweder},
+           familyi={S\bibinitperiod},
+           given={Tore},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{100dd41a7338b19f467349bc100354dc}
+      \strng{fullhash}{f8bce737887f49ccf464bc7f09b8e49b}
+      \strng{bibnamehash}{100dd41a7338b19f467349bc100354dc}
+      \strng{authorbibnamehash}{100dd41a7338b19f467349bc100354dc}
+      \strng{authornamehash}{100dd41a7338b19f467349bc100354dc}
+      \strng{authorfullhash}{f8bce737887f49ccf464bc7f09b8e49b}
+      \field{sortinit}{2}
+      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Species arise and establish themselves over the geologic time scale. This process is manifested as a change in the relative frequency of occurrences of a given species in the global pool of species. Our main goal here is to model this rise and the eventual decline of microfossil species using a mixed-effects model where groups each have a characteristic occurrence trajectory (main effects) and each species belonging to those groups is allowed to deviate from the given group trajectory (random effects). Our model can be described as a {$\quotesinglbase$}{\"{A}}{\'{u}}hat{$\quotesinglbase$}{\"{A}}{\`{u}} with logistic forms in the periods of increase and decline. Using the estimated timings of rises and falls, we find that the lengths of the periods of rise are about as long as the lengths of the periods when species are above 50{\%} of their estimated maximal occurrences. These latter periods are here termed periods of dominance, which are in turn about the same length as the species' periods of fall. The peak rates of the rises of microfossils are in general faster than their peak rates of falls. These quantified observations may have broad macroevolutionary and macroecological implications. Further, we hypothesize that species that have experienced and survived high levels of environmental volatility (specifically, periods of greater than average variation in temperature and productivity) during their formative periods should have longer periods of dominance. This is because subsequent environmental variations should not drive them to decline with ease. We find that higher estimated environmental volatility early in the life of a species positively correlates with lengths of periods of dominance, given that a species survives the initial stress of the environmental fluctuations. However, we find no evidence that the steepness of the rise of a species is affected by environmental volatility in the early phases of its life.}
+      \field{isbn}{0094-8373}
+      \field{issn}{0094-8373}
+      \field{journaltitle}{Paleobiology}
+      \field{number}{2}
+      \field{title}{{Global occurrence trajectories of microfossils: environmental volatility and the rise and fall of individual species}}
+      \field{volume}{36}
+      \field{year}{2010}
+      \field{pages}{224\bibrangedash 252}
+      \range{pages}{29}
+      \verb{doi}
+      \verb 10.1666/08080.1
+      \endverb
+      \verb{file}
+      \verb :home/peter/Documents/Mendeley Desktop/Liow et al/Paleobiology/Liow et al. - 2010 - Paleobiology.pdf:pdf
+      \endverb
+    \endentry
+    \entry{ARM}{book}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,uniquepart=base,hash=1e1eb60e3b6e222217bf8e9b24070b28}{%
+           family={Gelman},
+           familyi={G\bibinitperiod},
+           given={Andrew},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=1fd6540b91678ae8d3f51574305d2455}{%
+           family={Hill},
+           familyi={H\bibinitperiod},
+           given={Jennifer},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Cambridge}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{602df721bcd10fe1eca95cb5554d134b}
+      \strng{fullhash}{602df721bcd10fe1eca95cb5554d134b}
+      \strng{bibnamehash}{602df721bcd10fe1eca95cb5554d134b}
+      \strng{authorbibnamehash}{602df721bcd10fe1eca95cb5554d134b}
+      \strng{authornamehash}{602df721bcd10fe1eca95cb5554d134b}
+      \strng{authorfullhash}{602df721bcd10fe1eca95cb5554d134b}
+      \field{sortinit}{3}
+      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Data Analysis Using Regression and Multilevel/Hierarchical Models}}
+      \field{year}{2006}
+    \endentry
+    \entry{Tutz2016}{book}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,uniquepart=base,hash=4133bdf1da384bf31d5c1ec83be7006e}{%
+           family={Tutz},
+           familyi={T\bibinitperiod},
+           given={Gerhard},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=f5ba35d29d7e5a3ebfc27683ef364d1b}{%
+           family={Schmid},
+           familyi={S\bibinitperiod},
+           given={Matthis},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Springer International Publishing}%
+      }
+      \strng{namehash}{28255780c6e8b38bdeb5a59383703279}
+      \strng{fullhash}{28255780c6e8b38bdeb5a59383703279}
+      \strng{bibnamehash}{28255780c6e8b38bdeb5a59383703279}
+      \strng{authorbibnamehash}{28255780c6e8b38bdeb5a59383703279}
+      \strng{authornamehash}{28255780c6e8b38bdeb5a59383703279}
+      \strng{authorfullhash}{28255780c6e8b38bdeb5a59383703279}
+      \field{sortinit}{4}
+      \field{sortinithash}{11cdaee3b18e01d77f3f428b13c1fc76}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-3-319-28156-8}
+      \field{title}{{Modeling discrete time-to-event data}}
+      \field{year}{2016}
+      \verb{doi}
+      \verb 10.1007/978-3-319-28158-2
+      \endverb
+    \endentry
     \entry{StanManual}{misc}{}
       \name{author}{1}{}{%
         {{uniquename=0,uniquepart=base,hash=2418ee02a26ab01ead911ec86c507892}{%
@@ -2473,8 +2775,8 @@
       \strng{authorbibnamehash}{2418ee02a26ab01ead911ec86c507892}
       \strng{authornamehash}{2418ee02a26ab01ead911ec86c507892}
       \strng{authorfullhash}{2418ee02a26ab01ead911ec86c507892}
-      \field{sortinit}{3}
-      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
+      \field{sortinit}{8}
+      \field{sortinithash}{07edf88d4ea82509b9c4b4d13f41c452}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{{Stan Modeling Language Users Guide and Reference Manual}}
@@ -2507,8 +2809,8 @@
       \strng{authorbibnamehash}{a675bdac50a7f4fa2f4bf27653f97610}
       \strng{authornamehash}{a675bdac50a7f4fa2f4bf27653f97610}
       \strng{authorfullhash}{a675bdac50a7f4fa2f4bf27653f97610}
-      \field{sortinit}{3}
-      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
+      \field{sortinit}{1}
+      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{note}{R package version 2.18.2}
@@ -2536,8 +2838,8 @@
       \strng{authorbibnamehash}{ec69dfaa36b99b02d1d9a3733eae1d23}
       \strng{authornamehash}{ec69dfaa36b99b02d1d9a3733eae1d23}
       \strng{authorfullhash}{ec69dfaa36b99b02d1d9a3733eae1d23}
-      \field{sortinit}{3}
-      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
+      \field{sortinit}{1}
+      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Journal of Statistical Software}
@@ -2566,8 +2868,8 @@
       \strng{authorbibnamehash}{ec69dfaa36b99b02d1d9a3733eae1d23}
       \strng{authornamehash}{ec69dfaa36b99b02d1d9a3733eae1d23}
       \strng{authorfullhash}{ec69dfaa36b99b02d1d9a3733eae1d23}
-      \field{sortinit}{3}
-      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
+      \field{sortinit}{1}
+      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{The R Journal}
