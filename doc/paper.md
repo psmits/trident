@@ -1,3 +1,5 @@
+[**Keywords:**]{} conservation, paleobiology, extinction
+
 Introduction
 ============
 
@@ -85,15 +87,12 @@ the Deep Sea Drilling Program and the Ocean Drilling Project
 samples in space and time, a high degree of temporal resolution for the
 entirety of the Cenozoic, and has an internally consistent taxonomic
 identification strategy – as close to ideal data for this analysis as
-possible. Typical “exceptional” fossil records tend to be of individual
-taxonomic groups and for rarely longer than 10 million years. The
-Neptune database records multiple phyla-scale taxonomic groups for over
-60 million years, with incredible temporal resolution supported by the
-various age-models of the deep-sea cores the occurrences are recorded
-from – there is no equivalent fossil record. By analyzing patterns of
-extinction and global occurrence at fine temporal scales, we can better
-elucidate how well we can predict species extinction at human-relevant
-scales.
+possible. The Neptune database records multiple phyla-scale taxonomic
+groups for over 60 million years, with incredible temporal resolution
+supported by the various age-models of the deep-sea cores from which the
+occurrences are recorded. Analyzing patterns of extinction and global
+occurrence at fine temporal scales means we can better elucidate how
+well we can predict species extinction at human-relevant scales.
 
 Materials and Methods
 =====================
@@ -104,15 +103,13 @@ Data Specifications
 We analyzed microfossil occurrence information which was downloaded from
 the Neptune Database <http://www.nsb-mfn-berlin.de/nannotax>
 [@Lazarus1994; @SpencerCervato1999]. All occurrence information was
-downloaded for calcareous nannofossils, diatoms, foraminifera, and
-radiolarians – these occurrences span the entire globe between 120 and 0
-million years ago (Mya). This dataset of occurrences was then filtered
-to just those species which have their first occurrence at most 63 Mya.
-This choice means that our analysis avoids those taxa which survived the
-K/Pg boundary, those taxa which arose just after the K/Pg boundary, and
-means that our occurrence histories line up with the temperature
-time-series which was used as a predictor of extinction as discussed
-below.
+downloaded for calcareous nannoplankton, diatoms, foraminifera, and
+radiolarians.This dataset of occurrences was then filtered to just those
+species which have their first occurrence at most 63 Mya. This choice
+means that our analysis avoids those taxa which survived the K/Pg
+boundary, those taxa which arose just after the K/Pg boundary, and means
+that our occurrence histories line up with the temperature time-series
+which was used as a predictor of extinction as discussed below.
 
 All fossil occurrences were assigned to 1 My bins based on the estimated
 age of the fossil occurrence. After binning, each taxon’s geographic
@@ -185,7 +182,7 @@ Global temperature in degrees C. Mean centered, scaled to sd = 1.
 Species are at observation in millions of years.
 
 Taxonomic group of species (i.e. Foraminifera, Diatoms, Radiolarians,
-Calcaeous nannoplankton).
+Calcareous nannoplankton).
 
 Change in geographic range since last observation.
 
@@ -196,26 +193,12 @@ Temperature at previous observation.
 Model adequacy
 --------------
 
-We are interested in model adequacy and performance into two contexts:
-in-sample and out-of-sample predictive performance. “In-sample” means we
-are estimating how well our model predicts our observed data given that
-the model was fit to the entire dataset; this is a posterior predictive
-check in that we are comparing the posterior predictive distribution to
-our observed data. “Out-of-sample” is defined below.
-
-Relative and absolute model adequacy of the four variant models was
-compared using the area under the receiver operating characteristic
-curve or AUC [@Fawcett2006; @Mason2002]. This measure is commonly used
-in classification problems as it has the desirable characteristic of
-comparing the model’s true positive rate with its false positive rate,
-as opposed to accuracy which only considers the count of true positives.
-AUC ranges between 0.5 and 1, with 0.5 indicating no improvement in
-performance from random and 1 indicating perfect performance. AUC can be
-interpreted as the probability that our model correctly ranks the
-relative extinction risks of any two randomly selected species
-[@Fawcett2006; @Mason2002]. AUC values of approximately 0.8 or greater
-can be considered “good” [@ACCDA], which means that values between 0.7
-and 0.8 could then be considered “fair.”
+We are interested in model adequacy into two contexts: in-sample and
+out-of-sample predictive performance. In-sample means we are estimating
+how well our model predicts our observed data given that the model was
+fit to the entire dataset; this is a posterior predictive check in that
+we are comparing the posterior predictive distribution to our observed
+data. Out-of-sample is defined in context below.
 
 We are particularly interested in understanding how well our model
 predicts species extinction given new, future data (out-of-sample data).
@@ -231,11 +214,27 @@ from the subsequent fold. With 63 time points, each of the five folds
 represents approximately 13 time points. Keep in mind, however, that
 each time point corresponds to many (100-1000) individual observations.
 
-See our code repository https://github.com/psmits/trident for full code
-details. Our code uses “tidyverse” tools such as `dplyr` [@dplyr],
-`purr` [@purrr], and `tidybayes` [@tidybayes], thus some familiarity
-with that package ecosystem is necessary to fully comprehend how we’ve
-processed our data and results.
+Relative and absolute model adequacy of the four variant models was
+compared using the area under the receiver operating characteristic
+curve or AUC [@Fawcett2006; @Mason2002]. This measure is commonly used
+in classification problems as it has the desirable characteristic of
+comparing the model’s true positive rate with its false positive rate,
+as opposed to accuracy which only considers the count of true positives.
+AUC ranges between 0.5 and 1, with 0.5 indicating no improvement in
+performance from random and 1 indicating perfect performance. AUC can be
+interpreted as the probability that our model correctly ranks the
+relative extinction risks of any two randomly selected species
+[@Fawcett2006; @Mason2002]. AUC values of approximately 0.8 or greater
+can be considered “good” [@ACCDA], which means that values between 0.7
+and 0.8 could then be considered “fair.”
+
+See our code repository at https://github.com/psmits/trident for full
+code details. The entire analysis was coded in R and uses
+tidyverse-style tools such as `dplyr` [@dplyr], and `purr` [@purrr], and
+`tidybayes` [@tidybayes]. Additionally, all of our models were written
+using the `brms` [@brms2017; @brms2018] R package, which implements
+Stan-based Bayesian models which are fit via Hamiltonian Monte Carlo
+[@StanManual].
 
 Results
 =======
