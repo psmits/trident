@@ -6,7 +6,7 @@
 \usepackage[style=numeric-comp,
             backend=biber,
             bibencoding=utf8,
-            %maxcitenames=2,
+            maxbibnames=10,
             uniquename=init,
             giveninits=true,
             sorting=none,
@@ -36,6 +36,30 @@
   \renewcommand{\theequation}{S\arabic{equation}}
 }
 
+% https://3d.bk.tudelft.nl/hledoux/blog/fiddling-biblatex/
+%-- formatting hell for biblatex
+%-- remove "In:"
+\renewbibmacro{in:}{}
+%-- no "quotes" around titles of chapters/article titles
+\DeclareFieldFormat[article, inbook, incollection, inproceedings, misc, thesis, unpublished]
+{title}{#1}
+%-- no punctuation after volume
+\DeclareFieldFormat[article]{volume}{ {#1} } 
+%-- puts number/issue between brackets
+\DeclareFieldFormat[article, inbook, incollection, inproceedings, misc, thesis, unpublished]{number}{\mkbibparens{#1}} 
+%-- and then for articles directly the pages w/o any "pages" or "pp." 
+\DeclareFieldFormat[article]{pages}{#1}
+%-- for some types replace "pages" by "p."
+\DeclareFieldFormat[inproceedings, incollection, inbook]{pages}{p. #1}
+
+% https://tex.stackexchange.com/questions/81569/biblatex-parentheses-around-the-volume-number-of-an-article
+\renewbibmacro*{volume+number+eid}{%
+  \printfield{volume}%
+  \printfield{number}%
+  \printfield{eid}}
+\DeclareFieldFormat[article]{number}{\mkbibparens{#1}}
+
+
 % bibliographic information
 %\bibliographystyle{abbrvnat}
 %\bibliography{citations}
@@ -56,6 +80,7 @@
   %Department of Integrative Biology, University of California Berkeley\\
   \texttt{sethf@berkeley.edu}
 }
+\date{}
 
 \begin{document}
 
@@ -85,6 +110,7 @@
   %The results of this study reinforce the importance of the promise of paleontology and using the past to predict the future.
 \end{abstract}
 
+{\bf Keywords:} conservation, paleobiology, extinction
 
 \section{Introduction}
 
@@ -114,7 +140,7 @@ The Neptune database records multiple phyla-scale taxonomic groups for over 60 m
 
 \subsection{Data Specifications}
 
-We analyzed microfossil occurrence information which was downloaded from the Neptune Database \url{http://www.nsb-mfn-berlin.de/nannotax} \citep{Lazarus1994,SpencerCervato1999}. All occurrence information was downloaded for calcareous nannofossils, diatoms, foraminifera, and radiolarians.% -- these occurrences span the entire globe between 120 and 0 million years ago (Mya). 
+We analyzed microfossil occurrence information which was downloaded from the Neptune Database \url{http://www.nsb-mfn-berlin.de/nannotax} \citep{Lazarus1994,SpencerCervato1999}. All occurrence information was downloaded for calcareous nannoplankton, diatoms, foraminifera, and radiolarians.% -- these occurrences span the entire globe between 120 and 0 million years ago (Mya). 
 This dataset of occurrences was then filtered to just those species which have their first occurrence at most 63 Mya. This choice means that our analysis avoids those taxa which survived the K/Pg boundary, those taxa which arose just after the K/Pg boundary, and means that our occurrence histories line up with the temperature time-series which was used as a predictor of extinction as discussed below.
 
 All fossil occurrences were assigned to 1 My bins based on the estimated age of the fossil occurrence. After binning, each taxon's geographic range was calculated for each of the 1 My bins in which it occurred. Geographic range was calculated as the maximum great circle distance on an ellipsoid (i.e. the Earth) between any two occurrences of that species; this distance was measured in kilometers. 
@@ -159,7 +185,7 @@ Importantly, we include species geologic age at time of observation as a non-nes
     \item[c] Species geographic range in log km\(^2\). Mean centered, scaled to sd = 1.
     \item[d] Global temperature in degrees C. Mean centered, scaled to sd = 1.
     \item[e] Species are at observation in millions of years.
-    \item[f] Taxonomic group of species (i.e. Foraminifera, Diatoms, Radiolarians, Calcaeous nannoplankton).
+    \item[f] Taxonomic group of species (i.e. Foraminifera, Diatoms, Radiolarians, Calcareous nannoplankton).
     \item[g] Change in geographic range since last observation.
     \item[h] Temperature at previous observation.
     \end{tablenotes}
@@ -170,16 +196,15 @@ Importantly, we include species geologic age at time of observation as a non-nes
 
 \subsection{Model adequacy}
 
-We are interested in model adequacy and performance into two contexts: in-sample and out-of-sample predictive performance. ``In-sample'' means we are estimating how well our model predicts our observed data given that the model was fit to the entire dataset; this is a posterior predictive check in that we are comparing the posterior predictive distribution to our observed data. ``Out-of-sample'' is defined below.
+We are interested in model adequacy into two contexts: in-sample and out-of-sample predictive performance. In-sample means we are estimating how well our model predicts our observed data given that the model was fit to the entire dataset; this is a posterior predictive check in that we are comparing the posterior predictive distribution to our observed data. Out-of-sample is defined in context below.
+
+We are particularly interested in understanding how well our model predicts species extinction given new, future data (out-of-sample data). To do this, we estimated average out-of-sample predictive error using 5-fold time-series cross-validation. For time-series data, the folds (data partitions) are approximately equal segments of time. The model is fit to the first fold and the posterior estimates are used to predict the states of the observations in the second fold, then the model is fit to the first and second fold and the posterior states are used to estimate the states from the third fold, and so on with increasingly large numbers of folds used for fitting a model to predict the states from the subsequent fold. With 63 time points, each of the five folds represents approximately 13 time points. Keep in mind, however, that each time point corresponds to many (100-1000) individual observations.
 
 Relative and absolute model adequacy of the four variant models was compared using the area under the receiver operating characteristic curve or AUC \citep{Fawcett2006,Mason2002}. This measure is commonly used in classification problems as it has the desirable characteristic of comparing the model's true positive rate with its false positive rate, as opposed to accuracy which only considers the count of true positives. AUC ranges between 0.5 and 1, with 0.5 indicating no improvement in performance from random and 1 indicating perfect performance. AUC can be interpreted as the probability that our model correctly ranks the relative extinction risks of any two randomly selected species \citep{Fawcett2006,Mason2002}. AUC values of approximately 0.8 or greater can be considered ``good'' \citep{ACCDA}, which means that values between 0.7 and 0.8 could then be considered ``fair.''
 
 %The differences in in-sample predictive performance between the models was visualized in multiple ways: whole data set by model, taxonomic group by model, model performance over time, and model performance by taxonomic groups over time. These comparisons demonstrate the relative and absolute adequacy of the models in describing the dataset they were fit to.
 
-We are particularly interested in understanding how well our model predicts species extinction given new, future data (out-of-sample data). To do this, we estimated average out-of-sample predictive error using 5-fold time-series cross-validation. For time-series data, the folds (data partitions) are approximately equal segments of time. The model is fit to the first fold and the posterior estimates are used to predict the states of the observations in the second fold, then the model is fit to the first and second fold and the posterior states are used to estimate the states from the third fold, and so on with increasingly large numbers of folds used for fitting a model to predict the states from the subsequent fold. With 63 time points, each of the five folds represents approximately 13 time points. Keep in mind, however, that each time point corresponds to many (100-1000) individual observations.
-
-
-See our code repository https://github.com/psmits/trident for full code details. Our code uses ``tidyverse'' tools such as \texttt{dplyr} \citep{dplyr}, \texttt{purr} \citep{purrr}, and \texttt{tidybayes} \citep{tidybayes}, thus some familiarity with that package ecosystem is necessary to fully comprehend how we've processed our data and results.
+See our code repository at https://github.com/psmits/trident for full code details. The entire analysis was coded in R and uses tidyverse-style tools such as \texttt{dplyr} \citep{dplyr}, and \texttt{purr} \citep{purrr}, and \texttt{tidybayes} \citep{tidybayes}. Additionally, all of our models were written using the \texttt{brms} \citep{brms2017,brms2018} R package, which implements Stan-based Bayesian models which are fit via Hamiltonian Monte Carlo \citep{StanManual}.
 
 
 \section{Results}

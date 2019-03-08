@@ -315,8 +315,8 @@
       }
       \strng{namehash}{085bc4566a13085956661fd82b7c64dd}
       \strng{fullhash}{a51759de9d1a3d929d9c57f9b9c835e0}
-      \strng{bibnamehash}{085bc4566a13085956661fd82b7c64dd}
-      \strng{authorbibnamehash}{085bc4566a13085956661fd82b7c64dd}
+      \strng{bibnamehash}{a51759de9d1a3d929d9c57f9b9c835e0}
+      \strng{authorbibnamehash}{a51759de9d1a3d929d9c57f9b9c835e0}
       \strng{authornamehash}{085bc4566a13085956661fd82b7c64dd}
       \strng{authorfullhash}{a51759de9d1a3d929d9c57f9b9c835e0}
       \field{sortinit}{2}
@@ -375,8 +375,8 @@
       }
       \strng{namehash}{07cffea7b3e24d86003a05dc73aeb38e}
       \strng{fullhash}{15ad5c4fe6bc76218ae1d511c6f47bc2}
-      \strng{bibnamehash}{07cffea7b3e24d86003a05dc73aeb38e}
-      \strng{authorbibnamehash}{07cffea7b3e24d86003a05dc73aeb38e}
+      \strng{bibnamehash}{15ad5c4fe6bc76218ae1d511c6f47bc2}
+      \strng{authorbibnamehash}{15ad5c4fe6bc76218ae1d511c6f47bc2}
       \strng{authornamehash}{07cffea7b3e24d86003a05dc73aeb38e}
       \strng{authorfullhash}{15ad5c4fe6bc76218ae1d511c6f47bc2}
       \field{sortinit}{2}
@@ -1109,8 +1109,8 @@
       }
       \strng{namehash}{100dd41a7338b19f467349bc100354dc}
       \strng{fullhash}{f8bce737887f49ccf464bc7f09b8e49b}
-      \strng{bibnamehash}{100dd41a7338b19f467349bc100354dc}
-      \strng{authorbibnamehash}{100dd41a7338b19f467349bc100354dc}
+      \strng{bibnamehash}{f8bce737887f49ccf464bc7f09b8e49b}
+      \strng{authorbibnamehash}{f8bce737887f49ccf464bc7f09b8e49b}
       \strng{authornamehash}{100dd41a7338b19f467349bc100354dc}
       \strng{authorfullhash}{f8bce737887f49ccf464bc7f09b8e49b}
       \field{sortinit}{6}
@@ -1476,8 +1476,8 @@
       }
       \strng{namehash}{d282c5028f7d0e369c0e4a6d4fb14e22}
       \strng{fullhash}{da24ac5efda7943ee9d233483865bf51}
-      \strng{bibnamehash}{d282c5028f7d0e369c0e4a6d4fb14e22}
-      \strng{authorbibnamehash}{d282c5028f7d0e369c0e4a6d4fb14e22}
+      \strng{bibnamehash}{da24ac5efda7943ee9d233483865bf51}
+      \strng{authorbibnamehash}{da24ac5efda7943ee9d233483865bf51}
       \strng{authornamehash}{d282c5028f7d0e369c0e4a6d4fb14e22}
       \strng{authorfullhash}{da24ac5efda7943ee9d233483865bf51}
       \field{sortinit}{1}
@@ -1580,8 +1580,8 @@
       }
       \strng{namehash}{0d7fc2f15e97a944f4aff6df03e6d1f5}
       \strng{fullhash}{f35f3211ad56a1044ac1622a8aa5760d}
-      \strng{bibnamehash}{0d7fc2f15e97a944f4aff6df03e6d1f5}
-      \strng{authorbibnamehash}{0d7fc2f15e97a944f4aff6df03e6d1f5}
+      \strng{bibnamehash}{f35f3211ad56a1044ac1622a8aa5760d}
+      \strng{authorbibnamehash}{f35f3211ad56a1044ac1622a8aa5760d}
       \strng{authornamehash}{0d7fc2f15e97a944f4aff6df03e6d1f5}
       \strng{authorfullhash}{f35f3211ad56a1044ac1622a8aa5760d}
       \field{sortinit}{1}
@@ -1762,8 +1762,8 @@
       }
       \strng{namehash}{0a755253eb22b0bf49414a120fa79f67}
       \strng{fullhash}{0d3d8475f438fc24a2db7e596a919922}
-      \strng{bibnamehash}{0a755253eb22b0bf49414a120fa79f67}
-      \strng{authorbibnamehash}{0a755253eb22b0bf49414a120fa79f67}
+      \strng{bibnamehash}{0d3d8475f438fc24a2db7e596a919922}
+      \strng{authorbibnamehash}{0d3d8475f438fc24a2db7e596a919922}
       \strng{authornamehash}{0a755253eb22b0bf49414a120fa79f67}
       \strng{authorfullhash}{0d3d8475f438fc24a2db7e596a919922}
       \field{sortinit}{1}
@@ -1838,8 +1838,6 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Receiver operating characteristics (ROC) graphs are useful for organizing classifiers and visualizing their performance. ROC graphs are commonly used in medical decision making, and in recent years have been used increasingly in machine learning and data mining research. Although ROC graphs are apparently simple, there are some common misconceptions and pitfalls when using them in practice. The purpose of this article is to serve as an introduction to ROC graphs and as a guide for using them in research. ?? 2005 Elsevier B.V. All rights reserved.}
-      \field{eprintclass}{http:}
-      \field{eprinttype}{arXiv}
       \field{isbn}{01678655}
       \field{issn}{01678655}
       \field{journaltitle}{Pattern Recognition Letters}
@@ -1851,9 +1849,6 @@
       \range{pages}{14}
       \verb{doi}
       \verb 10.1016/j.patrec.2005.10.010
-      \endverb
-      \verb{eprint}
-      \verb /dx.doi.org/10.1016/j.patrec.200
       \endverb
       \verb{file}
       \verb :home/peter/Documents/Mendeley Desktop/Fawcett/Pattern Recognition Letters/Fawcett - 2006 - Pattern Recognition Letters.pdf:pdf;:home/peter/Documents/Mendeley Desktop/Fawcett/Pattern Recognition Letters/Fawcett - 2006 - Pattern Recognition Letters(2).pdf:pdf
@@ -1964,8 +1959,8 @@
       }
       \strng{namehash}{e0731a35ef88164c57848ecb7ca5f8ca}
       \strng{fullhash}{7c61bbc17922b9632f4f3a8d8534cf6f}
-      \strng{bibnamehash}{e0731a35ef88164c57848ecb7ca5f8ca}
-      \strng{authorbibnamehash}{e0731a35ef88164c57848ecb7ca5f8ca}
+      \strng{bibnamehash}{7c61bbc17922b9632f4f3a8d8534cf6f}
+      \strng{authorbibnamehash}{7c61bbc17922b9632f4f3a8d8534cf6f}
       \strng{authornamehash}{e0731a35ef88164c57848ecb7ca5f8ca}
       \strng{authorfullhash}{7c61bbc17922b9632f4f3a8d8534cf6f}
       \field{sortinit}{2}
@@ -2049,7 +2044,89 @@
       \verb http://mjskay.github.io/tidybayes/
       \endverb
     \endentry
-    \entry{ESL}{article}{}
+    \entry{brms2017}{article}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,uniquepart=base,hash=ec69dfaa36b99b02d1d9a3733eae1d23}{%
+           family={B\"{u}rkner},
+           familyi={B\bibinitperiod},
+           given={Paul-Christian},
+           giveni={P\bibinithyphendelim C\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{ec69dfaa36b99b02d1d9a3733eae1d23}
+      \strng{fullhash}{ec69dfaa36b99b02d1d9a3733eae1d23}
+      \strng{bibnamehash}{ec69dfaa36b99b02d1d9a3733eae1d23}
+      \strng{authorbibnamehash}{ec69dfaa36b99b02d1d9a3733eae1d23}
+      \strng{authornamehash}{ec69dfaa36b99b02d1d9a3733eae1d23}
+      \strng{authorfullhash}{ec69dfaa36b99b02d1d9a3733eae1d23}
+      \field{sortinit}{2}
+      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Statistical Software}
+      \field{number}{1}
+      \field{title}{{brms}: An R Package for {Bayesian} Multilevel Models Using {Stan}}
+      \field{volume}{80}
+      \field{year}{2017}
+      \field{pages}{1\bibrangedash 28}
+      \range{pages}{28}
+      \verb{doi}
+      \verb 10.18637/jss.v080.i01
+      \endverb
+    \endentry
+    \entry{brms2018}{article}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,uniquepart=base,hash=ec69dfaa36b99b02d1d9a3733eae1d23}{%
+           family={B\"{u}rkner},
+           familyi={B\bibinitperiod},
+           given={Paul-Christian},
+           giveni={P\bibinithyphendelim C\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{ec69dfaa36b99b02d1d9a3733eae1d23}
+      \strng{fullhash}{ec69dfaa36b99b02d1d9a3733eae1d23}
+      \strng{bibnamehash}{ec69dfaa36b99b02d1d9a3733eae1d23}
+      \strng{authorbibnamehash}{ec69dfaa36b99b02d1d9a3733eae1d23}
+      \strng{authornamehash}{ec69dfaa36b99b02d1d9a3733eae1d23}
+      \strng{authorfullhash}{ec69dfaa36b99b02d1d9a3733eae1d23}
+      \field{sortinit}{2}
+      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{The R Journal}
+      \field{number}{1}
+      \field{title}{Advanced {Bayesian} Multilevel Modeling with the R Package {brms}}
+      \field{volume}{10}
+      \field{year}{2018}
+      \field{pages}{395\bibrangedash 411}
+      \range{pages}{17}
+    \endentry
+    \entry{StanManual}{misc}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,uniquepart=base,hash=2418ee02a26ab01ead911ec86c507892}{%
+           family={{Stan Development Team}},
+           familyi={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{2418ee02a26ab01ead911ec86c507892}
+      \strng{fullhash}{2418ee02a26ab01ead911ec86c507892}
+      \strng{bibnamehash}{2418ee02a26ab01ead911ec86c507892}
+      \strng{authorbibnamehash}{2418ee02a26ab01ead911ec86c507892}
+      \strng{authornamehash}{2418ee02a26ab01ead911ec86c507892}
+      \strng{authorfullhash}{2418ee02a26ab01ead911ec86c507892}
+      \field{sortinit}{2}
+      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Stan Modeling Language Users Guide and Reference Manual}}
+      \field{year}{2017}
+      \verb{urlraw}
+      \verb http://mc-stan.org
+      \endverb
+      \verb{url}
+      \verb http://mc-stan.org
+      \endverb
+    \endentry
+    \entry{ESL}{book}{}
       \name{author}{3}{}{%
         {{uniquename=0,uniquepart=base,hash=0cb8fe4210baa81c4b0e67913b4d2768}{%
            family={Hastie},
@@ -2070,6 +2147,12 @@
            giveni={J\bibinitperiod},
            givenun=0}}%
       }
+      \list{location}{1}{%
+        {New York, NY}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
       \strng{namehash}{7ca1bfe876d5e037b6aed69704221267}
       \strng{fullhash}{7ca1bfe876d5e037b6aed69704221267}
       \strng{bibnamehash}{7ca1bfe876d5e037b6aed69704221267}
@@ -2081,29 +2164,18 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{During the past decade there has been an explosion in computation and information technology. With it has come vast amounts of data in a variety of fields such as medicine, biology, finance, and marketing. The challenge of understanding these data has led to the development of new tools in the field of statistics, and spawned new areas such as data mining, machine learning, and bioinformatics. Many of these tools have common underpinnings but are often expressed with different terminology. This book describes the important ideas in these areas in a common conceptual framework. While the approach is statistical, the emphasis is on concepts rather than mathematics. Many examples are given, with a liberal use of color graphics. It should be a valuable resource for statisticians and anyone interested in data mining in science or industry. The book's coverage is broad, from supervised learning (prediction) to unsupervised learning. The many topics include neural networks, support vector machines, classification trees and boosting-the first comprehensive treatment of this topic in any book. Trevor Hastie, Robert Tibshirani, and Jerome Friedman are professors of statistics at Stanford University. They are prominent researchers in this area: Hastie and Tibshirani developed generalized additive models and wrote a popular book of that title. Hastie wrote much of the statistical modeling software in S-PLUS and invented principal curves and surfaces. Tibshirani proposed the Lasso and is co-author of the very successful An Introduction to the Bootstrap. Friedman is the co-inventor of many data-mining tools including CART, MARS, and projection pursuit. FROM THE REVIEWS: TECHNOMETRICS "This is a vast and complex book. Generally, it concentrates on explaining why and how the methods work, rather than how to use them. Examples and especially the visualizations are principle features...As a source for the methods of statistical learning...it will probably be a long time before there is a competitor to this book."}
-      \field{eprinttype}{arXiv}
+      \field{edition}{2}
       \field{isbn}{978-0-387-84857-0}
       \field{issn}{0172-7397}
-      \field{journaltitle}{Bayesian Forecasting and Dynamic Models}
       \field{title}{{The Elements of Statistical Learning}}
-      \field{volume}{1}
       \field{year}{2009}
       \field{pages}{1\bibrangedash 694}
       \range{pages}{694}
       \verb{doi}
       \verb 10.1007/b94608
       \endverb
-      \verb{eprint}
-      \verb arXiv:1011.1669v3
-      \endverb
       \verb{file}
-      \verb :home/peter/Documents/Mendeley Desktop/Hastie, Tibshirani, Friedman/Bayesian Forecasting and Dynamic Models/Hastie, Tibshirani, Friedman - 2009 - Bayesian Forecasting and Dynamic Models.pdf:pdf
-      \endverb
-      \verb{urlraw}
-      \verb http://www.springerlink.com/index/10.1007/b94608
-      \endverb
-      \verb{url}
-      \verb http://www.springerlink.com/index/10.1007/b94608
+      \verb :home/peter/Documents/Mendeley Desktop/Hastie, Tibshirani, Friedman/Unknown/Hastie, Tibshirani, Friedman - 2009 - Unknown.pdf:pdf
       \endverb
     \endentry
   \enddatalist
@@ -2398,8 +2470,8 @@
       }
       \strng{namehash}{60518284f03e8c1ac60e8e4ebd2fb2c9}
       \strng{fullhash}{d2af831ce79d5f4861d1a3049d3935d5}
-      \strng{bibnamehash}{60518284f03e8c1ac60e8e4ebd2fb2c9}
-      \strng{authorbibnamehash}{60518284f03e8c1ac60e8e4ebd2fb2c9}
+      \strng{bibnamehash}{d2af831ce79d5f4861d1a3049d3935d5}
+      \strng{authorbibnamehash}{d2af831ce79d5f4861d1a3049d3935d5}
       \strng{authornamehash}{60518284f03e8c1ac60e8e4ebd2fb2c9}
       \strng{authorfullhash}{d2af831ce79d5f4861d1a3049d3935d5}
       \field{sortinit}{1}
@@ -2609,8 +2681,8 @@
       }
       \strng{namehash}{07cffea7b3e24d86003a05dc73aeb38e}
       \strng{fullhash}{15ad5c4fe6bc76218ae1d511c6f47bc2}
-      \strng{bibnamehash}{07cffea7b3e24d86003a05dc73aeb38e}
-      \strng{authorbibnamehash}{07cffea7b3e24d86003a05dc73aeb38e}
+      \strng{bibnamehash}{15ad5c4fe6bc76218ae1d511c6f47bc2}
+      \strng{authorbibnamehash}{15ad5c4fe6bc76218ae1d511c6f47bc2}
       \strng{authornamehash}{07cffea7b3e24d86003a05dc73aeb38e}
       \strng{authorfullhash}{15ad5c4fe6bc76218ae1d511c6f47bc2}
       \field{sortinit}{2}
@@ -2669,8 +2741,8 @@
       }
       \strng{namehash}{100dd41a7338b19f467349bc100354dc}
       \strng{fullhash}{f8bce737887f49ccf464bc7f09b8e49b}
-      \strng{bibnamehash}{100dd41a7338b19f467349bc100354dc}
-      \strng{authorbibnamehash}{100dd41a7338b19f467349bc100354dc}
+      \strng{bibnamehash}{f8bce737887f49ccf464bc7f09b8e49b}
+      \strng{authorbibnamehash}{f8bce737887f49ccf464bc7f09b8e49b}
       \strng{authornamehash}{100dd41a7338b19f467349bc100354dc}
       \strng{authorfullhash}{f8bce737887f49ccf464bc7f09b8e49b}
       \field{sortinit}{2}

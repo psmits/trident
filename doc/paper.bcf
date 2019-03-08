@@ -91,7 +91,7 @@
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>maxbibnames</bcf:key>
-      <bcf:value>3</bcf:value>
+      <bcf:value>10</bcf:value>
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>maxcitenames</bcf:key>
@@ -1985,9 +1985,12 @@
     <bcf:citekey order="22">dplyr</bcf:citekey>
     <bcf:citekey order="23">purrr</bcf:citekey>
     <bcf:citekey order="24">tidybayes</bcf:citekey>
-    <bcf:citekey order="25">ESL</bcf:citekey>
-    <bcf:citekey order="26">ESL</bcf:citekey>
-    <bcf:citekey order="27">Ezard2011</bcf:citekey>
+    <bcf:citekey order="25">brms2017</bcf:citekey>
+    <bcf:citekey order="25">brms2018</bcf:citekey>
+    <bcf:citekey order="26">StanManual</bcf:citekey>
+    <bcf:citekey order="27">ESL</bcf:citekey>
+    <bcf:citekey order="28">ESL</bcf:citekey>
+    <bcf:citekey order="29">Ezard2011</bcf:citekey>
   </bcf:section>
   <!-- SECTION 0 (cont.) -->
   <bcf:section number="0">
