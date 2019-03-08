@@ -54,10 +54,10 @@
       <file>blx-compat.def</file>
       <file>biblatex.def</file>
       <file>blx-natbib.def</file>
-      <file>authoryear-icomp.bbx</file>
-      <file>authoryear.bbx</file>
+      <file>numeric-comp.bbx</file>
+      <file>numeric.bbx</file>
       <file>standard.bbx</file>
-      <file>authoryear-icomp.cbx</file>
+      <file>numeric-comp.cbx</file>
       <file>biblatex.cfg</file>
       <file>english.lbx</file>
     </requires>
