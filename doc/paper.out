@@ -8,5 +8,8 @@
 \BOOKMARK [2][-]{subsection.3.2}{Cross-validation}{section.3}% 8
 \BOOKMARK [1][-]{section.4}{Discussion}{}% 9
 \BOOKMARK [1][-]{section.5}{Supplementary Material}{}% 10
-\BOOKMARK [2][-]{subsection.5.1}{Model Specifications}{section.5}% 11
-\BOOKMARK [2][-]{subsection.5.2}{Model Parameter Estimation}{section.5}% 12
+\BOOKMARK [2][-]{subsection.5.1}{Data Specifications}{section.5}% 11
+\BOOKMARK [3][-]{subsubsection.5.1.1}{Binning fossil occurrences}{subsection.5.1}% 12
+\BOOKMARK [3][-]{subsubsection.5.1.2}{Covariate transforms and standardizations}{subsection.5.1}% 13
+\BOOKMARK [2][-]{subsection.5.2}{Model Specifications}{section.5}% 14
+\BOOKMARK [2][-]{subsection.5.3}{Model Parameter Estimation}{section.5}% 15
