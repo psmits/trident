@@ -129,7 +129,9 @@ plot_taxon_covariate_time <- function(disc_best) {
     stat_lineribbon(size = 0.5) +
     geom_hline(yintercept = 0, linetype = 'dashed', alpha = 0.5) +
     scale_fill_brewer() +
-    facet_grid(type ~ key, scales = 'free_y')
+    facet_grid(type ~ key, scales = 'free_y') +
+    theme(legend.position = 'bottom') +
+    NULL
   
   out
 }
@@ -230,10 +232,12 @@ plot_taxon_hazard <- function(model) {
     bind_rows %>%
     mutate(effect_prob = invlogit(effect)) %>%  # put on prob scale
     ggplot(aes(x = age, y = effect_prob)) + 
-      stat_lineribbon(size = 0.5) +
-      scale_fill_brewer() +
-      facet_grid(type ~ .) +
-      labs(x = 'Age (My)', y = 'P(T = t | T >= t, x)')
+    stat_lineribbon(size = 0.5) +
+    scale_fill_brewer() +
+    facet_grid(type ~ .) +
+    labs(x = 'Age (My)', y = 'P(T = t | T >= t, x)') +
+    theme(legend.position = 'bottom') +
+    NULL
 
   db
 }
@@ -791,6 +795,7 @@ cv_model_time <- function(fit, .data, key, name, path) {
     stat_lineribbon(aes(x = time, y = value), size = 0.5) +
     scale_fill_brewer() +
     scale_x_reverse(breaks = brks) +
+    theme(legend.position = 'bottom') +
     labs(y = 'AUC', x = 'Time (Mya)') +
     NULL
     #coord_cartesian(ylim = c(0.4, 1), xlim = c(0, 50)) +
@@ -945,6 +950,7 @@ cv_model_taxon_time <- function(fit, .data, key, name, path) {
     scale_fill_brewer() +
     scale_x_reverse(breaks = brks) +
     facet_grid(fossil_group ~ model) +
+    theme(legend.position = 'bottom') +
     labs(x = 'Time (Mya)', y = 'AUC') +
     NULL
   fn <- paste0(path, '/fold_auc_taxon_time_', name, '.png')
