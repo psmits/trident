@@ -1,22 +1,27 @@
+[**Keywords:**]{} conservation, paleobiology, extinction
+
 Introduction
 ============
 
-Being able to predict which species are more likely to go extinct than
-others is critical for making good conservation decisions to limit the
-impact of the current biodiversity crisis. We cannot know, however, we
-do not yet know which species are going to go extinct because this has
-not happened yet – it is unobservable. We approach this this problem by
-analyzing the past in order to predict the future. The fossil record
-preserves past extinction events, allowing us to develop a predictive
-model of species extinction based on this record and the properties of
-the observed species, both extinct and extant
-[@Harnik2012; @Finnegan2015]. By assessing the predictive performance of
-this model on unobserved data, we can quantify how precise our best
+Being able to predict which species are more likely than others to go
+extinct over a given time frame is crucial for planning decisions
+policies to ameliorate the current biodiversity crisis. Some species
+have been the focus of intense study to define short-term (e.g. decadal
+to centennial scale) abundance and geographic range trajectories.
+
+We cannot know, however, we do not yet know which species are going to
+go extinct because this has not happened yet – it is unobservable. We
+approach this this problem by analyzing the past in order to predict the
+future. The fossil record preserves past extinction events, allowing us
+to develop a predictive model of species extinction based on this record
+and the properties of the observed species, both extinct and extant
+[@Harnik2012a; @Finnegan2015]. By assessing the predictive performance
+of this model on unobserved data, we can quantify how precise our best
 estimates will be for future extinctions – we ask the probability that,
 given two random species, we correctly rank their relative risks of
 extinction.
 
-By studying how species vary in their extinction risk over time and we
+Studying how species vary in their extinction risk over time means we
 can assess which species are at greater risk under unobserved
 conditions. We know that a species’ risk of extinction varies over time
 in both intensity (average rate) and selectivity (difference in risk
@@ -40,7 +45,7 @@ on identifying and measuring the effect of various predictors on
 extinction risk
 [@Harnik2011; @Smits2015; @Peters2008; @Payne2007; @Harnik2012; @Ezard2011; @Foote2006]
 or on how to identify or measure these effects
-[@Alroy2010; @Alroy2014; @Alroy2001; @Alroy2000; @Alroy2000b; @Foote2001].
+[@Alroy2010a; @Alroy2014; @Alroy2001; @Alroy2000; @Alroy2000b; @Foote2001].
 This focus means that while we have a good understanding of which
 factors are strong and general determinates of extinction risk, we have
 less knowledge of how accurate or strong our predictions about the
@@ -65,58 +70,29 @@ duration? While the phenomenon of species’ geographic range change over
 time has been studied
 [@Foote2007; @Liow2010; @Liow2007; @Kiessling2013], the potential
 predictive impact of this change has been under-evaluated (but see
-@Kiessling2013). For example, does a species’ extinction risk increase
-if that species decreased in global geographic range size over 1 million
-years? Here, we explicitly model and quantify the effects of changing
+@Kiessling2013). Here, we explicitly estimate the effects of changing
 geographic range as well as differences in global climate on how well we
-can predict species extinction. Similarly, we include species geologic
-age at time of observation as a potential predictor of extinction – a
-factor that may or may not contribute to differences in species
-extinction risk over time
-[@Smits2015; @Finnegan2008; @Ezard2012; @VanValen1973; @Liow2011; @Crampton2016].
-Importantly, the inclusion of these “historical” predictors allows us to
-more fully evaluate the question of how much information about a
-species’ past is necessary or useful when predicting a species’ risk of
-extinction.
+can predict species extinction. Importantly, the inclusion of these
+“historical” predictors allows us to more fully evaluate the question of
+how much information about a species’ past is necessary or useful when
+predicting a species’ risk of extinction.
 
-For this kind of exercise, we chose to analyze what is the longest
-continuous and best resolved fossil record – that of skeletonized marine
-plantonic microorganisms from the Cenozoic such as Foraminifera,
-Radiolarians, Diatoms, and calcareous nannofossils (e.g.
-coccolithophores). This data is available through the Neptune database,
-an online repository of species occurrences obtained through the Deep
-Sea Drilling Program and the Ocean Drilling Project
+For this exercise we chose to analyze one of the best-sampled and
+studied fossil records – the Cenozoic record of skeletonized marine
+planktonic microorganisms F(oraminifera, Radiolaria, Diatoms, and
+Coccolithophores). These data are readily available through the Neptune
+database, an online repository of species occurrences obtained through
+the Deep Sea Drilling Program and the Ocean Drilling Project
 [@Lazarus1994; @SpencerCervato1999]. This database provides abundant
 samples in space and time, a high degree of temporal resolution for the
 entirety of the Cenozoic, and has an internally consistent taxonomic
 identification strategy – as close to ideal data for this analysis as
-possible.
-
-Rarely are we able to analyze long periods of geological time at fine
-resolutions – below the 5-10 My scale. Due to substantial effort and the
-unique biology of the system, the microfossil provides us the unique
-opportunity to analyze ecological and evolutionary patterns at
-approximately million-year time scales. Typical “exceptional” fossil
-records tend to be of individual taxonomic groups and for rarely longer
-than 10 million years. The Neptune database records multiple phyla-scale
-taxonomic groups for over 60 million years, with incredible temporal
-resolution supported by the various age-models of the deep-sea cores the
-occurrences are recorded from – there is no equivalent fossil record. By
-analyzing patterns of extinction and global occurrence at fine temporal
-scales, we can better elucidate how well we can predict species
-extinction at human-relevant scales.
-
-Being able to analyze over 60 million years of fossil occurrences allows
-to actually quantify how accurate our predictions are in general, but
-also how much variation there is in predictive accuracy over time and in
-many different environmental contexts. Specifically, we might expect
-that our model’s predictive performance is best during prolonged periods
-of similar stress, such as the Eocene-Miocene transition [@Zachos2008] –
-more samples from similar environments inherently improves future
-predictions in unobserved, but similar conditions. Alternatively, we
-would expect our model based predictions of extinction surrounding the
-Paleocene-Eocene Thermal Maximum may be less accurate because there are
-inherently fewer samples from the rapid climatic event [@Zachos2008].
+possible. The Neptune database records multiple phyla-scale taxonomic
+groups for over 60 million years, with incredible temporal resolution
+supported by the various age-models of the deep-sea cores from which the
+occurrences are recorded. Analyzing patterns of extinction and global
+occurrence at fine temporal scales means we can better elucidate how
+well we can predict species extinction at human-relevant scales.
 
 Materials and Methods
 =====================
@@ -127,56 +103,20 @@ Data Specifications
 We analyzed microfossil occurrence information which was downloaded from
 the Neptune Database <http://www.nsb-mfn-berlin.de/nannotax>
 [@Lazarus1994; @SpencerCervato1999]. All occurrence information was
-downloaded for calcareous nannofossils, diatoms, foraminifera, and
-radiolarians – these occurrences span the entire globe between 120 and 0
-million years ago (Mya). This dataset of occurrences was then filtered
-to just those species which have their first occurrence at most 63 Mya.
-This choice means that our analysis avoids those taxa which survived the
-K/Pg boundary, those taxa which arose just after the K/Pg boundary, and
-means that our occurrence histories line up with the temperature
-time-series which was used as a predictor of extinction (discussed
-below).
+downloaded for calcareous nannoplankton, diatoms, foraminifera, and
+radiolarians.This dataset of occurrences was then filtered to just those
+species which have their first occurrence at most 63 Mya. This choice
+means that our analysis avoids those taxa which survived the K/Pg
+boundary, those taxa which arose just after the K/Pg boundary, and means
+that our occurrence histories line up with the temperature time-series
+which was used as a predictor of extinction as discussed below.
 
 All fossil occurrences were assigned to 1 My bins based on the estimated
-age of the fossil occurrence. Because the estimated ages of each
-occurrence is a product of core-specific age-models and can be overly
-precise, the hope is that by binning the data this smooths over the
-between-core heterogeneity and thus homogenizes our disparate data
-sources. The occurrence histories of each species were then given binary
-codes used to model the presence or extinction of those species. For
-every occurrence of a species, except the last, that species is
-considered to have survived and was marked with a 0. The last occurrence
-of that species is considered the bin in which the taxon has gone
-extinct – and is assigned a 1. This protocol means that we are reading
-the fossil record “as written,” a practice that is potentially dangerous
-as it is a overconfident statement of preservation and may be shortening
-the actual duration of that species
-[@Alroy2010; @Alroy2000b; @Alroy2014; @Foote1997; @Foote1999a; @Foote2001; @Foote1996e; @Lloyd2012b; @Marshall1995; @Wang2016].
-However, this practice is common with marine microfossil data due to
-their exceptional preservation rate
-[@Ezard2013; @Ezard2016; @Ezard2011; @Liow2010]. In fact, with marine
-microfossils collected from cores a bigger problem may be over extending
-the duration of a species due to mixing and smearing within the cores
-CITATIONS.
-
-A taxon’s geographic range was calculated for each of the 1 My bins in
-which it occurred. Geographic range was calculated as the maximum great
-circle distance on an ellipsoid (i.e. the Earth) between any two
-occurrences of that species; this measure is also called a geodesic.
-This distance was measured in kilometers. Geographic range was then
-log-plus-one transformed, and standardized by zero-centering the data
-and then dividing by the standard deviation of the distribution of
-geographic ranges. This standardization means that the analyzed values
-of geographic range had mean 0 and standard deviation 1. This
-standardization means that a regression coefficient associated with this
-covariate describes the change in extinction probability per change in
-standard deviation of geographic range, that coefficients associated
-with similarly standardized covariates will be directly comparable in
-magnitude, and that the interecpt term corresponds to the expected value
-of the outcome at when geographic range is its average value [@ARM].
-Change in geographic range between observations was measured from the
-transformed and standardized geographic range values and not
-standardized seperately.
+age of the fossil occurrence. After binning, each taxon’s geographic
+range was calculated for each of the 1 My bins in which it occurred.
+Geographic range was calculated as the maximum great circle distance on
+an ellipsoid (i.e. the Earth) between any two occurrences of that
+species; this distance was measured in kilometers.
 
 Temperature data used as covariates in this analysis are based on
 Magnesium/Calcium isotope ratios sourced from @Cramer2011. These
@@ -191,10 +131,10 @@ ice-caps develop midway through the Cenozoic. Our data source,
 63 Mya. We binned these estimates into 1 My intervals as we did with the
 fossil occurrences. The temperature estimate for each 1 My interval was
 calculated as the mean of all estimates within that interval.
-Temperature was then transformed and standardized the in the same manner
-as geographic range (above). Difference in temperature between between
-observations was measured from the transformed and standardized
-temperature values and not standardized seperately.
+
+See Section \[sec:data\_desc\] for a further explanation on how
+observations were temporally binned and how our covariates were
+standardized and transformed prior to analysis.
 
 Model Specifications
 --------------------
@@ -213,6 +153,14 @@ from each other. For a complete description of the statistical model
 used in this analysis, please see Section \[sec:model\_desc\]. For a
 description of how our models were implemented, please see Section
 \[sec:model\_est\].
+
+Importantly, we include species geologic age at time of observation as a
+non-nested varying intercept term. This factor may or may not contribute
+to differences in species extinction risk over time
+[@Smits2015; @Finnegan2008; @Ezard2012; @VanValen1973; @Liow2011; @Crampton2016],
+but its inclusion in our model is critical to its nature as a survival
+model [@Tutz2016]. Again, see Section \[sec:model\_desc\] for how this
+term was specified as part of our model.
 
   Code   Description                            Covariates   R Formula Syntax
   ------ -------------------------------------- ------------ ------------------
@@ -234,7 +182,7 @@ Global temperature in degrees C. Mean centered, scaled to sd = 1.
 Species are at observation in millions of years.
 
 Taxonomic group of species (i.e. Foraminifera, Diatoms, Radiolarians,
-Calcaeous nannoplankton).
+Calcareous nannoplankton).
 
 Change in geographic range since last observation.
 
@@ -245,31 +193,12 @@ Temperature at previous observation.
 Model adequacy
 --------------
 
-We are interested in model adequacy and performance into two contexts:
-in-sample and out-of-sample predictive performance. “In-sample” means we
-are estimating how well our model predicts our observed data given that
-the model was fit to the entire dataset; this is a posterior predictive
-check in that we are comparing the posterior predictive distribution to
-our observed data. “Out-of-sample” is defined below.
-
-Relative and absolute model adequacy of the four variant models was
-compared using the area under the receiver operating characteristic
-curve or AUC [@Fawcett2006; @Mason2002]. This measure is commonly used
-in classification problems as it has the desirable characteristic of
-comparing the model’s true positive rate with its false positive rate,
-as opposed to accuracy which only considers the count of true positives.
-AUC ranges between 0.5 and 1, with 0.5 indicating no improvement in
-performance from random and 1 indicating perfect performance. AUC can be
-interpreted as the probability that our model correctly ranks the
-relative extinction risks of any two randomly selected species
-[@Fawcett2006; @Mason2002].
-
-The differences in in-sample predictive performance between the models
-was visualized in multiple ways: whole data set by model, taxonomic
-group by model, model performance over time, and model performance by
-taxonomic groups over time. These comparisons demonstrate the relative
-and absolute adequacy of the models in describing the dataset they were
-fit to.
+We are interested in model adequacy into two contexts: in-sample and
+out-of-sample predictive performance. In-sample means we are estimating
+how well our model predicts our observed data given that the model was
+fit to the entire dataset; this is a posterior predictive check in that
+we are comparing the posterior predictive distribution to our observed
+data. Out-of-sample is defined in context below.
 
 We are particularly interested in understanding how well our model
 predicts species extinction given new, future data (out-of-sample data).
@@ -285,11 +214,27 @@ from the subsequent fold. With 63 time points, each of the five folds
 represents approximately 13 time points. Keep in mind, however, that
 each time point corresponds to many (100-1000) individual observations.
 
-See our code repository LINK for full code details. Our code uses
-“tidyverse” tools such as `dplyr` [@dplyr], `purr` [@purrr], and
-`tidybayes` [@tidybayes], thus some familiarity with that package
-ecosystem is necessary to fully comprehend how we’ve processed our data
-and results.
+Relative and absolute model adequacy of the four variant models was
+compared using the area under the receiver operating characteristic
+curve or AUC [@Fawcett2006; @Mason2002]. This measure is commonly used
+in classification problems as it has the desirable characteristic of
+comparing the model’s true positive rate with its false positive rate,
+as opposed to accuracy which only considers the count of true positives.
+AUC ranges between 0.5 and 1, with 0.5 indicating no improvement in
+performance from random and 1 indicating perfect performance. AUC can be
+interpreted as the probability that our model correctly ranks the
+relative extinction risks of any two randomly selected species
+[@Fawcett2006; @Mason2002]. AUC values of approximately 0.8 or greater
+can be considered “good” [@ACCDA], which means that values between 0.7
+and 0.8 could then be considered “fair.”
+
+See our code repository at https://github.com/psmits/trident for full
+code details. The entire analysis was coded in R and uses
+tidyverse-style tools such as `dplyr` [@dplyr], and `purr` [@purrr], and
+`tidybayes` [@tidybayes]. Additionally, all of our models were written
+using the `brms` [@brms2017; @brms2018] R package, which implements
+Stan-based Bayesian models which are fit via Hamiltonian Monte Carlo
+[@StanManual].
 
 Results
 =======
@@ -329,9 +274,9 @@ while our parameter rich model VP is possibly the most adequately
 performing model, the difference or improvement to performance is
 minimal at best – all four models have approximately equal in-sample AUC
 posterior distributions. All of the in-sample AUC estimates from our
-models are concentrated around an AUC of 0.77 which is interpreted as
-“fine but not good” performance. It is then hard to conclude that there
-is one “best” model which we can rely upon.
+models are concentrated around an AUC of 0.77. It is therefore hard to
+conclude that there is one “best” model which we can rely upon as they
+are all nearly functional equivalent.
 
 For many taxon/model combinations there are one or more time periods
 where posterior predictive in-sample AUC has a median value less than or
@@ -358,19 +303,17 @@ Cross-validation
 ----------------
 
 Expected out-of-sample predictive performance was estimated using
-five-fold cross-validation, modified for time series data [@ESL]. This
-procedure yields four posterior (predictive) distributions, each
-corresponding to AUC values calculated from model-based predictions
-compared to the extinction state of the hold-out data. These four
-posterior predictive distributions are pooled to yield a posterior
-predictive distribution of expected out-of-sample performance – the
-resulting distributions tend to be very multimodal due to their very
-nature being fit to and estimated from different data sets and amounts
-of data [@ESL]. Additionally, multimodality increases with model
-complexity (Fig. \[fig:fold\_auc\]) – this makes sense as the more
-complex models allow for predictor effects to vary with time, allowing
-for a greater range in possible parameter values which in turn yield a
-greater range of posterior predictions.
+five-fold cross-validation [@ESL]. This procedure yields four posterior
+(predictive) distributions, each corresponding to AUC values calculated
+from model-based predictions compared to the extinction state of the
+hold-out data. The resulting distribution when all folds are combined is
+very multimodal by their very nature of being fit to and estimated from
+different data sets and amounts of data [@ESL]. We find the visual
+degree of this multimodality increases with model complexity (Fig.
+\[fig:fold\_auc\]), most likely because the complex models allow for
+predictor effects to vary with time which allows for a greater range in
+possible parameter values which in turn yield a greater range of
+posterior predictions.
 
 Comparison between the posterior predictive distributions of expected
 out-of-sample AUC (Fig. \[fig:fold\_auc\]) reveals a similar range in
@@ -386,15 +329,6 @@ in-sample AUC. However, the shapes of the posterior distributions means
 interepting from the median values is incorrect – the models are
 effectively indistinguishable in their expected out-of-sample AUC
 values.
-
-Additionally, the quality of expected out-of-sample performance is not
-great, with average out-of-sample AUC for each of our models estimated
-to be between 0.7 and 0.8 which is far from perfect. This result means
-that we would expect to correctly rank two species in order of most to
-least likely to go extinct 70-80% of the time. However, this expected
-out-of-sample performance is approximately the same as the in-sample
-performance results (Fig. \[fig:auc\_hist\]), indicating that our models
-would yield consistent results when generalized to future extinctions.
 
 We can also compare the posterior predictive distribution of expected
 out-of-sample AUC over time and taxonomic group for each of the four
@@ -461,20 +395,8 @@ performance compared to the other models is virtually negligible (Fig.
 *statistically* greater AUC than the other three models, this result is
 not practically or *scientifically* significant.
 
-This result is an important reminder about understanding the practical
-interpretation of our analyses, which can be lost when we do not
-consider the predictive aspects of our analyses. By focusing on
-determining which covariates are “significant” and which model is best
-through simple comparisons means that the practical importance of the
-results are ignored. For example, in logistic regression a covariate can
-be considered significant on the log-odds scale but have no practical
-difference on the probability scale because the range of values is too
-small as to matter such as when the intercept is greater than 2 or less
-than -2 because the inverse-logit of those values are close to 0 or 1,
-respectively [@ARM].
-
-The success of model is partially driven by the size of our dataset and
-the hierarchical structure of our model. Our estimates are based on
+The success of our models is partially driven by the size of our dataset
+and the hierarchical structure of our model. Our estimates are based on
 rather limited information about the taxa themselves, and our model only
 takes into account some aspects of species geographic range and their
 rough taxonomic grouping. Instead of relying on large amounts of
@@ -495,16 +417,6 @@ taxonomic subset of the fossil occurrences present the Neptune Database
 and then only a limited selection of those species. This means ignoring
 the majority of occurrence information present in the Neptune database.
 
-This presents an interesting conundrum about how to improve upon our
-results. A simple hypothesis for how to improve upon our results is that
-if we were to include more biological information in our model, our
-estimates of species relative extinction risk would be improved.
-However, if we decrease the amount of data in our model, our results by
-definition decrease in their quality. For example, compare the results
-from our models fit using full in-sample dataset, and the results from
-the cross-validation where the fit to each fold is by definition based
-on less than full information.)
-
 In conclusion, our results provide a promising picture of our ability to
 predict the relative extinction risk of two randomly selected species.
 Considering that conservation decisions are made based on a continuum of
@@ -513,6 +425,51 @@ language as how conservation resources are allocated.
 
 Supplementary Material
 ======================
+
+Data Specifications {#sec:data_desc}
+-------------------
+
+### Binning fossil occurrences
+
+Because the estimated ages of each occurrence is a product of
+core-specific age-models and can be overly precise, the hope is that by
+binning the data this smooths over the between-core heterogeneity and
+thus homogenizes our disparate data sources. The occurrence histories of
+each species were then given binary codes used to model the presence or
+extinction of those species. For every occurrence of a species, except
+the last, that species is considered to have survived and was marked
+with a 0. The last occurrence of that species is considered the bin in
+which the taxon has gone extinct – and is assigned a 1. This protocol
+means that we are reading the fossil record “as written,” a practice
+that is potentially dangerous as it is a overconfident statement of
+preservation and may be shortening the actual duration of that species
+[@Alroy2010; @Alroy2000b; @Alroy2014; @Foote1997; @Foote1999a; @Foote2001; @Foote1996e; @Lloyd2012b; @Marshall1995; @Wang2016].
+However, this practice is common with marine microfossil data due to
+their exceptional preservation rate
+[@Ezard2013; @Ezard2016; @Ezard2011; @Liow2010]. In fact, with marine
+microfossils collected from cores a bigger problem may be over extending
+the duration of a species due to mixing and smearing within the cores
+CITATIONS.
+
+### Covariate transforms and standardizations {#sec:data_trans}
+
+Prior to analysis, geographic range was then log-plus-one transformed
+and standardized by mean-centering the data and then dividing by the
+standard deviation of the distribution of geographic ranges. This
+standardization means that a regression coefficient associated with this
+covariate describes the change in extinction probability per change in
+standard deviation of geographic range, that coefficients associated
+with similarly standardized covariates will be directly comparable in
+magnitude, and that the intercept term corresponds to the expected value
+of the outcome at when geographic range is its average value [@ARM].
+Change in geographic range between observations was measured from the
+standardized geographic range values and was not standardized
+separately.
+
+Temperature was also transformed and standardized the in the same manner
+as geographic range. Difference in temperature between between
+observations was measured from the standardized temperature values and
+was not standardized separately.
 
 Model Specifications {#sec:model_desc}
 --------------------
