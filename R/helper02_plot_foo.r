@@ -617,7 +617,6 @@ p_model_taxon <- function(fit_list, .data, key, name, path) {
 #' This function is only called for its side effects!
 #'
 #' @param fit_list list of model fits
-#' @param fit_list list of model fits
 #' @param .data tibble of neptune data
 #' @param key vector of model names
 #' @param name character length 1 vector describing data
@@ -625,44 +624,8 @@ p_model_taxon <- function(fit_list, .data, key, name, path) {
 #' @return NULL
 p_model_taxon_time <- function(fit_list, .data, key, name, path) {
   # posterior probability of observation surviving
-  pp_prob <- future_map(fit_list, 
-                        ~ posterior_linpred(.x, transform = TRUE, draws = 100))
 
-  # taxon and time
-  bysplit <- .data %>%
-    dplyr::select(mybin, fossil_group, event) %>%
-    mutate(type = paste0(fossil_group, ':', mybin)) # makes my life easier
-  
-  bb <- split(bysplit, bysplit$type)
-  
-  tt <- map(pp_prob, ~ as_tibble(t(.x)) %>%
-            split(., bysplit$type))
-  
-  safe_roc <- safely(roc)
-  safe_auc <- safely(auc)
-  foo <- function(event, prob) {
-    safe_auc(safe_roc(event, prob)$result)
-  }
-  split_auc <- map(tt, function(x) 
-                   map2(x, bb, ~ apply(.x, 2, function(a)  
-                                       foo(.y$event, a)))) %>%
-    map(., ~ map(.x, ~ reduce(map(.x, 'result'), c)))
-  
-  
-  auc_taxon_time <- map(split_auc, function(x) map(x, ~ as_tibble(x = .x)))%>%
-    map(., ~ bind_rows(.x, .id = 'phyla_time')) %>%
-    bind_rows(., .id = 'model') %>%
-    separate(., col = phyla_time, into = c('phyla', 'time'), sep = ':') %>%
-    mutate(time = as.numeric(time),
-           fossil_group = case_when(phyla == 'D' ~ 'Dinoflagellates',
-                                    phyla == 'R' ~ 'Radiolaria',
-                                    phyla == 'F' ~ 'Foraminifera',
-                                    phyla == 'N' ~ 'Calc. nanno.'),
-           model = case_when(model == 1 ~ key[1],
-                             model == 2 ~ key[2],
-                             model == 3 ~ key[3],
-                             model == 4 ~ key[4]),
-           model = factor(model, levels = rev(key)))
+  auc_taxon_time <- ins_roc_taxon_time(fit_list, .data, key)
   
   rects <- get_geotime_box(range(auc_taxon_time$time))
   
@@ -885,53 +848,8 @@ cv_model_taxon <- function(fit, .data, key, name, path) {
 #' @param path character length 1 vector describing directory to drop figures into -- needs trailing slash!
 #' @return NULL
 cv_model_taxon_time <- function(fit, .data, key, name, path) {
-  # predict the test data
-  pred <- get_pred(fit, .data)
 
-  # break up the posterior predictive estimates by taxon and time
-  # break up the data to match nicely
-  
-  # prepare the data in format
-  bysplit <- .data %>%
-    map(., 
-        ~ .x %>%
-          dplyr::select(mybin, fossil_group, event) %>%
-          mutate(type = paste0(fossil_group, ':', mybin)))
-  bb <- bysplit %>%
-    map(., ~ split(.x, .x$type))         # by taxon and time
-  
-  # break up probs
-  tt <- map(pred, ~ as_tibble(t(.x))) %>%
-    map2(., bysplit, ~ split(.x, .y$type))  
-  
-  
-  # calculate auc for each taxonXtime combo
-  safe_roc <- safely(roc)
-  safe_auc <- safely(auc)
-  foo <- function(event, prob) {
-    safe_auc(safe_roc(event, prob)$result)
-  }
-  split_auc <- map2(tt, bb, function(xx, yy)
-                    map2(xx, yy, ~ apply(.x, 2, function(aa)
-                                         foo(.y$event, aa)))) %>%
-    map(., ~ map(.x, ~ reduce(map(.x, 'result'), c)))
-  
-  # recombine and plot
-  fold_auc_taxon_time <- map(split_auc, function(x) map(x, ~ as_tibble(x = .x))) %>%
-    map(., ~ bind_rows(.x, .id = 'phyla_time')) %>%
-    bind_rows(., .id = 'model') %>%
-    separate(., col = phyla_time, into = c('phyla', 'time'), sep = ':') %>%
-    separate(., col = model, into = c('model', 'fold'), sep = '_') %>%
-    mutate(time = as.numeric(time),
-           fossil_group = case_when(phyla == 'D' ~ 'Dinoflagellates',
-                                    phyla == 'R' ~ 'Radiolaria',
-                                    phyla == 'F' ~ 'Foraminifera',
-                                    phyla == 'N' ~ 'Calc. nanno.'),
-           model = case_when(model == 'mod1' ~ key[1],
-                             model == 'mod2' ~ key[2],
-                             model == 'mod3' ~ key[3],
-                             model == 'mod4' ~ key[4]),
-           model = factor(model, levels = rev(key)))
+  fold_auc_taxon_time <- oos_roc_taxon_time(fit, .data, key)
   
   rects <- get_geotime_box(range(fold_auc_taxon_time$time))
  
