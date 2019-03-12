@@ -637,7 +637,6 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{The fossil record demonstrates that each major taxonomic group has a consistent net rate of diversification and a limit to its species richness. It has been thought that long-term changes in the dominance of major taxonomic groups can be predicted from these characteristics. However, new analyses show that diversity limits may rise or fall in response to adaptive radiations or extinctions. These changes are idiosyncratic and occur at different times in each taxa. For example, the end-Permian mass extinction permanently reduced the diversity of important, previously dominant groups such as brachiopods and crinoids. The current global crisis may therefore permanently alter the biosphere's taxonomic composition by changing the rules of evolution.}
-      \field{eprinttype}{arXiv}
       \field{isbn}{1095-9203 (Electronic)$\backslash$r0036-8075 (Linking)}
       \field{issn}{0036-8075}
       \field{journaltitle}{Science}
@@ -649,9 +648,6 @@
       \range{pages}{4}
       \verb{doi}
       \verb 10.1126/science.1189910
-      \endverb
-      \verb{eprint}
-      \verb arXiv:1011.1669v3
       \endverb
       \verb{file}
       \verb :home/peter/Documents/Mendeley Desktop/Alroy/Science/Alroy - 2010 - Science.pdf:pdf
@@ -1009,40 +1005,6 @@
       \verb :home/peter/Documents/Mendeley Desktop/Foote/Paleobiology/Foote - 2001 - Paleobiology.pdf:pdf
       \endverb
     \endentry
-    \entry{ARM}{book}{}
-      \name{author}{2}{}{%
-        {{uniquename=0,uniquepart=base,hash=1e1eb60e3b6e222217bf8e9b24070b28}{%
-           family={Gelman},
-           familyi={G\bibinitperiod},
-           given={Andrew},
-           giveni={A\bibinitperiod},
-           givenun=0}}%
-        {{uniquename=0,uniquepart=base,hash=1fd6540b91678ae8d3f51574305d2455}{%
-           family={Hill},
-           familyi={H\bibinitperiod},
-           given={Jennifer},
-           giveni={J\bibinitperiod},
-           givenun=0}}%
-      }
-      \list{location}{1}{%
-        {Cambridge}%
-      }
-      \list{publisher}{1}{%
-        {Cambridge University Press}%
-      }
-      \strng{namehash}{602df721bcd10fe1eca95cb5554d134b}
-      \strng{fullhash}{602df721bcd10fe1eca95cb5554d134b}
-      \strng{bibnamehash}{602df721bcd10fe1eca95cb5554d134b}
-      \strng{authorbibnamehash}{602df721bcd10fe1eca95cb5554d134b}
-      \strng{authornamehash}{602df721bcd10fe1eca95cb5554d134b}
-      \strng{authorfullhash}{602df721bcd10fe1eca95cb5554d134b}
-      \field{sortinit}{5}
-      \field{sortinithash}{3c19c3776b658b3558e9e2e4840c01e2}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{{Data Analysis Using Regression and Multilevel/Hierarchical Models}}
-      \field{year}{2006}
-    \endentry
     \entry{Foote2007}{article}{}
       \name{author}{1}{}{%
         {{uniquename=0,uniquepart=base,hash=ab99be064192f9409924032ef936a04f}{%
@@ -1058,8 +1020,8 @@
       \strng{authorbibnamehash}{ab99be064192f9409924032ef936a04f}
       \strng{authornamehash}{ab99be064192f9409924032ef936a04f}
       \strng{authorfullhash}{ab99be064192f9409924032ef936a04f}
-      \field{sortinit}{6}
-      \field{sortinithash}{57e57fb8451e7fcfa45d1e069f6d3136}
+      \field{sortinit}{5}
+      \field{sortinithash}{3c19c3776b658b3558e9e2e4840c01e2}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Occurrence data from the Paleobiology Database are used to analyze the waxing and waning of genera over time. Irrespective of whether we tabulate species richness, frequency of occurrence, geographic range, or other measures, the average rise and fall of genera is remarkably symmetrical. Genera tend already to be in a state of decline when they become extinct. Genera that last appear in the major mass extinction stages, however, are more frequently truncated while they are holding steady or even increasing. This need not imply that mass extinctions are qualitatively different from other events; it is consistent with the expected effects of simply increasing the magnitude of extinction. For reasons that are not completely clear, post-Paleozoic genera show less of a rise and fall on average and tend to be less symmetrical than do Paleozoic genera.}
@@ -1113,8 +1075,8 @@
       \strng{authorbibnamehash}{f8bce737887f49ccf464bc7f09b8e49b}
       \strng{authornamehash}{100dd41a7338b19f467349bc100354dc}
       \strng{authorfullhash}{f8bce737887f49ccf464bc7f09b8e49b}
-      \field{sortinit}{6}
-      \field{sortinithash}{57e57fb8451e7fcfa45d1e069f6d3136}
+      \field{sortinit}{5}
+      \field{sortinithash}{3c19c3776b658b3558e9e2e4840c01e2}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Species arise and establish themselves over the geologic time scale. This process is manifested as a change in the relative frequency of occurrences of a given species in the global pool of species. Our main goal here is to model this rise and the eventual decline of microfossil species using a mixed-effects model where groups each have a characteristic occurrence trajectory (main effects) and each species belonging to those groups is allowed to deviate from the given group trajectory (random effects). Our model can be described as a {$\quotesinglbase$}{\"{A}}{\'{u}}hat{$\quotesinglbase$}{\"{A}}{\`{u}} with logistic forms in the periods of increase and decline. Using the estimated timings of rises and falls, we find that the lengths of the periods of rise are about as long as the lengths of the periods when species are above 50{\%} of their estimated maximal occurrences. These latter periods are here termed periods of dominance, which are in turn about the same length as the species' periods of fall. The peak rates of the rises of microfossils are in general faster than their peak rates of falls. These quantified observations may have broad macroevolutionary and macroecological implications. Further, we hypothesize that species that have experienced and survived high levels of environmental volatility (specifically, periods of greater than average variation in temperature and productivity) during their formative periods should have longer periods of dominance. This is because subsequent environmental variations should not drive them to decline with ease. We find that higher estimated environmental volatility early in the life of a species positively correlates with lengths of periods of dominance, given that a species survives the initial stress of the environmental fluctuations. However, we find no evidence that the steepness of the rise of a species is affected by environmental volatility in the early phases of its life.}
@@ -1155,8 +1117,8 @@
       \strng{authorbibnamehash}{ddb7d7d11bae02691c90c00376557f65}
       \strng{authornamehash}{ddb7d7d11bae02691c90c00376557f65}
       \strng{authorfullhash}{ddb7d7d11bae02691c90c00376557f65}
-      \field{sortinit}{6}
-      \field{sortinithash}{57e57fb8451e7fcfa45d1e069f6d3136}
+      \field{sortinit}{5}
+      \field{sortinithash}{3c19c3776b658b3558e9e2e4840c01e2}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Knowing the geographic extents of species is crucial for understanding the causes of diversity distributions and modes of speciation and extinction. Species geographic ranges are often viewed as approximately constant in size in geological time, even though climate change studies have shown that historical and modern species geographic distributions are not static. Here, we use an extensive global microfossil database to explore the temporal trajectories of geographic extents over the entire lifespan of marine nannoplankton, diatom, planktic foraminifer and radiolarian species. We show that geographic extents are not static over geological time-scales. Temporal trajectories of species geographic ranges are asymmetric: the rise is quicker than the fall. We propose that once a species has overcome its initial difficulties in geographic establishment, it rises to its peak geographic extent. However, once this peak value is reached, it will also have a maximal number of species to interact with. The negative of these biotic interactions could then cause a gradual geographic decline. We discuss the multiple implications of our findings with reference to macroecological and macroevolutionary studies.}
@@ -1204,8 +1166,8 @@
       \strng{authorbibnamehash}{f53cea13aeb68f0799e6803f4d69de93}
       \strng{authornamehash}{f53cea13aeb68f0799e6803f4d69de93}
       \strng{authorfullhash}{f53cea13aeb68f0799e6803f4d69de93}
-      \field{sortinit}{6}
-      \field{sortinithash}{57e57fb8451e7fcfa45d1e069f6d3136}
+      \field{sortinit}{5}
+      \field{sortinithash}{3c19c3776b658b3558e9e2e4840c01e2}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Besides helping to identify species traits that are commonly linked to extinction risk, the fossil record may also be directly relevant for assessing the extinction risk of extant species. Standing geographical distribution or occupancy is a strong predictor of both recent and past extinction risk, but the role of changes in occupancy is less widely assessed. Here we demonstrate, based on the Cenozoic fossil record of marine species, that both occupancy and its temporal trajectory are significant determinants of risk. Based on extinct species we develop a model on the additive and interacting effects of occupancy and its temporal changes on extinction risk. We use this model to predict extinction risk of extant species. The predictions suggest a moderate risk for marine species on average. However, some species seem to be on a long-term decline and potentially at a latent extinction risk, which is not considered in current risk assessments.}
@@ -1252,8 +1214,8 @@
       \strng{authorbibnamehash}{301e07f50cf094b5c009f1118b7aa351}
       \strng{authornamehash}{301e07f50cf094b5c009f1118b7aa351}
       \strng{authorfullhash}{301e07f50cf094b5c009f1118b7aa351}
-      \field{sortinit}{7}
-      \field{sortinithash}{c818dd9105a2852444fc9f5e145c294e}
+      \field{sortinit}{6}
+      \field{sortinithash}{57e57fb8451e7fcfa45d1e069f6d3136}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{The notion of a positive relation between geographical range and speciation rate or speciation probability may go back to Darwin, but a negative relation between these parameters is equally plausible. Here, we test these alternatives in fossil and living molluscan taxa. Late Cretaceous gastropod genera exhibit a strong negative relation between the geographical ranges of constituent species and speciation rate per species per million years; this result is robust to sampling biases against small-bodied taxa and is not attributable to phylogenetic effects. They also exhibit weak inverse or non-significant relations between geographical range and (i) the total number of species produced over the 18 million year timeframe, and (ii) the number of species in a single timeplane. Sister-group comparisons using extant molluscan species also show a non-significant relation between median geographical range and species richness of genera. These results support the view that the factors promoting broad geographical ranges also tend to damp speciation rates. They also demonstrate that a strong inverse relation between per-species speciation rate and geographical range need not be reflected in analyses conducted within a single timeplane, underscoring the inadequacy of treating net speciation as a proxy for raw per-taxon rates.}
@@ -1295,8 +1257,8 @@
       \strng{authorbibnamehash}{9fe0d8e7cb3ea42ff56b12c847ffb968}
       \strng{authornamehash}{9fe0d8e7cb3ea42ff56b12c847ffb968}
       \strng{authorfullhash}{9fe0d8e7cb3ea42ff56b12c847ffb968}
-      \field{sortinit}{7}
-      \field{sortinithash}{c818dd9105a2852444fc9f5e145c294e}
+      \field{sortinit}{6}
+      \field{sortinithash}{57e57fb8451e7fcfa45d1e069f6d3136}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Species selection in the broad sense---also termed species sorting---shapes evolutionary patterns through differences in speciation and extinction rates (and their net outcome, often termed the emergent fitness of clades) that arise by interaction of intrinsic biological traits with the environment. Effect-macroevolution occurs when those biotic traits, such as body size or fecundity, reside at the organismic level. Strict-sense species selection occurs when those traits are emergent at the species level, such as geographic range or population size. The fields of paleontology, comparative phylogenetic analysis, macroecology, and conservation biology are rich in examples of species sorting, but relatively few instances have been well documented, so the extent and efficacy of the specific processes remain poorly known. A general formalization of these processes remains challenging, but approaches drawing on hierarchical covariance models appear promising. Analyses integrating paleontological and neontological d...}
@@ -1344,8 +1306,8 @@
       \strng{authorbibnamehash}{8b207d0fb9f9283b1fa89915e5ecfb40}
       \strng{authornamehash}{8b207d0fb9f9283b1fa89915e5ecfb40}
       \strng{authorfullhash}{8b207d0fb9f9283b1fa89915e5ecfb40}
-      \field{sortinit}{7}
-      \field{sortinithash}{c818dd9105a2852444fc9f5e145c294e}
+      \field{sortinit}{6}
+      \field{sortinithash}{57e57fb8451e7fcfa45d1e069f6d3136}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{The observation that geographic range size in Cretaceous mollusks is correlated with species survivorship and is heritable at the species level has figured repeatedly in discussions of species selection over the past two decades. However, some authors have suggested that the relationship between mode of larval development and geographic range supports the reduction of this example to selection on organismic properties. Our reanalysis of Jablonski's work on heritability at the species level finds that geographic range is significantly heritable (using a randomization test) in both bivalves and gastropods, even within a single larval mode. Further, generalized linear models show that geographic range size is more important than larval mode in predicting extinction probability in both gastropods and bivalves. These results reaffirm the role and heritability of geographic range as a species-level property that can promote species selection; the model-based approach applied here may help to operationalize "screening off " and related approaches to evaluating hierarchical explanations in evolution.}
@@ -1817,6 +1779,113 @@
       \verb{doi}
       \verb 10.1007/978-3-319-28158-2
       \endverb
+    \endentry
+    \entry{Arlot2010}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,uniquepart=base,hash=f536a5b1bc63890da21d6091897b1cad}{%
+           family={Arlot},
+           familyi={A\bibinitperiod},
+           given={Sylvain},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=3250ac136af0d1776387e11bb5155201}{%
+           family={Celisse},
+           familyi={C\bibinitperiod},
+           given={Alain},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{0007c88a802241e561514e407cb6dc92}
+      \strng{fullhash}{0007c88a802241e561514e407cb6dc92}
+      \strng{bibnamehash}{0007c88a802241e561514e407cb6dc92}
+      \strng{authorbibnamehash}{0007c88a802241e561514e407cb6dc92}
+      \strng{authornamehash}{0007c88a802241e561514e407cb6dc92}
+      \strng{authorfullhash}{0007c88a802241e561514e407cb6dc92}
+      \field{sortinit}{1}
+      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Used to estimate the risk of an estimator or to perform model selection, cross-validation is a widespread strategy because of its simplicity and its apparent universality. Many results exist on the model selection performances of cross-validation procedures. This survey intends to relate these results to the most recent advances of model selection theory, with a particular emphasis on distinguishing empirical statements from rigorous theoretical results. As a conclusion, guidelines are provided for choosing the best cross-validation procedure according to the particular features of the problem in hand.}
+      \field{eprinttype}{arXiv}
+      \field{isbn}{1935-7516}
+      \field{issn}{1935-7516}
+      \field{title}{{A survey of cross-validation procedures for model selection}}
+      \field{volume}{4}
+      \field{year}{2009}
+      \field{pages}{40\bibrangedash 79}
+      \range{pages}{40}
+      \verb{doi}
+      \verb 10.1214/09-SS054
+      \endverb
+      \verb{eprint}
+      \verb 0907.4728
+      \endverb
+      \verb{file}
+      \verb :home/peter/Documents/Mendeley Desktop/Arlot, Celisse/Unknown/Arlot, Celisse - 2009 - Unknown.pdf:pdf
+      \endverb
+      \verb{urlraw}
+      \verb http://arxiv.org/abs/0907.4728{\%}0Ahttp://dx.doi.org/10.1214/09-SS054
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/0907.4728%7B%5C%%7D0Ahttp://dx.doi.org/10.1214/09-SS054
+      \endverb
+      \keyw{and phrases,cross-validation,leave-one-out,model selection}
+    \endentry
+    \entry{Bergmeir2016}{article}{}
+      \name{author}{3}{}{%
+        {{uniquename=0,uniquepart=base,hash=fb7be81f0574878d688bb03f0abb8502}{%
+           family={Bergmeir},
+           familyi={B\bibinitperiod},
+           given={Christoph},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=a3ecf7dc6730e4e8fc15fcbf9e002e55}{%
+           family={Hyndman},
+           familyi={H\bibinitperiod},
+           given={Rob\bibnamedelima J.},
+           giveni={R\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=456c64a747ca43a27b2b0588e019452d}{%
+           family={Koo},
+           familyi={K\bibinitperiod},
+           given={Bonsoo},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier B.V.}%
+      }
+      \strng{namehash}{f090b846f5e026e09fa5a92d22317998}
+      \strng{fullhash}{f090b846f5e026e09fa5a92d22317998}
+      \strng{bibnamehash}{f090b846f5e026e09fa5a92d22317998}
+      \strng{authorbibnamehash}{f090b846f5e026e09fa5a92d22317998}
+      \strng{authornamehash}{f090b846f5e026e09fa5a92d22317998}
+      \strng{authorfullhash}{f090b846f5e026e09fa5a92d22317998}
+      \field{sortinit}{1}
+      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{One of the most widely used standard procedures for model evaluation in classification and regression is K-fold cross-validation (CV). However, when it comes to time series forecasting, because of the inherent serial correlation and potential non-stationarity of the data, its application is not straightforward and often replaced by practitioners in favour of an out-of-sample (OOS) evaluation. It is shown that for purely autoregressive models, the use of standard K-fold CV is possible provided the models considered have uncorrelated errors. Such a setup occurs, for example, when the models nest a more appropriate model. This is very common when Machine Learning methods are used for prediction, and where CV can control for overfitting the data. Theoretical insights supporting these arguments are presented, along with a simulation study and a real-world example. It is shown empirically that K-fold CV performs favourably compared to both OOS evaluation and other time-series-specific techniques such as non-dependent cross-validation.}
+      \field{issn}{01679473}
+      \field{journaltitle}{Computational Statistics and Data Analysis}
+      \field{title}{{A note on the validity of cross-validation for evaluating autoregressive time series prediction}}
+      \field{volume}{120}
+      \field{year}{2018}
+      \field{pages}{70\bibrangedash 83}
+      \range{pages}{14}
+      \verb{doi}
+      \verb 10.1016/j.csda.2017.11.003
+      \endverb
+      \verb{file}
+      \verb :home/peter/Documents/Mendeley Desktop/Bergmeir, Hyndman, Koo/Computational Statistics and Data Analysis/Bergmeir, Hyndman, Koo - 2018 - Computational Statistics and Data Analysis.pdf:pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1016/j.csda.2017.11.003
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1016/j.csda.2017.11.003
+      \endverb
+      \keyw{Autoregression,Cross-validation,Time series}
     \endentry
     \entry{Fawcett2006}{article}{}
       \name{author}{1}{}{%

@@ -2,12 +2,12 @@
 \BOOKMARK [1][-]{section.2}{Materials and Methods}{}% 2
 \BOOKMARK [2][-]{subsection.2.1}{Data Specifications}{section.2}% 3
 \BOOKMARK [2][-]{subsection.2.2}{Model Specifications}{section.2}% 4
-\BOOKMARK [2][-]{subsection.2.3}{Model adequacy}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.3}{In-sample and out-of-sample forecasting}{section.2}% 5
 \BOOKMARK [1][-]{section.3}{Results}{}% 6
-\BOOKMARK [2][-]{subsection.3.1}{Model adequacy}{section.3}% 7
-\BOOKMARK [2][-]{subsection.3.2}{Cross-validation}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.1}{In-sample forecasting adequacy}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.2}{Out-of-sample forecasting performance}{section.3}% 8
 \BOOKMARK [1][-]{section.4}{Discussion}{}% 9
-\BOOKMARK [1][-]{section.1}{Supplementary Material}{}% 10
+\BOOKMARK [1][-]{section.1}{Supplement to Materials and Methods}{}% 10
 \BOOKMARK [2][-]{subsection.1.1}{Data Specifications}{section.1}% 11
 \BOOKMARK [3][-]{subsubsection.1.1.1}{Binning fossil occurrences}{subsection.1.1}% 12
 \BOOKMARK [3][-]{subsubsection.1.1.2}{Covariate transforms and standardizations}{subsection.1.1}% 13
