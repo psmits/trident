@@ -126,8 +126,8 @@ plot_taxon_covariate_time <- function(disc_best) {
 
   out <- by_taxon %>%
     ggplot(aes(x = age, y = value)) +
-    stat_lineribbon(size = 0.5) +
     geom_hline(yintercept = 0, linetype = 'dashed', alpha = 0.5) +
+    stat_lineribbon(size = 0.5) +
     scale_fill_brewer() +
     facet_grid(type ~ key, scales = 'free_y') +
     theme(legend.position = 'bottom') +
