@@ -92,7 +92,7 @@
 \modulolinenumbers[3]
 
 \begin{abstract}
-  A tenants of conservation paleobiology is that knowledge of past extinction patterns can help us to better predict future extinctions. Although the future is unobservable, we can test the strength of this proposition by asking how well models conditioned on past observations would have predicted subsequent extinction events at different points in the geological past. To answer this question we analyze the well-sampled fossil record of Cenozoic planktonic microfossil taxa (foramanifera, radiolarians, diatoms, and calcareous nanoplankton.) For each group we examine how extinction probability varies over time as a function of species age, time of observation, current geographic range, change in geographic range, climate state, and change in climate state. Although the best-performing model includes time-varying effects and historical covariates (change in range and change in climate state) the improvement in predictive power over models with constant effects and no historical covariates is very minor. This model has an approximately 78\% median probability of correctly ranking the relative extinction risk any two randomly selected species. It performs nearly as well at out-of-sample prediction (70-80\%), implying that determinants of extinction risk have varied only modestly through time. An important caveat is that human impacts may substantially disrupt range-risk dynamics so that the future will be less predictable than it has been in the past.
+  A tenant of conservation paleobiology is that knowledge of past extinction patterns can help us to better predict future extinctions. Although the future is unobservable, we can test the strength of this proposition by asking how well models conditioned on past observations would have predicted subsequent extinction events at different points in the geological past. To answer this question we analyze the well-sampled fossil record of Cenozoic planktonic microfossil taxa (foramanifera, radiolarians, diatoms, and calcareous nanoplankton.) For each group we examine how extinction probability varies over time as a function of species age, time of observation, current geographic range, change in geographic range, climate state, and change in climate state. Although the best-performing model includes time-varying effects and historical covariates (change in range and change in climate state) the improvement in predictive power over models with constant effects and no historical covariates is very minor. This model has an approximately 78\% median probability of correctly ranking the relative extinction risk any two randomly selected species. It performs nearly as well at out-of-sample prediction (70-80\%), implying that determinants of extinction risk have varied only modestly through time. An important caveat is that human impacts may substantially disrupt range-risk dynamics so that the future will be less predictable than it has been in the past.
 
   %risk assessments for extant species can be improved by examining past extinction patterns and by using paleontological records to establish geographic range and abundance trajectories on geological timescales. 
   %We ask if, at a given point in time, how accurate are extinction risk predictions based on instantaneous geographic ranges and knowledge of past extinction/survival patterns?
@@ -116,7 +116,7 @@
   %The results of this study reinforce the importance of the promise of paleontology and using the past to predict the future.
 \end{abstract}
 
-{\bf Keywords:} conservation, paleobiology, extinction
+{\bf Keywords:} conservation, paleobiology, extinction, forecasting
 
 
 
@@ -307,6 +307,17 @@ In the analysis of the posterior predictive distributions of AUC from the in-sam
   \caption{Comparison of out-of-sample AUC values over time as aggregated by taxonomic group for each of the four models. The AUC of the individual My intervals within each fold is plotted to highlight the heterogentity in performance within and between folds. This presentation decomposes each of the 12-million year folds by each of the taxonomic groups into the predictions made for each of the million-year intervals. The black line corresponds to the median AUC estimate, with the envelopes corresponding to multiple credible intervals as indicated in the legend. See Table \ref{tab:model_def} for a description of each of the four models.}
   \label{fig:fold_auc_taxon_time}
 \end{figure}
+
+
+We quantitatively compared our AUC estimates from the out-of-sample forecasts to the AUC estimates from our in-sample forecasts by subtracting the in-sample AUC estimates from the out-of-sample AUC estimates (Fig. \ref{fig:oos_ins_diff}). This calculation means that differences close to 0 indicate complete congruence between in-sample and out-of-sample forecasts. A positive difference indicates that our out-of-sample forecasts are actually higher performing than our in-sample forecasts, while negative difference indicates poorer out-of-sample performance than in-sample forecast. Divergences between our out-of-sample and in-sample forecasts are rare and do not form multimillion year patters, quantifying broad congruence that visual comparisons of the two AUC time series suggests (Fig. \ref{fig:auc_taxon_time}, \ref{fig:fold_auc_taxon_time}). 
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/auc_diff}
+  \caption{Comparison between between our out-of-sample forecasts and in-sample forecasts for all models. This value is calculated as the values presented in Figure \ref{fig:fold_auc_taxon_time} minus those values presented in Figre \ref{fig:auc_taxon_time}. A differences close to 0 indicate complete congruence betwene in-sample and out-of-sample forecasts, while a positive difference indicates that our out-of-sample forecasts are actually higher performing than our in-sample forecasts, and a negative difference indicates poorer out-of-sample performance than in-sample forecast. See Table \ref{tab:model_def} for a description of each of the four models.}
+  \label{fig:oos_ins_diff}
+\end{figure}
+
 
 
 %Looking at four randomly sampled species, we evaluated their probability of extinction at all times that species was observed. We then compared these estimates to the geographic range trajectory of 
