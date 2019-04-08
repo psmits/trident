@@ -1464,6 +1464,41 @@
       \endverb
       \keyw{http://dx.doi.org/10.1029/2011JC007255,doi:10.102}
     \endentry
+    \entry{Tutz2016}{book}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,uniquepart=base,hash=4133bdf1da384bf31d5c1ec83be7006e}{%
+           family={Tutz},
+           familyi={T\bibinitperiod},
+           given={Gerhard},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=f5ba35d29d7e5a3ebfc27683ef364d1b}{%
+           family={Schmid},
+           familyi={S\bibinitperiod},
+           given={Matthis},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Springer International Publishing}%
+      }
+      \strng{namehash}{28255780c6e8b38bdeb5a59383703279}
+      \strng{fullhash}{28255780c6e8b38bdeb5a59383703279}
+      \strng{bibnamehash}{28255780c6e8b38bdeb5a59383703279}
+      \strng{authorbibnamehash}{28255780c6e8b38bdeb5a59383703279}
+      \strng{authornamehash}{28255780c6e8b38bdeb5a59383703279}
+      \strng{authorfullhash}{28255780c6e8b38bdeb5a59383703279}
+      \field{sortinit}{1}
+      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-3-319-28156-8}
+      \field{title}{{Modeling discrete time-to-event data}}
+      \field{year}{2016}
+      \verb{doi}
+      \verb 10.1007/978-3-319-28158-2
+      \endverb
+    \endentry
     \entry{Finnegan2008}{article}{}
       \name{author}{3}{}{%
         {{uniquename=0,uniquepart=base,hash=f7b47a5ceedb2f1f7e3d4c1d3d457797}{%
@@ -1745,39 +1780,56 @@
       \verb 10.1073/pnas.1519092113
       \endverb
     \endentry
-    \entry{Tutz2016}{book}{}
-      \name{author}{2}{}{%
-        {{uniquename=0,uniquepart=base,hash=4133bdf1da384bf31d5c1ec83be7006e}{%
-           family={Tutz},
+    \entry{ESL}{book}{}
+      \name{author}{3}{}{%
+        {{uniquename=0,uniquepart=base,hash=0cb8fe4210baa81c4b0e67913b4d2768}{%
+           family={Hastie},
+           familyi={H\bibinitperiod},
+           given={Trevor},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=88eea600247d798f8b2ce0b2dc614492}{%
+           family={Tibshirani},
            familyi={T\bibinitperiod},
-           given={Gerhard},
-           giveni={G\bibinitperiod},
+           given={Robert},
+           giveni={R\bibinitperiod},
            givenun=0}}%
-        {{uniquename=0,uniquepart=base,hash=f5ba35d29d7e5a3ebfc27683ef364d1b}{%
-           family={Schmid},
-           familyi={S\bibinitperiod},
-           given={Matthis},
-           giveni={M\bibinitperiod},
+        {{uniquename=0,uniquepart=base,hash=971cf69058b64a94326dea0f2a8bbcce}{%
+           family={Friedman},
+           familyi={F\bibinitperiod},
+           given={Jerome},
+           giveni={J\bibinitperiod},
            givenun=0}}%
+      }
+      \list{location}{1}{%
+        {New York, NY}%
       }
       \list{publisher}{1}{%
-        {Springer International Publishing}%
+        {Springer}%
       }
-      \strng{namehash}{28255780c6e8b38bdeb5a59383703279}
-      \strng{fullhash}{28255780c6e8b38bdeb5a59383703279}
-      \strng{bibnamehash}{28255780c6e8b38bdeb5a59383703279}
-      \strng{authorbibnamehash}{28255780c6e8b38bdeb5a59383703279}
-      \strng{authornamehash}{28255780c6e8b38bdeb5a59383703279}
-      \strng{authorfullhash}{28255780c6e8b38bdeb5a59383703279}
+      \strng{namehash}{7ca1bfe876d5e037b6aed69704221267}
+      \strng{fullhash}{7ca1bfe876d5e037b6aed69704221267}
+      \strng{bibnamehash}{7ca1bfe876d5e037b6aed69704221267}
+      \strng{authorbibnamehash}{7ca1bfe876d5e037b6aed69704221267}
+      \strng{authornamehash}{7ca1bfe876d5e037b6aed69704221267}
+      \strng{authorfullhash}{7ca1bfe876d5e037b6aed69704221267}
       \field{sortinit}{1}
       \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{isbn}{978-3-319-28156-8}
-      \field{title}{{Modeling discrete time-to-event data}}
-      \field{year}{2016}
+      \field{abstract}{During the past decade there has been an explosion in computation and information technology. With it has come vast amounts of data in a variety of fields such as medicine, biology, finance, and marketing. The challenge of understanding these data has led to the development of new tools in the field of statistics, and spawned new areas such as data mining, machine learning, and bioinformatics. Many of these tools have common underpinnings but are often expressed with different terminology. This book describes the important ideas in these areas in a common conceptual framework. While the approach is statistical, the emphasis is on concepts rather than mathematics. Many examples are given, with a liberal use of color graphics. It should be a valuable resource for statisticians and anyone interested in data mining in science or industry. The book's coverage is broad, from supervised learning (prediction) to unsupervised learning. The many topics include neural networks, support vector machines, classification trees and boosting-the first comprehensive treatment of this topic in any book. Trevor Hastie, Robert Tibshirani, and Jerome Friedman are professors of statistics at Stanford University. They are prominent researchers in this area: Hastie and Tibshirani developed generalized additive models and wrote a popular book of that title. Hastie wrote much of the statistical modeling software in S-PLUS and invented principal curves and surfaces. Tibshirani proposed the Lasso and is co-author of the very successful An Introduction to the Bootstrap. Friedman is the co-inventor of many data-mining tools including CART, MARS, and projection pursuit. FROM THE REVIEWS: TECHNOMETRICS "This is a vast and complex book. Generally, it concentrates on explaining why and how the methods work, rather than how to use them. Examples and especially the visualizations are principle features...As a source for the methods of statistical learning...it will probably be a long time before there is a competitor to this book."}
+      \field{edition}{2}
+      \field{isbn}{978-0-387-84857-0}
+      \field{issn}{0172-7397}
+      \field{title}{{The Elements of Statistical Learning}}
+      \field{year}{2009}
+      \field{pages}{1\bibrangedash 694}
+      \range{pages}{694}
       \verb{doi}
-      \verb 10.1007/978-3-319-28158-2
+      \verb 10.1007/b94608
+      \endverb
+      \verb{file}
+      \verb :home/peter/Documents/Mendeley Desktop/Hastie, Tibshirani, Friedman/Unknown/Hastie, Tibshirani, Friedman - 2009 - Unknown.pdf:pdf
       \endverb
     \endentry
     \entry{Arlot2010}{article}{}
@@ -1801,8 +1853,8 @@
       \strng{authorbibnamehash}{0007c88a802241e561514e407cb6dc92}
       \strng{authornamehash}{0007c88a802241e561514e407cb6dc92}
       \strng{authorfullhash}{0007c88a802241e561514e407cb6dc92}
-      \field{sortinit}{1}
-      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
+      \field{sortinit}{2}
+      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Used to estimate the risk of an estimator or to perform model selection, cross-validation is a widespread strategy because of its simplicity and its apparent universality. Many results exist on the model selection performances of cross-validation procedures. This survey intends to relate these results to the most recent advances of model selection theory, with a particular emphasis on distinguishing empirical statements from rigorous theoretical results. As a conclusion, guidelines are provided for choosing the best cross-validation procedure according to the particular features of the problem in hand.}
@@ -1861,8 +1913,8 @@
       \strng{authorbibnamehash}{f090b846f5e026e09fa5a92d22317998}
       \strng{authornamehash}{f090b846f5e026e09fa5a92d22317998}
       \strng{authorfullhash}{f090b846f5e026e09fa5a92d22317998}
-      \field{sortinit}{1}
-      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
+      \field{sortinit}{2}
+      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{One of the most widely used standard procedures for model evaluation in classification and regression is K-fold cross-validation (CV). However, when it comes to time series forecasting, because of the inherent serial correlation and potential non-stationarity of the data, its application is not straightforward and often replaced by practitioners in favour of an out-of-sample (OOS) evaluation. It is shown that for purely autoregressive models, the use of standard K-fold CV is possible provided the models considered have uncorrelated errors. Such a setup occurs, for example, when the models nest a more appropriate model. This is very common when Machine Learning methods are used for prediction, and where CV can control for overfitting the data. Theoretical insights supporting these arguments are presented, along with a simulation study and a real-world example. It is shown empirically that K-fold CV performs favourably compared to both OOS evaluation and other time-series-specific techniques such as non-dependent cross-validation.}
@@ -1902,8 +1954,8 @@
       \strng{authorbibnamehash}{9c15aa0b2a7683cefeaa12c991d0b1c2}
       \strng{authornamehash}{9c15aa0b2a7683cefeaa12c991d0b1c2}
       \strng{authorfullhash}{9c15aa0b2a7683cefeaa12c991d0b1c2}
-      \field{sortinit}{1}
-      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
+      \field{sortinit}{2}
+      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Receiver operating characteristics (ROC) graphs are useful for organizing classifiers and visualizing their performance. ROC graphs are commonly used in medical decision making, and in recent years have been used increasingly in machine learning and data mining research. Although ROC graphs are apparently simple, there are some common misconceptions and pitfalls when using them in practice. The purpose of this article is to serve as an introduction to ROC graphs and as a guide for using them in research. ?? 2005 Elsevier B.V. All rights reserved.}
@@ -1945,8 +1997,8 @@
       \strng{authorbibnamehash}{26a3817a0aef980bbde15a11f70539af}
       \strng{authornamehash}{26a3817a0aef980bbde15a11f70539af}
       \strng{authorfullhash}{26a3817a0aef980bbde15a11f70539af}
-      \field{sortinit}{1}
-      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
+      \field{sortinit}{2}
+      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Quarterly Journal of the Royal Metorological Society}
@@ -2193,58 +2245,6 @@
       \endverb
       \verb{url}
       \verb http://mc-stan.org
-      \endverb
-    \endentry
-    \entry{ESL}{book}{}
-      \name{author}{3}{}{%
-        {{uniquename=0,uniquepart=base,hash=0cb8fe4210baa81c4b0e67913b4d2768}{%
-           family={Hastie},
-           familyi={H\bibinitperiod},
-           given={Trevor},
-           giveni={T\bibinitperiod},
-           givenun=0}}%
-        {{uniquename=0,uniquepart=base,hash=88eea600247d798f8b2ce0b2dc614492}{%
-           family={Tibshirani},
-           familyi={T\bibinitperiod},
-           given={Robert},
-           giveni={R\bibinitperiod},
-           givenun=0}}%
-        {{uniquename=0,uniquepart=base,hash=971cf69058b64a94326dea0f2a8bbcce}{%
-           family={Friedman},
-           familyi={F\bibinitperiod},
-           given={Jerome},
-           giveni={J\bibinitperiod},
-           givenun=0}}%
-      }
-      \list{location}{1}{%
-        {New York, NY}%
-      }
-      \list{publisher}{1}{%
-        {Springer}%
-      }
-      \strng{namehash}{7ca1bfe876d5e037b6aed69704221267}
-      \strng{fullhash}{7ca1bfe876d5e037b6aed69704221267}
-      \strng{bibnamehash}{7ca1bfe876d5e037b6aed69704221267}
-      \strng{authorbibnamehash}{7ca1bfe876d5e037b6aed69704221267}
-      \strng{authornamehash}{7ca1bfe876d5e037b6aed69704221267}
-      \strng{authorfullhash}{7ca1bfe876d5e037b6aed69704221267}
-      \field{sortinit}{2}
-      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{During the past decade there has been an explosion in computation and information technology. With it has come vast amounts of data in a variety of fields such as medicine, biology, finance, and marketing. The challenge of understanding these data has led to the development of new tools in the field of statistics, and spawned new areas such as data mining, machine learning, and bioinformatics. Many of these tools have common underpinnings but are often expressed with different terminology. This book describes the important ideas in these areas in a common conceptual framework. While the approach is statistical, the emphasis is on concepts rather than mathematics. Many examples are given, with a liberal use of color graphics. It should be a valuable resource for statisticians and anyone interested in data mining in science or industry. The book's coverage is broad, from supervised learning (prediction) to unsupervised learning. The many topics include neural networks, support vector machines, classification trees and boosting-the first comprehensive treatment of this topic in any book. Trevor Hastie, Robert Tibshirani, and Jerome Friedman are professors of statistics at Stanford University. They are prominent researchers in this area: Hastie and Tibshirani developed generalized additive models and wrote a popular book of that title. Hastie wrote much of the statistical modeling software in S-PLUS and invented principal curves and surfaces. Tibshirani proposed the Lasso and is co-author of the very successful An Introduction to the Bootstrap. Friedman is the co-inventor of many data-mining tools including CART, MARS, and projection pursuit. FROM THE REVIEWS: TECHNOMETRICS "This is a vast and complex book. Generally, it concentrates on explaining why and how the methods work, rather than how to use them. Examples and especially the visualizations are principle features...As a source for the methods of statistical learning...it will probably be a long time before there is a competitor to this book."}
-      \field{edition}{2}
-      \field{isbn}{978-0-387-84857-0}
-      \field{issn}{0172-7397}
-      \field{title}{{The Elements of Statistical Learning}}
-      \field{year}{2009}
-      \field{pages}{1\bibrangedash 694}
-      \range{pages}{694}
-      \verb{doi}
-      \verb 10.1007/b94608
-      \endverb
-      \verb{file}
-      \verb :home/peter/Documents/Mendeley Desktop/Hastie, Tibshirani, Friedman/Unknown/Hastie, Tibshirani, Friedman - 2009 - Unknown.pdf:pdf
       \endverb
     \endentry
   \enddatalist
