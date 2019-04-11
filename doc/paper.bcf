@@ -2018,17 +2018,21 @@
     <bcf:citekey order="2">Ezard2016</bcf:citekey>
     <bcf:citekey order="2">Ezard2011</bcf:citekey>
     <bcf:citekey order="2">Liow2010</bcf:citekey>
-    <bcf:citekey order="3">ARM</bcf:citekey>
-    <bcf:citekey order="4">Tutz2016</bcf:citekey>
+    <bcf:citekey order="3">Mekik2018</bcf:citekey>
+    <bcf:citekey order="3">Broecker1999</bcf:citekey>
+    <bcf:citekey order="3">Mekik2014</bcf:citekey>
+    <bcf:citekey order="3">Peng1984</bcf:citekey>
+    <bcf:citekey order="4">ARM</bcf:citekey>
     <bcf:citekey order="5">Tutz2016</bcf:citekey>
-    <bcf:citekey order="6">ARM</bcf:citekey>
-    <bcf:citekey order="7">Tutz2016</bcf:citekey>
-    <bcf:citekey order="8">StanManual</bcf:citekey>
+    <bcf:citekey order="6">Tutz2016</bcf:citekey>
+    <bcf:citekey order="7">ARM</bcf:citekey>
+    <bcf:citekey order="8">Tutz2016</bcf:citekey>
     <bcf:citekey order="9">StanManual</bcf:citekey>
-    <bcf:citekey order="10">rstanarm</bcf:citekey>
-    <bcf:citekey order="11">brms2017</bcf:citekey>
-    <bcf:citekey order="11">brms2018</bcf:citekey>
-    <bcf:citekey order="12">StanManual</bcf:citekey>
+    <bcf:citekey order="10">StanManual</bcf:citekey>
+    <bcf:citekey order="11">rstanarm</bcf:citekey>
+    <bcf:citekey order="12">brms2017</bcf:citekey>
+    <bcf:citekey order="12">brms2018</bcf:citekey>
+    <bcf:citekey order="13">StanManual</bcf:citekey>
   </bcf:section>
   <!-- SECTION 0 (cont.) -->
   <bcf:section number="0">

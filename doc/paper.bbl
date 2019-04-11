@@ -2835,6 +2835,182 @@
       \verb :home/peter/Documents/Mendeley Desktop/Liow et al/Paleobiology/Liow et al. - 2010 - Paleobiology.pdf:pdf
       \endverb
     \endentry
+    \entry{Mekik2018}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,uniquepart=base,hash=2b62881fd51fcd838fb913db23ff0fc1}{%
+           family={Mekik},
+           familyi={M\bibinitperiod},
+           given={Figen},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=ba5d300ed7aef344250ae69a1780cae7}{%
+           family={Anderson},
+           familyi={A\bibinitperiod},
+           given={Robert},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier Ltd}%
+      }
+      \strng{namehash}{4b9361a997f6549122f6f229b8b3f299}
+      \strng{fullhash}{4b9361a997f6549122f6f229b8b3f299}
+      \strng{bibnamehash}{4b9361a997f6549122f6f229b8b3f299}
+      \strng{authorbibnamehash}{4b9361a997f6549122f6f229b8b3f299}
+      \strng{authornamehash}{4b9361a997f6549122f6f229b8b3f299}
+      \strng{authorfullhash}{4b9361a997f6549122f6f229b8b3f299}
+      \field{sortinit}{3}
+      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{A compilation of ages from 67 core tops in the eastern equatorial Pacific (EEP) does not display an easily discernible regional pattern. The ages range from 790 to over 15,000 years. The youngest core tops with the highest sediment focusing factors are located in the Panama Basin. There are weak but statistically significant inverse relationships between core top age and age-model based mass accumulation rates, bioturbation depth, linear sedimentation rate and sediment focusing factors. However, we found no statistically significant relationship between core top age and calcite dissolution in sediments or 230Th-normalized mass accumulation rates. We found evidence suggesting that greater amount of sediment focusing helps to preserve the carbonate fraction of the sediment where focusing is taking place. When focusing factors are plotted against percent calcite dissolved, we observe a strong inverse relationship, and core tops younger than 4500 years tend to occur where focusing factors are high and percent calcite dissolved values are low. Using labile organic carbon fluxes to estimate bioturbation depth in the sediments results in the observation that where bioturbation depth is shallow ({<}4 cm), the core top age has a strong, inverse relationship with sediment accumulation rate. We used the Globorotalia menardii Fragmentation Index (MFI) as an indicator of percent calcite dissolved in deep sea sediments. There is a distinct pattern to core top calcite dissolution in the EEP which delineates bands of high surface ocean productivity as well as the clear increase in dissolution downward on the flanks of the East Pacific Rise.}
+      \field{issn}{02773791}
+      \field{journaltitle}{Quaternary Science Reviews}
+      \field{title}{{Is the core top modern? Observations from the eastern equatorial Pacific}}
+      \field{volume}{186}
+      \field{year}{2018}
+      \field{pages}{156\bibrangedash 168}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.1016/j.quascirev.2018.01.020
+      \endverb
+      \verb{file}
+      \verb :home/peter/Documents/Mendeley Desktop/Mekik, Anderson/Quaternary Science Reviews/Mekik, Anderson - 2018 - Quaternary Science Reviews.pdf:pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1016/j.quascirev.2018.01.020
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1016/j.quascirev.2018.01.020
+      \endverb
+      \keyw{Bioturbation,Calcite dissolution,Core top age,Equatorial Pacific,Focusing factor,Holocene,Mass accumulation rate,Paleoceanography,Radiogenic isotopes,$\delta$18O stratigraphy}
+    \endentry
+    \entry{Broecker1999}{article}{}
+      \name{author}{5}{}{%
+        {{uniquename=1,uniquepart=given,hash=87e1048f9bb52f8324160c171b84961b}{%
+           family={Broecker},
+           familyi={B\bibinitperiod},
+           given={Wallace},
+           giveni={W\bibinitperiod},
+           givenun=1}}%
+        {{uniquename=0,uniquepart=base,hash=e7dca9b2f39009ea21bc00770a45bc87}{%
+           family={Matsumoto},
+           familyi={M\bibinitperiod},
+           given={Katsumi},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=04d5a9ab38c8d2dbc2d6fc29ce671e89}{%
+           family={Clark},
+           familyi={C\bibinitperiod},
+           given={Elizabeth},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=61873e4b4fafae10795c5ff44d7d5cad}{%
+           family={Hajdas},
+           familyi={H\bibinitperiod},
+           given={Irka},
+           giveni={I\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=4e8b7f8c9e4a8869445edce11a123751}{%
+           family={Bonani},
+           familyi={B\bibinitperiod},
+           given={Georges},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{6999aef7c4c4ff674461dc4ca6c5154e}
+      \strng{fullhash}{2d5b3e210d420d1b67048f5d09383ae6}
+      \strng{bibnamehash}{2d5b3e210d420d1b67048f5d09383ae6}
+      \strng{authorbibnamehash}{2d5b3e210d420d1b67048f5d09383ae6}
+      \strng{authornamehash}{6999aef7c4c4ff674461dc4ca6c5154e}
+      \strng{authorfullhash}{2d5b3e210d420d1b67048f5d09383ae6}
+      \field{sortinit}{3}
+      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Paleoceanography}
+      \field{number}{4}
+      \field{title}{{Radiocarbon age differences between coexisting foraminiferal species}}
+      \field{volume}{14}
+      \field{year}{1999}
+      \field{pages}{431\bibrangedash 436}
+      \range{pages}{6}
+      \verb{file}
+      \verb :home/peter/Documents/Mendeley Desktop/Broecker et al/Paleoceanography/Broecker et al. - 1999 - Paleoceanography.pdf:pdf
+      \endverb
+      \keyw{doi:10.1029/1999PA900019,http://dx.doi.org/10.1029/1999PA900019}
+    \endentry
+    \entry{Mekik2014}{article}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,uniquepart=base,hash=2b62881fd51fcd838fb913db23ff0fc1}{%
+           family={Mekik},
+           familyi={M\bibinitperiod},
+           given={Figen},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{2b62881fd51fcd838fb913db23ff0fc1}
+      \strng{fullhash}{2b62881fd51fcd838fb913db23ff0fc1}
+      \strng{bibnamehash}{2b62881fd51fcd838fb913db23ff0fc1}
+      \strng{authorbibnamehash}{2b62881fd51fcd838fb913db23ff0fc1}
+      \strng{authornamehash}{2b62881fd51fcd838fb913db23ff0fc1}
+      \strng{authorfullhash}{2b62881fd51fcd838fb913db23ff0fc1}
+      \field{sortinit}{3}
+      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Sedimentation rate, bioturbation, winnowing, and calcite dissolution produce significant radiocarbon age offsets among multiple species of coexisting planktonic foraminifers and pteropod fragments. We compare the radiocarbon age of foraminifer species and pteropod fragments with estimates of percent calcite dissolved made with a sedimentary proxy (Globorotalia menardii fragmentation index---MFI) to delineate the effect of dissolution on radiocarbon age of foraminifers. Data from two core top transects on the Rio Grande Rise (RIO) and Ontong Java Plateau (OJP) and from down core sediments of varying sedimentation rates in the tropical Pacific (ME-27, MD98 2177, and MW91-9 56GGC) reveal that sediments with the greatest accumulation rates produce the least age offsets among coexisting species. Age offsets among coexisting foraminifers are about 3500 years on RIO, and 1000 years on OJP. Two core tops from RIO yield an age of the Last Glacial Maximum possibly due to mass displacement of younger sediments downslope. Foraminifer age increases with increasing dissolution and there is a consistent pattern of older foraminifer fragments coexisting with younger whole shells of the same species. The only exception is sediments which have experienced high dissolution where fragments are younger than whole shells. The age offset between fragments of G. menardii and its coexisting whole shells does not exceed the age offset among other coexisting foraminifer species in the same core tops.}
+      \field{issn}{19449186}
+      \field{journaltitle}{Paleoceanography}
+      \field{number}{1}
+      \field{title}{{Radiocarbon dating of planktonic foraminifer shells: A cautionary tale}}
+      \field{volume}{29}
+      \field{year}{2014}
+      \field{pages}{13\bibrangedash 29}
+      \range{pages}{17}
+      \verb{doi}
+      \verb 10.1002/2013PA002532
+      \endverb
+      \verb{file}
+      \verb :home/peter/Documents/Mendeley Desktop/Mekik/Paleoceanography/Mekik - 2014 - Paleoceanography.pdf:pdf
+      \endverb
+      \keyw{deep sea sediments,planktonic foraminifer,pteropod fragments,radiocarbon age}
+    \endentry
+    \entry{Peng1984}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,uniquepart=base,hash=9e4d01bd917c723685838f3331477bd2}{%
+           family={Peng},
+           familyi={P\bibinitperiod},
+           given={Tsung-Hung},
+           giveni={T\bibinithyphendelim H\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=1,uniquepart=given,hash=6e547bcbe93ca8f8bb28b1ac238004ed}{%
+           family={Broecker},
+           familyi={B\bibinitperiod},
+           given={Wallace\bibnamedelima S},
+           giveni={W\bibinitperiod\bibinitdelim S\bibinitperiod},
+           givenun=1}}%
+      }
+      \strng{namehash}{593dd60c5f06e5e73ee886ecd95d142c}
+      \strng{fullhash}{593dd60c5f06e5e73ee886ecd95d142c}
+      \strng{bibnamehash}{593dd60c5f06e5e73ee886ecd95d142c}
+      \strng{authorbibnamehash}{593dd60c5f06e5e73ee886ecd95d142c}
+      \strng{authornamehash}{593dd60c5f06e5e73ee886ecd95d142c}
+      \strng{authorfullhash}{593dd60c5f06e5e73ee886ecd95d142c}
+      \field{sortinit}{3}
+      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Nuclear Instruments and Methods in Physics Research Section B: Beam Interactions with Materials and Atoms}
+      \field{title}{{The impacts of bioturbation on the age difference between benthic and planktonic foraminifera in deep sea sediments}}
+      \field{volume}{35}
+      \field{year}{1984}
+      \field{pages}{346\bibrangedash 352}
+      \range{pages}{7}
+      \verb{file}
+      \verb :home/peter/Documents/Mendeley Desktop/Peng, Broecker/Nuclear Instruments and Methods in Physics Research Section B Beam Interactions with Materials and Atoms/Peng, Broecker - 1984 - Nuclear Instruments and Methods in Physics Research Section B Beam Interactions with Materials and Atoms.pdf:pdf
+      \endverb
+    \endentry
     \entry{ARM}{book}{}
       \name{author}{2}{}{%
         {{uniquename=0,uniquepart=base,hash=1e1eb60e3b6e222217bf8e9b24070b28}{%
@@ -2862,8 +3038,8 @@
       \strng{authorbibnamehash}{602df721bcd10fe1eca95cb5554d134b}
       \strng{authornamehash}{602df721bcd10fe1eca95cb5554d134b}
       \strng{authorfullhash}{602df721bcd10fe1eca95cb5554d134b}
-      \field{sortinit}{3}
-      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
+      \field{sortinit}{4}
+      \field{sortinithash}{11cdaee3b18e01d77f3f428b13c1fc76}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{{Data Analysis Using Regression and Multilevel/Hierarchical Models}}
@@ -2893,8 +3069,8 @@
       \strng{authorbibnamehash}{28255780c6e8b38bdeb5a59383703279}
       \strng{authornamehash}{28255780c6e8b38bdeb5a59383703279}
       \strng{authorfullhash}{28255780c6e8b38bdeb5a59383703279}
-      \field{sortinit}{4}
-      \field{sortinithash}{11cdaee3b18e01d77f3f428b13c1fc76}
+      \field{sortinit}{5}
+      \field{sortinithash}{3c19c3776b658b3558e9e2e4840c01e2}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{isbn}{978-3-319-28156-8}
@@ -2916,8 +3092,8 @@
       \strng{authorbibnamehash}{2418ee02a26ab01ead911ec86c507892}
       \strng{authornamehash}{2418ee02a26ab01ead911ec86c507892}
       \strng{authorfullhash}{2418ee02a26ab01ead911ec86c507892}
-      \field{sortinit}{8}
-      \field{sortinithash}{07edf88d4ea82509b9c4b4d13f41c452}
+      \field{sortinit}{9}
+      \field{sortinithash}{1dd72ab054147731c9d824b49aba0534}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{{Stan Modeling Language Users Guide and Reference Manual}}
