@@ -19,129 +19,6 @@
 
 \refsection{1}
   \datalist[entry]{none/global//global/global}
-    \entry{Harnik2012a}{article}{}
-      \name{author}{14}{}{%
-        {{uniquename=0,uniquepart=base,hash=692158c1d91ee509893a508e0375dc61}{%
-           family={Harnik},
-           familyi={H\bibinitperiod},
-           given={Paul\bibnamedelima G.},
-           giveni={P\bibinitperiod\bibinitdelim G\bibinitperiod},
-           givenun=0}}%
-        {{uniquename=0,uniquepart=base,hash=4fb0f4b693ee1e4ec1f50d11773821bf}{%
-           family={Lotze},
-           familyi={L\bibinitperiod},
-           given={Heike\bibnamedelima K.},
-           giveni={H\bibinitperiod\bibinitdelim K\bibinitperiod},
-           givenun=0}}%
-        {{uniquename=0,uniquepart=base,hash=6df1320d32e7b353e1958b218c17ac05}{%
-           family={Anderson},
-           familyi={A\bibinitperiod},
-           given={Sean\bibnamedelima C.},
-           giveni={S\bibinitperiod\bibinitdelim C\bibinitperiod},
-           givenun=0}}%
-        {{uniquename=0,uniquepart=base,hash=fb41113b41c96ffcef17b2b386566d2c}{%
-           family={Finkel},
-           familyi={F\bibinitperiod},
-           given={Zoe\bibnamedelima V.},
-           giveni={Z\bibinitperiod\bibinitdelim V\bibinitperiod},
-           givenun=0}}%
-        {{uniquename=0,uniquepart=base,hash=d8a1f361bf63c4e71d2981fde89814d8}{%
-           family={Finnegan},
-           familyi={F\bibinitperiod},
-           given={Seth},
-           giveni={S\bibinitperiod},
-           givenun=0}}%
-        {{uniquename=0,uniquepart=base,hash=d4d1e8d6ec5b5fe86d17b2be3270c795}{%
-           family={Lindberg},
-           familyi={L\bibinitperiod},
-           given={David\bibnamedelima R.},
-           giveni={D\bibinitperiod\bibinitdelim R\bibinitperiod},
-           givenun=0}}%
-        {{uniquename=0,uniquepart=base,hash=8c6b4cf0c42a9827fa59a7ccd6a10b2e}{%
-           family={Liow},
-           familyi={L\bibinitperiod},
-           given={Lee\bibnamedelima Hsiang},
-           giveni={L\bibinitperiod\bibinitdelim H\bibinitperiod},
-           givenun=0}}%
-        {{uniquename=0,uniquepart=base,hash=ba61eae5d93357dfe6181f044ef1614d}{%
-           family={Lockwood},
-           familyi={L\bibinitperiod},
-           given={Rowan},
-           giveni={R\bibinitperiod},
-           givenun=0}}%
-        {{uniquename=0,uniquepart=base,hash=caed4202aa63dc74a21656f4033ddb31}{%
-           family={McClain},
-           familyi={M\bibinitperiod},
-           given={Craig\bibnamedelima R.},
-           giveni={C\bibinitperiod\bibinitdelim R\bibinitperiod},
-           givenun=0}}%
-        {{uniquename=0,uniquepart=base,hash=578c7041a4af29b5151c86f51a365000}{%
-           family={McGuire},
-           familyi={M\bibinitperiod},
-           given={Jenny\bibnamedelima L.},
-           giveni={J\bibinitperiod\bibinitdelim L\bibinitperiod},
-           givenun=0}}%
-        {{uniquename=0,uniquepart=base,hash=6958e1c5c95cc46f29d680f3a91a6b94}{%
-           family={O'Dea},
-           familyi={O\bibinitperiod},
-           given={Aaron},
-           giveni={A\bibinitperiod},
-           givenun=0}}%
-        {{uniquename=0,uniquepart=base,hash=70850873279eb537d059fb4677ecc8fd}{%
-           family={Pandolfi},
-           familyi={P\bibinitperiod},
-           given={John\bibnamedelima M.},
-           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod},
-           givenun=0}}%
-        {{uniquename=0,uniquepart=base,hash=21b6af629bc168836575391476615574}{%
-           family={Simpson},
-           familyi={S\bibinitperiod},
-           given={Carl},
-           giveni={C\bibinitperiod},
-           givenun=0}}%
-        {{uniquename=0,uniquepart=base,hash=6addc03fc3c1037483f862b0cd3765d1}{%
-           family={Tittensor},
-           familyi={T\bibinitperiod},
-           given={Derek\bibnamedelima P.},
-           giveni={D\bibinitperiod\bibinitdelim P\bibinitperiod},
-           givenun=0}}%
-      }
-      \list{publisher}{1}{%
-        {Elsevier Ltd}%
-      }
-      \strng{namehash}{d4f0f58e430376eca3aebff280be8ca1}
-      \strng{fullhash}{1544efe84d99eec6cfe5892e0543b921}
-      \strng{bibnamehash}{d4f0f58e430376eca3aebff280be8ca1}
-      \strng{authorbibnamehash}{d4f0f58e430376eca3aebff280be8ca1}
-      \strng{authornamehash}{d4f0f58e430376eca3aebff280be8ca1}
-      \strng{authorfullhash}{1544efe84d99eec6cfe5892e0543b921}
-      \field{sortinit}{1}
-      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{In the coming century, life in the ocean will be confronted with a suite of environmental conditions that have no analog in human history. Thus, there is an urgent need to determine which marine species will adapt and which will go extinct. Here, we review the growing literature on marine extinctions and extinction risk in the fossil, historical, and modern records to compare the patterns, drivers, and biological correlates of marine extinctions at different times in the past. Characterized by markedly different environmental states, some past periods share common features with predicted future scenarios. We highlight how the different records can be integrated to better understand and predict the impact of current and projected future environmental changes on extinction risk in the ocean. {{$\copyright$}} 2012 Elsevier Ltd.}
-      \field{isbn}{0169-5347}
-      \field{issn}{01695347}
-      \field{journaltitle}{Trends in Ecology and Evolution}
-      \field{number}{11}
-      \field{title}{{Extinctions in ancient and modern seas}}
-      \field{volume}{27}
-      \field{year}{2012}
-      \field{pages}{608\bibrangedash 617}
-      \range{pages}{10}
-      \verb{doi}
-      \verb 10.1016/j.tree.2012.07.010
-      \endverb
-      \verb{file}
-      \verb :home/peter/Documents/Mendeley Desktop/Harnik et al/Trends in Ecology and Evolution/Harnik et al. - 2012 - Trends in Ecology and Evolution.pdf:pdf
-      \endverb
-      \verb{urlraw}
-      \verb http://dx.doi.org/10.1016/j.tree.2012.07.010
-      \endverb
-      \verb{url}
-      \verb http://dx.doi.org/10.1016/j.tree.2012.07.010
-      \endverb
-    \endentry
     \entry{Finnegan2015}{article}{}
       \name{author}{11}{}{%
         {{uniquename=0,uniquepart=base,hash=d8a1f361bf63c4e71d2981fde89814d8}{%
@@ -232,6 +109,161 @@
       \verb :home/peter/Documents/Mendeley Desktop/Finnegan et al/Science/Finnegan et al. - 2015 - Science.pdf:pdf
       \endverb
     \endentry
+    \entry{Kiessling2016}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,uniquepart=base,hash=8d64c069ee1e4098c8ae987371387165}{%
+           family={Kiessling},
+           familyi={K\bibinitperiod},
+           given={Wolfgang},
+           giveni={W\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=98db8217301ab8f340f8034c24f7836a}{%
+           family={Kocsis},
+           familyi={K\bibinitperiod},
+           given={{\'{A}}d{\'{a}}m\bibnamedelima T.},
+           giveni={\'{A}\bibinitperiod\bibinitdelim T\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{f702bbfaddda7810089c39c62a8facc5}
+      \strng{fullhash}{f702bbfaddda7810089c39c62a8facc5}
+      \strng{bibnamehash}{f702bbfaddda7810089c39c62a8facc5}
+      \strng{authorbibnamehash}{f702bbfaddda7810089c39c62a8facc5}
+      \strng{authornamehash}{f702bbfaddda7810089c39c62a8facc5}
+      \strng{authorfullhash}{f702bbfaddda7810089c39c62a8facc5}
+      \field{sortinit}{1}
+      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Besides helping to identify species traits that are commonly linked to extinction risk, the fossil record may also be directly relevant for assessing the extinction risk of extant species. Standing geographical distribution or occupancy is a strong predictor of both recent and past extinction risk, but the role of changes in occupancy is less widely assessed. Here we demonstrate, based on the Cenozoic fossil record of marine species, that both occupancy and its temporal trajectory are significant determinants of risk. Based on extinct species we develop a model on the additive and interacting effects of occupancy and its temporal changes on extinction risk. We use this model to predict extinction risk of extant species. The predictions suggest a moderate risk for marine species on average. However, some species seem to be on a long-term decline and potentially at a latent extinction risk, which is not considered in current risk assessments.}
+      \field{issn}{1744957X}
+      \field{journaltitle}{Biology letters}
+      \field{title}{{Adding fossil occupancy trajectories to the assessment of modern extinction risk}}
+      \field{volume}{12}
+      \field{year}{2016}
+      \field{pages}{20150813}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1098/rsbl.2015.0813
+      \endverb
+      \verb{file}
+      \verb :home/peter/Documents/Mendeley Desktop/Kiessling, Kocsis/Biology letters/Kiessling, Kocsis - 2016 - Biology letters.pdf:pdf
+      \endverb
+      \keyw{extinction risk,geographical occupancy,palaeobiology}
+    \endentry
+    \entry{Harnik2011}{article}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,uniquepart=base,hash=68ea50f8c0b787e5d0e5461dc22f9ef9}{%
+           family={Harnik},
+           familyi={H\bibinitperiod},
+           given={Paul\bibnamedelima G},
+           giveni={P\bibinitperiod\bibinitdelim G\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{68ea50f8c0b787e5d0e5461dc22f9ef9}
+      \strng{fullhash}{68ea50f8c0b787e5d0e5461dc22f9ef9}
+      \strng{bibnamehash}{68ea50f8c0b787e5d0e5461dc22f9ef9}
+      \strng{authorbibnamehash}{68ea50f8c0b787e5d0e5461dc22f9ef9}
+      \strng{authornamehash}{68ea50f8c0b787e5d0e5461dc22f9ef9}
+      \strng{authorfullhash}{68ea50f8c0b787e5d0e5461dc22f9ef9}
+      \field{sortinit}{2}
+      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Biological factors, such as abundance and body size, may contrib- ute directly to extinction risk and indirectly through their influence on other biological characteristics, such as geographic range size. Paleontological data can be used to explicitly test many of these hypothesized relationships, and general patterns revealed through analysis of the fossil record can help refine predictive models of extinction risk developed for extant species. Here, I use structural equation modeling to tease apart the contributions of three canonical predictors of extinction---abundance, body size, and geographic range size---to the duration of bivalve species in the early Cenozoic marine fossil record of the eastern United States. I find that geographic range size has a strong direct effect on extinction risk and that an apparent direct effect of abundance can be explained entirely by its covariation with geographic range. The influence of geographic range on extinction risk is manifest across three ecologically disparate bivalve clades. Body size also has strong direct effects on extinction risk but operates in opposing directions in different clades, and thus, it seems to be decoupled from extinction risk in bivalves as a whole. Although abundance does not directly predict extinction risk, I reveal weak indirect effects of both abundance and body size through their positive influence on geographic range size. Multivariate models that account for the pervasive covariation between biological factors and extinction are necessary for assessing causality in evolutionary processes and making informed predictions in applied conser- vation efforts.}
+      \field{isbn}{0027-8424}
+      \field{issn}{0027-8424}
+      \field{journaltitle}{Proceedings of the National Academy of Science}
+      \field{number}{33}
+      \field{title}{{Direct and indirect effects of biological factors on extinction risk in fossil bivalves}}
+      \field{volume}{108}
+      \field{year}{2011}
+      \field{pages}{13594\bibrangedash 13599}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1073/pnas.1100572108/-/DCSupplemental.www.pnas.org/cgi/doi/10.1073/pnas.1100572108
+      \endverb
+      \verb{file}
+      \verb :home/peter/Documents/Mendeley Desktop/Harnik/Proceedings of the National Academy of Science/Harnik - 2011 - Proceedings of the National Academy of Science.pdf:pdf
+      \endverb
+      \keyw{macroecology | macroevolution | Paleogene | Bivalv}
+    \endentry
+    \entry{Smits2015}{article}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,uniquepart=base,hash=c923fcf3d4ec4bd87b0caf6ff22e9ca0}{%
+           family={Smits},
+           familyi={S\bibinitperiod},
+           given={Peter\bibnamedelima D.},
+           giveni={P\bibinitperiod\bibinitdelim D\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{c923fcf3d4ec4bd87b0caf6ff22e9ca0}
+      \strng{fullhash}{c923fcf3d4ec4bd87b0caf6ff22e9ca0}
+      \strng{bibnamehash}{c923fcf3d4ec4bd87b0caf6ff22e9ca0}
+      \strng{authorbibnamehash}{c923fcf3d4ec4bd87b0caf6ff22e9ca0}
+      \strng{authornamehash}{c923fcf3d4ec4bd87b0caf6ff22e9ca0}
+      \strng{authorfullhash}{c923fcf3d4ec4bd87b0caf6ff22e9ca0}
+      \field{sortinit}{2}
+      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Determining which biological traits influence differences in extinction risk is vital for understanding the differential diversification of life and for making predictions about species' vulnerability to anthropogenic impacts. Here I present a hierarchical Bayesian survival model of North American Cenozoic mammal species durations in relation to species-level ecological factors, time of origination, and phylogenetic relationships. I find support for the survival of the unspecialized as a time-invariant generalization of trait-based extinction risk. Furthermore, I find that phylogenetic and temporal effects are both substantial factors associated with differences in species durations. Finally, I find that the estimated effects of these factors are partially incongruous with how these factors are correlated with extinction risk of the extant species. These findings parallel previous observations that background extinction is a poor predictor of mass extinction events and suggest that attention should be focused on mass extinctions to gain insight into modern species loss.}
+      \field{issn}{0027-8424}
+      \field{journaltitle}{Proceedings of the National Academy of Sciences}
+      \field{number}{42}
+      \field{title}{{Expected time-invariant effects of biological traits on mammal species duration}}
+      \field{volume}{112}
+      \field{year}{2015}
+      \field{pages}{13015\bibrangedash 13020}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1073/pnas.1510482112
+      \endverb
+      \verb{file}
+      \verb :home/peter/Documents/Mendeley Desktop/Smits/Proceedings of the National Academy of Sciences/Smits - 2015 - Proceedings of the National Academy of Sciences.pdf:pdf
+      \endverb
+      \verb{urlraw}
+      \verb http://www.pnas.org/lookup/doi/10.1073/pnas.1510482112
+      \endverb
+      \verb{url}
+      \verb http://www.pnas.org/lookup/doi/10.1073/pnas.1510482112
+      \endverb
+    \endentry
+    \entry{Peters2008}{article}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,uniquepart=base,hash=a3243cb96ab018507d727f2aacc79087}{%
+           family={Peters},
+           familyi={P\bibinitperiod},
+           given={Shanan\bibnamedelima E.},
+           giveni={S\bibinitperiod\bibinitdelim E\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{a3243cb96ab018507d727f2aacc79087}
+      \strng{fullhash}{a3243cb96ab018507d727f2aacc79087}
+      \strng{bibnamehash}{a3243cb96ab018507d727f2aacc79087}
+      \strng{authorbibnamehash}{a3243cb96ab018507d727f2aacc79087}
+      \strng{authornamehash}{a3243cb96ab018507d727f2aacc79087}
+      \strng{authorfullhash}{a3243cb96ab018507d727f2aacc79087}
+      \field{sortinit}{2}
+      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The causes of mass extinctions and the nature of biological selectivity during extinction events remain central questions in palaeobiology. Although many different environmental perturbations have been invoked as extinction mechanisms, it has long been recognized that fluctuations in sea level coincide with many episodes of biotic turnover. Recent work supports the hypothesis that changes in the areas of epicontinental seas have influenced the macroevolution of marine animals, but the extent to which differential environmental turnover has contributed to extinction selectivity remains unknown. Here I use a new compilation of the temporal durations of sedimentary rock packages to show that carbonate and terrigenous clastic marine shelf environments have different spatio-temporal dynamics and that these dynamics predict patterns of genus-level extinction, extinction selectivity and diversity among Sepkoski's Palaeozoic and modern evolutionary faunae. These results do not preclude a role for biological interactions or unusual physical events as drivers of macroevolution, but they do suggest that the turnover of marine shelf habitats and correlated environmental changes have been consistent determinants of extinction, extinction selectivity and the shifting composition of the marine biota during the Phanerozoic eon.}
+      \field{isbn}{0028-0836}
+      \field{issn}{00280836}
+      \field{journaltitle}{Nature}
+      \field{number}{7204}
+      \field{title}{{Environmental determinants of extinction selectivity in the fossil record}}
+      \field{volume}{454}
+      \field{year}{2008}
+      \field{pages}{626\bibrangedash 629}
+      \range{pages}{4}
+      \verb{doi}
+      \verb 10.1038/nature07032
+      \endverb
+      \verb{file}
+      \verb :home/peter/Documents/Mendeley Desktop/Peters/Nature/Peters - 2008 - Nature.pdf:pdf
+      \endverb
+    \endentry
     \entry{Payne2007}{article}{}
       \name{author}{2}{}{%
         {{uniquename=0,uniquepart=base,hash=ec68eacbcfd6d1d7a7343ad79b626412}{%
@@ -274,77 +306,60 @@
       \verb :home/peter/Documents/Mendeley Desktop/Payne, Finnegan/Proceedings of the National Academy of Sciences/Payne, Finnegan - 2007 - Proceedings of the National Academy of Sciences.pdf:pdf
       \endverb
     \endentry
-    \entry{Payne2016}{article}{}
-      \name{author}{6}{}{%
-        {{uniquename=0,uniquepart=base,hash=f9a5b9e52625eb471cd02a2050ee79e4}{%
+    \entry{Harnik2012}{article}{}
+      \name{author}{3}{}{%
+        {{uniquename=0,uniquepart=base,hash=b8b9e459ffe7c9e6a82b3bd8f704f774}{%
+           family={Harnik},
+           familyi={H\bibinitperiod},
+           given={P.\bibnamedelimi G.},
+           giveni={P\bibinitperiod\bibinitdelim G\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=4a5b9491e7bfd4e3984e98f78eb84ef0}{%
+           family={Simpson},
+           familyi={S\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=36ee7b6f4945bb58137476dedf5496cc}{%
            family={Payne},
            familyi={P\bibinitperiod},
-           given={Jonathan\bibnamedelima L.},
+           given={J.\bibnamedelimi L.},
            giveni={J\bibinitperiod\bibinitdelim L\bibinitperiod},
            givenun=0}}%
-        {{uniquename=0,uniquepart=base,hash=6596c2ce147eda5689265295f6f6eef6}{%
-           family={Bush},
-           familyi={B\bibinitperiod},
-           given={Andrew\bibnamedelima M.},
-           giveni={A\bibinitperiod\bibinitdelim M\bibinitperiod},
-           givenun=0}}%
-        {{uniquename=0,uniquepart=base,hash=36819fb1b32484d2d24f352da25ba0fc}{%
-           family={Chang},
-           familyi={C\bibinitperiod},
-           given={Ellen\bibnamedelima T.},
-           giveni={E\bibinitperiod\bibinitdelim T\bibinitperiod},
-           givenun=0}}%
-        {{uniquename=0,uniquepart=base,hash=4650007d5ae451581316db72dcbd66b6}{%
-           family={Heim},
-           familyi={H\bibinitperiod},
-           given={Noel\bibnamedelima A.},
-           giveni={N\bibinitperiod\bibinitdelim A\bibinitperiod},
-           givenun=0}}%
-        {{uniquename=0,uniquepart=base,hash=cef82512b2885d7bad693d80a175bd96}{%
-           family={Knope},
-           familyi={K\bibinitperiod},
-           given={Matthew\bibnamedelima L.},
-           giveni={M\bibinitperiod\bibinitdelim L\bibinitperiod},
-           givenun=0}}%
-        {{uniquename=0,uniquepart=base,hash=d0407ca66111699868af7f4035d51188}{%
-           family={Pruss},
-           familyi={P\bibinitperiod},
-           given={Sara\bibnamedelima B.},
-           giveni={S\bibinitperiod\bibinitdelim B\bibinitperiod},
-           givenun=0}}%
       }
-      \strng{namehash}{085bc4566a13085956661fd82b7c64dd}
-      \strng{fullhash}{a51759de9d1a3d929d9c57f9b9c835e0}
-      \strng{bibnamehash}{a51759de9d1a3d929d9c57f9b9c835e0}
-      \strng{authorbibnamehash}{a51759de9d1a3d929d9c57f9b9c835e0}
-      \strng{authornamehash}{085bc4566a13085956661fd82b7c64dd}
-      \strng{authorfullhash}{a51759de9d1a3d929d9c57f9b9c835e0}
+      \strng{namehash}{27cc569a08eb957b2118427b623d7772}
+      \strng{fullhash}{27cc569a08eb957b2118427b623d7772}
+      \strng{bibnamehash}{27cc569a08eb957b2118427b623d7772}
+      \strng{authorbibnamehash}{27cc569a08eb957b2118427b623d7772}
+      \strng{authornamehash}{27cc569a08eb957b2118427b623d7772}
+      \strng{authorfullhash}{27cc569a08eb957b2118427b623d7772}
       \field{sortinit}{2}
       \field{sortinithash}{cbff857e587bcb4635511624d773949e}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{The macroevolutionary effects of extinction derive from both intensity of taxonomic losses and selectivity of losses with respect to ecology, physiology and/or higher taxonomy. Increasingly, palaeontologists are using logistic regression to quantify extinction selectivity because the selectivity metric is independent of extinction intensity and multiple predictor variables can be assessed simultaneously. We illustrate the use of logistic regression with an analysis of physiological buffering capacity and extinction risk in the Phanerozoic marine fossil record. We propose the geometric mean of extinction intensity and selectivity as a metric for the influence of extinction events. The end-Permian mass extinction had the largest influence on the physiological composition of the fauna owing to its combination of high intensity and strong selectivity. In addition to providing a quantitative measure of influence to compare among past events, this approach provides an avenue for quantifying the risk posed by the emerging biodiversity crisis that goes beyond a simple projection of taxonomic losses.}
-      \field{issn}{1744-9561}
-      \field{journaltitle}{Biology Letters}
-      \field{number}{10}
-      \field{title}{{Extinction intensity, selectivity and their combined macroevolutionary influence in the fossil record}}
-      \field{volume}{12}
-      \field{year}{2016}
-      \field{pages}{20160202}
-      \range{pages}{1}
+      \field{abstract}{Rarity is widely used to predict the vulnerability of species to extinction. Species can be rare in markedly different ways, but the relative impacts of these different forms of rarity on extinction risk are poorly known and cannot be determined through observations of species that are not yet extinct. The fossil record provides a valuable archive with which we can directly determine which aspects of rarity lead to the greatest risk. Previous palaeontological analyses confirm that rarity is associated with extinction risk, but the relative contributions of different types of rarity to extinction risk remain unknown because their impacts have never been examined simultaneously. Here, we analyse a global database of fossil marine animals spanning the past 500 million years, examining differential extinction with respect to multiple rarity types within each geological stage. We observe systematic differences in extinction risk over time among marine genera classified according to their rarity. Geographic range played a primary role in determining extinction, and habitat breadth a secondary role, whereas local abundance had little effect. These results suggest that current reductions in geographic range size will lead to pronounced increases in long-term extinction risk even if local populations are relatively large at present.}
+      \field{isbn}{1471-2954 (Electronic)$\backslash$n0962-8452 (Linking)}
+      \field{issn}{0962-8452}
+      \field{journaltitle}{Proceedings of the Royal Society B: Biological Sciences}
+      \field{number}{1749}
+      \field{title}{{Long-term differences in extinction risk among the seven forms of rarity}}
+      \field{volume}{279}
+      \field{year}{2012}
+      \field{pages}{4969\bibrangedash 4976}
+      \range{pages}{8}
       \verb{doi}
-      \verb 10.1098/rsbl.2016.0202
+      \verb 10.1098/rspb.2012.1902
       \endverb
       \verb{file}
-      \verb :home/peter/Documents/Mendeley Desktop/Payne et al/Biology Letters/Payne et al. - 2016 - Biology Letters.pdf:pdf
+      \verb :home/peter/Documents/Mendeley Desktop/Harnik, Simpson, Payne/Proceedings of the Royal Society B Biological Sciences/Harnik, Simpson, Payne - 2012 - Proceedings of the Royal Society B Biological Sciences.pdf:pdf;:home/peter/Documents/Mendeley Desktop/Harnik, Simpson, Payne/Proceedings of the Royal Society B Biological Sciences/Harnik, Simpson, Payne - 2012 - Proceedings of the Royal Society B Biological Sciences(2).pdf:pdf
       \endverb
       \verb{urlraw}
-      \verb http://rsbl.royalsocietypublishing.org/lookup/doi/10.1098/rsbl.2016.0202
+      \verb http://rspb.royalsocietypublishing.org/cgi/doi/10.1098/rspb.2012.1902
       \endverb
       \verb{url}
-      \verb http://rsbl.royalsocietypublishing.org/lookup/doi/10.1098/rsbl.2016.0202
+      \verb http://rspb.royalsocietypublishing.org/cgi/doi/10.1098/rspb.2012.1902
       \endverb
-      \keyw{extinction,macroevolution,physiology}
+      \keyw{conservation,invertebrate,macroecology,macroevolution,phanerozoic}
     \endentry
     \entry{Ezard2011}{article}{}
       \name{author}{4}{}{%
@@ -406,175 +421,6 @@
       \verb http://www.sciencemag.org/cgi/doi/10.1126/science.1203060
       \endverb
     \endentry
-    \entry{Harnik2011}{article}{}
-      \name{author}{1}{}{%
-        {{uniquename=0,uniquepart=base,hash=68ea50f8c0b787e5d0e5461dc22f9ef9}{%
-           family={Harnik},
-           familyi={H\bibinitperiod},
-           given={Paul\bibnamedelima G},
-           giveni={P\bibinitperiod\bibinitdelim G\bibinitperiod},
-           givenun=0}}%
-      }
-      \strng{namehash}{68ea50f8c0b787e5d0e5461dc22f9ef9}
-      \strng{fullhash}{68ea50f8c0b787e5d0e5461dc22f9ef9}
-      \strng{bibnamehash}{68ea50f8c0b787e5d0e5461dc22f9ef9}
-      \strng{authorbibnamehash}{68ea50f8c0b787e5d0e5461dc22f9ef9}
-      \strng{authornamehash}{68ea50f8c0b787e5d0e5461dc22f9ef9}
-      \strng{authorfullhash}{68ea50f8c0b787e5d0e5461dc22f9ef9}
-      \field{sortinit}{3}
-      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{Biological factors, such as abundance and body size, may contrib- ute directly to extinction risk and indirectly through their influence on other biological characteristics, such as geographic range size. Paleontological data can be used to explicitly test many of these hypothesized relationships, and general patterns revealed through analysis of the fossil record can help refine predictive models of extinction risk developed for extant species. Here, I use structural equation modeling to tease apart the contributions of three canonical predictors of extinction---abundance, body size, and geographic range size---to the duration of bivalve species in the early Cenozoic marine fossil record of the eastern United States. I find that geographic range size has a strong direct effect on extinction risk and that an apparent direct effect of abundance can be explained entirely by its covariation with geographic range. The influence of geographic range on extinction risk is manifest across three ecologically disparate bivalve clades. Body size also has strong direct effects on extinction risk but operates in opposing directions in different clades, and thus, it seems to be decoupled from extinction risk in bivalves as a whole. Although abundance does not directly predict extinction risk, I reveal weak indirect effects of both abundance and body size through their positive influence on geographic range size. Multivariate models that account for the pervasive covariation between biological factors and extinction are necessary for assessing causality in evolutionary processes and making informed predictions in applied conser- vation efforts.}
-      \field{isbn}{0027-8424}
-      \field{issn}{0027-8424}
-      \field{journaltitle}{Proceedings of the National Academy of Science}
-      \field{number}{33}
-      \field{title}{{Direct and indirect effects of biological factors on extinction risk in fossil bivalves}}
-      \field{volume}{108}
-      \field{year}{2011}
-      \field{pages}{13594\bibrangedash 13599}
-      \range{pages}{6}
-      \verb{doi}
-      \verb 10.1073/pnas.1100572108/-/DCSupplemental.www.pnas.org/cgi/doi/10.1073/pnas.1100572108
-      \endverb
-      \verb{file}
-      \verb :home/peter/Documents/Mendeley Desktop/Harnik/Proceedings of the National Academy of Science/Harnik - 2011 - Proceedings of the National Academy of Science.pdf:pdf
-      \endverb
-      \keyw{macroecology | macroevolution | Paleogene | Bivalv}
-    \endentry
-    \entry{Smits2015}{article}{}
-      \name{author}{1}{}{%
-        {{uniquename=0,uniquepart=base,hash=c923fcf3d4ec4bd87b0caf6ff22e9ca0}{%
-           family={Smits},
-           familyi={S\bibinitperiod},
-           given={Peter\bibnamedelima D.},
-           giveni={P\bibinitperiod\bibinitdelim D\bibinitperiod},
-           givenun=0}}%
-      }
-      \strng{namehash}{c923fcf3d4ec4bd87b0caf6ff22e9ca0}
-      \strng{fullhash}{c923fcf3d4ec4bd87b0caf6ff22e9ca0}
-      \strng{bibnamehash}{c923fcf3d4ec4bd87b0caf6ff22e9ca0}
-      \strng{authorbibnamehash}{c923fcf3d4ec4bd87b0caf6ff22e9ca0}
-      \strng{authornamehash}{c923fcf3d4ec4bd87b0caf6ff22e9ca0}
-      \strng{authorfullhash}{c923fcf3d4ec4bd87b0caf6ff22e9ca0}
-      \field{sortinit}{3}
-      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{Determining which biological traits influence differences in extinction risk is vital for understanding the differential diversification of life and for making predictions about species' vulnerability to anthropogenic impacts. Here I present a hierarchical Bayesian survival model of North American Cenozoic mammal species durations in relation to species-level ecological factors, time of origination, and phylogenetic relationships. I find support for the survival of the unspecialized as a time-invariant generalization of trait-based extinction risk. Furthermore, I find that phylogenetic and temporal effects are both substantial factors associated with differences in species durations. Finally, I find that the estimated effects of these factors are partially incongruous with how these factors are correlated with extinction risk of the extant species. These findings parallel previous observations that background extinction is a poor predictor of mass extinction events and suggest that attention should be focused on mass extinctions to gain insight into modern species loss.}
-      \field{issn}{0027-8424}
-      \field{journaltitle}{Proceedings of the National Academy of Sciences}
-      \field{number}{42}
-      \field{title}{{Expected time-invariant effects of biological traits on mammal species duration}}
-      \field{volume}{112}
-      \field{year}{2015}
-      \field{pages}{13015\bibrangedash 13020}
-      \range{pages}{6}
-      \verb{doi}
-      \verb 10.1073/pnas.1510482112
-      \endverb
-      \verb{file}
-      \verb :home/peter/Documents/Mendeley Desktop/Smits/Proceedings of the National Academy of Sciences/Smits - 2015 - Proceedings of the National Academy of Sciences.pdf:pdf
-      \endverb
-      \verb{urlraw}
-      \verb http://www.pnas.org/lookup/doi/10.1073/pnas.1510482112
-      \endverb
-      \verb{url}
-      \verb http://www.pnas.org/lookup/doi/10.1073/pnas.1510482112
-      \endverb
-    \endentry
-    \entry{Peters2008}{article}{}
-      \name{author}{1}{}{%
-        {{uniquename=0,uniquepart=base,hash=a3243cb96ab018507d727f2aacc79087}{%
-           family={Peters},
-           familyi={P\bibinitperiod},
-           given={Shanan\bibnamedelima E.},
-           giveni={S\bibinitperiod\bibinitdelim E\bibinitperiod},
-           givenun=0}}%
-      }
-      \strng{namehash}{a3243cb96ab018507d727f2aacc79087}
-      \strng{fullhash}{a3243cb96ab018507d727f2aacc79087}
-      \strng{bibnamehash}{a3243cb96ab018507d727f2aacc79087}
-      \strng{authorbibnamehash}{a3243cb96ab018507d727f2aacc79087}
-      \strng{authornamehash}{a3243cb96ab018507d727f2aacc79087}
-      \strng{authorfullhash}{a3243cb96ab018507d727f2aacc79087}
-      \field{sortinit}{3}
-      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{The causes of mass extinctions and the nature of biological selectivity during extinction events remain central questions in palaeobiology. Although many different environmental perturbations have been invoked as extinction mechanisms, it has long been recognized that fluctuations in sea level coincide with many episodes of biotic turnover. Recent work supports the hypothesis that changes in the areas of epicontinental seas have influenced the macroevolution of marine animals, but the extent to which differential environmental turnover has contributed to extinction selectivity remains unknown. Here I use a new compilation of the temporal durations of sedimentary rock packages to show that carbonate and terrigenous clastic marine shelf environments have different spatio-temporal dynamics and that these dynamics predict patterns of genus-level extinction, extinction selectivity and diversity among Sepkoski's Palaeozoic and modern evolutionary faunae. These results do not preclude a role for biological interactions or unusual physical events as drivers of macroevolution, but they do suggest that the turnover of marine shelf habitats and correlated environmental changes have been consistent determinants of extinction, extinction selectivity and the shifting composition of the marine biota during the Phanerozoic eon.}
-      \field{isbn}{0028-0836}
-      \field{issn}{00280836}
-      \field{journaltitle}{Nature}
-      \field{number}{7204}
-      \field{title}{{Environmental determinants of extinction selectivity in the fossil record}}
-      \field{volume}{454}
-      \field{year}{2008}
-      \field{pages}{626\bibrangedash 629}
-      \range{pages}{4}
-      \verb{doi}
-      \verb 10.1038/nature07032
-      \endverb
-      \verb{file}
-      \verb :home/peter/Documents/Mendeley Desktop/Peters/Nature/Peters - 2008 - Nature.pdf:pdf
-      \endverb
-    \endentry
-    \entry{Harnik2012}{article}{}
-      \name{author}{3}{}{%
-        {{uniquename=0,uniquepart=base,hash=b8b9e459ffe7c9e6a82b3bd8f704f774}{%
-           family={Harnik},
-           familyi={H\bibinitperiod},
-           given={P.\bibnamedelimi G.},
-           giveni={P\bibinitperiod\bibinitdelim G\bibinitperiod},
-           givenun=0}}%
-        {{uniquename=0,uniquepart=base,hash=4a5b9491e7bfd4e3984e98f78eb84ef0}{%
-           family={Simpson},
-           familyi={S\bibinitperiod},
-           given={C.},
-           giveni={C\bibinitperiod},
-           givenun=0}}%
-        {{uniquename=0,uniquepart=base,hash=36ee7b6f4945bb58137476dedf5496cc}{%
-           family={Payne},
-           familyi={P\bibinitperiod},
-           given={J.\bibnamedelimi L.},
-           giveni={J\bibinitperiod\bibinitdelim L\bibinitperiod},
-           givenun=0}}%
-      }
-      \strng{namehash}{27cc569a08eb957b2118427b623d7772}
-      \strng{fullhash}{27cc569a08eb957b2118427b623d7772}
-      \strng{bibnamehash}{27cc569a08eb957b2118427b623d7772}
-      \strng{authorbibnamehash}{27cc569a08eb957b2118427b623d7772}
-      \strng{authornamehash}{27cc569a08eb957b2118427b623d7772}
-      \strng{authorfullhash}{27cc569a08eb957b2118427b623d7772}
-      \field{sortinit}{3}
-      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{Rarity is widely used to predict the vulnerability of species to extinction. Species can be rare in markedly different ways, but the relative impacts of these different forms of rarity on extinction risk are poorly known and cannot be determined through observations of species that are not yet extinct. The fossil record provides a valuable archive with which we can directly determine which aspects of rarity lead to the greatest risk. Previous palaeontological analyses confirm that rarity is associated with extinction risk, but the relative contributions of different types of rarity to extinction risk remain unknown because their impacts have never been examined simultaneously. Here, we analyse a global database of fossil marine animals spanning the past 500 million years, examining differential extinction with respect to multiple rarity types within each geological stage. We observe systematic differences in extinction risk over time among marine genera classified according to their rarity. Geographic range played a primary role in determining extinction, and habitat breadth a secondary role, whereas local abundance had little effect. These results suggest that current reductions in geographic range size will lead to pronounced increases in long-term extinction risk even if local populations are relatively large at present.}
-      \field{isbn}{1471-2954 (Electronic)$\backslash$n0962-8452 (Linking)}
-      \field{issn}{0962-8452}
-      \field{journaltitle}{Proceedings of the Royal Society B: Biological Sciences}
-      \field{number}{1749}
-      \field{title}{{Long-term differences in extinction risk among the seven forms of rarity}}
-      \field{volume}{279}
-      \field{year}{2012}
-      \field{pages}{4969\bibrangedash 4976}
-      \range{pages}{8}
-      \verb{doi}
-      \verb 10.1098/rspb.2012.1902
-      \endverb
-      \verb{file}
-      \verb :home/peter/Documents/Mendeley Desktop/Harnik, Simpson, Payne/Proceedings of the Royal Society B Biological Sciences/Harnik, Simpson, Payne - 2012 - Proceedings of the Royal Society B Biological Sciences.pdf:pdf;:home/peter/Documents/Mendeley Desktop/Harnik, Simpson, Payne/Proceedings of the Royal Society B Biological Sciences/Harnik, Simpson, Payne - 2012 - Proceedings of the Royal Society B Biological Sciences(2).pdf:pdf
-      \endverb
-      \verb{urlraw}
-      \verb http://rspb.royalsocietypublishing.org/cgi/doi/10.1098/rspb.2012.1902
-      \endverb
-      \verb{url}
-      \verb http://rspb.royalsocietypublishing.org/cgi/doi/10.1098/rspb.2012.1902
-      \endverb
-      \keyw{conservation,invertebrate,macroecology,macroevolution,phanerozoic}
-    \endentry
     \entry{Foote2006}{article}{}
       \name{author}{1}{}{%
         {{uniquename=0,uniquepart=base,hash=ab99be064192f9409924032ef936a04f}{%
@@ -590,8 +436,8 @@
       \strng{authorbibnamehash}{ab99be064192f9409924032ef936a04f}
       \strng{authornamehash}{ab99be064192f9409924032ef936a04f}
       \strng{authorfullhash}{ab99be064192f9409924032ef936a04f}
-      \field{sortinit}{3}
-      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
+      \field{sortinit}{2}
+      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Short-term fluctuations in the diversification rate of Paleozoic marine animal genera are more strongly correlated with extinction-rate variation than with origination-rate variation. Diversity dynamics are strikingly different in the Mesozoic and Cenozoic, when variation in origination is more important than extinction. Data on the lithologic context of taxonomic occurrences in the Paleobiology Database are used to assess the substrate affinities of Paleozoic genera. The greater role of extinction-rate variation in the Paleozoic is found to characterize genera with an affinity for carbonate substrates but not those that prefer terrigenous clastic substrates. It is therefore plausible that the Paleozoic to post-Paleozoic shift in diversity dynamics is underlain in part by the secular decline in the relative areal extent of carbonate environments, and the concomitant decline in the relative diversity of carbonate- versus clastic-loving taxa.}
@@ -632,8 +478,8 @@
       \strng{authorbibnamehash}{b41b106c94a7142a4ec3408d8f212969}
       \strng{authornamehash}{b41b106c94a7142a4ec3408d8f212969}
       \strng{authorfullhash}{b41b106c94a7142a4ec3408d8f212969}
-      \field{sortinit}{4}
-      \field{sortinithash}{11cdaee3b18e01d77f3f428b13c1fc76}
+      \field{sortinit}{3}
+      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{The fossil record demonstrates that each major taxonomic group has a consistent net rate of diversification and a limit to its species richness. It has been thought that long-term changes in the dominance of major taxonomic groups can be predicted from these characteristics. However, new analyses show that diversity limits may rise or fall in response to adaptive radiations or extinctions. These changes are idiosyncratic and occur at different times in each taxa. For example, the end-Permian mass extinction permanently reduced the diversity of important, previously dominant groups such as brachiopods and crinoids. The current global crisis may therefore permanently alter the biosphere's taxonomic composition by changing the rules of evolution.}
@@ -674,8 +520,8 @@
       \strng{authorbibnamehash}{139258ecb448cbdd5d01bef611b8d985}
       \strng{authornamehash}{139258ecb448cbdd5d01bef611b8d985}
       \strng{authorfullhash}{139258ecb448cbdd5d01bef611b8d985}
-      \field{sortinit}{4}
-      \field{sortinithash}{11cdaee3b18e01d77f3f428b13c1fc76}
+      \field{sortinit}{3}
+      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Paleobiologists have used many different methods for estimating rates of origination and extinction. Unfortunately, all equations that consider entire age ranges are distorted by the Pull of the Recent, the Signor-Lipps effect, and simple edge effects. Attention has been paid recently to an equation of Foote's that considers counts of taxa either crossing the bottom and top of an interval or crossing one boundary but not the other. This generalized boundary-crosser (BC) method has important advantages but is still potentially subject to the major biases. The only published equation that circumvents all of them is the three-timer (3T) log ratio, which does so by focusing on a four-interval moving window. Although it is highly accurate it is noisy when turnover rates are very high or sampling is very poor. More precise values are yielded by a newly derived equation that uses the same counts. However, it also considers taxa sampled in a window's first and fourth intervals but missing from the third (i.e., gap-fillers). Simulations show that the 3T, gap-filler (GF), and BC equations yield identical values when sampling and turnover are uniform through time. When applied to Phanerozoic-scale marine animal data, 3T and GF agree well but the BC rates are systematically lower. The apparent reason is that (1) long-ranging but infrequently sampled genera are less likely to be split up by taxonomists and (2) the BC equation overweights taxa with long ranges. Thus, BC rates pertain more to rare genera that are likely to represent large clades whereas GF rates pertain more to actual species-level patterns. Given these results, all published turnover rates based either on genus-level data or on age ranges must be reconsidered because they may reflect taxonomic practices more strongly than the species-level dynamics of interest to biologists.}
@@ -859,8 +705,8 @@
       \strng{authorbibnamehash}{7149a6dd8b097f4da60fb2d31032398f}
       \strng{authornamehash}{7149a6dd8b097f4da60fb2d31032398f}
       \strng{authorfullhash}{7120000f4648ed5e02fb31d47fe174a0}
-      \field{sortinit}{4}
-      \field{sortinithash}{11cdaee3b18e01d77f3f428b13c1fc76}
+      \field{sortinit}{3}
+      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Global diversity curves reflect more than just the number of taxa that have existed through time: they also mirror variation in the nature of the fossil record and the way the record is reported. These sampling effects are best quantified by assembling and analyzing large numbers of locality-specific biotic inventories. Here, we introduce a new database of this kind for the Phanerozoic fossil record of marine invertebrates. We apply four substantially distinct analytical methods that estimate taxonomic diversity by quantifying and correcting for variation through time in the number and nature of inventories. Variation introduced by the use of two dramatically different counting protocols also is explored. We present sampling-standardized diversity estimates for two long intervals that sum to 300 Myr (Middle Ordovician-Carboniferous; Late Jurassic-Paleogene). Our new curves differ considerably from traditional, synoptic curves. For example, some of them imply unexpectedly low late Cretaceous and early Tertiary diversity levels. However, such factors as the current emphasis in the database on North America and Europe still obscure our view of the global history of marine biodiversity. These limitations will be addressed as the database and methods are refined.}
@@ -913,8 +759,8 @@
       \strng{authorbibnamehash}{1c83b2a5a3846677911bacc37248d3fe}
       \strng{authornamehash}{1c83b2a5a3846677911bacc37248d3fe}
       \strng{authorfullhash}{1c83b2a5a3846677911bacc37248d3fe}
-      \field{sortinit}{4}
-      \field{sortinithash}{11cdaee3b18e01d77f3f428b13c1fc76}
+      \field{sortinit}{3}
+      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{isbn}{0094-8373}
@@ -947,8 +793,8 @@
       \strng{authorbibnamehash}{139258ecb448cbdd5d01bef611b8d985}
       \strng{authornamehash}{139258ecb448cbdd5d01bef611b8d985}
       \strng{authorfullhash}{139258ecb448cbdd5d01bef611b8d985}
-      \field{sortinit}{4}
-      \field{sortinithash}{11cdaee3b18e01d77f3f428b13c1fc76}
+      \field{sortinit}{3}
+      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{This paper documents a series of methodological innovations that are relevant to macroevolutionary studies. The new methods are applied to updated faunal and body mass data sets for North American fossil mammals, documenting several key trends across the late Cretaceous and Cenozoic. The methods are (1) A maximum likelihood formulation of appearance event ordination. The reformulated criterion involves generating a maximally likely hypothesized relative ordering of first and last appearances (i.e., an age range chart). The criterion takes faunal occurrences, stratigraphic relationships, and the sampling probability of individual genera and species into account. (2) A nonparametric temporal interpolation method called \textquoteleft{}\textquoteleft{}shrink-wrapping'' that makes it possible to employ the greatest possible number of tie points without violating monotonicity or allowing abrupt changes in slopes. The new calibration method is used in computing provisional definitions of boundaries among North American land mammal ages. (3) Additionalmethods for randomized subsampling of faunal lists, one weighting the number of lists that have been drawn by the sum of the square of the number of occurrences in each list, and one further modifying this approach to account for long-term changes in average local species richness. (4) Foote's new equations for instantaneous speciation and extinction rates. The equations are rederived and used to generate time series, confirm that logistic dynamics result from the diversity dependence of speciation but not extinction, and define the median duration of species (i.e., 2.6 m.y. for Eocene-- Pleistocene mammals). (5) A method employing the G likelihood ratio statistic that is used to quantify the volatility of changes in the relative proportion of species falling in each of several major taxonomic groups. (6) Univariate measures of body mass distributions based on ordinary moment statistics (mean, standard deviation, skewness, kurtosis). These measures are favored over the method of cenogram analysis. Data are presented showing that even diverse individual fossil collections merely yield a noisy version of the same pattern seen in the overall continental data set. Peaks in speciation rates, extinction rates, proportional volatility, and shifts in body mass distributions occur at different times, suggesting that environmental perturbations do not have simple effects on the biota.}
@@ -984,8 +830,8 @@
       \strng{authorbibnamehash}{ab99be064192f9409924032ef936a04f}
       \strng{authornamehash}{ab99be064192f9409924032ef936a04f}
       \strng{authorfullhash}{ab99be064192f9409924032ef936a04f}
-      \field{sortinit}{4}
-      \field{sortinithash}{11cdaee3b18e01d77f3f428b13c1fc76}
+      \field{sortinit}{3}
+      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Apparent variation in rates of origination and extinction reflects the true temporal pat- tern of taxonomic rates as well as the distorting effects of incomplete and variable preservation, effects that are themselves exacerbated by true variation in taxonomic rates. Here I present an ap- proach that can undo these distortions and thus permit estimates of true taxonomic rates, while providing estimates of preservation in the process. Standard survivorship probabilities are mod- ified to incorporate variable taxonomic rates and rates of fossil recovery. Time series of these rates are explored by numerical optimization until the set of rates that best explains the observed data is found. If internal occurrences within stratigraphic ranges are available, or if temporal patterns of fossil recovery can otherwise be assumed, these constraints can be exploited, but they are by no means necessary. In its most general form, the approach requires no data other than first and last appearances. When tested against simulated data, the method is able to recover temporal patterns in rates of origination, extinction, and preservation. With empirical data, it yields estimates of pres- ervation rate that agree with those obtained independently by tabulating internal occurrences with- in stratigraphic ranges. Moreover, when empirical occurrence data are artificially degraded, the method detects the resulting gaps in sampling and corrects taxonomic rates. Preliminary appli- cation to data on Paleozoic marine animals suggests that some features of the apparent record, such as the forward smearing of true origination events and the backward smearing of true extinction events, can be detected and corrected. Other features, such as the end-Ordovician extinction, may be fairly accurate at face value.}
@@ -1004,6 +850,78 @@
       \verb{file}
       \verb :home/peter/Documents/Mendeley Desktop/Foote/Paleobiology/Foote - 2001 - Paleobiology.pdf:pdf
       \endverb
+    \endentry
+    \entry{Payne2016}{article}{}
+      \name{author}{6}{}{%
+        {{uniquename=0,uniquepart=base,hash=f9a5b9e52625eb471cd02a2050ee79e4}{%
+           family={Payne},
+           familyi={P\bibinitperiod},
+           given={Jonathan\bibnamedelima L.},
+           giveni={J\bibinitperiod\bibinitdelim L\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=6596c2ce147eda5689265295f6f6eef6}{%
+           family={Bush},
+           familyi={B\bibinitperiod},
+           given={Andrew\bibnamedelima M.},
+           giveni={A\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=36819fb1b32484d2d24f352da25ba0fc}{%
+           family={Chang},
+           familyi={C\bibinitperiod},
+           given={Ellen\bibnamedelima T.},
+           giveni={E\bibinitperiod\bibinitdelim T\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=4650007d5ae451581316db72dcbd66b6}{%
+           family={Heim},
+           familyi={H\bibinitperiod},
+           given={Noel\bibnamedelima A.},
+           giveni={N\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=cef82512b2885d7bad693d80a175bd96}{%
+           family={Knope},
+           familyi={K\bibinitperiod},
+           given={Matthew\bibnamedelima L.},
+           giveni={M\bibinitperiod\bibinitdelim L\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=d0407ca66111699868af7f4035d51188}{%
+           family={Pruss},
+           familyi={P\bibinitperiod},
+           given={Sara\bibnamedelima B.},
+           giveni={S\bibinitperiod\bibinitdelim B\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{085bc4566a13085956661fd82b7c64dd}
+      \strng{fullhash}{a51759de9d1a3d929d9c57f9b9c835e0}
+      \strng{bibnamehash}{a51759de9d1a3d929d9c57f9b9c835e0}
+      \strng{authorbibnamehash}{a51759de9d1a3d929d9c57f9b9c835e0}
+      \strng{authornamehash}{085bc4566a13085956661fd82b7c64dd}
+      \strng{authorfullhash}{a51759de9d1a3d929d9c57f9b9c835e0}
+      \field{sortinit}{4}
+      \field{sortinithash}{11cdaee3b18e01d77f3f428b13c1fc76}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The macroevolutionary effects of extinction derive from both intensity of taxonomic losses and selectivity of losses with respect to ecology, physiology and/or higher taxonomy. Increasingly, palaeontologists are using logistic regression to quantify extinction selectivity because the selectivity metric is independent of extinction intensity and multiple predictor variables can be assessed simultaneously. We illustrate the use of logistic regression with an analysis of physiological buffering capacity and extinction risk in the Phanerozoic marine fossil record. We propose the geometric mean of extinction intensity and selectivity as a metric for the influence of extinction events. The end-Permian mass extinction had the largest influence on the physiological composition of the fauna owing to its combination of high intensity and strong selectivity. In addition to providing a quantitative measure of influence to compare among past events, this approach provides an avenue for quantifying the risk posed by the emerging biodiversity crisis that goes beyond a simple projection of taxonomic losses.}
+      \field{issn}{1744-9561}
+      \field{journaltitle}{Biology Letters}
+      \field{number}{10}
+      \field{title}{{Extinction intensity, selectivity and their combined macroevolutionary influence in the fossil record}}
+      \field{volume}{12}
+      \field{year}{2016}
+      \field{pages}{20160202}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1098/rsbl.2016.0202
+      \endverb
+      \verb{file}
+      \verb :home/peter/Documents/Mendeley Desktop/Payne et al/Biology Letters/Payne et al. - 2016 - Biology Letters.pdf:pdf
+      \endverb
+      \verb{urlraw}
+      \verb http://rsbl.royalsocietypublishing.org/lookup/doi/10.1098/rsbl.2016.0202
+      \endverb
+      \verb{url}
+      \verb http://rsbl.royalsocietypublishing.org/lookup/doi/10.1098/rsbl.2016.0202
+      \endverb
+      \keyw{extinction,macroevolution,physiology}
     \endentry
     \entry{Foote2007}{article}{}
       \name{author}{1}{}{%
@@ -1214,8 +1132,8 @@
       \strng{authorbibnamehash}{301e07f50cf094b5c009f1118b7aa351}
       \strng{authornamehash}{301e07f50cf094b5c009f1118b7aa351}
       \strng{authorfullhash}{301e07f50cf094b5c009f1118b7aa351}
-      \field{sortinit}{6}
-      \field{sortinithash}{57e57fb8451e7fcfa45d1e069f6d3136}
+      \field{sortinit}{5}
+      \field{sortinithash}{3c19c3776b658b3558e9e2e4840c01e2}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{The notion of a positive relation between geographical range and speciation rate or speciation probability may go back to Darwin, but a negative relation between these parameters is equally plausible. Here, we test these alternatives in fossil and living molluscan taxa. Late Cretaceous gastropod genera exhibit a strong negative relation between the geographical ranges of constituent species and speciation rate per species per million years; this result is robust to sampling biases against small-bodied taxa and is not attributable to phylogenetic effects. They also exhibit weak inverse or non-significant relations between geographical range and (i) the total number of species produced over the 18 million year timeframe, and (ii) the number of species in a single timeplane. Sister-group comparisons using extant molluscan species also show a non-significant relation between median geographical range and species richness of genera. These results support the view that the factors promoting broad geographical ranges also tend to damp speciation rates. They also demonstrate that a strong inverse relation between per-species speciation rate and geographical range need not be reflected in analyses conducted within a single timeplane, underscoring the inadequacy of treating net speciation as a proxy for raw per-taxon rates.}
@@ -1257,8 +1175,8 @@
       \strng{authorbibnamehash}{9fe0d8e7cb3ea42ff56b12c847ffb968}
       \strng{authornamehash}{9fe0d8e7cb3ea42ff56b12c847ffb968}
       \strng{authorfullhash}{9fe0d8e7cb3ea42ff56b12c847ffb968}
-      \field{sortinit}{6}
-      \field{sortinithash}{57e57fb8451e7fcfa45d1e069f6d3136}
+      \field{sortinit}{5}
+      \field{sortinithash}{3c19c3776b658b3558e9e2e4840c01e2}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Species selection in the broad sense---also termed species sorting---shapes evolutionary patterns through differences in speciation and extinction rates (and their net outcome, often termed the emergent fitness of clades) that arise by interaction of intrinsic biological traits with the environment. Effect-macroevolution occurs when those biotic traits, such as body size or fecundity, reside at the organismic level. Strict-sense species selection occurs when those traits are emergent at the species level, such as geographic range or population size. The fields of paleontology, comparative phylogenetic analysis, macroecology, and conservation biology are rich in examples of species sorting, but relatively few instances have been well documented, so the extent and efficacy of the specific processes remain poorly known. A general formalization of these processes remains challenging, but approaches drawing on hierarchical covariance models appear promising. Analyses integrating paleontological and neontological d...}
@@ -1306,8 +1224,8 @@
       \strng{authorbibnamehash}{8b207d0fb9f9283b1fa89915e5ecfb40}
       \strng{authornamehash}{8b207d0fb9f9283b1fa89915e5ecfb40}
       \strng{authorfullhash}{8b207d0fb9f9283b1fa89915e5ecfb40}
-      \field{sortinit}{6}
-      \field{sortinithash}{57e57fb8451e7fcfa45d1e069f6d3136}
+      \field{sortinit}{5}
+      \field{sortinithash}{3c19c3776b658b3558e9e2e4840c01e2}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{The observation that geographic range size in Cretaceous mollusks is correlated with species survivorship and is heritable at the species level has figured repeatedly in discussions of species selection over the past two decades. However, some authors have suggested that the relationship between mode of larval development and geographic range supports the reduction of this example to selection on organismic properties. Our reanalysis of Jablonski's work on heritability at the species level finds that geographic range is significantly heritable (using a randomization test) in both bivalves and gastropods, even within a single larval mode. Further, generalized linear models show that geographic range size is more important than larval mode in predicting extinction probability in both gastropods and bivalves. These results reaffirm the role and heritability of geographic range as a species-level property that can promote species selection; the model-based approach applied here may help to operationalize "screening off " and related approaches to evaluating hierarchical explanations in evolution.}
@@ -1349,8 +1267,8 @@
       \strng{authorbibnamehash}{c89c1858819e2003a1136bdcfcda3bfc}
       \strng{authornamehash}{c89c1858819e2003a1136bdcfcda3bfc}
       \strng{authorfullhash}{c89c1858819e2003a1136bdcfcda3bfc}
-      \field{sortinit}{1}
-      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
+      \field{sortinit}{6}
+      \field{sortinithash}{57e57fb8451e7fcfa45d1e069f6d3136}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Marine micropaleontology must in the future provide more precise chronologic and paleoenvironmental information, which in turn must be based on better, more consistent taxonomic and distributional data. Better tools for synthesis and standardization of this data are needed, as the ever expanding published literature is rapidly becoming unmanageable by purely manual compilation methods. The micropaleontology group at the ETH has developed a large relational database of marine microfossil data to partially meet this need. It currently contains biogeographic data on the distribution in Deep Sea Drilling Project (DSDP) and Ocean Drilling Program (ODP) holes of nearly 8,000 species of Cenozoic planktonic foraminifera, radiolaria, diatoms and calcareous nannofossils. The database also includes full stratigraphic occurrence (range chart) data for these fossil groups from more than 100 selected Neogene holes. A particular feature of the database is that all sample information and species names in the original reports are linked to newly created, updatable, comprehensive age models and synonymy lists which reflect modern chronology and taxonomic usage. Searches of the database automatically make use of this information in producing reports. Species' occurrences, including first and last occurrence information, can be further analyzed using external spreadsheet and statistics packages; plotted by mapping programs; or displayed by a new program which creates composite age-range charts.}
@@ -1386,8 +1304,8 @@
       \strng{authorbibnamehash}{5b83aa1e78bcdaab75e621f2c586dcfe}
       \strng{authornamehash}{5b83aa1e78bcdaab75e621f2c586dcfe}
       \strng{authorfullhash}{5b83aa1e78bcdaab75e621f2c586dcfe}
-      \field{sortinit}{1}
-      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
+      \field{sortinit}{6}
+      \field{sortinithash}{57e57fb8451e7fcfa45d1e069f6d3136}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{issn}{10948074}
@@ -1442,8 +1360,8 @@
       \strng{authorbibnamehash}{da24ac5efda7943ee9d233483865bf51}
       \strng{authornamehash}{d282c5028f7d0e369c0e4a6d4fb14e22}
       \strng{authorfullhash}{da24ac5efda7943ee9d233483865bf51}
-      \field{sortinit}{1}
-      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
+      \field{sortinit}{8}
+      \field{sortinithash}{07edf88d4ea82509b9c4b4d13f41c452}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{We reconstruct trends in ice volume and deep ocean temperature for the past 108 Myr, resolving variations on timescales of {\~{}}2 Myr and longer. We use a sea level record as a proxy for ice volume, a benthic foraminiferal Mg/Cabf record as a proxy for temperature, and a benthic foraminiferal $\delta$18Obf record as a proxy for both. This allows us to construct dual estimates of temperature and ice volume variations for the interval 10--60 Ma: extracting temperature from $\delta$18Obf by using sea level as a proxy for ice volume to constrain the $\delta$18Osw component, and extracting seawater $\delta$18Osw (which reflects ice volume) from $\delta$18Obf by using Mg/Cabf to constrain the temperature component. Each of these approaches requires numerous assumptions, but the range of plausible solutions are concordant on timescales {>}2 Myr and within an uncertainty of \x{00b1}2\textdegree{}C temperature and \x{00b1}0.4\textperthousand{} $\delta$18Osw. The agreement between the two approaches for the last 50 Myr provides empirical justification for the use of $\delta$18Obf, Mg/Cabf, and sea level records as robust climate proxies. Our reconstructions indicate differences between deep ocean cooling and continental ice growth in the late Cenozoic: cooling occurred gradually in the middle--late Eocene and late Miocene--Pliocene while ice growth occurred rapidly in the earliest Oligocene, middle Miocene, and Plio-Pleistocene. These differences are consistent with climate models that imply that temperatures, set by the long-term CO2 equilibrium, should change only gradually on timescales {>}2 Myr, but growth of continental ice sheets may be rapid in response to climate thresholds due to feedbacks that are not yet fully understood.}
@@ -1853,8 +1771,8 @@
       \strng{authorbibnamehash}{0007c88a802241e561514e407cb6dc92}
       \strng{authornamehash}{0007c88a802241e561514e407cb6dc92}
       \strng{authorfullhash}{0007c88a802241e561514e407cb6dc92}
-      \field{sortinit}{2}
-      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{sortinit}{1}
+      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Used to estimate the risk of an estimator or to perform model selection, cross-validation is a widespread strategy because of its simplicity and its apparent universality. Many results exist on the model selection performances of cross-validation procedures. This survey intends to relate these results to the most recent advances of model selection theory, with a particular emphasis on distinguishing empirical statements from rigorous theoretical results. As a conclusion, guidelines are provided for choosing the best cross-validation procedure according to the particular features of the problem in hand.}
@@ -1913,8 +1831,8 @@
       \strng{authorbibnamehash}{f090b846f5e026e09fa5a92d22317998}
       \strng{authornamehash}{f090b846f5e026e09fa5a92d22317998}
       \strng{authorfullhash}{f090b846f5e026e09fa5a92d22317998}
-      \field{sortinit}{2}
-      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{sortinit}{1}
+      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{One of the most widely used standard procedures for model evaluation in classification and regression is K-fold cross-validation (CV). However, when it comes to time series forecasting, because of the inherent serial correlation and potential non-stationarity of the data, its application is not straightforward and often replaced by practitioners in favour of an out-of-sample (OOS) evaluation. It is shown that for purely autoregressive models, the use of standard K-fold CV is possible provided the models considered have uncorrelated errors. Such a setup occurs, for example, when the models nest a more appropriate model. This is very common when Machine Learning methods are used for prediction, and where CV can control for overfitting the data. Theoretical insights supporting these arguments are presented, along with a simulation study and a real-world example. It is shown empirically that K-fold CV performs favourably compared to both OOS evaluation and other time-series-specific techniques such as non-dependent cross-validation.}
@@ -1954,8 +1872,8 @@
       \strng{authorbibnamehash}{9c15aa0b2a7683cefeaa12c991d0b1c2}
       \strng{authornamehash}{9c15aa0b2a7683cefeaa12c991d0b1c2}
       \strng{authorfullhash}{9c15aa0b2a7683cefeaa12c991d0b1c2}
-      \field{sortinit}{2}
-      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{sortinit}{1}
+      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Receiver operating characteristics (ROC) graphs are useful for organizing classifiers and visualizing their performance. ROC graphs are commonly used in medical decision making, and in recent years have been used increasingly in machine learning and data mining research. Although ROC graphs are apparently simple, there are some common misconceptions and pitfalls when using them in practice. The purpose of this article is to serve as an introduction to ROC graphs and as a guide for using them in research. ?? 2005 Elsevier B.V. All rights reserved.}
@@ -1997,8 +1915,8 @@
       \strng{authorbibnamehash}{26a3817a0aef980bbde15a11f70539af}
       \strng{authornamehash}{26a3817a0aef980bbde15a11f70539af}
       \strng{authorfullhash}{26a3817a0aef980bbde15a11f70539af}
-      \field{sortinit}{2}
-      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{sortinit}{1}
+      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Quarterly Journal of the Royal Metorological Society}
@@ -2044,8 +1962,8 @@
       \strng{authorbibnamehash}{d09fe2e619d525e330f747928fd74847}
       \strng{authornamehash}{d09fe2e619d525e330f747928fd74847}
       \strng{authorfullhash}{d09fe2e619d525e330f747928fd74847}
-      \field{sortinit}{2}
-      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{sortinit}{1}
+      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{{Applied categorical and count data analysis}}
