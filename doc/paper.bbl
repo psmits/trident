@@ -923,6 +923,43 @@
       \endverb
       \keyw{extinction,macroevolution,physiology}
     \endentry
+    \entry{Smits2019}{article}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,uniquepart=base,hash=85826e2e1e5a5a84f194da270671f0a4}{%
+           family={Smits},
+           familyi={S\bibinitperiod},
+           given={Peter\bibnamedelima D},
+           giveni={P\bibinitperiod\bibinitdelim D\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{85826e2e1e5a5a84f194da270671f0a4}
+      \strng{fullhash}{85826e2e1e5a5a84f194da270671f0a4}
+      \strng{bibnamehash}{85826e2e1e5a5a84f194da270671f0a4}
+      \strng{authorbibnamehash}{85826e2e1e5a5a84f194da270671f0a4}
+      \strng{authornamehash}{85826e2e1e5a5a84f194da270671f0a4}
+      \strng{authorfullhash}{85826e2e1e5a5a84f194da270671f0a4}
+      \field{sortinit}{4}
+      \field{sortinithash}{11cdaee3b18e01d77f3f428b13c1fc76}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{bioRxiv}
+      \field{title}{{How macroecology affects macroevolution : the interplay between extinction intensity and trait-dependent extinction in brachiopods}}
+      \field{year}{2019}
+      \field{pages}{523811}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1101/523811
+      \endverb
+      \verb{file}
+      \verb :home/peter/Documents/Mendeley Desktop/Smits/bioRxiv/Smits - 2019 - bioRxiv.pdf:pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.biorxiv.org/content/early/2019/01/17/523811
+      \endverb
+      \verb{url}
+      \verb https://www.biorxiv.org/content/early/2019/01/17/523811
+      \endverb
+    \endentry
     \entry{Foote2007}{article}{}
       \name{author}{1}{}{%
         {{uniquename=0,uniquepart=base,hash=ab99be064192f9409924032ef936a04f}{%
