@@ -465,19 +465,19 @@
     \endentry
     \entry{Alroy2010a}{article}{}
       \name{author}{1}{}{%
-        {{uniquename=0,uniquepart=base,hash=b41b106c94a7142a4ec3408d8f212969}{%
+        {{uniquename=0,uniquepart=base,hash=139258ecb448cbdd5d01bef611b8d985}{%
            family={Alroy},
            familyi={A\bibinitperiod},
-           given={J.},
+           given={John},
            giveni={J\bibinitperiod},
            givenun=0}}%
       }
-      \strng{namehash}{b41b106c94a7142a4ec3408d8f212969}
-      \strng{fullhash}{b41b106c94a7142a4ec3408d8f212969}
-      \strng{bibnamehash}{b41b106c94a7142a4ec3408d8f212969}
-      \strng{authorbibnamehash}{b41b106c94a7142a4ec3408d8f212969}
-      \strng{authornamehash}{b41b106c94a7142a4ec3408d8f212969}
-      \strng{authorfullhash}{b41b106c94a7142a4ec3408d8f212969}
+      \strng{namehash}{139258ecb448cbdd5d01bef611b8d985}
+      \strng{fullhash}{139258ecb448cbdd5d01bef611b8d985}
+      \strng{bibnamehash}{139258ecb448cbdd5d01bef611b8d985}
+      \strng{authorbibnamehash}{139258ecb448cbdd5d01bef611b8d985}
+      \strng{authornamehash}{139258ecb448cbdd5d01bef611b8d985}
+      \strng{authorfullhash}{139258ecb448cbdd5d01bef611b8d985}
       \field{sortinit}{3}
       \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
       \field{labelnamesource}{author}
@@ -2172,19 +2172,19 @@
   \datalist[entry]{none/global//global/global}
     \entry{Alroy2010}{article}{}
       \name{author}{1}{}{%
-        {{uniquename=0,uniquepart=base,hash=b30184a386a012803c89be9cc3548827}{%
+        {{uniquename=0,uniquepart=base,hash=139258ecb448cbdd5d01bef611b8d985}{%
            family={Alroy},
            familyi={A\bibinitperiod},
-           given={J},
+           given={John},
            giveni={J\bibinitperiod},
            givenun=0}}%
       }
-      \strng{namehash}{b30184a386a012803c89be9cc3548827}
-      \strng{fullhash}{b30184a386a012803c89be9cc3548827}
-      \strng{bibnamehash}{b30184a386a012803c89be9cc3548827}
-      \strng{authorbibnamehash}{b30184a386a012803c89be9cc3548827}
-      \strng{authornamehash}{b30184a386a012803c89be9cc3548827}
-      \strng{authorfullhash}{b30184a386a012803c89be9cc3548827}
+      \strng{namehash}{139258ecb448cbdd5d01bef611b8d985}
+      \strng{fullhash}{139258ecb448cbdd5d01bef611b8d985}
+      \strng{bibnamehash}{139258ecb448cbdd5d01bef611b8d985}
+      \strng{authorbibnamehash}{139258ecb448cbdd5d01bef611b8d985}
+      \strng{authornamehash}{139258ecb448cbdd5d01bef611b8d985}
+      \strng{authorfullhash}{139258ecb448cbdd5d01bef611b8d985}
       \field{sortinit}{1}
       \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
       \field{labelnamesource}{author}
