@@ -1,7 +1,7 @@
 library(pacman)
 
 p_load(tidyverse, janitor, here, furrr,
-       sp, dismo, raster, rgdal, XML, maptools, geosphere, 
+       sp, dismo, raster, rgdal, XML, maptools, geosphere, GeoRange,
        scales)
 
 # misc
@@ -42,6 +42,7 @@ mgca <- read_tsv(here('data', 'cramer', 'cramer_temp.txt')) %>%
 lnghst_code <- c('FKLD', 'BRAZ', 'BENG', 'GUIN', 'CNRY', 'GUIA', 'NECS', 
                  'ARCT', 'SARC', 'SATL', 'ETRA', 'WTRA', 'CARB', 'NATR', 
                  'NASE', 'NASW', 'MEDI', 'GFST', 'NADR', 'NWCS')
+
 
 # keep something constant across datasets
 partial_raw_to_clean <- partial(raw_to_clean,

@@ -215,7 +215,8 @@ raw_to_clean <- function(nano,
   
   # get all the important geographic range information
   # have to summarize the big matrix nano
-  sprange <- nano %>%
+  sprange <- 
+    nano %>%
     group_by(fullname, mybin) %>%
     dplyr::summarise(nocc = n(),  # number of occurrences in bin
                      ncell = n_distinct(cell),  # number of unique cells in bin
@@ -225,6 +226,8 @@ raw_to_clean <- function(nano,
                      area = areaPolygon(cbind(plng, plat)),
                      maxgcd = dist_gcd(plng, plat),
                      nprov = n_distinct(longhurst_code),
+                     # NEW minimum spanning tree, only need measure in km
+                     mst = MSTDist(longs = plng, lats = plat)$MST_km,
                      fossil_group = plurality(fossil_group)) %>%
     filter(maxgcd > 0,
            latext > 0)
