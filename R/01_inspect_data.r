@@ -2,7 +2,7 @@ library(pacman)
 
 p_load(tidyverse, furrr, here,
        arm, rstanarm, bayesplot,
-       scales, ggridges,
+       scales, ggridges, viridis,
        pROC)
 
 source(here('R', 'helper01_process_foo.r'))
@@ -34,6 +34,48 @@ view_neptune(.data = counti_rt_trans,
 view_neptune(.data = counti_rl_trans, 
              name = 'restrict_local',
              path = here('results', 'figure'))
+
+
+
+# for each species, how many temporal windows do we observe it?
+# what percent of taxa with in a phylum are observed that many times?
+appear_count <- 
+  counti_trans %>%
+  group_by(fullname, fossil_group) %>%
+  summarize(n_appear = n_distinct(mybin)) %>%
+  ungroup()
+
+appear_count %>%
+  group_by(fossil_group) %>%
+  summarize(p_2 = sum(n_appear >=2) / n(),
+            p_3 = sum(n_appear >= 3) / n(),
+            p_4 = sum(n_appear >= 4) / n(),
+            p_5 = sum(n_appear >= 5) / n(),
+            p_6 = sum(n_appear >= 6) / n(),
+            p_7 = sum(n_appear >= 7) / n(),
+            p_8 = sum(n_appear >= 8) / n(),
+            p_9 = sum(n_appear >= 9) / n()) %>%
+  xtable::xtable(.) %>%
+  xtable::print.xtable(., file = here::here('results', 'appear_percent.tex'),
+                       include.rownames = FALSE)
+
+appear_graph <- 
+  appear_count %>%
+  mutate(fossil_name = case_when(fossil_group == 'D' ~ 'Dinoflagellates',
+                                 fossil_group == 'R' ~ 'Radiolaria',
+                                 fossil_group == 'F' ~ 'Foraminifera',
+                                 fossil_group == 'N' ~ 'Calc. nanno.')) %>%
+  ggplot(aes(x = n_appear, fill = fossil_name)) +
+  geom_bar() +
+  scale_fill_viridis(discrete = TRUE) +
+  theme(legend.position = 'bottom') +
+  labs(x = 'Time bin appearances',
+       y = 'Species',
+       fill = 'Taxon')
+ggsave(filename = here::here('results', 'figure', 'appear_time_bin.png'),
+       plot = appear_graph, width = 10, height = 6)
+
+
 
 
 # looking at the temperature data
