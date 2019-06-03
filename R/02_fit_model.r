@@ -89,6 +89,7 @@ counti <- read_rds(here('data', 'counting.rds'))
 counti_restrict_time <- read_rds(here('data', 'counting_restrict_time.rds'))
 counti_restrict_local <- read_rds(here('data', 'counting_restrict_local.rds'))
 
+
 # transform the data for analysis
 counti_trans <- prepare_analysis(counti)
 counti_rt_trans <- prepare_analysis(counti_restrict_time)

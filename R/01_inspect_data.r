@@ -82,7 +82,8 @@ ggsave(filename = here::here('results', 'figure', 'appear_time_bin.png'),
 mgca <- read_tsv(here('data', 'cramer', 'cramer_temp.txt'))
 names(mgca) <- str_to_lower(names(mgca))
 names(mgca) <- str_remove_all(names(mgca), '[^[[:alnum:]]]')
-mgca <- mgca %>%
+mgca <- 
+  mgca %>%
   mutate(bin = break_my(age, by = 1)) %>%
   group_by(bin) %>%
   mutate(temp_bin = mean(temperature, na.rm = TRUE)) %>%
@@ -130,7 +131,7 @@ width_effect <-
   vary_width %>%
   dplyr::select(-latext) %>%
   group_by(width) %>%
-  mutate_at(vars(-width), funs(inplace(.))) %>%
+  mutate_at(vars(-width), .funs = list(~ inplace(.))) %>%
   gather(key = 'key', value = 'value', -width) %>%
   ggplot(aes(x = width, y = value)) +
   geom_jitter(height = 0, width = 0.05, alpha = 0.01) +
