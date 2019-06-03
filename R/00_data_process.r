@@ -44,6 +44,17 @@ lnghst_code <- c('FKLD', 'BRAZ', 'BENG', 'GUIN', 'CNRY', 'GUIA', 'NECS',
                  'NASE', 'NASW', 'MEDI', 'GFST', 'NADR', 'NWCS')
 
 
+#nano <- neptune
+#form <- 'count'
+#bin_width <- 1
+#age_max <- age_max
+#restrict <- FALSE
+#.width <- c(0.01, 0.99)
+#sp <- sp 
+#mgca <- mgca
+#prov <- NULL
+
+
 # keep something constant across datasets
 partial_raw_to_clean <- partial(raw_to_clean,
                                 nano = neptune,
@@ -57,32 +68,32 @@ counti_restrict_time <- partial_raw_to_clean(restrict = TRUE)
 counti_restrict_local <- partial_raw_to_clean(prov = lnghst_code)
 
 
-# try with multiple bin_width -s
-partial_short_bin <- partial(raw_to_clean,
-                             nano = neptune,
-                             form = 'count',
-                             age_max = age_max,
-                             sp = sp,
-                             mgca = mgca)
-
-
-prep_short <- function(width = bin_width) {
-
-  varname <- paste0("bin_", width)     # tidy eval stuff
-
-  partial_short_bin(bin_width = width)  %>%
-  dplyr::select(fullname, mybin, latext, nocc, ncell, maxgcd) %>%
-  rename(!!varname := mybin) %>%       # tidy eval stuff
-  gather(key = 'key', value = 'value', 
-         -fullname, -maxgcd, -latext, -nocc, -ncell) %>%
-  separate(key, c('bin', 'width'), sep = '_') %>%
-  mutate(width = parse_number(width)) %>%
-  dplyr::select(maxgcd, latext, nocc, ncell, width)
-
-}
-
-widths <- c(0.1, 0.25, 0.5, 1, 1.5, 2, 2.5, 3, 5)
-vary_bin <- future_map_dfr(widths, ~ prep_short(.x))
+## try with multiple bin_width -s
+#partial_short_bin <- partial(raw_to_clean,
+#                             nano = neptune,
+#                             form = 'count',
+#                             age_max = age_max,
+#                             sp = sp,
+#                             mgca = mgca)
+#
+#
+#prep_short <- function(width = bin_width) {
+#
+#  varname <- paste0("bin_", width)     # tidy eval stuff
+#
+#  partial_short_bin(bin_width = width)  %>%
+#  dplyr::select(fullname, mybin, latext, nocc, ncell, maxgcd) %>%
+#  rename(!!varname := mybin) %>%       # tidy eval stuff
+#  gather(key = 'key', value = 'value', 
+#         -fullname, -maxgcd, -latext, -nocc, -ncell) %>%
+#  separate(key, c('bin', 'width'), sep = '_') %>%
+#  mutate(width = parse_number(width)) %>%
+#  dplyr::select(maxgcd, latext, nocc, ncell, width)
+#
+#}
+#
+#widths <- c(0.1, 0.25, 0.5, 1, 1.5, 2, 2.5, 3, 5)
+#vary_bin <- future_map_dfr(widths, ~ prep_short(.x))
 #counti_01 <- prep_short(0.1) 
 #
 #counti_025 <- prep_short(0.25) 
@@ -116,4 +127,4 @@ vary_bin <- future_map_dfr(widths, ~ prep_short(.x))
 write_rds(counti, path = here('data', 'counting.rds'))
 write_rds(counti_restrict_time, path = here('data', 'counting_restrict_time.rds'))
 write_rds(counti_restrict_local, path = here('data', 'counting_restrict_local.rds'))
-write_rds(vary_bin, path = here('data', 'counting_vary_binwidth.rds'))
+#write_rds(vary_bin, path = here('data', 'counting_vary_binwidth.rds'))

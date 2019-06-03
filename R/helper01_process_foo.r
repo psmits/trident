@@ -212,7 +212,19 @@ raw_to_clean <- function(nano,
   nano$cell <- cellFromXY(ras, 
                           xy = as.data.frame(nano[, c('plng', 'plat')]))
   
-  
+
+  temp_mst <- 
+    nano %>%
+    #filter(fullname %in% unique(nano$fullname)[1:100]) %>%
+    dplyr::select(fullname, mybin, plng, plat) %>%
+    group_by(fullname, mybin) %>%
+    group_map(., ~ distinct(., .keep_all = TRUE), keep = TRUE) %>%
+    future_map(., ~ .x %>%
+               mutate(mst = MSTDist(.x$plng, .x$plat)$MST_km)) %>%
+    reduce(., bind_rows) %>%
+    group_by(fullname, mybin) %>%
+    dplyr::summarize(mst = mean(mst))
+
   # get all the important geographic range information
   # have to summarize the big matrix nano
   sprange <- 
@@ -227,10 +239,13 @@ raw_to_clean <- function(nano,
                      maxgcd = dist_gcd(plng, plat),
                      nprov = n_distinct(longhurst_code),
                      # NEW minimum spanning tree, only need measure in km
-                     mst = MSTDist(longs = plng, lats = plat)$MST_km,
+                     #mst = MSTDist(longs = plng, lats = plat)$MST_km,
                      fossil_group = plurality(fossil_group)) %>%
     filter(maxgcd > 0,
            latext > 0)
+
+  sprange <- 
+    left_join(sprange, temp_mst, by = c('fullname', 'mybin'))
 
 
   # want to add in the lear mgca data
