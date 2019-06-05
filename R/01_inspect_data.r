@@ -1,6 +1,6 @@
 library(pacman)
 
-p_load(tidyverse, furrr, here,
+p_load(tidyverse, furrr, here, corrr,
        arm, rstanarm, bayesplot,
        scales, ggridges, viridis,
        pROC)
@@ -9,6 +9,7 @@ source(here('R', 'helper01_process_foo.r'))
 source(here('R', 'helper02_plot_foo.r'))
 source(here('R', 'helper03_misc_foo.r'))
 source(here('R', 'helper04_stan_utility.r'))
+source(here('R', 'helper07_diffsafe.r'))
 
 # important constants
 theme_set(theme_bw())
@@ -75,7 +76,14 @@ appear_graph <-
 ggsave(filename = here::here('results', 'figure', 'appear_time_bin.png'),
        plot = appear_graph, width = 10, height = 6)
 
-
+# correlations 
+mst_corr <- 
+  counti_trans %>%
+  dplyr::select(mst, diff1_mst:diff4_mst) %>%
+  correlate() %>%
+  shave() %>%
+  rplot(print_cor = TRUE)
+ggsave(filename = here::here('results', 'figure', 'mst_correlation.png'))
 
 
 # looking at the temperature data
