@@ -14,6 +14,7 @@ library(here)
 source(here('R', 'helper01_process_foo.r'))
 source(here('R', 'helper03_misc_foo.r'))
 source(here('R', 'helper04_stan_utility.r'))
+source(here('R', 'helper07_diffsafe.r'))
 
 # important constants
 options(mc.cores = parallel::detectCores())
@@ -64,14 +65,14 @@ counti_rl_trans <- prepare_analysis(counti_restrict_local)
 # past and vary
 form <- 
   formula(event ~ 
-          temp + lag1_temp + mst + diff1_mst + 
-          (temp + lag1_temp + mst + diff1_mst | fact_mybin/fossil_group) +
+          temp + lag1_temp + mst + diff1_mst + diff2_mst + diff3_mst +
+          (temp + lag1_temp + mst + diff1_mst + diff2_mst + diff3_mst | fact_mybin/fossil_group) +
           (1 | fact_relage/fossil_group))
 
 # past but no vary
 form2 <- 
   formula(event ~ 
-          temp + lag1_temp + mst + diff1_mst +
+          temp + lag1_temp + mst + diff1_mst + diff2_mst + diff3_mst +
           (1 | fact_mybin/fossil_group) +
           (1 | fact_relage/fossil_group))
 
@@ -103,11 +104,11 @@ part_glmer <- partial(stan_glmer,
 
 # some models have differen't priors
 list_part_glmer <- 
-  list(partial(part_glmer, prior = normal(location = c(0, 0, -1, 0),
-                                          scale = rep(1, 4),
+  list(partial(part_glmer, prior = normal(location = c(0, 0, -1, 0, 0, 0),
+                                          scale = rep(1, 6),
                                           autoscale = FALSE)),
-       partial(part_glmer, prior = normal(location = c(0, 0, -1, 0),
-                                          scale = rep(1, 4),
+       partial(part_glmer, prior = normal(location = c(0, 0, -1, 0, 0, 0),
+                                          scale = rep(1, 6),
                                           autoscale = FALSE)),
        partial(part_glmer, prior = normal(location = c(0, -1),
                                           scale = rep(1, 2),
