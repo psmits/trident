@@ -18,6 +18,31 @@ source(here('R', 'helper04_stan_utility.r'))
 # important constants
 options(mc.cores = parallel::detectCores())
 
+
+# get data in
+counti <- read_rds(here('data', 'counting.rds'))
+counti_restrict_time <- read_rds(here('data', 'counting_restrict_time.rds'))
+counti_restrict_local <- read_rds(here('data', 'counting_restrict_local.rds'))
+
+# transform the data for analysis
+counti_trans <- prepare_analysis(counti)
+counti_rt_trans <- prepare_analysis(counti_restrict_time)
+counti_rl_trans <- prepare_analysis(counti_restrict_local)
+
+## test eff
+#test_maxgcd <- 
+#  stan_glmer(formula = event ~ maxgcd + (1 | fact_mybin / fossil_group),
+#             data = counti_trans,
+#             family = 'binomial')
+#
+#test_mst <- 
+#  stan_glmer(formula = event ~ mst + (1 | fact_mybin / fossil_group),
+#             data = counti_trans,
+#             family = 'binomial')
+#
+#loo(test_maxgcd)
+#loo(test_mst)
+
 #priors <- c(set_prior('normal(-2, 1)', class= 'Intercept'),
 #            set_prior('normal(0, 1)', class = 'b'),
 #            set_prior('normal(-1, 1)', class = 'b', coef = 'maxgcd'),
@@ -37,30 +62,37 @@ options(mc.cores = parallel::detectCores())
 #              prior = priors)
 
 # past and vary
-form <- formula(event ~ temp + lag1_temp + maxgcd + diff_maxgcd 
-                + (1 | fact_relage/fossil_group)
-                + (1 + temp + lag1_temp + maxgcd + diff_maxgcd | 
-                   fact_mybin/fossil_group))
+form <- 
+  formula(event ~ 
+          temp + lag1_temp + mst + diff1_mst + 
+          (temp + lag1_temp + mst + diff1_mst | fact_mybin/fossil_group) +
+          (1 | fact_relage/fossil_group))
 
 # past but no vary
-form2 <- update(form, ~ . - (1 + temp + lag1_temp + maxgcd + diff_maxgcd | 
-                             fact_mybin/fossil_group) 
-                      + (1 | fact_mybin/fossil_group))
+form2 <- 
+  formula(event ~ 
+          temp + lag1_temp + mst + diff1_mst +
+          (1 | fact_mybin/fossil_group) +
+          (1 | fact_relage/fossil_group))
 
 # no past but vary
-form3 <- update(form, ~ . - diff_maxgcd - lag1_temp 
-                      - (1 + temp + lag1_temp + maxgcd + diff_maxgcd | 
-                         fact_mybin/fossil_group) 
-                      + (1 + temp + maxgcd | fact_mybin/fossil_group))
+form3 <- 
+  formula(event ~ 
+          temp + mst + 
+          (temp + mst | fact_mybin/fossil_group) +
+          (1 | fact_relage/fossil_group))
 
 # no past or vary
-form4 <- update(form3, ~ . - (1 + temp + maxgcd | fact_mybin/fossil_group) 
-                       + (1 | fact_mybin/fossil_group))
+form4 <- 
+  formula(event ~ 
+          temp + mst + 
+          (1 | fact_mybin/fossil_group) +
+          (1 | fact_relage/fossil_group))
 
 
 forms <- list(form, form2, form3, form4)
 
-# partial evaluation to fill in priors and ancillary details
+# partial evaluation to fill in priors and ancillary details?
 part_glmer <- partial(stan_glmer, 
                       family = 'binomial',
                       prior_intercept = normal(-2, 5, autoscale = FALSE),
@@ -71,29 +103,19 @@ part_glmer <- partial(stan_glmer,
 
 # some models have differen't priors
 list_part_glmer <- 
-  list(partial(part_glmer, prior = normal(c(0, 0, -1, 0), 
-                                          rep(1, 4), 
+  list(partial(part_glmer, prior = normal(location = c(0, 0, -1, 0),
+                                          scale = rep(1, 4),
                                           autoscale = FALSE)),
-       partial(part_glmer, prior = normal(c(0, 0, -1, 0), 
-                                          rep(1, 4), 
+       partial(part_glmer, prior = normal(location = c(0, 0, -1, 0),
+                                          scale = rep(1, 4),
                                           autoscale = FALSE)),
-       partial(part_glmer, prior = normal(c(0, -1), 
-                                          rep(1, 2), 
+       partial(part_glmer, prior = normal(location = c(0, -1),
+                                          scale = rep(1, 2),
                                           autoscale = FALSE)),
-       partial(part_glmer, prior = normal(c(0, -1), 
-                                          rep(1, 2), 
+       partial(part_glmer, prior = normal(location = c(0, -1),
+                                          scale = rep(1, 2),
                                           autoscale = FALSE)))
 
-# get data in
-counti <- read_rds(here('data', 'counting.rds'))
-counti_restrict_time <- read_rds(here('data', 'counting_restrict_time.rds'))
-counti_restrict_local <- read_rds(here('data', 'counting_restrict_local.rds'))
-
-
-# transform the data for analysis
-counti_trans <- prepare_analysis(counti)
-counti_rt_trans <- prepare_analysis(counti_restrict_time)
-counti_rl_trans <- prepare_analysis(counti_restrict_local)
 
 # map the data to the models
 disc_fit <- map2(forms, list_part_glmer, ~ .y(.x, data = counti_trans))
