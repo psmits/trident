@@ -86,6 +86,22 @@ mst_corr <-
 ggsave(filename = here::here('results', 'figure', 'mst_correlation.png'))
 
 
+# foram genera to check for planktonic vs benthic
+foram_genera <- 
+  counti_trans %>%
+  filter(fossil_group == 'F') %>%
+  dplyr::select(fullname) %>%
+  distinct()
+write_csv(x = foram_genera,
+          path = here::here('results', 'foram_genera.csv'))
+foram_genera_time <- 
+  counti_trans %>%
+  filter(fossil_group == 'F') %>%
+  dplyr::select(fullname, mybin) %>%
+  distinct()
+write_csv(x = foram_genera_time,
+          path = here::here('results', 'foram_genera_time.csv'))
+
 # looking at the temperature data
 mgca <- read_tsv(here('data', 'cramer', 'cramer_temp.txt'))
 names(mgca) <- str_to_lower(names(mgca))

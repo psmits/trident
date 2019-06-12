@@ -232,7 +232,7 @@ See our code repository at https://github.com/psmits/trident for full code detai
   \caption{Out-of-sample}
   \label{fig:fold_auc}
  \end{subfigure}
- \caption{In-sample (\ref{fig:auc_hist}) and out-of-sample (\ref{fig:fold_auc}) area under the receiver operating charactered curve (AUC) estimates for each of our four models. These estimates are calculated from the models posterior predictive distribution or from predictions made to new data, respectively. Marked below the posterior distributions are the median AUC and 50\% and 80\% posterior intervals for all observations in our dataset. Models with higher AUC values indicate better performance over models with lower AUC values. AUC is bounded between 0.5 and 1. See Table \ref{tab:model_def} for an explanation of the four models (C, V, CP, VP).}
+ \caption{Comparisons of measures of model performance for both in-sample (\ref{fig:auc_hist}) and out-of-sample (\ref{fig:fold_auc}) cross-validation. We used area under the receiver operating charactered curve (AUC) estimates for each of our four models as our measure of performance. These estimates are calculated from the models posterior predictive distribution or from predictions made to new data, respectively. Marked below the posterior distributions are the median AUC and 50\% and 80\% posterior intervals for all observations in our dataset. Models with higher AUC values indicate better performance over models with lower AUC values. AUC is bounded between 0.5 and 1. See Table \ref{tab:model_def} for an explanation of the four models (C, V, CP, VP).}
  \label{fig:auc_compare}
 \end{figure}
 
@@ -266,7 +266,7 @@ The in-sample forecasts from our four models over time are virtually identical w
 \begin{figure}[ht]
  \centering
  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/auc_taxon_time_full}
- \caption{Comparison of in-sample forecasting performance measured by AUC for each of the four models, arranged over time and by taxonomic group. These estimates reflect each model's fit to the various taxonomic groups over time. The black line corresponds to the median AUC value, while the envelopes correspond to multiple credible intervals as indicated in the legend. In all cases, higher AUC values indicate greater predictive performance versus lower AUC values. The grey intervals mark the geologic ages of the Cenozoic. See Table \ref{tab:model_def} for a description of each of the four models.}
+ \caption{Understanding model adequacy over time and taxonomic group by comparing in-sample forecasting performance measured by AUC for each of the four models. These estimates reflect each model's fit to the various taxonomic groups over time. The black line corresponds to the median AUC value, while the envelopes correspond to multiple credible intervals as indicated in the legend. In all cases, higher AUC values indicate greater predictive performance versus lower AUC values. The grey intervals mark the geologic ages of the Cenozoic. See Table \ref{tab:model_def} for a description of each of the four models.}
  \label{fig:auc_taxon_time}
 \end{figure}
 
@@ -303,7 +303,7 @@ In the analysis of the in-sample forecast performance of the four models, we not
 \begin{figure}[ht]
  \centering
  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/fold_auc_taxon_time_full}
- \caption{Comparison of out-of-sample AUC values over time as aggregated by taxonomic group for each of the four models. The AUC of the individual My intervals within each fold is plotted to highlight the heterogeneity in performance within and between folds. This presentation decomposes each of the 12-million year folds by each of the taxonomic groups into the predictions made for each of the million-year intervals. The black line corresponds to the median AUC estimate, with the envelopes corresponding to multiple credible intervals as indicated in the legend. The grey intervals mark the geologic ages of the Cenozoic. See Table \ref{tab:model_def} for a description of each of the four models.}
+ \caption{Comparison of our models ability to forecast future extinction events as measured by out-of-sample AUC values over time as aggregated by taxonomic group for each of the four models. The AUC of the individual My intervals within each fold is plotted to highlight the heterogeneity in performance within and between folds. This presentation decomposes each of the 12-million year folds by each of the taxonomic groups into the predictions made for each of the million-year intervals. The black line corresponds to the median AUC estimate, with the envelopes corresponding to multiple credible intervals as indicated in the legend. The grey intervals mark the geologic ages of the Cenozoic. See Table \ref{tab:model_def} for a description of each of the four models.}
  \label{fig:fold_auc_taxon_time}
 \end{figure}
 
@@ -313,7 +313,7 @@ We compared the difference in our AUC estimates from the out-of-sample forecasts
 \begin{figure}[ht]
  \centering
  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/auc_diff}
- \caption{Comparison between our out-of-sample forecasts and in-sample forecasts for all models. This value is calculated as the values presented in Figure \ref{fig:fold_auc_taxon_time} minus those values presented in Figure \ref{fig:auc_taxon_time}. A differences close to 0 indicate complete congruence between in-sample and out-of-sample forecasts, while a positive difference indicates that our out-of-sample forecasts are actually higher performing than our in-sample forecasts, and a negative difference indicates poorer out-of-sample performance than in-sample forecast. See Table \ref{tab:model_def} for a description of each of the four models.}
+ \caption{Comparing our models' ability to forecast out-of-sample extinction compared to our models' in-sample forecasts. Congruence between these measures indicates that our models are not necessarily overfit to the data. This value is calculated as the values presented in Figure \ref{fig:fold_auc_taxon_time} minus those values presented in Figure \ref{fig:auc_taxon_time}. A differences close to 0 indicate complete congruence between in-sample and out-of-sample forecasts, while a positive difference indicates that our out-of-sample forecasts are actually higher performing than our in-sample forecasts, and a negative difference indicates poorer out-of-sample performance than in-sample forecast. See Table \ref{tab:model_def} for a description of each of the four models.}
  \label{fig:oos_ins_diff}
 \end{figure}
 
