@@ -1481,6 +1481,35 @@
       \endverb
       \keyw{22 october 1999,age models,cenozoic,copyright,evolution,paleontological society,plankton,relational database}
     \endentry
+    \entry{GeoRange}{manual}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,uniquepart=base,hash=e3a7dca989a73f02960a95096f2cabff}{%
+           family={Developer},
+           familyi={D\bibinitperiod},
+           given={James\bibnamedelima Boyle},
+           giveni={J\bibinitperiod\bibinitdelim B\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{e3a7dca989a73f02960a95096f2cabff}
+      \strng{fullhash}{e3a7dca989a73f02960a95096f2cabff}
+      \strng{bibnamehash}{e3a7dca989a73f02960a95096f2cabff}
+      \strng{authorbibnamehash}{e3a7dca989a73f02960a95096f2cabff}
+      \strng{authornamehash}{e3a7dca989a73f02960a95096f2cabff}
+      \strng{authorfullhash}{e3a7dca989a73f02960a95096f2cabff}
+      \field{sortinit}{1}
+      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{R package version 0.1.0}
+      \field{title}{GeoRange: Calculating Geographic Range from Occurrence Data}
+      \field{year}{2017}
+      \verb{urlraw}
+      \verb https://CRAN.R-project.org/package=GeoRange
+      \endverb
+      \verb{url}
+      \verb https://CRAN.R-project.org/package=GeoRange
+      \endverb
+    \endentry
     \entry{Cramer2011}{article}{}
       \name{author}{4}{}{%
         {{uniquename=0,uniquepart=base,hash=e50d17f4c343da63f5af47056b69630f}{%
@@ -1514,8 +1543,8 @@
       \strng{authorbibnamehash}{da24ac5efda7943ee9d233483865bf51}
       \strng{authornamehash}{d282c5028f7d0e369c0e4a6d4fb14e22}
       \strng{authorfullhash}{da24ac5efda7943ee9d233483865bf51}
-      \field{sortinit}{9}
-      \field{sortinithash}{1dd72ab054147731c9d824b49aba0534}
+      \field{sortinit}{1}
+      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{We reconstruct trends in ice volume and deep ocean temperature for the past 108 Myr, resolving variations on timescales of {\~{}}2 Myr and longer. We use a sea level record as a proxy for ice volume, a benthic foraminiferal Mg/Cabf record as a proxy for temperature, and a benthic foraminiferal $\delta$18Obf record as a proxy for both. This allows us to construct dual estimates of temperature and ice volume variations for the interval 10--60 Ma: extracting temperature from $\delta$18Obf by using sea level as a proxy for ice volume to constrain the $\delta$18Osw component, and extracting seawater $\delta$18Osw (which reflects ice volume) from $\delta$18Obf by using Mg/Cabf to constrain the temperature component. Each of these approaches requires numerous assumptions, but the range of plausible solutions are concordant on timescales {>}2 Myr and within an uncertainty of \x{00b1}2\textdegree{}C temperature and \x{00b1}0.4\textperthousand{} $\delta$18Osw. The agreement between the two approaches for the last 50 Myr provides empirical justification for the use of $\delta$18Obf, Mg/Cabf, and sea level records as robust climate proxies. Our reconstructions indicate differences between deep ocean cooling and continental ice growth in the late Cenozoic: cooling occurred gradually in the middle--late Eocene and late Miocene--Pliocene while ice growth occurred rapidly in the earliest Oligocene, middle Miocene, and Plio-Pleistocene. These differences are consistent with climate models that imply that temperatures, set by the long-term CO2 equilibrium, should change only gradually on timescales {>}2 Myr, but growth of continental ice sheets may be rapid in response to climate thresholds due to feedbacks that are not yet fully understood.}
@@ -1885,8 +1914,8 @@
       \strng{authorbibnamehash}{7ca1bfe876d5e037b6aed69704221267}
       \strng{authornamehash}{7ca1bfe876d5e037b6aed69704221267}
       \strng{authorfullhash}{7ca1bfe876d5e037b6aed69704221267}
-      \field{sortinit}{1}
-      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
+      \field{sortinit}{2}
+      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{During the past decade there has been an explosion in computation and information technology. With it has come vast amounts of data in a variety of fields such as medicine, biology, finance, and marketing. The challenge of understanding these data has led to the development of new tools in the field of statistics, and spawned new areas such as data mining, machine learning, and bioinformatics. Many of these tools have common underpinnings but are often expressed with different terminology. This book describes the important ideas in these areas in a common conceptual framework. While the approach is statistical, the emphasis is on concepts rather than mathematics. Many examples are given, with a liberal use of color graphics. It should be a valuable resource for statisticians and anyone interested in data mining in science or industry. The book's coverage is broad, from supervised learning (prediction) to unsupervised learning. The many topics include neural networks, support vector machines, classification trees and boosting-the first comprehensive treatment of this topic in any book. Trevor Hastie, Robert Tibshirani, and Jerome Friedman are professors of statistics at Stanford University. They are prominent researchers in this area: Hastie and Tibshirani developed generalized additive models and wrote a popular book of that title. Hastie wrote much of the statistical modeling software in S-PLUS and invented principal curves and surfaces. Tibshirani proposed the Lasso and is co-author of the very successful An Introduction to the Bootstrap. Friedman is the co-inventor of many data-mining tools including CART, MARS, and projection pursuit. FROM THE REVIEWS: TECHNOMETRICS "This is a vast and complex book. Generally, it concentrates on explaining why and how the methods work, rather than how to use them. Examples and especially the visualizations are principle features...As a source for the methods of statistical learning...it will probably be a long time before there is a competitor to this book."}
@@ -1925,8 +1954,8 @@
       \strng{authorbibnamehash}{0007c88a802241e561514e407cb6dc92}
       \strng{authornamehash}{0007c88a802241e561514e407cb6dc92}
       \strng{authorfullhash}{0007c88a802241e561514e407cb6dc92}
-      \field{sortinit}{1}
-      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
+      \field{sortinit}{2}
+      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Used to estimate the risk of an estimator or to perform model selection, cross-validation is a widespread strategy because of its simplicity and its apparent universality. Many results exist on the model selection performances of cross-validation procedures. This survey intends to relate these results to the most recent advances of model selection theory, with a particular emphasis on distinguishing empirical statements from rigorous theoretical results. As a conclusion, guidelines are provided for choosing the best cross-validation procedure according to the particular features of the problem in hand.}
@@ -1985,8 +2014,8 @@
       \strng{authorbibnamehash}{f090b846f5e026e09fa5a92d22317998}
       \strng{authornamehash}{f090b846f5e026e09fa5a92d22317998}
       \strng{authorfullhash}{f090b846f5e026e09fa5a92d22317998}
-      \field{sortinit}{1}
-      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
+      \field{sortinit}{2}
+      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{One of the most widely used standard procedures for model evaluation in classification and regression is K-fold cross-validation (CV). However, when it comes to time series forecasting, because of the inherent serial correlation and potential non-stationarity of the data, its application is not straightforward and often replaced by practitioners in favour of an out-of-sample (OOS) evaluation. It is shown that for purely autoregressive models, the use of standard K-fold CV is possible provided the models considered have uncorrelated errors. Such a setup occurs, for example, when the models nest a more appropriate model. This is very common when Machine Learning methods are used for prediction, and where CV can control for overfitting the data. Theoretical insights supporting these arguments are presented, along with a simulation study and a real-world example. It is shown empirically that K-fold CV performs favourably compared to both OOS evaluation and other time-series-specific techniques such as non-dependent cross-validation.}
@@ -2026,8 +2055,8 @@
       \strng{authorbibnamehash}{9c15aa0b2a7683cefeaa12c991d0b1c2}
       \strng{authornamehash}{9c15aa0b2a7683cefeaa12c991d0b1c2}
       \strng{authorfullhash}{9c15aa0b2a7683cefeaa12c991d0b1c2}
-      \field{sortinit}{1}
-      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
+      \field{sortinit}{2}
+      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Receiver operating characteristics (ROC) graphs are useful for organizing classifiers and visualizing their performance. ROC graphs are commonly used in medical decision making, and in recent years have been used increasingly in machine learning and data mining research. Although ROC graphs are apparently simple, there are some common misconceptions and pitfalls when using them in practice. The purpose of this article is to serve as an introduction to ROC graphs and as a guide for using them in research. ?? 2005 Elsevier B.V. All rights reserved.}
@@ -2069,8 +2098,8 @@
       \strng{authorbibnamehash}{26a3817a0aef980bbde15a11f70539af}
       \strng{authornamehash}{26a3817a0aef980bbde15a11f70539af}
       \strng{authorfullhash}{26a3817a0aef980bbde15a11f70539af}
-      \field{sortinit}{1}
-      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
+      \field{sortinit}{2}
+      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Quarterly Journal of the Royal Metorological Society}
@@ -2252,8 +2281,8 @@
       \strng{authorbibnamehash}{ec69dfaa36b99b02d1d9a3733eae1d23}
       \strng{authornamehash}{ec69dfaa36b99b02d1d9a3733eae1d23}
       \strng{authorfullhash}{ec69dfaa36b99b02d1d9a3733eae1d23}
-      \field{sortinit}{2}
-      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{sortinit}{3}
+      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Journal of Statistical Software}
@@ -2282,8 +2311,8 @@
       \strng{authorbibnamehash}{ec69dfaa36b99b02d1d9a3733eae1d23}
       \strng{authornamehash}{ec69dfaa36b99b02d1d9a3733eae1d23}
       \strng{authorfullhash}{ec69dfaa36b99b02d1d9a3733eae1d23}
-      \field{sortinit}{2}
-      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{sortinit}{3}
+      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{The R Journal}
@@ -2306,8 +2335,8 @@
       \strng{authorbibnamehash}{2418ee02a26ab01ead911ec86c507892}
       \strng{authornamehash}{2418ee02a26ab01ead911ec86c507892}
       \strng{authorfullhash}{2418ee02a26ab01ead911ec86c507892}
-      \field{sortinit}{2}
-      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{sortinit}{3}
+      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{{Stan Modeling Language Users Guide and Reference Manual}}
@@ -2415,8 +2444,8 @@
       \strng{authorbibnamehash}{d4f0f58e430376eca3aebff280be8ca1}
       \strng{authornamehash}{d4f0f58e430376eca3aebff280be8ca1}
       \strng{authorfullhash}{1544efe84d99eec6cfe5892e0543b921}
-      \field{sortinit}{2}
-      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{sortinit}{3}
+      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{In the coming century, life in the ocean will be confronted with a suite of environmental conditions that have no analog in human history. Thus, there is an urgent need to determine which marine species will adapt and which will go extinct. Here, we review the growing literature on marine extinctions and extinction risk in the fossil, historical, and modern records to compare the patterns, drivers, and biological correlates of marine extinctions at different times in the past. Characterized by markedly different environmental states, some past periods share common features with predicted future scenarios. We highlight how the different records can be integrated to better understand and predict the impact of current and projected future environmental changes on extinction risk in the ocean. {{$\copyright$}} 2012 Elsevier Ltd.}
