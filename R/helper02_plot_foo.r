@@ -337,7 +337,7 @@ view_neptune <- function(.data, name = 'full', path = '../results/figure/') {
     .data %>%
     mutate(state = case_when(event == 0 ~ 'Standard',
                              event == 1 ~ 'Last'),
-           fossil_group = case_when(fossil_group == 'D' ~ 'Dinoflagellates',
+           fossil_group = case_when(fossil_group == 'D' ~ 'Diatoms',
                                     fossil_group == 'R' ~ 'Radiolaria',
                                     fossil_group == 'F' ~ 'Foraminifera',
                                     fossil_group == 'N' ~ 'Calc. nanno.')) %>%
@@ -373,7 +373,7 @@ view_neptune <- function(.data, name = 'full', path = '../results/figure/') {
                      died = any(event == 1)) %>%
     mutate(state = case_when(died == 0 ~ 'Extant',
                              died == 1 ~ 'Extinct'),
-           fossil_group = case_when(fossil_group == 'D' ~ 'Dinoflagellates',
+           fossil_group = case_when(fossil_group == 'D' ~ 'Diatoms',
                                     fossil_group == 'R' ~ 'Radiolaria',
                                     fossil_group == 'F' ~ 'Foraminifera',
                                     fossil_group == 'N' ~ 'Calc. nanno.')) %>%
@@ -598,7 +598,7 @@ p_model_taxon <- function(fit_list, .data, key, name, path) {
     rename(taxon = L2,
            model = L1) %>%
     mutate(model = factor(model, levels = rev(key)),
-           taxon = case_when(taxon == 'D' ~ 'Dinoflagellates',
+           taxon = case_when(taxon == 'D' ~ 'Diatoms',
                              taxon == 'R' ~ 'Radiolaria',
                              taxon == 'F' ~ 'Foraminifera',
                              taxon == 'N' ~ 'Calc. nanno.')) %>%
@@ -817,7 +817,7 @@ cv_model_taxon <- function(fit, .data, key, name, path) {
     rename(taxon = L2,
            model = L1) %>%
     separate(., col = model, into = c('model', 'fold'), sep = '_') %>%
-    mutate(taxon = case_when(taxon == 'D' ~ 'Dinoflagellates',
+    mutate(taxon = case_when(taxon == 'D' ~ 'Diatoms',
                              taxon == 'R' ~ 'Radiolaria',
                              taxon == 'F' ~ 'Foraminifera',
                              taxon == 'N' ~ 'Calc. nanno.'),

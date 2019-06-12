@@ -17,6 +17,7 @@ library(here)
 source(here('R', 'helper01_process_foo.r'))
 source(here('R', 'helper03_misc_foo.r'))
 source(here('R', 'helper04_stan_utility.r'))
+source(here('R', 'helper07_diffsafe.r'))
 
 # important constants
 options(mc.cores = parallel::detectCores())
@@ -24,27 +25,34 @@ options(mc.cores = parallel::detectCores())
 # the function to do this
 fit_models <- function(.data) {
   # past and vary
-  form <- formula(event ~ temp + lag1_temp + maxgcd + diff_maxgcd 
-                  + (1 | fact_relage/fossil_group)
-                  + (1 + temp + lag1_temp + maxgcd + diff_maxgcd | 
-                     fact_mybin/fossil_group))
+  form <- 
+    formula(event ~ 
+            temp + lag1_temp + mst + diff1_mst + diff2_mst + diff3_mst +
+            (temp + lag1_temp + mst + diff1_mst + diff2_mst + diff3_mst | fact_mybin/fossil_group) +
+            (1 | fact_relage/fossil_group))
 
   # past but no vary
-  form2 <- update(form, ~ . - (1 + temp + lag1_temp + maxgcd + diff_maxgcd | 
-                               fact_mybin/fossil_group) 
-  + (1 | fact_mybin/fossil_group))
+  form2 <- 
+    formula(event ~ 
+            temp + lag1_temp + mst + diff1_mst + diff2_mst + diff3_mst +
+            (1 | fact_mybin/fossil_group) +
+            (1 | fact_relage/fossil_group))
 
   # no past but vary
-  form3 <- update(form, ~ . - diff_maxgcd - lag1_temp 
-                  - (1 + temp + lag1_temp + maxgcd + diff_maxgcd | 
-                     fact_mybin/fossil_group) 
-                  + (1 + temp + maxgcd | fact_mybin/fossil_group))
+  form3 <- 
+    formula(event ~ 
+            temp + mst + 
+            (temp + mst | fact_mybin/fossil_group) +
+            (1 | fact_relage/fossil_group))
 
   # no past or vary
-  form4 <- update(form3, ~ . - (1 + temp + maxgcd | fact_mybin/fossil_group) 
-                  + (1 | fact_mybin/fossil_group))
+  form4 <- 
+    formula(event ~ 
+            temp + mst + 
+            (1 | fact_mybin/fossil_group) +
+            (1 | fact_relage/fossil_group))
 
-  # all of the forms
+
   forms <- list(form, form2, form3, form4)
 
   # partial evaluation to fill in big details once
@@ -56,11 +64,11 @@ fit_models <- function(.data) {
                         adapt_delta = 0.999999)
 
   # some models have differen't priors
-  priors <- list(prior = normal(c(0, 0, -1, 0), 
-                                rep(1, 4), 
+  priors <- list(prior = normal(c(0, 0, -1, 0, 0, 0), 
+                                rep(1, 6), 
                                 autoscale = FALSE),
-                 prior = normal(c(0, 0, -1, 0), 
-                                rep(1, 4), 
+                 prior = normal(c(0, 0, -1, 0, 0, 0), 
+                                rep(1, 6), 
                                 autoscale = FALSE),
                  prior = normal(c(0, -1), 
                                 rep(1, 2), 
@@ -77,7 +85,7 @@ fit_models <- function(.data) {
 
   # by_formula list of (partial) functions
   # counti_accum list of folds
-  to_fit <- cross2(by_formula, counti_accum)
+  to_fit <- cross2(by_formula, .data)
 
   # all that is missing is the data
   # i have to admit that this is really cool -- beginning me would never have figured this out!
@@ -115,29 +123,29 @@ counti_fold <- read_rds(here('data', 'counting.rds')) %>%
   split(., .$fold) %>%
   rev(.)
 
-counti_fold_rt <- read_rds(here('data', 'counting_restrict_time.rds')) %>%
-  prepare_analysis(.) %>%
-  mutate(fold = break_my(mybin, number = 5)) %>%
-  split(., .$fold) %>%
-  rev(.)
-
-counti_fold_rl <- read_rds(here('data', 'counting_restrict_local.rds')) %>%
-  prepare_analysis(.) %>%
-  mutate(fold = break_my(mybin, number = 5)) %>%
-  split(., .$fold) %>%
-  rev(.)
+#counti_fold_rt <- read_rds(here('data', 'counting_restrict_time.rds')) %>%
+#  prepare_analysis(.) %>%
+#  mutate(fold = break_my(mybin, number = 5)) %>%
+#  split(., .$fold) %>%
+#  rev(.)
+#
+#counti_fold_rl <- read_rds(here('data', 'counting_restrict_local.rds')) %>%
+#  prepare_analysis(.) %>%
+#  mutate(fold = break_my(mybin, number = 5)) %>%
+#  split(., .$fold) %>%
+#  rev(.)
 
 # combine some folds to make training sets
 counti_accum <- accumulate(counti_fold, bind_rows) [-1]
-counti_accum_rt <- accumulate(counti_fold_rt, bind_rows) [-1]
-counti_accum_rl <- accumulate(counti_fold_rl, bind_rows) [-1]
+#counti_accum_rt <- accumulate(counti_fold_rt, bind_rows) [-1]
+#counti_accum_rl <- accumulate(counti_fold_rl, bind_rows) [-1]
 
 # fit models to the folds
 fit_full <- fit_models(.data = counti_accum)
-fit_rt <- fit_models(.data = counti_accum_rt)
-fit_rl <- fit_models(.data = counti_accum_rl)
+#fit_rt <- fit_models(.data = counti_accum_rt)
+#fit_rl <- fit_models(.data = counti_accum_rl)
 
 # write out cross-validation fits
 write_rds(fit_full, path = here('results', 'training_fit.rds'))
-write_rds(fit_rt, path = here('results', 'training_fit_rt.rds'))
-write_rds(fit_rl, path = here('results', 'training_fit_rl.rds'))
+#write_rds(fit_rt, path = here('results', 'training_fit_rt.rds'))
+#write_rds(fit_rl, path = here('results', 'training_fit_rl.rds'))

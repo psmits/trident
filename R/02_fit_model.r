@@ -120,10 +120,10 @@ list_part_glmer <-
 
 # map the data to the models
 disc_fit <- map2(forms, list_part_glmer, ~ .y(.x, data = counti_trans))
-disc_fit_rt <- map2(forms, list_part_glmer, ~ .y(.x, data = counti_rt_trans))
-disc_fit_rl <- map2(forms, list_part_glmer, ~ .y(.x, data = counti_rl_trans))
+#disc_fit_rt <- map2(forms, list_part_glmer, ~ .y(.x, data = counti_rt_trans))
+#disc_fit_rl <- map2(forms, list_part_glmer, ~ .y(.x, data = counti_rl_trans))
 
 # write out the model fits
 write_rds(disc_fit, path = here('results', 'disc_fit.rds'))
-write_rds(disc_fit_rt, path = here('results', 'disc_fit_rt.rds'))
-write_rds(disc_fit_rl, path = here('results', 'disc_fit_rl.rds'))
+#write_rds(disc_fit_rt, path = here('results', 'disc_fit_rt.rds'))
+#write_rds(disc_fit_rl, path = here('results', 'disc_fit_rl.rds'))
