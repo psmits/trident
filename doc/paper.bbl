@@ -2040,6 +2040,68 @@
       \endverb
       \keyw{Autoregression,Cross-validation,Time series}
     \endentry
+    \entry{Gelman2013d}{book}{}
+      \name{author}{6}{}{%
+        {{uniquename=0,uniquepart=base,hash=1e1eb60e3b6e222217bf8e9b24070b28}{%
+           family={Gelman},
+           familyi={G\bibinitperiod},
+           given={Andrew},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=f97b41dbe17904c56e1c370d9a392615}{%
+           family={Carlin},
+           familyi={C\bibinitperiod},
+           given={John\bibnamedelima B},
+           giveni={J\bibinitperiod\bibinitdelim B\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=0587b773e9f0b7671b8b7f70dbb409b0}{%
+           family={Stern},
+           familyi={S\bibinitperiod},
+           given={Hal\bibnamedelima S},
+           giveni={H\bibinitperiod\bibinitdelim S\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=930572fca1a1480e44ad865ae7260b91}{%
+           family={Dunson},
+           familyi={D\bibinitperiod},
+           given={David\bibnamedelima B},
+           giveni={D\bibinitperiod\bibinitdelim B\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=5d36e97683cbc9d6ef06fc2ec40becb0}{%
+           family={Vehtari},
+           familyi={V\bibinitperiod},
+           given={Aki},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=557f967471a621bf5ed42b091c523bd9}{%
+           family={Rubin},
+           familyi={R\bibinitperiod},
+           given={Donald\bibnamedelima B},
+           giveni={D\bibinitperiod\bibinitdelim B\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Boca Raton, FL}%
+      }
+      \list{publisher}{2}{%
+        {Chapman}%
+        {Hall}%
+      }
+      \strng{namehash}{7b511f44eded88e08c98470ecd75568d}
+      \strng{fullhash}{cf1f68125453ecbe871448bacab0d1c5}
+      \strng{bibnamehash}{cf1f68125453ecbe871448bacab0d1c5}
+      \strng{authorbibnamehash}{cf1f68125453ecbe871448bacab0d1c5}
+      \strng{authornamehash}{7b511f44eded88e08c98470ecd75568d}
+      \strng{authorfullhash}{cf1f68125453ecbe871448bacab0d1c5}
+      \field{sortinit}{2}
+      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{3}
+      \field{title}{{Bayesian data analysis}}
+      \field{year}{2013}
+      \field{pages}{675}
+      \range{pages}{1}
+    \endentry
     \entry{Fawcett2006}{article}{}
       \name{author}{1}{}{%
         {{uniquename=0,uniquepart=base,hash=9c15aa0b2a7683cefeaa12c991d0b1c2}{%
@@ -2249,8 +2311,8 @@
       \strng{authorbibnamehash}{62ee66d0503a0d594daf8e77fec37f8f}
       \strng{authornamehash}{62ee66d0503a0d594daf8e77fec37f8f}
       \strng{authorfullhash}{62ee66d0503a0d594daf8e77fec37f8f}
-      \field{sortinit}{2}
-      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{sortinit}{3}
+      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{note}{R package version 1.0.3}
@@ -2325,16 +2387,19 @@
     \endentry
     \entry{StanManual}{misc}{}
       \name{author}{1}{}{%
-        {{uniquename=0,uniquepart=base,hash=2418ee02a26ab01ead911ec86c507892}{%
-           family={{Stan Development Team}},
-           familyi={S\bibinitperiod}}}%
+        {{uniquename=0,uniquepart=base,hash=b96a4b6062cf61d1deeffac867c7fd8a}{%
+           family={Team},
+           familyi={T\bibinitperiod},
+           given={Stan\bibnamedelima Development},
+           giveni={S\bibinitperiod\bibinitdelim D\bibinitperiod},
+           givenun=0}}%
       }
-      \strng{namehash}{2418ee02a26ab01ead911ec86c507892}
-      \strng{fullhash}{2418ee02a26ab01ead911ec86c507892}
-      \strng{bibnamehash}{2418ee02a26ab01ead911ec86c507892}
-      \strng{authorbibnamehash}{2418ee02a26ab01ead911ec86c507892}
-      \strng{authornamehash}{2418ee02a26ab01ead911ec86c507892}
-      \strng{authorfullhash}{2418ee02a26ab01ead911ec86c507892}
+      \strng{namehash}{b96a4b6062cf61d1deeffac867c7fd8a}
+      \strng{fullhash}{b96a4b6062cf61d1deeffac867c7fd8a}
+      \strng{bibnamehash}{b96a4b6062cf61d1deeffac867c7fd8a}
+      \strng{authorbibnamehash}{b96a4b6062cf61d1deeffac867c7fd8a}
+      \strng{authornamehash}{b96a4b6062cf61d1deeffac867c7fd8a}
+      \strng{authorfullhash}{b96a4b6062cf61d1deeffac867c7fd8a}
       \field{sortinit}{3}
       \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
       \field{labelnamesource}{author}
@@ -3306,16 +3371,19 @@
     \endentry
     \entry{StanManual}{misc}{}
       \name{author}{1}{}{%
-        {{uniquename=0,uniquepart=base,hash=2418ee02a26ab01ead911ec86c507892}{%
-           family={{Stan Development Team}},
-           familyi={S\bibinitperiod}}}%
+        {{uniquename=0,uniquepart=base,hash=b96a4b6062cf61d1deeffac867c7fd8a}{%
+           family={Team},
+           familyi={T\bibinitperiod},
+           given={Stan\bibnamedelima Development},
+           giveni={S\bibinitperiod\bibinitdelim D\bibinitperiod},
+           givenun=0}}%
       }
-      \strng{namehash}{2418ee02a26ab01ead911ec86c507892}
-      \strng{fullhash}{2418ee02a26ab01ead911ec86c507892}
-      \strng{bibnamehash}{2418ee02a26ab01ead911ec86c507892}
-      \strng{authorbibnamehash}{2418ee02a26ab01ead911ec86c507892}
-      \strng{authornamehash}{2418ee02a26ab01ead911ec86c507892}
-      \strng{authorfullhash}{2418ee02a26ab01ead911ec86c507892}
+      \strng{namehash}{b96a4b6062cf61d1deeffac867c7fd8a}
+      \strng{fullhash}{b96a4b6062cf61d1deeffac867c7fd8a}
+      \strng{bibnamehash}{b96a4b6062cf61d1deeffac867c7fd8a}
+      \strng{authorbibnamehash}{b96a4b6062cf61d1deeffac867c7fd8a}
+      \strng{authornamehash}{b96a4b6062cf61d1deeffac867c7fd8a}
+      \strng{authorfullhash}{b96a4b6062cf61d1deeffac867c7fd8a}
       \field{sortinit}{9}
       \field{sortinithash}{1dd72ab054147731c9d824b49aba0534}
       \field{labelnamesource}{author}
