@@ -8,6 +8,7 @@ source(here('R', 'helper02_plot_foo.r'))
 source(here('R', 'helper03_misc_foo.r'))
 source(here('R', 'helper04_stan_utility.r'))
 source(here('R', 'helper05_roc_utility.r'))
+source(here('R', 'helper07_diffsafe.r'))
 
 # important constants
 plan(multiprocess)
@@ -40,35 +41,16 @@ posterior_shrinkage <- 1 - (posc / prsc) ^ 2
 
 
 # posterior intervals
-interval_est <- disc_best %>%
+interval_est <- 
+  disc_best %>%
   spread_draws(`(Intercept)`, 
-               maxgcd, 
-               diff_maxgcd,
-               #`maxgcd:diff_maxgcd`,
                temp,
                lag1_temp,
-               `Sigma[fossil_group:fact_mybin:(Intercept),(Intercept)]`,
-               `Sigma[fossil_group:fact_mybin:maxgcd,(Intercept)]`,
-               `Sigma[fossil_group:fact_mybin:diff_maxgcd,(Intercept)]`,
-               #`Sigma[fossil_group:fact_mybin:maxgcd:diff_maxgcd,(Intercept)]`,
-               `Sigma[fossil_group:fact_mybin:maxgcd,maxgcd]`,
-               `Sigma[fossil_group:fact_mybin:diff_maxgcd,maxgcd]`,
-               #`Sigma[fossil_group:fact_mybin:maxgcd:diff_maxgcd,maxgcd]`,
-               `Sigma[fossil_group:fact_mybin:diff_maxgcd,diff_maxgcd]`,
-               #`Sigma[fossil_group:fact_mybin:maxgcd:diff_maxgcd,diff_maxgcd]`,
-               #`Sigma[fossil_group:fact_mybin:maxgcd:diff_maxgcd,maxgcd:diff_maxgcd]`,
-               `Sigma[fossil_group:fact_relage:(Intercept),(Intercept)]`,
-               `Sigma[fact_mybin:(Intercept),(Intercept)]`,
-               `Sigma[fact_mybin:maxgcd,(Intercept)]`,
-               `Sigma[fact_mybin:diff_maxgcd,(Intercept)]`,
-               #`Sigma[fact_mybin:maxgcd:diff_maxgcd,(Intercept)]`,
-               `Sigma[fact_mybin:maxgcd,maxgcd]`,
-               `Sigma[fact_mybin:diff_maxgcd,maxgcd]`,
-               #`Sigma[fact_mybin:maxgcd:diff_maxgcd,maxgcd]`,
-               `Sigma[fact_mybin:diff_maxgcd,diff_maxgcd]`,
-               #`Sigma[fact_mybin:maxgcd:diff_maxgcd,diff_maxgcd]`,
-               #`Sigma[fact_mybin:maxgcd:diff_maxgcd,maxgcd:diff_maxgcd]`,
-               `Sigma[fact_relage:(Intercept),(Intercept)]`) %>%
+               mst,
+               diff1_mst,
+               diff2_mst,
+               diff3_mst)
+%>%
 median_qi(.width = c(0.8, 0.5))
 
 effect_eye <- disc_best %>%

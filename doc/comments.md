@@ -90,7 +90,7 @@ I enjoyed my reading and hope the comments below help to improve the ms.
 
 5. It will help our understanding if you explain the main point/message of each fig in the contest of discussion in each caption 
 
-6 I am not sure if it’s possible, but I am curious where geographic range or temperature are the key? Or both are essential? It is possible to try geographic range only model and temperature only model to see such?
+6. I am not sure if it’s possible, but I am curious where geographic range or temperature are the key? Or both are essential? It is possible to try geographic range only model and temperature only model to see such?
 
 7. The authors use deep-water temperature (using geochemistry of benthic foram from deep-sea cores) data. And their biotic data is plankton. Their plankton can be mostly from ocean surface or photic zone (eg diatoms), but some have good bunch of deep-water species (radioralians).
 The authors need some discussion and justification on this.
