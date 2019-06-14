@@ -16,6 +16,9 @@ source(here('R', 'helper07_diffsafe.r'))
 # important constants
 plan(multiprocess)
 
+# useful graphical constants
+theme_set(theme_bw(base_size = 20))
+
 # get data in
 counti <- read_rds(here('data', 'counting.rds'))
 #counti_restrict_time <- read_rds(here('data', 'counting_restrict_time.rds'))

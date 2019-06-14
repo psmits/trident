@@ -10,9 +10,13 @@ source(here('R', 'helper03_misc_foo.r'))
 source(here('R', 'helper04_stan_utility.r'))
 source(here('R', 'helper05_roc_utility.r'))
 source(here('R', 'helper06_geotime.r'))
+source(here('R', 'helper07_diffsafe.r'))
 
 # important constants
 plan(multiprocess)
+
+# useful graphical constants
+theme_set(theme_bw(base_size = 20))
 
 # get data in
 counti_fold <- read_rds(here('data', 'counting.rds')) %>%

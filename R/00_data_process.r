@@ -11,6 +11,9 @@ source(here('R', 'helper03_misc_foo.r'))
 # parallel set up
 plan(multiprocess)
 
+# useful graphical constants
+theme_set(theme_bw(base_size = 20))
+
 
 # process timescale information
 gts <- read_csv("https://raw.githubusercontent.com/japhir/stratPlot/master/GTS_colours.csv") %>%

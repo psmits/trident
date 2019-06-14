@@ -65,7 +65,7 @@ plot_georange_compare <- function(data) {
 #' @return a ggplot object
 plot_taxon_covariate_time <- function(disc_best) {
   comp_const <- disc_best %>%
-    spread_draws(maxgcd, diff_maxgcd, temp, lag1_temp)
+    spread_draws(mst, diff1_mst, diff2_mst, diff3_mst, temp, lag1_temp)
 
   comp_var <- disc_best %>%
     spread_draws(b[i, f]) %>%
@@ -82,20 +82,24 @@ plot_taxon_covariate_time <- function(disc_best) {
   # first element is just temporal effect
   core <- full_join(comp_const, cv[[1]], 
                     by = c('.chain', '.iteration', '.draw')) %>%
-    mutate(eff_maxgcd = maxgcd.x + maxgcd.y,
-           eff_diff_maxgcd = diff_maxgcd.x + diff_maxgcd.y,
+    mutate(eff_mst = mst.x + mst.y,
+           eff_diff1_mst = diff1_mst.x + diff1_mst.y,
+           eff_diff2_mst = diff2_mst.x + diff2_mst.y,
+           eff_diff3_mst = diff3_mst.x + diff3_mst.y,
            eff_temp = temp.x + temp.y,
            eff_lag1_temp = lag1_temp.x + lag1_temp.y) %>%
     dplyr::select(.chain, .iteration, .draw, f, age, 
-                eff_maxgcd, eff_diff_maxgcd,
-                eff_temp, eff_lag1_temp) %>%
+                  eff_mst, eff_diff1_mst, eff_diff2_mst, eff_diff3_mst,
+                  eff_temp, eff_lag1_temp) %>%
     arrange(.chain, .iteration, .draw, age)
 
   # need to confirm correct line-up
   by_taxon <- map(cv[-1], ~ full_join(core, .x, by = c('.chain', '.iteration', 'age'))) %>%
     map(., ~ .x %>%
-        mutate(taxon_eff_maxgcd = eff_maxgcd + maxgcd,
-               taxon_eff_diff_maxgcd = eff_diff_maxgcd + diff_maxgcd,
+        mutate(taxon_eff_mst = eff_mst + mst,
+               taxon_eff_diff1_mst = eff_diff1_mst + diff1_mst,
+               taxon_eff_diff2_mst = eff_diff2_mst + diff2_mst,
+               taxon_eff_diff3_mst = eff_diff3_mst + diff3_mst,
                taxon_eff_temp = eff_temp + temp,
                taxon_eff_lag1_temp = eff_lag1_temp + lag1_temp)) %>%
     reduce(bind_rows) %>%
@@ -105,18 +109,21 @@ plot_taxon_covariate_time <- function(disc_best) {
            -f.x, -f.y, 
            -age, 
            -`(Intercept)`, -type,
-           -eff_maxgcd, -eff_diff_maxgcd,
+           -eff_mst, -eff_diff1_mst, -eff_diff2_mst, -eff_diff3_mst, 
            -eff_temp, -eff_lag1_temp,
-           -diff_maxgcd, -maxgcd,
+           -diff1_mst, -diff2_mst, -diff3_mst, -mst,
            -lag1_temp, -temp) %>%
     filter(!is.na(type)) %>%
     mutate(key = fct_recode(key, 
-                            geo_range = 'taxon_eff_maxgcd',
-                            geo_change = 'taxon_eff_diff_maxgcd',
+                            geo_range = 'taxon_eff_mst',
+                            geo_change1 = 'taxon_eff_diff1_mst',
+                            geo_change2 = 'taxon_eff_diff2_mst',
+                            geo_change3 = 'taxon_eff_diff3_mst',
                             temp_now = 'taxon_eff_temp',
                             temp_lag = 'taxon_eff_lag1_temp'),
            key = fct_relevel(key, 
-                             'geo_range', 'geo_change', 
+                             'geo_range', 
+                             'geo_change1', 'geo_change2', 'geo_change3', 
                              'temp_now', 'temp_lag'),
            type = fct_recode(type,
                              diatoms = 'fossil_group:fact_mybin:D:',
@@ -170,7 +177,7 @@ plot_risk_time <- function(data, model, nsp = 4) {
 
   # now we can combine the empirical data with the linpred values
   full_est <- temp %>%
-    dplyr::select(fullname, maxgcd, relage) %>% 
+    dplyr::select(fullname, mst, relage) %>% 
     left_join(., temp_est, by = c('fullname', 'relage'))
 
   ext_plot <- full_est %>%
@@ -181,8 +188,8 @@ plot_risk_time <- function(data, model, nsp = 4) {
 
   range_plot <- full_est %>%
     group_by(fullname, relage) %>%
-    summarise(maxgcd = mean(maxgcd)) %>%
-    ggplot(aes(x = relage, y = maxgcd)) + 
+    summarise(mst = mean(mst)) %>%
+    ggplot(aes(x = relage, y = mst)) + 
     geom_line() +
     facet_grid(~ fullname) + 
     labs(x = 'Age (My)', y = 'Geographic range (standardized)')

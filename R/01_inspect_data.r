@@ -12,8 +12,10 @@ source(here('R', 'helper04_stan_utility.r'))
 source(here('R', 'helper07_diffsafe.r'))
 
 # important constants
-theme_set(theme_bw())
 plan(multiprocess)
+
+# useful graphical constants
+theme_set(theme_bw(base_size = 20))
 
 
 # get data in
