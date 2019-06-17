@@ -39,7 +39,7 @@ auc_taxon_time <- map(split_auc, function(x) map(x, ~ as_tibble(x = .x)))%>%
   bind_rows(., .id = 'model') %>%
   separate(., col = phyla_time, into = c('phyla', 'time'), sep = ':') %>%
   mutate(time = as.numeric(time),
-         fossil_group = case_when(phyla == 'D' ~ 'Dinoflagellates',
+         fossil_group = case_when(phyla == 'D' ~ 'Diatoms',
                                   phyla == 'R' ~ 'Radiolaria',
                                   phyla == 'F' ~ 'Foraminifera',
                                   phyla == 'N' ~ 'Calc. nanno.'),
@@ -102,7 +102,7 @@ oos_roc_taxon_time <- function(fit, .data, key) {
     separate(., col = phyla_time, into = c('phyla', 'time'), sep = ':') %>%
     separate(., col = model, into = c('model', 'fold'), sep = '_') %>%
     mutate(time = as.numeric(time),
-           fossil_group = case_when(phyla == 'D' ~ 'Dinoflagellates',
+           fossil_group = case_when(phyla == 'D' ~ 'Diatoms',
                                     phyla == 'R' ~ 'Radiolaria',
                                     phyla == 'F' ~ 'Foraminifera',
                                     phyla == 'N' ~ 'Calc. nanno.'),
