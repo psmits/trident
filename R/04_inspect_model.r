@@ -175,11 +175,12 @@ ggsave(filename = here('results', 'figure', 'hazard_bygroup.png'),
 
 
 # make plots of effect change over time for
+theme_set(theme_bw(base_size = 15))
 by_taxon <- plot_taxon_covariate_time(disc_best) + 
   scale_x_reverse()
 ggsave(filename = here('results', 'figure', 'eff_time_group.png'), 
        plot = by_taxon,
-       height = 6, width = 8)
+       height = 8, width = 12)
 
 
 ## look at hazard over duration for a few examples

@@ -94,7 +94,8 @@ plot_taxon_covariate_time <- function(disc_best) {
     arrange(.chain, .iteration, .draw, age)
 
   # need to confirm correct line-up
-  by_taxon <- map(cv[-1], ~ full_join(core, .x, by = c('.chain', '.iteration', 'age'))) %>%
+  by_taxon <- 
+    map(cv[-1], ~ full_join(core, .x, by = c('.chain', '.iteration', 'age'))) %>%
     map(., ~ .x %>%
         mutate(taxon_eff_mst = eff_mst + mst,
                taxon_eff_diff1_mst = eff_diff1_mst + diff1_mst,
@@ -108,13 +109,15 @@ plot_taxon_covariate_time <- function(disc_best) {
            -.draw.y, -.draw.x,
            -f.x, -f.y, 
            -age, 
-           -`(Intercept)`, -type,
+           #-`(Intercept)`,
+           -type,
            -eff_mst, -eff_diff1_mst, -eff_diff2_mst, -eff_diff3_mst, 
            -eff_temp, -eff_lag1_temp,
            -diff1_mst, -diff2_mst, -diff3_mst, -mst,
            -lag1_temp, -temp) %>%
     filter(!is.na(type)) %>%
     mutate(key = fct_recode(key, 
+                            intercept = '(Intercept)',
                             geo_range = 'taxon_eff_mst',
                             geo_change1 = 'taxon_eff_diff1_mst',
                             geo_change2 = 'taxon_eff_diff2_mst',
@@ -122,14 +125,28 @@ plot_taxon_covariate_time <- function(disc_best) {
                             temp_now = 'taxon_eff_temp',
                             temp_lag = 'taxon_eff_lag1_temp'),
            key = fct_relevel(key, 
-                             'geo_range', 
+                             'intercept', 'geo_range', 
                              'geo_change1', 'geo_change2', 'geo_change3', 
                              'temp_now', 'temp_lag'),
            type = fct_recode(type,
                              diatoms = 'fossil_group:fact_mybin:D:',
                              forams = 'fossil_group:fact_mybin:F:',
                              nannofossil_misc = 'fossil_group:fact_mybin:N:',
-                             radiolarians = 'fossil_group:fact_mybin:R:'))
+                             radiolarians = 'fossil_group:fact_mybin:R:')) %>%
+    mutate(type = case_when(type == 'diatoms' ~ 'Diatoms',
+                            type == 'radiolarians' ~ 'Radiolaria',
+                            type == 'forams' ~ 'Foraminifera',
+                            type == 'nannofossil_misc' ~ 'Calc. nanno.'),
+           key = case_when(key == 'intercept' ~ 'Average \nlog-odds of \nextinction',
+                           key == 'geo_range' ~ 'Geographic range',
+                           key == 'geo_change1' ~ 'Change in \ngeographic range \n(1 lag)',
+                           key == 'geo_change2' ~ 'Change in \ngeographic range \n(2 lag)',
+                           key == 'geo_change3' ~ 'Change in \ngeographic range \n(3 lag)',
+                           key == 'temp_now' ~ 'Global temperature',
+                           key == 'temp_lag' ~ 'Previous global \ntemperature'),
+           key = fct_relevel(key,
+                              c('Geographic range'),
+                              after = 1))
 
   out <- by_taxon %>%
     ggplot(aes(x = age, y = value)) +
@@ -865,7 +882,12 @@ cv_model_taxon_time <- function(fit, .data, key, name, path) {
     round(., -1) %>%
     unique(.)
 
-  fold_auc_taxon_time <- fold_auc_taxon_time %>%
+  fold_auc_taxon_time <- 
+    fold_auc_taxon_time %>%
+    mutate(fossil_group = case_when(fossil_group == 'D' ~ 'Diatoms',
+                                    fossil_group == 'R' ~ 'Radiolaria',
+                                    fossil_group == 'F' ~ 'Foraminifera',
+                                    fossil_group == 'N' ~ 'Calc. nanno.')) %>%
     ggplot() +
     geom_rect(data = rects,
               aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
