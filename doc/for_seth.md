@@ -1,5 +1,5 @@
-Reviewer 1
-----------
+Reviewer 1 (Wolfgang)
+---------------------
 
 
 Presentation of results could be improved. Showing raw data of extinction rates in the four groups, and individual analyses how age and phyla actually influence extinction risk would be preferred over the wiggly lines in Figs. 2 and 3. The latter could be moved to the supplement. The text in the results section is very technical, describing too much detail. 
@@ -12,8 +12,8 @@ Presentation of results could be improved. Showing raw data of extinction rates 
 
 
 
-Reviewer 2
-----------
+Reviewer 2 (Matt Clapham)
+-------------------------
 
 I find it interesting that the predictability of extinction doesn’t obviously differ between background intervals and intervals with more unusual environmental perturbations (such as the PETM or E-O transition). Perhaps that’s because those events weren’t mass extinctions in the vein of the P/T or K/Pg. There’s also a fair amount of volatility in the AUC time-series. Nevertheless, does this consistent predictive ability regardless of differences in conditions say anything interesting about extinction predictions?
 
@@ -21,8 +21,8 @@ The caveat that human impacts may dramatically alter extinction risk seems like 
 
 
 
-Reviewer 3
-----------
+Reviewer 3 (moriyaki?)
+----------------------
 
 6. I am not sure if it’s possible, but I am curious where geographic range or temperature are the key? Or both are essential? It is possible to try geographic range only model and temperature only model to see such?
 

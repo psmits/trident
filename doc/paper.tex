@@ -92,28 +92,8 @@
 \modulolinenumbers[3]
 
 \begin{abstract}
-  A tenet of conservation palaeobiology is that knowledge of past extinction patterns can help us to better predict future extinctions. Although the future is unobservable, we can test the strength of this proposition by asking how well models conditioned on past observations would have predicted subsequent extinction events at different points in the geological past. To answer this question, we analyze the well-sampled fossil record of Cenozoic planktonic microfossil taxa (foramanifera, radiolarians, diatoms, and calcareous nanoplankton). We examine how extinction probability varies over time as a function of species age, time of observation, current geographic range, change in geographic range, climate state, and change in climate state. Although the best-performing model includes time-varying effects and historical covariates (change in range and change in climate), the improvement in predictive power over models with constant effects and no historical covariates is very minor. Our models have a 70-80\% probability of correctly forecast the rank order of extinction risk for a random out-of-sample species pair, implying that determinants of extinction have varied only modestly through time. An important caveat is that human impacts may substantially disrupt range-risk dynamics so that the future will be less predictable than it has been in the past.
+  A tenet of conservation palaeobiology is that knowledge of past extinction patterns can help us to better predict future extinctions. Although the future is unobservable, we can test the strength of this proposition by asking how well models conditioned on past observations would have predicted subsequent extinction events at different points in the geological past. To answer this question, we analyze the well-sampled fossil record of Cenozoic planktonic microfossil taxa (foramanifera, radiolarians, diatoms, and calcareous nanoplankton). We examine how extinction probability varies over time as a function of species age, time of observation, current geographic range, change in geographic range, climate state, and change in climate state. We find that our model that includes our historical covariates (e.g. change in geographic range) and allows covariate effects to vary over time to be overfit to our data, yielding biased forecasts of future extinction events. In contrast, our models which include either historical covariates or which allow for covariate effects to vary over time yield equivalent forecasts. Our models have a 70-80\% probability of correctly forecast the rank order of extinction risk for a random out-of-sample species pair, implying that determinants of extinction have varied only modestly through time. An important caveat is that human impacts may substantially disrupt range-risk dynamics so that the future will be less predictable than it has been in the past.
 
- %risk assessments for extant species can be improved by examining past extinction patterns and by using palaeontological records to establish geographic range and abundance trajectories on geological timescales. 
- %We ask if, at a given point in time, how accurate are extinction risk predictions based on instantaneous geographic ranges and knowledge of past extinction/survival patterns?
- %Such suggestions prompt two key questions: (1) At a given timescale, to what extent are extinction risk trajectories deterministic (past trends are likely to continue into the future) versus Markovian (the future depends only on the present state)? (2) 
- %Our results imply that at million-year timescales extinction risk trajectories are nearly Markovian, perhaps because the processes driving geographic range changes vary on substantially shorter timescales. 
- %However, models based on present geographic ranges and past range-risk relationships are likely to be moderately successful at predicting future extinction/survival outcomes. 
- %In-sample model performance measures are approximately equal to out-of-sample performance measures (assessed with 5-fold cross-validation), suggesting that the determinants of relative extinction risk are fairly consistent throughout the Cenozoic. 
- %Our best supported model includes the historical covariates, change in geographic range and lag of global temperature, which indicates that the past improves our estimates of the present and future. 
- %We have confidence that our conclusions about our ability to predict species extinction risk in the future with similar accuracy to when we predict species extinction risk in the past because our in-sample model performance measures are approximately equal to out-of-sample performance. 
- %Including the historical covariates and allowing their effects to vary over time yields marginally better predictions than not including them. 
- %However, the improvement in predictive power by including these historical covariates is modest at best, absent at worst, and ultimately reflects the extremely stochastic nature of species extinction. 
- %Finally, we find support for species' extinction risk increases with age, though the strength of this effect varies among taxonomic groups. 
- %This effect is most pronounced in forams and radiolarians, and less pronounced in diatoms and calcareous nanoplankton. 
- %The greatest source of variance in survival probability is the timing of observation. 
- %Importantly, this result means that the time of an observation is a greater source of variation in survival probability when compared to species age. 
- %We find that including information on a species' change in geographic range size on average improves our predictions of species survival at million-year timescales. 
- %The effect of change in geographic range is much smaller than the effect of current geographic range, and highly variable through time as the effect changes sign and there are times where there is little evidence for any effect of past geographic range. 
- %These results imply that at million-year timescales geographic range trajectories are nearly Markovian, perhaps because the processes driving geographic range changes vary on substantially shorter timescales. 
- %The effect of change in geographic range on survival most likely stands for many interacting and unobserved processes which in-turn produce that species' geographic range and its affect on survival. 
- %These results reflect the difficulty of estimating species extinction, and that while including historical covariates does improve model performance, that gain is very small. 
- %The results of this study reinforce the importance of the promise of palaeontology and using the past to predict the future.
 \end{abstract}
 
 {\bf Keywords:} conservation, palaeobiology, extinction, forecasting
@@ -226,6 +206,8 @@ See our code repository at https://github.com/psmits/trident for full code detai
 
 \section{Results}
 
+The focus of this study is on understanding how well our models forecast future extinction events by comparing our in-sample and out-of-sample forecast estimates. A presentation of the posterior estimates for the regression coefficient estimates from our VP model (Table \ref{tab:model_def}) is available our Supplemental Materials (Section \ref{sec:supp_res}).
+
 % ROC model comparison
 \begin{figure}[ht]
  \begin{subfigure}[ht]{0.45\textwidth}
@@ -244,30 +226,11 @@ See our code repository at https://github.com/psmits/trident for full code detai
 
 \subsection{In-sample forecasting adequacy}
 
-The in-sample model comparisons are useful for comparing the relative ability of our models to represent the data they were fit to. Comparison between the posterior distributions of in-sample AUC for each of the four models demonstrates that all of our models have approximately equal in-sample forecasting performance (Fig. \ref{fig:auc_hist}). The parameter rich model VP has the greatest median in-sample AUC when compared to the other three models, but there is substantial overlap in their posterior distributions. Additionally, while our parameter rich model VP is possibly the most adequately performing model, the difference or improvement to performance is minimal at best -- all four models have approximately equal in-sample AUC posterior distributions. All the in-sample AUC estimates from our models are concentrated on an AUC value of 0.77. It is therefore hard to conclude that there is one ``best'' model which we can rely upon as they are all nearly functional equivalent. 
+The in-sample model comparisons are useful for comparing the relative ability of our models to represent the data they were fit to, acting as quality control and sensitivity analysis. Comparison between the posterior distributions of in-sample AUC for each of the four models demonstrates that the parameter rich model VP has the greatest median in-sample AUC when compared to the other three models, while there is substantial overlap in the posterior distributions of the forecasts from the other three models (Fig. \ref{fig:auc_hist}). 
 
-%When the posterior predictive distributions of the in-sample AUC estimates are presented over time, the similarity in adequacy between the models becomes more apparent (Fig. \ref{fig:auc_ts}). There are few major or obvious differences in model adequacy between the four models.
-%% ROC model comparison time series
-%\begin{figure}[ht]
-% \centering
-% \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/auc_ts_full}
-% \caption{Comparison between the posterior predictive AUC estimates for each of the time intervals for each of the four models. These estimates are reflections of each model's fit to the various time intervals. The red line corresponds to the median AUC value, while the envelopes correspond to multiple credible intervals as indicated in the legend. In all cases, higher AUC values indicate greater predictive performance versus lower AUC values.}
-% \label{fig:auc_ts}
-%\end{figure}
+However, the actual difference in forecast AUC result between the VP model and the other three models is extremely small (0.01 AUC unit), and all the in-sample AUC estimates from our models are concentrated between an AUC value of 0.775 and 0.795 (Fig. \ref{fig:auc_hist}). This result indicates that the practical difference in performanc between these models might be so small that there is no practical benefit that the VP model over the other three. Ultimately, determining which of these models produces the best forecasts of future extinctions requires comparing these in-sample results to our out-of-sample results (see below).
 
-
-%When the posterior predictive distributions of the in-sample AUC estimates are presented by taxonomic group, some heterogeneity in model adequacy is revealed (Fig. \ref{fig:auc_taxon}). While in all cases the model with the highest average in-sample AUC is the parameter-rich ``past and vary'' model, the amount of difference between the models varies by taxonomic group in ways not observable from the pooled estimates (Fig. \ref{fig:auc_hist}). For example, the difference between the ``past and vary'' model and the others is more pronounced for Calcareous nannoplankton and Dinoflagellates, and smaller for the Foraminifera and Radiolaria. 
-%\begin{figure}[ht]
-% \centering
-% \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/auc_taxon_full}
-% \caption{Comparison of posterior predictive AUC estimates for each of the four models, arranged by taxonomic group. These estimates reflect each model's fit to the various taxonomic groups present in this analysis. The densities reflect the posterior distribution of the estimates, and below each density is marked the median AUC value along with the 50\% and 80\% credible intervals. In all cases, higher AUC values indicate greater predictive performance versus lower AUC values.}
-% \label{fig:auc_taxon}
-%\end{figure}
-
-
-
-
-The in-sample forecasts from our four models over time are virtually identical within taxa (Fig. \ref{fig:auc_taxon_time}). Our in-sample forecasts for Diatoms are the weakest of the taxonomic groups as all four models have an equal number of intervals with no predictive power (AUC approximately 0.5). In contrast, our best in-sample forecast results are for Radiolarians where there is at most 1 interval with almost no predictive power. Ultimately, our in-sample forecasts are virtually identical across models.
+The in-sample forecasts from our four models over time are broadly similar between taxonomic groups (Fig. \ref{fig:auc_taxon_time}). Our in-sample forecasts for Diatoms are the weakest of the taxonomic groups as all four models have an equal number of intervals with no predictive power (AUC approximately 0.5). In contrast, our best in-sample forecast results are for Radiolarians where for any of our models there is at most 1 interval with almost no predictive power. Ultimately, our in-sample forecasts over time by taxonimc group are broadly consistent between our four models.
 
 \begin{figure}[ht]
  \centering
@@ -281,29 +244,7 @@ The in-sample forecasts from our four models over time are virtually identical w
 
 \subsection{Out-of-sample forecasting performance}
 
-Expected out-of-sample forecasting performance was estimated using five-fold cross-validation for time series \citep{Arlot2010,Bergmeir2016}. Comparing the in-sample AUC estimates to the expected out-of-sample AUC estimates reveals a similar range in performance for all models (Fig. \ref{fig:auc_hist}, \ref{fig:fold_auc}). Interestingly, the differences in posterior predictive distributions of AUC between the four model variations is reduced in out-of-sample prediction. For example, the VP model no longer has the greatest median AUC of the four models (Fig. \ref{fig:fold_auc}). For this reason the rank order of median out-of-sample AUC is different from the rank order of median in-sample AUC. However, making interpretations based only on the median AUC estimates is incorrect -- our estimates are the full posterior, not individual points. Because of this, the four models are effectively indistinguishable in their out-of-sample forecast performance (Fig. \ref{fig:fold_auc}).
-
-%A slight decrease in performance when dealing with out-of-sample observations makes sense: each of the models fit during cross-validation is based on fewer data than the model fit on the full data (between 1/5th to 4/5ths of the original). Additionally, a potential decrease in precision when forecasting the future of extinction risk is almost to be expected as the future is not necessarily the same as the past. However, the similarly between the in-sample and out-of-sample results indicates that our model is fairly robust to how extinction intensity has changed over the Cenozoic. 
-
-%This result means that we would expect to correctly rank two species in order of most to least likely to go extinct 70-80\% of the time. However, this expected out-of-sample performance is approximately the same as the in-sample performance results (Fig. \ref{fig:auc_hist}), indicating that our models would yield consistent results when generalized to future extinctions.
-
-%When the posterior predictive distribution of expected out-of-sample AUC is presented as a time series, the similarity between the models is even more apparent (Fig. \ref{fig:fold_auc_time}). While the width of the credible intervals at various time points varies between the models, the overall picture of expected out-of-sample AUC is almost identical when you compare the models -- periods of relatively better or worse performance map identically between the time series.
-%\begin{figure}[ht]
-% \centering
-% \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/fold_auc_time_full}
-% \caption{Comparison of out-of-sample AUC values calculated for each of the million year intervals for each of the four models. The AUC of the individual My intervals within each fold is plotted to highlight the heterogeneity in performance within and between folds. This presentation decomposes each of the 12-million year folds (Fig. \ref{fig:fold_auc}) into the predictions made for each of the million-year intervals. The red line corresponds to the median AUC estimate, with the envelopes corresponding to multiple credible intervals as indicated in the legend.}
-% \label{fig:fold_auc_time}
-%\end{figure}
-%We can also compare expected out-of-sample AUC by taxonomic group for each of the models (Fig. \ref{fig:fold_auc_taxon}). These comparisons reveal a lot about the differences in predictive potential of the taxonomic groups. For example, the posterior predictive distributions of out-of-sample AUC for Foraminifera from all four models are approximately identical. In contrast, expected out-of-sample AUC for Radiolaria exhibits the same or similar pattern in relative model performance to the pooled comparisons (Fig. \ref{fig:fold_auc}). Additionally, we can state that our out-of-sample predictions for calcareous nannoplankton and dinoflagellates are not necessarily as precise as our estimates for Foraminifera or even Radiolaria. These results indicate that out-of-sample predictions may be easier for some taxonomic groups than others (e.g. Foraminifera versus Dinoflagellates.
-%\begin{figure}[ht]
-% \centering
-% \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/fold_auc_taxon_full}
-% \caption{Comparison of out-of-sample AUC values aggregated by taxonomic group for each of the four models. Depicted for each taxon-model combination is an aggregate density of all posterior predictive estimates for each of four folds -- cross-validation estimates are commonly multi-modal as each fold presents its own challenges for prediction. Beneath these densities is marked the median estimate along with 50\% and 80\% credible intervals.}
-% \label{fig:fold_auc_taxon}
-%\end{figure}
-%
-
-The posterior predictive distribution of expected out-of-sample AUC over time and across taxonomic groups are nearly identical for each of the four models (Fig. \ref{fig:fold_auc_taxon_time}). 
+Expected out-of-sample forecasting performance was estimated using five-fold cross-validation for time series \citep{Arlot2010,Bergmeir2016}. Our out-of-sample forecast AUC estimates demonstrate a broader range of results, with AUC estimates ranging between approximately 0.7 and 0.85 (Fig. \ref{fig:auc_hist}, \ref{fig:fold_auc}). While our VP model was the model with greatest in-sample forecasting performance (Fig. \ref{fig:auc_hist}), this model has the greatest decrease in out-of-sample forecasting performance (Fig. \ref{fig:fold_auc}). In comparison, the other three models demontrstrate a much smaller difference between in-sample forecast and out-of-sample forecast AUC values which indicates that our VP model is overfit to our data, and that one of the simpler model would be preferable for predicting future extinctions. This result means that our model which includes the historical covariates (e.g. change in geographic range) and allowing these effects to vary over time produces biased extinciton forecasts. Interestingly, including either historical covariates like change in geographic range or allowing the effects of geographic range and other covariate effects to vary over time have approximately equal effect on forecasting future extinction events (Fig. \ref{fig:auc_compare}). 
 
 In the analysis of the in-sample forecast performance of the four models, we noted that there were time intervals where our predictions were no better than random (Fig. \ref{fig:auc_taxon_time}). This occurrence is generally much rarer for the posterior distribution of AUC from the out-of-sample forecasts. The major exception to this pattern are our estimates for the diatoms, which have at least one time interval for all four models in which the median AUC of the out-of-sample forecasts were no better random. The only other group for which median posterior predictive estimate of out-of-sample AUC reaches 0.5 is calcareous nannoplankton, and then only with the V model.
 \begin{figure}[ht]
@@ -325,51 +266,21 @@ We compared the difference in our AUC estimates from the out-of-sample forecasts
 
 
 
-%Looking at four randomly sampled species, we evaluated their probability of extinction at all times that species was observed. We then compared these estimates to the geographic range trajectory of 
-%
-%
-%% risk estimate compared to change in geo-range
-%\begin{figure}[ht]
-% \centering
-% \begin{subfigure}{\textwidth}
-%  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/relrisk_range}
-%  \caption{A}
-%  \label{fig:relrisk_range}
-% \end{subfigure}
-%
-% \begin{subfigure}{\textwidth}
-%  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio=true]{../results/figure/relrisk_ext}
-%  \caption{B}
-%  \label{fig:relrisk_ext}
-% \end{subfigure}
-% \caption{Comparison between species geographic range histories and our estimate of their probability of extinction for each time of observation. Geographic range is assumed observed without error. Our probability estimates are presented as a median (point) and 50\% and 80\% credible intervals.}
-% \label{fig:relrisk_compare}
-%\end{figure}
-
-
 
 \section{Discussion}
 
-We find that all of our models are expected to correctly forecast which species of randomly selected extinct-extant pair is more likely to go extinct between 70\% to 80\% of the time (Fig. \ref{fig:fold_auc}). One of the most striking aspects of these results is the similarity in forecasting performance for in-sample and out-of-sample observations. A slight decrease in performance when dealing with out-of-sample observations makes sense: each of the models fit during cross-validation is based on fewer data than the model fit on the full data (between 1/5th to 4/5ths of the original). Additionally, a potential decrease in precision when forecasting the future of extinction risk is to be expected as the future will always differ from the past in some respect. However, the similarly between the in-sample and out-of-sample results indicates that our model is fairly robust to variation in extinction intensity over the Cenozoic. An extremely important caveat, of course, is that human impacts may substantially alter present and future extinction risk dynamics relative to the average Cenozoic state, so that the future may become less predictable than it has been in the past \citep{Harnik2012a,Finnegan2015}.
+We find that all of our models are expected to correctly forecast which species of randomly selected extinct-extant pair is more likely to go extinct between 70\% to 80\% of the time (Fig. \ref{fig:fold_auc}). One of the most striking aspect of these results is that our results is that our model that includes historical covariates (e.g. change in geographic range) and allows for covariate effects to vary over time is overfit to our data and produces more biased out-of-sample predictions than the other three models (Fig. \ref{fig:auc_compare}). In comparison, the models that include either the historical covariates or allows covariate effects to vary over time produce less biased out-of-sample forecasts. A slight decrease in performance when dealing with out-of-sample observations makes sense: each of the models fit during cross-validation is based on fewer data than the model fit on the full data (between 1/5th to 4/5ths of the original). Additionally, a potential decrease in precision when forecasting the future of extinction risk is to be expected as the future will always differ from the past in some respect. An extremely important caveat, of course, is that human impacts may substantially alter present and future extinction risk dynamics relative to the average Cenozoic state, so that the future may become less predictable than it has been in the past \citep{Harnik2012a,Finnegan2015}.
 
-%This similarity demonstrates that while models with historical covariates are predictors of species extinction have better in-sample performance (Fig. \ref{fig:auc_hist}, \ref{fig:auc_taxon_time}), all of them forecast the extinction risk of out-of-sample data with a similar degree of success (Fig. \ref{fig:fold_auc}, \ref{fig:fold_auc_taxon_time}).
+We also find that our three of our four models are practically identical in their ability to make in-sample and out-of-sample forecasts. Although the in-sample AUC estimates differ between models, all of these estimates are in a narrow range of possible AUC values (Fig. \ref{fig:auc_hist}). While the ``best'' model based on in-sample forecasting results includes the historical covariates and allows all covariate effects to vary over time, the out-of-sample forecasts from this mode indicate that this model is overfit to our data and produces less accurate forecasts than the other three models \ref{fig:fold_auc}). Including historical covariates such as geographic range trajectory yields out-of-sample forecasts with nearly identical results to a model that allows covariate effects to vary over time but does not include historical covariates. This contrasts with previous findings using geological stages as their time unit \citep{Kiessling2016} and suggests that further investigation of other taxa, timescales, and environments may help to elucidate the conditions under which past geographic range trajectories are most informative about future extinction risk. 
 
-We also find that our four models are practically identical in their ability to make in-sample and out-of-sample forecasts. Although the in-sample AUC estimates differ between models, all of these estimates are in a narrow range of possible AUC values (Fig. \ref{fig:auc_hist}). While the ``best'' model does include the historical covariates and allows all covariate effects to vary over time, its practical difference in performance versus the other models is negligible (Fig. \ref{fig:fold_auc}). Thus even though the VP model has a statistically greater AUC for in-sample forecasts than the other three models, this result has no practical significance because the predictions are functionally identical. The results of the out-of-sample forecasts illustrate this point in full, as all four models have functionally identical out-of-sample performance. Thus, including geographic range trajectory results in only very minor improvements in forecasting accuracy. This contrasts with previous findings using geological stages as their time unit \citep{Kiessling2016} and suggests that further investigation of other taxa, timescales, and environments may help to elucidate the conditions under which past geographic range trajectories are most informative about future extinction risk.
-
-%This result is an important reminder about understanding the practical interpretation of our analyses, which can be lost when we do not consider the predictive aspects of our analyses. By focusing on determining which covariates are ``significant'' and which model is best through simple comparisons means that the practical importance of the results are ignored. For example, in logistic regression a covariate can be considered significant on the log-odds scale but have no practical difference on the probability scale because the range of values is too small as to matter such as when the intercept is greater than 2 or less than -2 because the inverse-logit of those values are close to 0 or 1, respectively \citep{ARM}.
-
-The relative quality and consistency of our models' out-of-sample forecasting performance is encouraging given that these estimates are based on very limited biological and environmental information about the studied taxa. Even our most complex models only account for a few simple aspects of geographic range, prior history, and phylogenetic affinity. The principal reason we were not able to include more biological information in the models used here is because we lack additional life history or ecological information for many of the marine micro- and nannoplankton included in this study. Foraminifera are an exception to this problem as aspects of life history, ecology, and physiology are known for many foram species \citep{Ezard2011}. However, comparable information does not exist for all foram species, nor does this type of data exist for the other three taxonomic groups studied here. Future analyses including this type of information and focused more narrowly on the foraminifera may be informative. 
-
-In summary, our results suggest that models trained on prior extinction/survival patterns do modestly well at predicting relative extinction probability of randomly selected species pairs based on a small number of taxonomic, geographic, and historical predictors. While change to in geographic range and past temperature information is not found to greatly improve our ability to estimate future extinction risk, we do find that the immediate past is a modest predict of the immediate future. These results are comparable to conservation determinations because both are expressed in terms of an relative risk. The results of this simple exercise suggest that conservation decisions would be bolstered by including fossil data.
+It is interesting to note that both historical covariates like change in geographic range and allowing covariate effects to vary over time can be thought of as different ways of encoding the past: explicitly or implicitly. Including historical covariates in a model but not allowing covariate effects to vary over time encodes the past explicitly but assumes that covariates effects are constant over time. Allowing covariate effects to vary over time, on the other hand, does not explicitly encode ``the past'' into our model but instead models how covariate effects vary over time which allows the past to be implicitly included in our model. By modeling this variation, forecasts made for future extinction events can allow for a wide range of potential effects of our covariates on predicting extinction. Comparing our out-of-sample forecast results indicates that these approaches yield approximately equal forecasting performance (Fig. \ref{fig:fold_auc}).
 
 
-%are encouraging for efforts to incorporate fossil data into current and future extinction risk assessments, and 
+The relative quality and consistency between three of our models' in-sample and out-of-sample forecasting performance is encouraging given that these estimates are based on very limited biological and environmental information about the studied taxa. Even our most complex models only account for a few simple aspects of geographic range, prior history, and phylogenetic affinity. The principal reason we were not able to include more biological information in the models used here is because we lack additional life history or ecological information for many of the marine micro- and nannoplankton included in this study. Foraminifera are an exception to this problem as aspects of life history, ecology, and physiology are known for many foram species \citep{Ezard2011}. However, comparable information does not exist for all foram species, nor does this type of data exist for the other three taxonomic groups studied here. Future analyses including this type of information and focused more narrowly on the foraminifera may be informative. 
 
+In summary, our results suggest that models trained on prior extinction/survival patterns do modestly well at predicting relative extinction probability of randomly selected species pairs based on a small number of taxonomic, geographic, and historical predictors. We find that our VP model chich includes the historical covariates such as change in geographic range between observations and past global temperature information while also allowing covariate effects to vary over time is overfit to our data and produces less accurate out-of-sample forecasts than our three less complex models. 
 
-
-%It performs nearly as well at out-of-sample prediction (70-80\%), implying that determinants of extinction risk have varied only modestly through time. An important caveat is that human impacts may substantially disrupt range-risk dynamics so that the future will be less predictable than it has been in the past.
-
-%This presents an interesting conundrum about how to improve upon our results. A simple hypothesis for how to improve upon our results is that if we were to include more biological information in our model, our estimates of species relative extinction risk would be improved. However, if we decrease the amount of data in our model, our results by definition decrease in their quality. For example, compare the results from our models fit using full in-sample dataset, and the results from the cross-validation where the fit to each fold is by definition based on less than full information.)
+We find that three of our models yield functional equivalent out-of-sample forecasts: our model with historical covariates but assume covariate effects are constant over time (CP model), our model which allows for covariate effects to vary over time but does not include the historical covarites (V model), and our model without historical covariates and does not allow covariate effects to vary over time (C model). This result implies that explicit modeling of historical covariate effects on extinction yields similar forecasts to modeling how covariate effects have changed over time. We interpret this to mean that paleobiological information, such as variation in covariate effects on extinction risk over time, can improve our ability to forecast future extinctions, however including both historical coviarates and allowing covariate effects to vary over time yields an overfit model which produces biased forecasts. Importantly, while our model with no historical covariates and no variation on effects over time yielded similar out-of-sample forecasts to our model with historical covariates but constant effect and our model with varying effects but no historical covariates, the inclusion of this additional information does not harm these models' forecast ability. The results of this simple exercise suggest that conservation decisions would be bolstered by including fossil data.
 
 
 
@@ -497,6 +408,29 @@ brmfit <- brm(formula = form,
 \end{verbatim}
 
 Posterior convergence was determined using the general and HMC-specific diagnostic criteria: scale reduction factor (\(\hat{R}\); target \(<1.1\)), effective sample size (eff; target value eff/steps \(<0.0001\)), number of samples that saturated the maximum trajectory length for avoiding infinite loops (treedepth; target value 0), sample divergence, and the energy Bayesian Fraction of Mission Information (E-BFMI; target value \(>0.2\)). For further explanation of these diagnostic criteria, see the Stan Manual \citep{StanManual}.
+
+\section{Supplement to Results} \label{sec:supp_res}
+
+Here we present the parameter estimates for our from our VP model (Table \ref{tab:model_def}). We choose to present the estimates from this model because it is our most inclusive model and its parameter estimates are indicative of parameter estimates from other models with a subset of those covariates included in this model.
+
+We present the group-level estimates are the average effects of that covariate over time and across taxonomic groups. These estimates make up the vector $\mu$ described above. In addition to the average effect of our covariates, we also included the estimate of the group-level intercept, which is the average log-odds of extinction for an average observation over time and across taxonomic groups.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics{../results/figure/effect_est}
+  \caption{Group-level parameter posterior estimates from our VP model (Table \ref{tab:model_def}). The posterior distribution of our parameter estimates are presented as densities. Below each of these densities is marked the median estimate along with 50\% and 80\% credible intervals. Estimates are on the log-odds scale.}
+  \label{fig:param_est}
+\end{figure}
+
+Our VP model allows for these our regression coefficients to vary over time and between taxonomic groups. Here we present the population-level estimates for our regression coefficients along with the population-level intercept estimates. Population-level estimates are those for a specific time interval and taxonomic group. In this case, the intercept estimate describes the log-odds of extinction for an average observation at that point in time and taxonomic group.
+
+\begin{figure}[<+htpb+>]
+  \centering
+  \includegraphics{../results/figure/eff_time_group}
+  \caption{Population-level parameter posterior estimates from our VP model (Table \ref{tab:model_def}). Posterior estimates are presented as a time series. The black line represents the median estimate of that parameter. In addition, the 50\%, 80\%, and 95\% credible intervals are indicated. Estimates are on the log-odds scale.}
+  \label{fig:param_est_time_group}
+\end{figure}
+
 
 
 \printbibliography[title={Supplementary References}]
