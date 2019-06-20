@@ -15,7 +15,7 @@ source(here('R', 'helper07_diffsafe.r'))
 plan(multiprocess)
 
 # useful graphical constants
-theme_set(theme_bw(base_size = 20))
+theme_set(theme_bw(base_size = 25))
 
 
 # get data in

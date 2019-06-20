@@ -376,7 +376,7 @@ view_neptune <- function(.data, name = 'full', path = '../results/figure/') {
   filename <- paste0(path, '/occ_time_label_', name, '.png')
   ggsave(filename = filename,
          plot = octg, 
-         width = 4, height = 6)
+         width = 8, height = 10)
   
   
   # relative "abundance" of microfossil_groups over time
@@ -387,7 +387,7 @@ view_neptune <- function(.data, name = 'full', path = '../results/figure/') {
   filename <- paste0(path, '/abn_time_stack_', name, '.png')
   ggsave(filename = filename,
          plot = ocag, 
-         width = 6, height = 6)
+         width = 10, height = 10)
   
   # occurrences by relage
   ocrg <- .data %>% 
@@ -412,7 +412,7 @@ view_neptune <- function(.data, name = 'full', path = '../results/figure/') {
   filename <- paste0(path, '/age_label_', name, '.png')
   ggsave(filename = filename,
          plot = ocrg, 
-         width = 4, height = 6)
+         width = 6, height = 10)
   
   
   
@@ -430,7 +430,7 @@ view_neptune <- function(.data, name = 'full', path = '../results/figure/') {
   filename <- paste0(path, '/range_time_', name, '.png')
   ggsave(filename = filename,
          plot = srg, 
-         width = 8, height = 6)
+         width = 10, height = 8)
   
   # lots of little code here
   # for FAD/LAD accumulation curves
@@ -467,13 +467,13 @@ view_neptune <- function(.data, name = 'full', path = '../results/figure/') {
   filename <- paste0(path, '/fad_lad_count_wide_', name, '.png')
   ggsave(filename = filename,
          plot = ccg, 
-         width = 6, height = 3)
+         width = 10, height = 5)
   
   ccg2 <- ccg + facet_grid(fossil_group ~ ., switch = 'y', scales = 'free_y')
   filename <- paste0(path, '/fad_lad_count_tall_', name, '.png')
   ggsave(filename = filename,
          plot = ccg2, 
-         width = 4, height = 6)
+         width = 8, height = 10)
 }
 
 
