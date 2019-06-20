@@ -1,4 +1,4 @@
-\documentclass{beamer} 
+\documentclass[aspectratio=169]{beamer} 
 \usepackage{amsmath,amsthm}
 \usepackage{graphicx,microtype,parskip}
 \usepackage{caption,subcaption,multirow}
@@ -80,7 +80,7 @@
       \begin{center}
         \includegraphics[width=\textwidth,height=0.15\textheight,keepaspectratio=true]{figure/calc}
 
-        \includegraphics[width=\textwidth,height=0.15\textheight,keepaspectratio=true]{figure/dino}
+        \includegraphics[width=\textwidth,height=0.15\textheight,keepaspectratio=true]{figure/diatom}
 
         \includegraphics[width=\textwidth,height=0.15\textheight,keepaspectratio=true]{figure/foram}
 
@@ -90,10 +90,10 @@
       \end{center}
     \end{column}
     \begin{column}{0.4\textwidth}
-      \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio=true]{../results/figure/occ_time_label_full}
+      \includegraphics[width=\textwidth,height=0.7\textheight,keepaspectratio=true]{../results/figure/occ_time_label_full}
     \end{column}
     \begin{column}{0.4\textwidth}
-      \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio=true]{../results/figure/age_label_full}
+      \includegraphics[width=\textwidth,height=0.7\textheight,keepaspectratio=true]{../results/figure/age_label_full}
     \end{column}
   \end{columns}
 
@@ -265,17 +265,28 @@
   \begin{itemize}
     \item \alert{The past matters\dots} 
       \begin{itemize}
-        \item Our best supported model includes our historical covariates and allows all effects to vary over time.
+        \item Our best supported model includes either our historical covariates or allows all effects to vary over time.
       \end{itemize}
     \item \alert{But not that much\dots}
       \begin{itemize}
         \item Models only average/fair expected out-of-sample performance.
       \end{itemize}
+    \item Allowing effects to vary over time is probably preferable to historical covariates -- measures and accounts for variation which is important when predicting extinction in novel environments.
     \item Mechanisms behind changes to geographic range operate at sub-million year scales. Perhaps their effects are weak/masked at million (or greater) year scales.
   \end{itemize}
 
 \end{frame}
+  
 
+\begin{frame}
+
+  \begin{center}
+    \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio=true]{figure/book}
+
+    \Large{https://psmits.github.io/paleo\_book/index.html}
+  \end{center}
+
+\end{frame}
 
 \begin{frame}
   \frametitle{Acknowledgements}
