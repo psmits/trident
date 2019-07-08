@@ -94,7 +94,7 @@ diff_gg <-
   facet_grid(fossil_group ~ model) +
   scale_x_reverse(name = 'CI', breaks = brks) +
   theme(legend.position = 'bottom') +
-  labs(x = 'Time (Mya)', y = 'Difference btwn OOS and INS') +
+  labs(x = 'Time (Mya)', y = 'Difference between out-of-sample and in-sample AUC') +
   NULL
 
 ggsave(filename = here::here('results', 'figure', 'auc_diff.png'),
