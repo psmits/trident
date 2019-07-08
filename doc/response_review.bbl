@@ -1,0 +1,176 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.9 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{1}
+  \datalist[entry]{none/global//global/global}
+    \entry{ESL}{book}{}
+      \name{author}{3}{}{%
+        {{uniquename=0,uniquepart=base,hash=0cb8fe4210baa81c4b0e67913b4d2768}{%
+           family={Hastie},
+           familyi={H\bibinitperiod},
+           given={Trevor},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=88eea600247d798f8b2ce0b2dc614492}{%
+           family={Tibshirani},
+           familyi={T\bibinitperiod},
+           given={Robert},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=971cf69058b64a94326dea0f2a8bbcce}{%
+           family={Friedman},
+           familyi={F\bibinitperiod},
+           given={Jerome},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {New York, NY}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{7ca1bfe876d5e037b6aed69704221267}
+      \strng{fullhash}{7ca1bfe876d5e037b6aed69704221267}
+      \strng{bibnamehash}{7ca1bfe876d5e037b6aed69704221267}
+      \strng{authorbibnamehash}{7ca1bfe876d5e037b6aed69704221267}
+      \strng{authornamehash}{7ca1bfe876d5e037b6aed69704221267}
+      \strng{authorfullhash}{7ca1bfe876d5e037b6aed69704221267}
+      \field{sortinit}{1}
+      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{During the past decade there has been an explosion in computation and information technology. With it has come vast amounts of data in a variety of fields such as medicine, biology, finance, and marketing. The challenge of understanding these data has led to the development of new tools in the field of statistics, and spawned new areas such as data mining, machine learning, and bioinformatics. Many of these tools have common underpinnings but are often expressed with different terminology. This book describes the important ideas in these areas in a common conceptual framework. While the approach is statistical, the emphasis is on concepts rather than mathematics. Many examples are given, with a liberal use of color graphics. It should be a valuable resource for statisticians and anyone interested in data mining in science or industry. The book's coverage is broad, from supervised learning (prediction) to unsupervised learning. The many topics include neural networks, support vector machines, classification trees and boosting-the first comprehensive treatment of this topic in any book. Trevor Hastie, Robert Tibshirani, and Jerome Friedman are professors of statistics at Stanford University. They are prominent researchers in this area: Hastie and Tibshirani developed generalized additive models and wrote a popular book of that title. Hastie wrote much of the statistical modeling software in S-PLUS and invented principal curves and surfaces. Tibshirani proposed the Lasso and is co-author of the very successful An Introduction to the Bootstrap. Friedman is the co-inventor of many data-mining tools including CART, MARS, and projection pursuit. FROM THE REVIEWS: TECHNOMETRICS "This is a vast and complex book. Generally, it concentrates on explaining why and how the methods work, rather than how to use them. Examples and especially the visualizations are principle features...As a source for the methods of statistical learning...it will probably be a long time before there is a competitor to this book."}
+      \field{edition}{2}
+      \field{isbn}{978-0-387-84857-0}
+      \field{issn}{0172-7397}
+      \field{title}{{The Elements of Statistical Learning}}
+      \field{year}{2009}
+      \field{pages}{1\bibrangedash 694}
+      \range{pages}{694}
+      \verb{doi}
+      \verb 10.1007/b94608
+      \endverb
+      \verb{file}
+      \verb :home/peter/Documents/Mendeley Desktop/Hastie, Tibshirani, Friedman/Unknown/Hastie, Tibshirani, Friedman - 2009 - Unknown.pdf:pdf
+      \endverb
+    \endentry
+    \entry{Gelman2013d}{book}{}
+      \name{author}{6}{}{%
+        {{uniquename=0,uniquepart=base,hash=1e1eb60e3b6e222217bf8e9b24070b28}{%
+           family={Gelman},
+           familyi={G\bibinitperiod},
+           given={Andrew},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=f97b41dbe17904c56e1c370d9a392615}{%
+           family={Carlin},
+           familyi={C\bibinitperiod},
+           given={John\bibnamedelima B},
+           giveni={J\bibinitperiod\bibinitdelim B\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=0587b773e9f0b7671b8b7f70dbb409b0}{%
+           family={Stern},
+           familyi={S\bibinitperiod},
+           given={Hal\bibnamedelima S},
+           giveni={H\bibinitperiod\bibinitdelim S\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=930572fca1a1480e44ad865ae7260b91}{%
+           family={Dunson},
+           familyi={D\bibinitperiod},
+           given={David\bibnamedelima B},
+           giveni={D\bibinitperiod\bibinitdelim B\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=5d36e97683cbc9d6ef06fc2ec40becb0}{%
+           family={Vehtari},
+           familyi={V\bibinitperiod},
+           given={Aki},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=557f967471a621bf5ed42b091c523bd9}{%
+           family={Rubin},
+           familyi={R\bibinitperiod},
+           given={Donald\bibnamedelima B},
+           giveni={D\bibinitperiod\bibinitdelim B\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Boca Raton, FL}%
+      }
+      \list{publisher}{2}{%
+        {Chapman}%
+        {Hall}%
+      }
+      \strng{namehash}{7b511f44eded88e08c98470ecd75568d}
+      \strng{fullhash}{cf1f68125453ecbe871448bacab0d1c5}
+      \strng{bibnamehash}{cf1f68125453ecbe871448bacab0d1c5}
+      \strng{authorbibnamehash}{cf1f68125453ecbe871448bacab0d1c5}
+      \strng{authornamehash}{7b511f44eded88e08c98470ecd75568d}
+      \strng{authorfullhash}{cf1f68125453ecbe871448bacab0d1c5}
+      \field{sortinit}{1}
+      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{3}
+      \field{title}{{Bayesian data analysis}}
+      \field{year}{2013}
+      \field{pages}{675}
+      \range{pages}{1}
+    \endentry
+    \entry{Lazarus1994}{article}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,uniquepart=base,hash=c89c1858819e2003a1136bdcfcda3bfc}{%
+           family={Lazarus},
+           familyi={L\bibinitperiod},
+           given={Dave},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{c89c1858819e2003a1136bdcfcda3bfc}
+      \strng{fullhash}{c89c1858819e2003a1136bdcfcda3bfc}
+      \strng{bibnamehash}{c89c1858819e2003a1136bdcfcda3bfc}
+      \strng{authorbibnamehash}{c89c1858819e2003a1136bdcfcda3bfc}
+      \strng{authornamehash}{c89c1858819e2003a1136bdcfcda3bfc}
+      \strng{authorfullhash}{c89c1858819e2003a1136bdcfcda3bfc}
+      \field{sortinit}{4}
+      \field{sortinithash}{11cdaee3b18e01d77f3f428b13c1fc76}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Marine micropaleontology must in the future provide more precise chronologic and paleoenvironmental information, which in turn must be based on better, more consistent taxonomic and distributional data. Better tools for synthesis and standardization of this data are needed, as the ever expanding published literature is rapidly becoming unmanageable by purely manual compilation methods. The micropaleontology group at the ETH has developed a large relational database of marine microfossil data to partially meet this need. It currently contains biogeographic data on the distribution in Deep Sea Drilling Project (DSDP) and Ocean Drilling Program (ODP) holes of nearly 8,000 species of Cenozoic planktonic foraminifera, radiolaria, diatoms and calcareous nannofossils. The database also includes full stratigraphic occurrence (range chart) data for these fossil groups from more than 100 selected Neogene holes. A particular feature of the database is that all sample information and species names in the original reports are linked to newly created, updatable, comprehensive age models and synonymy lists which reflect modern chronology and taxonomic usage. Searches of the database automatically make use of this information in producing reports. Species' occurrences, including first and last occurrence information, can be further analyzed using external spreadsheet and statistics packages; plotted by mapping programs; or displayed by a new program which creates composite age-range charts.}
+      \field{isbn}{0882-8121}
+      \field{issn}{08828121}
+      \field{journaltitle}{Mathematical Geology}
+      \field{number}{7}
+      \field{title}{{Neptune: A marine micropaleontology database}}
+      \field{volume}{26}
+      \field{year}{1994}
+      \field{pages}{817\bibrangedash 832}
+      \range{pages}{16}
+      \verb{doi}
+      \verb 10.1007/BF02083119
+      \endverb
+      \verb{file}
+      \verb :home/peter/Documents/Mendeley Desktop/Lazarus/Mathematical Geology/Lazarus - 1994 - Mathematical Geology.pdf:pdf
+      \endverb
+      \keyw{DSDP,Neogene,ODP,chronology,micropaleontology,taxonomy}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

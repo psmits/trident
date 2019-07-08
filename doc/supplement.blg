@@ -1,0 +1,27 @@
+[0] Config.pm:302> INFO - This is Biber 2.9
+[0] Config.pm:305> INFO - Logfile is 'supplement.blg'
+[57] biber:313> INFO - === Mon Jul  8, 2019, 12:30:06
+[86] Biber.pm:371> INFO - Reading 'supplement.bcf'
+[178] Biber.pm:857> INFO - Found 0 citekeys in bib section 0
+[178] Biber.pm:857> INFO - Found 24 citekeys in bib section 1
+[179] Biber.pm:857> INFO - Found 0 citekeys in bib section 0
+[214] Biber.pm:3981> INFO - Processing section 1
+[233] Biber.pm:4154> INFO - Looking for bibtex format file 'citations.bib' for section 1
+[273] bibtex.pm:1468> INFO - LaTeX decoding ...
+[690] bibtex.pm:1294> INFO - Found BibTeX data source 'citations.bib'
+[764] Utils.pm:169> WARN - ISBN '00948373' in entry 'Alroy2000b' is invalid - run biber with '--validate_datamodel' for details.
+[784] Utils.pm:169> WARN - ISBN '00948373' in entry 'Foote1997' is invalid - run biber with '--validate_datamodel' for details.
+[809] Utils.pm:169> WARN - ISBN '0094-8373' in entry 'Foote2001' is invalid - run biber with '--validate_datamodel' for details.
+[852] Utils.pm:169> WARN - ISBN '0091-7613' in entry 'Marshall1995' is invalid - run biber with '--validate_datamodel' for details.
+[889] Utils.pm:169> WARN - ISBN '2041-210X' in entry 'Ezard2013' is invalid - run biber with '--validate_datamodel' for details.
+[901] Utils.pm:169> WARN - ISBN '1461-0248' in entry 'Ezard2016' is invalid - run biber with '--validate_datamodel' for details.
+[921] Utils.pm:169> WARN - ISBN '1095-9203 (Electronic)$\backslash$r0036-8075 (Linking)' in entry 'Ezard2011' is invalid - run biber with '--validate_datamodel' for details.
+[941] Utils.pm:169> WARN - ISBN '0094-8373' in entry 'Liow2010' is invalid - run biber with '--validate_datamodel' for details.
+[1105] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[1105] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[1105] Biber.pm:3809> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'en-US'
+[1105] Biber.pm:3815> INFO - No sort tailoring available for locale 'en-US'
+[1147] bbl.pm:617> INFO - Writing 'supplement.bbl' with encoding 'ascii'
+[1148] bbl.pm:618> INFO - Converting UTF-8 to TeX macros on output to .bbl
+[1225] bbl.pm:720> INFO - Output to supplement.bbl
+[1226] Biber.pm:110> INFO - WARNINGS: 8

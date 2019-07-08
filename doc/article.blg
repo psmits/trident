@@ -1,0 +1,45 @@
+[0] Config.pm:302> INFO - This is Biber 2.9
+[0] Config.pm:305> INFO - Logfile is 'article.blg'
+[35] biber:313> INFO - === Mon Jul  8, 2019, 12:06:19
+[61] Biber.pm:371> INFO - Reading 'article.bcf'
+[164] Biber.pm:857> INFO - Found 0 citekeys in bib section 0
+[165] Biber.pm:857> INFO - Found 52 citekeys in bib section 1
+[166] Biber.pm:857> INFO - Found 0 citekeys in bib section 0
+[197] Biber.pm:3981> INFO - Processing section 1
+[211] Biber.pm:4154> INFO - Looking for bibtex format file 'citations.bib' for section 1
+[229] bibtex.pm:1468> INFO - LaTeX decoding ...
+[516] bibtex.pm:1294> INFO - Found BibTeX data source 'citations.bib'
+[591] Utils.pm:169> WARN - ISBN '0027-8424 (Print)$\backslash$n0027-8424 (Linking)' in entry 'Payne2007' is invalid - run biber with '--validate_datamodel' for details.
+[612] Utils.pm:169> WARN - ISBN '1095-9203 (Electronic)$\backslash$r0036-8075 (Linking)' in entry 'Ezard2011' is invalid - run biber with '--validate_datamodel' for details.
+[623] Utils.pm:169> WARN - month field 'dec' in entry 'Wang2008a' is not an integer - this will probably not sort properly.
+[644] Utils.pm:169> WARN - ISBN '0027-8424' in entry 'Harnik2011' is invalid - run biber with '--validate_datamodel' for details.
+[652] Utils.pm:169> WARN - ISBN '0028-0836' in entry 'Peters2008' is invalid - run biber with '--validate_datamodel' for details.
+[664] Utils.pm:169> WARN - ISBN '1471-2954 (Electronic)$\backslash$n0962-8452 (Linking)' in entry 'Harnik2012' is invalid - run biber with '--validate_datamodel' for details.
+[696] Utils.pm:169> WARN - ISBN '0169-5347' in entry 'Harnik2012a' is invalid - run biber with '--validate_datamodel' for details.
+[700] Utils.pm:169> WARN - ISBN '0094-8373' in entry 'Foote2006' is invalid - run biber with '--validate_datamodel' for details.
+[704] Utils.pm:169> WARN - ISBN '1095-9203 (Electronic)$\backslash$r0036-8075 (Linking)' in entry 'Alroy2010a' is invalid - run biber with '--validate_datamodel' for details.
+[761] Utils.pm:169> WARN - ISBN '0027-8424' in entry 'Alroy2001' is invalid - run biber with '--validate_datamodel' for details.
+[767] Utils.pm:169> WARN - ISBN '0094-8373' in entry 'Alroy2000' is invalid - run biber with '--validate_datamodel' for details.
+[774] Utils.pm:169> WARN - ISBN '00948373' in entry 'Alroy2000b' is invalid - run biber with '--validate_datamodel' for details.
+[779] Utils.pm:169> WARN - ISBN '0094-8373' in entry 'Foote2001' is invalid - run biber with '--validate_datamodel' for details.
+[783] Utils.pm:169> WARN - ISBN '0882-8121' in entry 'Lazarus1994' is invalid - run biber with '--validate_datamodel' for details.
+[792] Utils.pm:169> WARN - ISBN '0094-8373' in entry 'Foote2007' is invalid - run biber with '--validate_datamodel' for details.
+[806] Utils.pm:169> WARN - ISBN '0094-8373' in entry 'Liow2010' is invalid - run biber with '--validate_datamodel' for details.
+[814] Utils.pm:169> WARN - ISBN '0962-8452' in entry 'Liow2007' is invalid - run biber with '--validate_datamodel' for details.
+[828] Utils.pm:169> WARN - ISBN '0962-8452' in entry 'Jablonski2003' is invalid - run biber with '--validate_datamodel' for details.
+[839] Utils.pm:169> WARN - ISBN '00030147' in entry 'Jablonski2006' is invalid - run biber with '--validate_datamodel' for details.
+[854] Utils.pm:169> WARN - ISBN '0036-8075' in entry 'Foote2007b' is invalid - run biber with '--validate_datamodel' for details.
+[876] Utils.pm:169> WARN - ISBN '0148-0227' in entry 'Cramer2011' is invalid - run biber with '--validate_datamodel' for details.
+[894] Utils.pm:169> WARN - ISBN '0094-8373' in entry 'Finnegan2008' is invalid - run biber with '--validate_datamodel' for details.
+[905] Utils.pm:169> WARN - ISBN '1744-957X (Electronic)$\backslash$r1744-9561 (Linking)' in entry 'Ezard2012' is invalid - run biber with '--validate_datamodel' for details.
+[934] Utils.pm:169> WARN - ISBN '1558-5646' in entry 'Liow2011' is invalid - run biber with '--validate_datamodel' for details.
+[964] Utils.pm:169> WARN - ISBN '1935-7516' in entry 'Arlot2010' is invalid - run biber with '--validate_datamodel' for details.
+[993] Utils.pm:169> WARN - ISBN '01678655' in entry 'Fawcett2006' is invalid - run biber with '--validate_datamodel' for details.
+[1100] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[1100] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[1100] Biber.pm:3809> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'en-US'
+[1100] Biber.pm:3815> INFO - No sort tailoring available for locale 'en-US'
+[1185] bbl.pm:617> INFO - Writing 'article.bbl' with encoding 'ascii'
+[1186] bbl.pm:618> INFO - Converting UTF-8 to TeX macros on output to .bbl
+[1330] bbl.pm:720> INFO - Output to article.bbl
+[1331] Biber.pm:110> INFO - WARNINGS: 26

@@ -53,7 +53,7 @@
 
   \begin{center}
     \begin{LARGE}
-      Extinction is \alert{hard} to predict, but is \alert{important} to conservation decisions.
+      Extinction is \alert{hard} to predict, \\but is \alert{important} to conservation decisions.
     \end{LARGE}
   \end{center}
 
@@ -63,11 +63,13 @@
 \begin{frame}
   \frametitle{Predicting extinction}
 
-  \begin{itemize}[<+->]
-    \item A taxon with a \alert{greater than average} global geographic range is likely to \alert{survive for longer} than a taxon with \alert{less than average} global geographic range.
-    \item A taxon's global geographic range can change over time.
-    \item What happens to extinction risk as a taxon changes geographic range? How is extinction risk impacted if that taxon's global geographic range has recently \alert{increased} or \alert{decreased}?
-  \end{itemize}
+  \begin{Large}
+    \begin{itemize}[<+->]
+      \item A taxon with a \alert{greater than average} global geographic range is likely to \alert{survive for longer} than a taxon with \alert{less than average} global geographic range.
+      \item A taxon's global geographic range can change over time.
+      \item What happens to extinction risk as a taxon changes geographic range? How is extinction risk impacted if that taxon's global geographic range has recently \alert{increased} or \alert{decreased}?
+    \end{itemize}
+  \end{Large}
 
 \end{frame}
 
@@ -105,17 +107,20 @@
 \begin{frame}
   \frametitle{How we're analyzing the data}
 
-  \begin{itemize}%[<+->]
-    \item Encoding the past
-      \begin{itemize}
-        \item Change in geographic range between current observation and previous observation.
-        \item Average global temperature at time of previous observation (Mg/Ca elemental ratio).
-        \item Age in millions of years at time of observation.
-      \end{itemize}
-    %\item \alert{Compare} models using WAIC/LOOIC.
-    \item Explore model adequacy using posterior predictive distribution.
-    \item Estimate out-of-sample predictive performance using \(k\)-fold cross-validation.
-  \end{itemize}
+  \begin{Large}
+    \begin{itemize}%[<+->]
+      \item Encoding the past
+        \begin{itemize}
+            \begin{large}
+            \item Change in geographic range between current observation and previous observation.
+            \item Average global temperature at time of previous observation (Mg/Ca elemental ratio).
+            \item Age in millions of years at time of observation.
+            \end{large}
+        \end{itemize}
+      \item Explore model adequacy using posterior predictive distribution.
+      \item Estimate out-of-sample predictive performance using \(k\)-fold cross-validation.
+    \end{itemize}
+  \end{Large}
 
 \end{frame}
 
@@ -176,8 +181,10 @@
 
     \end{column}
     \begin{column}{0.6\textwidth}
+      \begin{large}
+        
       The area represents the probability of correct ranking of a random ``extant''-``extinct'' pair.
-      
+
       \[
         \text{AUC} = 
         \begin{cases} 
@@ -188,6 +195,8 @@
           > 0.9 & \text{outstanding} \\
         \end{cases}
       \]
+      
+      \end{large}
 
     \end{column}
   \end{columns}
@@ -262,21 +271,23 @@
 \begin{frame}
   \frametitle{Summary}
 
-  \begin{itemize}
-    \item \alert{The past matters\dots} 
-      \begin{itemize}
-        \item Our best supported model includes either our historical covariates or allows all effects to vary over time.
-      \end{itemize}
-    \item \alert{But not that much\dots}
-      \begin{itemize}
-        \item Models only average/fair expected out-of-sample performance.
-      \end{itemize}
-    \item Allowing effects to vary over time is probably preferable to historical covariates -- measures and accounts for variation which is important when predicting extinction in novel environments.
-    \item Mechanisms behind changes to geographic range operate at sub-million year scales. Perhaps their effects are weak/masked at million (or greater) year scales.
-  \end{itemize}
+  \begin{large}
+    \begin{itemize}
+      \item \alert{The past matters\dots} 
+        \begin{itemize}
+          \item Our best supported model includes either our historical covariates or allows all effects to vary over time.
+        \end{itemize}
+      \item \alert{But extinction is still hard to predict}
+        \begin{itemize}
+          \item Models only average/fair expected out-of-sample performance.
+        \end{itemize}
+      \item Allowing effects to vary over time is probably preferable to historical covariates -- measures and accounts for variation which is important when predicting extinction in novel environments.
+      \item Mechanisms behind changes to geographic range operate at sub-million year scales. Perhaps their effects are weak/masked at million (or greater) year scales.
+    \end{itemize}
+  \end{large}
 
 \end{frame}
-  
+
 
 \begin{frame}
 

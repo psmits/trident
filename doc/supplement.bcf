@@ -1929,99 +1929,6 @@
     <bcf:datasource type="file" datatype="bibtex">citations.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="1">
-    <bcf:citekey order="1">Finnegan2015</bcf:citekey>
-    <bcf:citekey order="1">Kiessling2016</bcf:citekey>
-    <bcf:citekey order="2">Payne2007</bcf:citekey>
-    <bcf:citekey order="2">Payne2016</bcf:citekey>
-    <bcf:citekey order="2">Ezard2011</bcf:citekey>
-    <bcf:citekey order="2">Smits2019</bcf:citekey>
-    <bcf:citekey order="2">Wang2008a</bcf:citekey>
-    <bcf:citekey order="2">Knoll2007</bcf:citekey>
-    <bcf:citekey order="3">Harnik2011</bcf:citekey>
-    <bcf:citekey order="3">Smits2015</bcf:citekey>
-    <bcf:citekey order="3">Peters2008</bcf:citekey>
-    <bcf:citekey order="3">Payne2007</bcf:citekey>
-    <bcf:citekey order="3">Harnik2012</bcf:citekey>
-    <bcf:citekey order="3">Harnik2012a</bcf:citekey>
-    <bcf:citekey order="3">Ezard2011</bcf:citekey>
-    <bcf:citekey order="3">Foote2006</bcf:citekey>
-    <bcf:citekey order="4">Alroy2010a</bcf:citekey>
-    <bcf:citekey order="4">Alroy2014</bcf:citekey>
-    <bcf:citekey order="4">Alroy2001</bcf:citekey>
-    <bcf:citekey order="4">Alroy2000</bcf:citekey>
-    <bcf:citekey order="4">Alroy2000b</bcf:citekey>
-    <bcf:citekey order="4">Foote2001</bcf:citekey>
-    <bcf:citekey order="5">Lazarus1994</bcf:citekey>
-    <bcf:citekey order="5">SpencerCervato1999</bcf:citekey>
-    <bcf:citekey order="6">Lazarus1994</bcf:citekey>
-    <bcf:citekey order="6">SpencerCervato1999</bcf:citekey>
-    <bcf:citekey order="7">Lazarus1994</bcf:citekey>
-    <bcf:citekey order="8">Foote2007</bcf:citekey>
-    <bcf:citekey order="8">Liow2010</bcf:citekey>
-    <bcf:citekey order="8">Liow2007</bcf:citekey>
-    <bcf:citekey order="8">Kiessling2013</bcf:citekey>
-    <bcf:citekey order="8">Payne2007</bcf:citekey>
-    <bcf:citekey order="8">Jablonski2003</bcf:citekey>
-    <bcf:citekey order="8">Jablonski2008</bcf:citekey>
-    <bcf:citekey order="8">Jablonski2006</bcf:citekey>
-    <bcf:citekey order="9">Liow2007</bcf:citekey>
-    <bcf:citekey order="9">Kiessling2013</bcf:citekey>
-    <bcf:citekey order="9">Foote2007b</bcf:citekey>
-    <bcf:citekey order="9">Pigot2012</bcf:citekey>
-    <bcf:citekey order="10">Lazarus1994</bcf:citekey>
-    <bcf:citekey order="10">SpencerCervato1999</bcf:citekey>
-    <bcf:citekey order="11">GeoRange</bcf:citekey>
-    <bcf:citekey order="12">Cramer2011</bcf:citekey>
-    <bcf:citekey order="13">Cramer2011</bcf:citekey>
-    <bcf:citekey order="14">Cramer2011</bcf:citekey>
-    <bcf:citekey order="15">Cramer2011</bcf:citekey>
-    <bcf:citekey order="16">Cramer2011</bcf:citekey>
-    <bcf:citekey order="17">Cramer2011</bcf:citekey>
-    <bcf:citekey order="18">Tutz2016</bcf:citekey>
-    <bcf:citekey order="19">Smits2015</bcf:citekey>
-    <bcf:citekey order="19">Finnegan2008</bcf:citekey>
-    <bcf:citekey order="19">Ezard2012</bcf:citekey>
-    <bcf:citekey order="19">VanValen1973</bcf:citekey>
-    <bcf:citekey order="19">Liow2011</bcf:citekey>
-    <bcf:citekey order="19">Crampton2016</bcf:citekey>
-    <bcf:citekey order="20">Tutz2016</bcf:citekey>
-    <bcf:citekey order="21">ESL</bcf:citekey>
-    <bcf:citekey order="22">Arlot2010</bcf:citekey>
-    <bcf:citekey order="22">Bergmeir2016</bcf:citekey>
-    <bcf:citekey order="22">ESL</bcf:citekey>
-    <bcf:citekey order="23">ESL</bcf:citekey>
-    <bcf:citekey order="23">Gelman2013d</bcf:citekey>
-    <bcf:citekey order="24">ESL</bcf:citekey>
-    <bcf:citekey order="25">Fawcett2006</bcf:citekey>
-    <bcf:citekey order="25">Mason2002</bcf:citekey>
-    <bcf:citekey order="26">Fawcett2006</bcf:citekey>
-    <bcf:citekey order="26">Mason2002</bcf:citekey>
-    <bcf:citekey order="27">ACCDA</bcf:citekey>
-    <bcf:citekey order="28">dplyr</bcf:citekey>
-    <bcf:citekey order="29">purrr</bcf:citekey>
-    <bcf:citekey order="30">tidybayes</bcf:citekey>
-    <bcf:citekey order="31">brms2017</bcf:citekey>
-    <bcf:citekey order="31">brms2018</bcf:citekey>
-    <bcf:citekey order="32">StanManual</bcf:citekey>
-    <bcf:citekey order="33">Arlot2010</bcf:citekey>
-    <bcf:citekey order="33">Bergmeir2016</bcf:citekey>
-    <bcf:citekey order="34">Kiessling2016</bcf:citekey>
-    <bcf:citekey order="35">Kiessling2016</bcf:citekey>
-    <bcf:citekey order="36">Harnik2012a</bcf:citekey>
-    <bcf:citekey order="36">Finnegan2015</bcf:citekey>
-    <bcf:citekey order="37">Harnik2012a</bcf:citekey>
-    <bcf:citekey order="37">Finnegan2015</bcf:citekey>
-    <bcf:citekey order="37">Payne2007</bcf:citekey>
-    <bcf:citekey order="38">Ezard2011</bcf:citekey>
-  </bcf:section>
-  <!-- SECTION 0 (cont.) -->
-  <bcf:section number="0">
-  </bcf:section>
-  <!-- SECTION 2 -->
-  <bcf:bibdata section="2">
-    <bcf:datasource type="file" datatype="bibtex">citations.bib</bcf:datasource>
-  </bcf:bibdata>
-  <bcf:section number="2">
     <bcf:citekey order="1">Alroy2010</bcf:citekey>
     <bcf:citekey order="1">Alroy2000b</bcf:citekey>
     <bcf:citekey order="1">Alroy2014</bcf:citekey>
@@ -2063,15 +1970,6 @@
   </bcf:sortingtemplate>
   <!-- DATALISTS -->
   <bcf:datalist section="1"
-                name="none/global//global/global"
-                type="entry"
-                sortingtemplatename="none"
-                sortingnamekeytemplatename="global"
-                labelprefix=""
-                uniquenametemplatename="global"
-                labelalphanametemplatename="global">
-  </bcf:datalist>
-  <bcf:datalist section="2"
                 name="none/global//global/global"
                 type="entry"
                 sortingtemplatename="none"
