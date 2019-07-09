@@ -1704,19 +1704,19 @@
     \endentry
     \entry{GeoRange}{manual}{}
       \name{author}{1}{}{%
-        {{uniquename=0,uniquepart=base,hash=1d6c5c677a1017e881059e98aff27ba5}{%
-           family={Boyle},
-           familyi={B\bibinitperiod},
-           given={James},
-           giveni={J\bibinitperiod},
+        {{uniquename=0,uniquepart=base,hash=e3a7dca989a73f02960a95096f2cabff}{%
+           family={Developer},
+           familyi={D\bibinitperiod},
+           given={James\bibnamedelima Boyle},
+           giveni={J\bibinitperiod\bibinitdelim B\bibinitperiod},
            givenun=0}}%
       }
-      \strng{namehash}{1d6c5c677a1017e881059e98aff27ba5}
-      \strng{fullhash}{1d6c5c677a1017e881059e98aff27ba5}
-      \strng{bibnamehash}{1d6c5c677a1017e881059e98aff27ba5}
-      \strng{authorbibnamehash}{1d6c5c677a1017e881059e98aff27ba5}
-      \strng{authornamehash}{1d6c5c677a1017e881059e98aff27ba5}
-      \strng{authorfullhash}{1d6c5c677a1017e881059e98aff27ba5}
+      \strng{namehash}{e3a7dca989a73f02960a95096f2cabff}
+      \strng{fullhash}{e3a7dca989a73f02960a95096f2cabff}
+      \strng{bibnamehash}{e3a7dca989a73f02960a95096f2cabff}
+      \strng{authorbibnamehash}{e3a7dca989a73f02960a95096f2cabff}
+      \strng{authornamehash}{e3a7dca989a73f02960a95096f2cabff}
+      \strng{authorfullhash}{e3a7dca989a73f02960a95096f2cabff}
       \field{sortinit}{1}
       \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
       \field{labelnamesource}{author}
@@ -2633,6 +2633,123 @@
       \verb{url}
       \verb http://mc-stan.org
       \endverb
+    \endentry
+    \entry{Prothero1994}{article}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,uniquepart=base,hash=dac23511ac14c4dbeee1fe941bd8af27}{%
+           family={Prothero},
+           familyi={P\bibinitperiod},
+           given={Donald\bibnamedelima R},
+           giveni={D\bibinitperiod\bibinitdelim R\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{dac23511ac14c4dbeee1fe941bd8af27}
+      \strng{fullhash}{dac23511ac14c4dbeee1fe941bd8af27}
+      \strng{bibnamehash}{dac23511ac14c4dbeee1fe941bd8af27}
+      \strng{authorbibnamehash}{dac23511ac14c4dbeee1fe941bd8af27}
+      \strng{authornamehash}{dac23511ac14c4dbeee1fe941bd8af27}
+      \strng{authorfullhash}{dac23511ac14c4dbeee1fe941bd8af27}
+      \field{sortinit}{3}
+      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Annual Review of Earth and Planetary Sciences}
+      \field{title}{{The late Eocene-Oligocene extinctions}}
+      \field{volume}{22}
+      \field{year}{1994}
+      \field{pages}{145\bibrangedash 165}
+      \range{pages}{21}
+      \verb{file}
+      \verb :home/peter/Documents/Mendeley Desktop/Prothero/Annual Review of Earth and Planetary Sciences/Prothero - 1994 - Annual Review of Earth and Planetary Sciences.pdf:pdf
+      \endverb
+    \endentry
+    \entry{Wade2008}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,uniquepart=base,hash=1c5a3ac294714f052acb80992f818be5}{%
+           family={Wade},
+           familyi={W\bibinitperiod},
+           given={Bridget\bibnamedelima S},
+           giveni={B\bibinitperiod\bibinitdelim S\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=8ebfdea7bfcd3c0f51f1afc7a2a04a00}{%
+           family={Pearson},
+           familyi={P\bibinitperiod},
+           given={Paul\bibnamedelima N},
+           giveni={P\bibinitperiod\bibinitdelim N\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{164224d562843e237c44000125b843c9}
+      \strng{fullhash}{164224d562843e237c44000125b843c9}
+      \strng{bibnamehash}{164224d562843e237c44000125b843c9}
+      \strng{authorbibnamehash}{164224d562843e237c44000125b843c9}
+      \strng{authornamehash}{164224d562843e237c44000125b843c9}
+      \strng{authorfullhash}{164224d562843e237c44000125b843c9}
+      \field{sortinit}{3}
+      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Marine Micropaleontology}
+      \field{title}{{Planktonic foraminiferal turnover, diversity fluctuations and geochemical signals across the Eocene/Oligocene boundary in Tanzania}}
+      \field{volume}{68}
+      \field{year}{2008}
+      \field{pages}{244\bibrangedash 255}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1016/j.marmicro.2008.04.002
+      \endverb
+      \verb{file}
+      \verb :home/peter/Documents/Mendeley Desktop/Wade, Pearson/Marine Micropaleontology/Wade, Pearson - 2008 - Marine Micropaleontology.pdf:pdf
+      \endverb
+      \keyw{eocene,oligocene boundary,planktonic foraminifera}
+    \endentry
+    \entry{Kamikuri2012}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,uniquepart=base,hash=ec1e2d326e9d4d6a3099a80d4a4b470b}{%
+           family={Kamikuri},
+           familyi={K\bibinitperiod},
+           given={Shin-ichi},
+           giveni={S\bibinithyphendelim i\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=1c5a3ac294714f052acb80992f818be5}{%
+           family={Wade},
+           familyi={W\bibinitperiod},
+           given={Bridget\bibnamedelima S},
+           giveni={B\bibinitperiod\bibinitdelim S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier B.V.}%
+      }
+      \strng{namehash}{104931b03dbfdec892fafa97073ded32}
+      \strng{fullhash}{104931b03dbfdec892fafa97073ded32}
+      \strng{bibnamehash}{104931b03dbfdec892fafa97073ded32}
+      \strng{authorbibnamehash}{104931b03dbfdec892fafa97073ded32}
+      \strng{authornamehash}{104931b03dbfdec892fafa97073ded32}
+      \strng{authorfullhash}{104931b03dbfdec892fafa97073ded32}
+      \field{sortinit}{3}
+      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0377-8398}
+      \field{journaltitle}{Marine Micropaleontology}
+      \field{title}{{Radiolarian magnetobiochronology and faunal turnover across the middle/late Eocene boundary at Ocean Drilling Program Site 1052 in the western North Atlantic Ocean}}
+      \field{volume}{88-89}
+      \field{year}{2012}
+      \field{pages}{41\bibrangedash 53}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.1016/j.marmicro.2012.03.001
+      \endverb
+      \verb{file}
+      \verb :home/peter/Documents/Mendeley Desktop/Kamikuri, Wade/Marine Micropaleontology/Kamikuri, Wade - 2012 - Marine Micropaleontology.pdf:pdf
+      \endverb
+      \verb{urlraw}
+      \verb http://dx.doi.org/10.1016/j.marmicro.2012.03.001
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1016/j.marmicro.2012.03.001
+      \endverb
+      \keyw{Atlantic,Faunal turnover,Kamikuri2012,MLET,Magnetobiochronology,Middle/late Eocene boundary,Radiolarians,Site 1052,late eocene boundary,middle}
     \endentry
   \enddatalist
 \endrefsection
