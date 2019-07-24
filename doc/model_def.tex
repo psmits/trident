@@ -1,0 +1,59 @@
+\documentclass[12pt,letterpaper]{article}
+
+\usepackage{amsmath, amsthm, amsfonts, amssymb}
+\usepackage{microtype, parskip, graphicx}
+%\usepackage[comma,numbers,sort&compress]{natbib}
+\usepackage[style=numeric-comp,
+      backend=biber,
+      bibencoding=utf8,
+      maxbibnames=10,
+      uniquename=init,
+      giveninits=true,
+      sorting=none,
+      natbib=true,
+      url=false,
+      doi=false,
+      isbn=false]{biblatex}
+\usepackage[margin=1in]{geometry}
+\usepackage{lineno}
+\usepackage{longtable}
+\usepackage{caption, subcaption, multirow, morefloats, rotating}
+\usepackage{wrapfig}
+\usepackage{hyperref}
+\usepackage{threeparttable}
+
+\frenchspacing
+
+\begin{document}
+
+\begin{table}[ht]
+ \caption{Models and their definitions}
+ \begin{threeparttable}
+  {
+   \def\arraystretch{1.5}
+   \begin{tabular}{ l p{3cm} l l }
+    Code & Description & Covariates & R Formula Syntax\tnote{a}\phantom{\textsuperscript{a}} \\
+    \hline
+    C & Constant effects, no historical cov. & \parbox[t]{0.25\textwidth}{Geographic range,\\temperature} & \parbox[t]{0.33\textwidth}{event\tnote{b}\phantom{\textsuperscript{b}} $\sim$ range\tnote{c}\phantom{\textsuperscript{c}} + temp\tnote{d}\phantom{\textsuperscript{d}} +\\(1 $|$ time\tnote{e}\phantom{\textsuperscript{e}}/phylum\tnote{f}\phantom{\textsuperscript{f}}) +\\(1 $|$ age\tnote{g}\phantom{\textsuperscript{g}}/phylum)} \\
+    V & Varying effects, no historical cov. & \parbox[t]{0.25\textwidth}{Geographic range,\\temperature} & \parbox[t]{0.33\textwidth}{event $\sim$ range + temp +\\(1 + range + temp $|$ time/phylum) + (1 $|$ age/phylum)} \\ 
+    CP & Constant effects, historical cov. & \parbox[t]{0.25\textwidth}{Geographic range,\\change in geographic range, temperature,\\previous temperature} & \parbox[t]{0.33\textwidth}{event $\sim$ + range\_diff1\tnote{g}\phantom{\textsuperscript{h}} + range\_diff2\tnote{h}\phantom{\textsuperscript{h}} + range\_diff3\tnote{h}\phantom{\textsuperscript{h}} + \\temp + temp\_lag\tnote{i}\phantom{\textsuperscript{i}} +\\(1 $|$ time/phylum) +\\(1 $|$ age/phylum)} \\
+    VP & Varying effects, historical cov. & \parbox[t]{0.25\textwidth}{Geographic range,\\change in geographic range, temperature,\\previous temperature} & \parbox[t]{0.33\textwidth}{event $\sim$ range + range\_diff1 + range\_diff2 + range\_diff3 + \\temp + temp\_lag +\\(1 + range + range\_diff1 + range\_diff2 + range\_diff3 +\\temp + temp\_lag $|$ time/phylum) +\\(1 $|$ age/phylum)} \\
+    \hline
+   \end{tabular}
+  }
+  \begin{tablenotes}
+  \item[a] See Supplemental Equation S2 for full statistical model definition.
+  \item[b] Species observation where 1 if time of last observation, otherwise 0.
+  \item[c] Species geographic range in log km\(^2\). Mean centered, scaled to sd = 1.
+  \item[d] Global temperature in degrees C. Mean centered, scaled to sd = 1.
+  \item[e] Time of observation.
+  \item[f] Taxonomic group of species (i.e. Foraminifera, diatoms, Radiolaria, calcareous nannoplankton).
+  \item[g] Age at observation.
+  \item[h] Change in geographic range since last observation (number indicates how lags).
+  \item[i] Temperature at previous observation.
+  \end{tablenotes}
+ \end{threeparttable}
+ \label{tab:model_def}
+\end{table}
+
+\end{document}

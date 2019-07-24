@@ -133,6 +133,378 @@
       \field{pages}{675}
       \range{pages}{1}
     \endentry
+    \entry{Harnik2012a}{article}{}
+      \name{author}{14}{}{%
+        {{uniquename=0,uniquepart=base,hash=692158c1d91ee509893a508e0375dc61}{%
+           family={Harnik},
+           familyi={H\bibinitperiod},
+           given={Paul\bibnamedelima G.},
+           giveni={P\bibinitperiod\bibinitdelim G\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=4fb0f4b693ee1e4ec1f50d11773821bf}{%
+           family={Lotze},
+           familyi={L\bibinitperiod},
+           given={Heike\bibnamedelima K.},
+           giveni={H\bibinitperiod\bibinitdelim K\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=6df1320d32e7b353e1958b218c17ac05}{%
+           family={Anderson},
+           familyi={A\bibinitperiod},
+           given={Sean\bibnamedelima C.},
+           giveni={S\bibinitperiod\bibinitdelim C\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=fb41113b41c96ffcef17b2b386566d2c}{%
+           family={Finkel},
+           familyi={F\bibinitperiod},
+           given={Zoe\bibnamedelima V.},
+           giveni={Z\bibinitperiod\bibinitdelim V\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=d8a1f361bf63c4e71d2981fde89814d8}{%
+           family={Finnegan},
+           familyi={F\bibinitperiod},
+           given={Seth},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=d4d1e8d6ec5b5fe86d17b2be3270c795}{%
+           family={Lindberg},
+           familyi={L\bibinitperiod},
+           given={David\bibnamedelima R.},
+           giveni={D\bibinitperiod\bibinitdelim R\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=8c6b4cf0c42a9827fa59a7ccd6a10b2e}{%
+           family={Liow},
+           familyi={L\bibinitperiod},
+           given={Lee\bibnamedelima Hsiang},
+           giveni={L\bibinitperiod\bibinitdelim H\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=ba61eae5d93357dfe6181f044ef1614d}{%
+           family={Lockwood},
+           familyi={L\bibinitperiod},
+           given={Rowan},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=caed4202aa63dc74a21656f4033ddb31}{%
+           family={McClain},
+           familyi={M\bibinitperiod},
+           given={Craig\bibnamedelima R.},
+           giveni={C\bibinitperiod\bibinitdelim R\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=578c7041a4af29b5151c86f51a365000}{%
+           family={McGuire},
+           familyi={M\bibinitperiod},
+           given={Jenny\bibnamedelima L.},
+           giveni={J\bibinitperiod\bibinitdelim L\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=6958e1c5c95cc46f29d680f3a91a6b94}{%
+           family={O'Dea},
+           familyi={O\bibinitperiod},
+           given={Aaron},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=70850873279eb537d059fb4677ecc8fd}{%
+           family={Pandolfi},
+           familyi={P\bibinitperiod},
+           given={John\bibnamedelima M.},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=21b6af629bc168836575391476615574}{%
+           family={Simpson},
+           familyi={S\bibinitperiod},
+           given={Carl},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=6addc03fc3c1037483f862b0cd3765d1}{%
+           family={Tittensor},
+           familyi={T\bibinitperiod},
+           given={Derek\bibnamedelima P.},
+           giveni={D\bibinitperiod\bibinitdelim P\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier Ltd}%
+      }
+      \strng{namehash}{d4f0f58e430376eca3aebff280be8ca1}
+      \strng{fullhash}{1544efe84d99eec6cfe5892e0543b921}
+      \strng{bibnamehash}{d4f0f58e430376eca3aebff280be8ca1}
+      \strng{authorbibnamehash}{d4f0f58e430376eca3aebff280be8ca1}
+      \strng{authornamehash}{d4f0f58e430376eca3aebff280be8ca1}
+      \strng{authorfullhash}{1544efe84d99eec6cfe5892e0543b921}
+      \field{sortinit}{4}
+      \field{sortinithash}{11cdaee3b18e01d77f3f428b13c1fc76}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{In the coming century, life in the ocean will be confronted with a suite of environmental conditions that have no analog in human history. Thus, there is an urgent need to determine which marine species will adapt and which will go extinct. Here, we review the growing literature on marine extinctions and extinction risk in the fossil, historical, and modern records to compare the patterns, drivers, and biological correlates of marine extinctions at different times in the past. Characterized by markedly different environmental states, some past periods share common features with predicted future scenarios. We highlight how the different records can be integrated to better understand and predict the impact of current and projected future environmental changes on extinction risk in the ocean. {{$\copyright$}} 2012 Elsevier Ltd.}
+      \field{isbn}{0169-5347}
+      \field{issn}{01695347}
+      \field{journaltitle}{Trends in Ecology and Evolution}
+      \field{number}{11}
+      \field{title}{{Extinctions in ancient and modern seas}}
+      \field{volume}{27}
+      \field{year}{2012}
+      \field{pages}{608\bibrangedash 617}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1016/j.tree.2012.07.010
+      \endverb
+      \verb{file}
+      \verb :home/peter/Documents/Mendeley Desktop/Harnik et al/Trends in Ecology and Evolution/Harnik et al. - 2012 - Trends in Ecology and Evolution.pdf:pdf
+      \endverb
+      \verb{urlraw}
+      \verb http://dx.doi.org/10.1016/j.tree.2012.07.010
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1016/j.tree.2012.07.010
+      \endverb
+    \endentry
+    \entry{Finnegan2015}{article}{}
+      \name{author}{11}{}{%
+        {{uniquename=0,uniquepart=base,hash=d8a1f361bf63c4e71d2981fde89814d8}{%
+           family={Finnegan},
+           familyi={F\bibinitperiod},
+           given={Seth},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=038ea3ec1926798b09c8f7b7f1638142}{%
+           family={Anderson},
+           familyi={A\bibinitperiod},
+           given={Sean\bibnamedelima C},
+           giveni={S\bibinitperiod\bibinitdelim C\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=68ea50f8c0b787e5d0e5461dc22f9ef9}{%
+           family={Harnik},
+           familyi={H\bibinitperiod},
+           given={Paul\bibnamedelima G},
+           giveni={P\bibinitperiod\bibinitdelim G\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=21b6af629bc168836575391476615574}{%
+           family={Simpson},
+           familyi={S\bibinitperiod},
+           given={Carl},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=edc2cf93b9d034ca8f007d8e10060802}{%
+           family={Tittensor},
+           familyi={T\bibinitperiod},
+           given={Derek\bibnamedelima P},
+           giveni={D\bibinitperiod\bibinitdelim P\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=69853df4bc118b3de84d4608897beb00}{%
+           family={Byrnes},
+           familyi={B\bibinitperiod},
+           given={Jarrett\bibnamedelima E},
+           giveni={J\bibinitperiod\bibinitdelim E\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=a1976b07c9c27726b36b3d760b20970b}{%
+           family={Finkley},
+           familyi={F\bibinitperiod},
+           given={Zoe\bibnamedelima V},
+           giveni={Z\bibinitperiod\bibinitdelim V\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=6fc1b5cb92656a63124964f5c9811b65}{%
+           family={Lindberg},
+           familyi={L\bibinitperiod},
+           given={David\bibnamedelima R},
+           giveni={D\bibinitperiod\bibinitdelim R\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=8c6b4cf0c42a9827fa59a7ccd6a10b2e}{%
+           family={Liow},
+           familyi={L\bibinitperiod},
+           given={Lee\bibnamedelima Hsiang},
+           giveni={L\bibinitperiod\bibinitdelim H\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=6958e1c5c95cc46f29d680f3a91a6b94}{%
+           family={O'Dea},
+           familyi={O\bibinitperiod},
+           given={Aaron},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=53455b1efee192606c27984608cd5e3d}{%
+           family={Pandolfi},
+           familyi={P\bibinitperiod},
+           given={John\bibnamedelima M},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{7c9cd988767e24f125497443604ed936}
+      \strng{fullhash}{b9fcb4a4b231558879c983c94443ead5}
+      \strng{bibnamehash}{7c9cd988767e24f125497443604ed936}
+      \strng{authorbibnamehash}{7c9cd988767e24f125497443604ed936}
+      \strng{authornamehash}{7c9cd988767e24f125497443604ed936}
+      \strng{authorfullhash}{b9fcb4a4b231558879c983c94443ead5}
+      \field{sortinit}{4}
+      \field{sortinithash}{11cdaee3b18e01d77f3f428b13c1fc76}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Science}
+      \field{number}{6234}
+      \field{title}{{Paleontological baselines for evaluating extinction risk in the modern oceans}}
+      \field{volume}{348}
+      \field{year}{2015}
+      \field{pages}{567\bibrangedash 570}
+      \range{pages}{4}
+      \verb{file}
+      \verb :home/peter/Documents/Mendeley Desktop/Finnegan et al/Science/Finnegan et al. - 2015 - Science.pdf:pdf
+      \endverb
+    \endentry
+    \entry{Payne2007}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,uniquepart=base,hash=ec68eacbcfd6d1d7a7343ad79b626412}{%
+           family={Payne},
+           familyi={P\bibinitperiod},
+           given={Jonathan\bibnamedelima L},
+           giveni={J\bibinitperiod\bibinitdelim L\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=d8a1f361bf63c4e71d2981fde89814d8}{%
+           family={Finnegan},
+           familyi={F\bibinitperiod},
+           given={Seth},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{148a7c5606cb53e5b0d2c43b1eb27fb4}
+      \strng{fullhash}{148a7c5606cb53e5b0d2c43b1eb27fb4}
+      \strng{bibnamehash}{148a7c5606cb53e5b0d2c43b1eb27fb4}
+      \strng{authorbibnamehash}{148a7c5606cb53e5b0d2c43b1eb27fb4}
+      \strng{authornamehash}{148a7c5606cb53e5b0d2c43b1eb27fb4}
+      \strng{authorfullhash}{148a7c5606cb53e5b0d2c43b1eb27fb4}
+      \field{sortinit}{5}
+      \field{sortinithash}{3c19c3776b658b3558e9e2e4840c01e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Wide geographic range is generally thought to buffer taxa against extinction, but the strength of this effect has not been investigated for the great majority of the fossil record. Although the majority of genus extinctions have occurred between major mass extinctions, little is known about extinction selectivity regimes during these "background" intervals. Consequently, the question of whether selectivity regimes differ between background and mass extinctions is largely unresolved. Using logistic regression, we evaluated the selectivity of genus survivorship with respect to geographic range by using a global database of fossil benthic marine invertebrates spanning the Cambrian through the Neogene periods, an interval of approximately 500 My. Our results show that wide geographic range has been significantly and positively associated with survivorship for the great majority of Phanerozoic time. Moreover, the significant association between geographic range and survivorship remains after controlling for differences in species richness and abundance among genera. However, mass extinctions and several second-order extinction events exhibit less geographic range selectivity than predicted by range alone. Widespread environmental disturbance can explain the reduced association between geographic range and extinction risk by simultaneously affecting genera with similar ecological and physiological characteristics on global scales. Although factors other than geographic range have certainly affected extinction risk during many intervals, geographic range is likely the most consistently significant predictor of extinction risk in the marine fossil record.}
+      \field{isbn}{0027-8424 (Print)$\backslash$n0027-8424 (Linking)}
+      \field{issn}{0027-8424}
+      \field{journaltitle}{Proceedings of the National Academy of Sciences}
+      \field{number}{25}
+      \field{title}{{The effect of geographic range on extinction risk during background and mass extinction.}}
+      \field{volume}{104}
+      \field{year}{2007}
+      \field{pages}{10506\bibrangedash 10511}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1073/pnas.0701257104
+      \endverb
+      \verb{file}
+      \verb :home/peter/Documents/Mendeley Desktop/Payne, Finnegan/Proceedings of the National Academy of Sciences/Payne, Finnegan - 2007 - Proceedings of the National Academy of Sciences.pdf:pdf
+      \endverb
+    \endentry
+    \entry{Prothero1994}{article}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,uniquepart=base,hash=dac23511ac14c4dbeee1fe941bd8af27}{%
+           family={Prothero},
+           familyi={P\bibinitperiod},
+           given={Donald\bibnamedelima R},
+           giveni={D\bibinitperiod\bibinitdelim R\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{dac23511ac14c4dbeee1fe941bd8af27}
+      \strng{fullhash}{dac23511ac14c4dbeee1fe941bd8af27}
+      \strng{bibnamehash}{dac23511ac14c4dbeee1fe941bd8af27}
+      \strng{authorbibnamehash}{dac23511ac14c4dbeee1fe941bd8af27}
+      \strng{authornamehash}{dac23511ac14c4dbeee1fe941bd8af27}
+      \strng{authorfullhash}{dac23511ac14c4dbeee1fe941bd8af27}
+      \field{sortinit}{6}
+      \field{sortinithash}{57e57fb8451e7fcfa45d1e069f6d3136}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Annual Review of Earth and Planetary Sciences}
+      \field{title}{{The late Eocene-Oligocene extinctions}}
+      \field{volume}{22}
+      \field{year}{1994}
+      \field{pages}{145\bibrangedash 165}
+      \range{pages}{21}
+      \verb{file}
+      \verb :home/peter/Documents/Mendeley Desktop/Prothero/Annual Review of Earth and Planetary Sciences/Prothero - 1994 - Annual Review of Earth and Planetary Sciences.pdf:pdf
+      \endverb
+    \endentry
+    \entry{Wade2008}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,uniquepart=base,hash=1c5a3ac294714f052acb80992f818be5}{%
+           family={Wade},
+           familyi={W\bibinitperiod},
+           given={Bridget\bibnamedelima S},
+           giveni={B\bibinitperiod\bibinitdelim S\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=8ebfdea7bfcd3c0f51f1afc7a2a04a00}{%
+           family={Pearson},
+           familyi={P\bibinitperiod},
+           given={Paul\bibnamedelima N},
+           giveni={P\bibinitperiod\bibinitdelim N\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{164224d562843e237c44000125b843c9}
+      \strng{fullhash}{164224d562843e237c44000125b843c9}
+      \strng{bibnamehash}{164224d562843e237c44000125b843c9}
+      \strng{authorbibnamehash}{164224d562843e237c44000125b843c9}
+      \strng{authornamehash}{164224d562843e237c44000125b843c9}
+      \strng{authorfullhash}{164224d562843e237c44000125b843c9}
+      \field{sortinit}{6}
+      \field{sortinithash}{57e57fb8451e7fcfa45d1e069f6d3136}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Marine Micropaleontology}
+      \field{title}{{Planktonic foraminiferal turnover, diversity fluctuations and geochemical signals across the Eocene/Oligocene boundary in Tanzania}}
+      \field{volume}{68}
+      \field{year}{2008}
+      \field{pages}{244\bibrangedash 255}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1016/j.marmicro.2008.04.002
+      \endverb
+      \verb{file}
+      \verb :home/peter/Documents/Mendeley Desktop/Wade, Pearson/Marine Micropaleontology/Wade, Pearson - 2008 - Marine Micropaleontology.pdf:pdf
+      \endverb
+      \keyw{eocene,oligocene boundary,planktonic foraminifera}
+    \endentry
+    \entry{Kamikuri2012}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,uniquepart=base,hash=ec1e2d326e9d4d6a3099a80d4a4b470b}{%
+           family={Kamikuri},
+           familyi={K\bibinitperiod},
+           given={Shin-ichi},
+           giveni={S\bibinithyphendelim i\bibinitperiod},
+           givenun=0}}%
+        {{uniquename=0,uniquepart=base,hash=1c5a3ac294714f052acb80992f818be5}{%
+           family={Wade},
+           familyi={W\bibinitperiod},
+           given={Bridget\bibnamedelima S},
+           giveni={B\bibinitperiod\bibinitdelim S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier B.V.}%
+      }
+      \strng{namehash}{104931b03dbfdec892fafa97073ded32}
+      \strng{fullhash}{104931b03dbfdec892fafa97073ded32}
+      \strng{bibnamehash}{104931b03dbfdec892fafa97073ded32}
+      \strng{authorbibnamehash}{104931b03dbfdec892fafa97073ded32}
+      \strng{authornamehash}{104931b03dbfdec892fafa97073ded32}
+      \strng{authorfullhash}{104931b03dbfdec892fafa97073ded32}
+      \field{sortinit}{6}
+      \field{sortinithash}{57e57fb8451e7fcfa45d1e069f6d3136}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0377-8398}
+      \field{journaltitle}{Marine Micropaleontology}
+      \field{title}{{Radiolarian magnetobiochronology and faunal turnover across the middle/late Eocene boundary at Ocean Drilling Program Site 1052 in the western North Atlantic Ocean}}
+      \field{volume}{88-89}
+      \field{year}{2012}
+      \field{pages}{41\bibrangedash 53}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.1016/j.marmicro.2012.03.001
+      \endverb
+      \verb{file}
+      \verb :home/peter/Documents/Mendeley Desktop/Kamikuri, Wade/Marine Micropaleontology/Kamikuri, Wade - 2012 - Marine Micropaleontology.pdf:pdf
+      \endverb
+      \verb{urlraw}
+      \verb http://dx.doi.org/10.1016/j.marmicro.2012.03.001
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1016/j.marmicro.2012.03.001
+      \endverb
+      \keyw{Atlantic,Faunal turnover,Kamikuri2012,MLET,Magnetobiochronology,Middle/late Eocene boundary,Radiolarians,Site 1052,late eocene boundary,middle}
+    \endentry
     \entry{Lazarus1994}{article}{}
       \name{author}{1}{}{%
         {{uniquename=0,uniquepart=base,hash=c89c1858819e2003a1136bdcfcda3bfc}{%
@@ -148,8 +520,8 @@
       \strng{authorbibnamehash}{c89c1858819e2003a1136bdcfcda3bfc}
       \strng{authornamehash}{c89c1858819e2003a1136bdcfcda3bfc}
       \strng{authorfullhash}{c89c1858819e2003a1136bdcfcda3bfc}
-      \field{sortinit}{4}
-      \field{sortinithash}{11cdaee3b18e01d77f3f428b13c1fc76}
+      \field{sortinit}{7}
+      \field{sortinithash}{c818dd9105a2852444fc9f5e145c294e}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Marine micropaleontology must in the future provide more precise chronologic and paleoenvironmental information, which in turn must be based on better, more consistent taxonomic and distributional data. Better tools for synthesis and standardization of this data are needed, as the ever expanding published literature is rapidly becoming unmanageable by purely manual compilation methods. The micropaleontology group at the ETH has developed a large relational database of marine microfossil data to partially meet this need. It currently contains biogeographic data on the distribution in Deep Sea Drilling Project (DSDP) and Ocean Drilling Program (ODP) holes of nearly 8,000 species of Cenozoic planktonic foraminifera, radiolaria, diatoms and calcareous nannofossils. The database also includes full stratigraphic occurrence (range chart) data for these fossil groups from more than 100 selected Neogene holes. A particular feature of the database is that all sample information and species names in the original reports are linked to newly created, updatable, comprehensive age models and synonymy lists which reflect modern chronology and taxonomic usage. Searches of the database automatically make use of this information in producing reports. Species' occurrences, including first and last occurrence information, can be further analyzed using external spreadsheet and statistics packages; plotted by mapping programs; or displayed by a new program which creates composite age-range charts.}

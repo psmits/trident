@@ -81,7 +81,7 @@
 \modulolinenumbers[3]
 
 
-Below are our responses to the editor and reviewer comments that we recieved on our original manuscrpt. We would like to thank the editor and the three reviewers for their thoughtful and insightful comments which have greatly improved the manuscript.
+Below are our responses to the editor and reviewer comments that we received on our original manuscript. We would like to thank the editor and the three reviewers for their thoughtful and insightful comments which have greatly improved the manuscript.
 
 Editor and reviewer comments are presented in bold. Below these comments, we detail how we updated our manuscript in response to that comment. 
 
@@ -173,7 +173,7 @@ We have updated the relevant section of the text with this suggestion, in partic
   While the main result is well founded by the sophisticated analyses (in fact too sophisticated to be understandable in all details by the reviewer), it is somewhat disappointing, as the relative importance of parameters in multivariate models remain vague. It is also disappointing to see that change of range had a negligible effect in the multivariate context, as this is one of the main arguments for using the fossil record in extinction risk assessments (besides taxon age and intrinsic turnover rates). I argue that, to really discard change of range, the authors would need to look at longer trajectories of range. Bin-to-bin changes at this temporal resolution (1 myr) are perhaps too noisy to inform models. I am not asking for additional analyses for this paper, but this point should be added to the discussion.
 \end{bfseries}
 
-Thank you for this suggestion. We have update our analysis to include change in geographic range from the last three observations. This change adds two more covariates to all models that include our ``historical covaraites.'' This addition to our analysis did change our results, and we now consider our most complex model that includes historical covariates and variation in covariate effect over time to be overfit to our data. Our models that include either historical covariates or variation in effects over time, however, are found to have functionaly equivalent out-of-sample performance.
+Thank you for this suggestion; see above re. the change we made in the timespace of historical covariates.
 
 
 
@@ -189,9 +189,11 @@ Thank you for pointing out this issue in our text and we apologize for the lack 
   The methods are very well explained (especially in the supplement), although uncertainties in parameter estimates merit some further prose. Using maximum great circle distance (GCD) as a measure of geographic range is ok but prone to sampling bias. Better sampled intervals will inevitably have greater mean ranges than more poorly sampled intervals. While the scaling applied by the authors takes different means and variance into account it may not be sufficient. If GCD is used, I’d recommend normalizing to the maximum observed geographic range in an interval prior to scaling. Grid cell occupancy or minimum spanning trees are alternative measures, which are worthy of exploration. 
 \end{bfseries}
 
-Thank you both for the suggestion to move to minimum spanning tree measure of geographic range. We have updated our analysis using this new range metric. The change in range metric did not change our interpretation of the results.
+
+Thank you both for the suggestion to move to minimum spanning tree measure of geographic range. We have updated our analysis using this new range metric. The change in range metric did not substantively change our interpretation of the results.
 
 We chose not to standardize geographic range to in-bin max because we believe this breaks ``coherence'' of the measure and the interpretation of the regression coefficients. With geographic range not standardized by max in-bin geographic range, the regression coefficients for the ``change in range'' covariates are the expected change in log-odds of extinction risk per standard deviation change in geographic range between that previous bin and the current bin. In contrast, if the variables are defined as percentages, the difference between bins gives a less obvious or interpretable regression coefficient. Additionally, max in-bin geographic range is nearly identical for the entire Cenozoic.
+
 
 \begin{bfseries}
   Looking at change of range is good, but the authors could also look at changes beyond two intervals. Although models incorporating multiple bins may result in overfitting, the argument is that long-term decline will increase extinction risk. I’d argue that two bins (especially at the relatively fine temporal scale applied) can hardly measure long-term decline. Finally, the authors should provide a rationale why these and not other parameters were used in the study (see also below). Does latitude or skeletal mineralogy have little to add to model performance?
@@ -296,11 +298,11 @@ Thank you for this suggestion. We have improved the language in our methods sect
 
 From the updated manuscript:
 
-``In-sample forecasting is a posterior predictive check in that we are estimating our model's ability to correctly classify the data to which it was fit. Posterior predictive checks are a type of sensitivity analysis because we are checking the quality of model's fit to the data. If our models have poor in-sample forecasting performance, than our models are not adequate descriptors of the data and will most likely make poor out-of-sample predictions. In-sample forecasting measures, however, are not the same as understanding our models' ability to forecast future extinctions or if our models are overfit to our data and produce biased out-of-sample estimates \citep{ESL}.''
+Line 173: ``In-sample forecasting is a posterior predictive check in that we are estimating our model's ability to correctly classify the data to which it was fit. Posterior predictive checks are a type of sensitivity analysis because we are checking the quality of model's fit to the data. If our models have poor in-sample forecasting performance, than our models are not adequate descriptors of the data and will most likely make poor out-of-sample predictions. In-sample forecasting measures, however, are not the same as understanding our models' ability to forecast future extinctions or if our models are overfit to our data and produce biased out-of-sample estimates \citep{ESL}.''
 
 And:
 
-``The in-sample model comparisons are useful for comparing the relative ability of our models to represent the data they were fit to, acting as quality control and sensitivity analysis. Comparison between the posterior distributions \dots''
+Line 232: ``The in-sample model comparisons are useful for comparing the relative ability of our models to represent the data they were fit to, acting as quality control and sensitivity analysis. Comparison between the posterior distributions \dots''
 
 
 \subsection{Reviewer 2}
@@ -315,7 +317,13 @@ And:
   The caveat that human impacts may dramatically alter extinction risk seems like an important one and, as it stands, seems like it could undercut the (rather terse) final conclusion. Would conservation decisions really be bolstered by including fossil data? I would agree with that (and of course I would, as a paleobiologist), but it might be useful to expand a bit on this topic. Do you mean that a model such as yours, incorporating geographic range and other such parameters, would be helpful? In what way could it be used? Or do you mean using models based on past intervals with environmental changes inferred to be similar – the PETM as an analogue for warming and acidification, for example? I wonder if it would be helpful to draw a stronger connection linking your finding to conservation biology, given the different stressors now.
 \end{bfseries}
 
-WAITING FOR SETH
+Thank you for your suggestion to expand upon the implciations of the human impact on extinction risk and how that might affect how well we can predict future extinction events. We have added a section to our discussion in an attempt to address this.
+
+From the updated manuscript:
+
+Line 318: ``An extremely important caveat, of course, is that human impacts may substantially alter present and future extinction risk dynamics relative to the average Cenozoic state, so that the future may become less predictable than it has been in the past \citep{Harnik2012a,Finnegan2015}. The CP model assumes that the effects of the historical covariates are constant through time, but given growing evidence that human impacts substantially alter extinction risk dynamics \citep{Harnik2012a,Finnegan2015,Payne2007}, this assumption may not be valid and may limit or bias our ability to predict extinction in truly novel environmental regimes. Thus, it might be preferable to use a model similar to our V model which allows extinction risk and selectivity to vary over time. For this reason, while our CP and V models yield similar out-of-sample forecasts, we believe the V model offers more practical benefits for predicting extinction risk in future, anthropogenically impacted environments.''
+
+On a related note, it is notable that there are no obvious consistent changes in average model performance during episodes of climatic environmental change such as the mid-Eocene to early Oligocene (Fig. 1b), although this interval is characterized by elevated extinction among several planktonic groups \citep{Prothero1994,Wade2008,Kamikuri2012}. This suggests that relationships between the simple covariates included in our models and extinction risk were relatively stable though this interval.  However, it is likely that more complex models accounting for other aspects of ecology and biogeography might exhibit reduced forecasting performance during this and other climate change episodes.
 
 \begin{bfseries}
   I found the description on lines 171-174 to be a bit confusing. The phrase “this pattern” (line 171) seems to refer to the posterior distribution less than/equal to 0.5. The sentence states that the pattern is absent in absent in VP model for forams and radiolarians, but to me the radiolarian pattern doesn’t look too different from the V model (which also doesn’t dip below 0.5). The next sentence argue that there are fewer period of low performance for calcareous nannos and dinoflagellates in the VP model, but the differences seem minimal. Perhaps I’m not familiar with these graphs, but there only seems to be a difference in calcareous nannos around 50 Ma, and among dinoflagellates a small difference around 58 Ma and 30 Ma?
@@ -377,7 +385,7 @@ We have added a section to the Methods discussing this data limitation
 
 From the updated manuscript:
 
-``Mg/Ca based temperature estimates are measured from benthic forams, and are an estimate of deep water ocean temperature. The organisms in this study are all planktonic, Mg/Ca based temperature estimates do not describe the exact environment these organisms inhabit. Ideally, we would have detailed ocean surface water temperature estimates for the entire globe for the entire Cenozoic. Unfortunately, that type of data does not exist. So, we interpret our temperature estimates as reflecting the global climate state that an organisms experiences, and not as a descriptor of that taxon's local environmental ecology.''
+Line 134: ``Mg/Ca based temperature estimates are measured from benthic forams, and are an estimate of deep water ocean temperature. The organisms in this study are all planktonic, Mg/Ca based temperature estimates do not describe the exact environment these organisms inhabit. Ideally, we would have detailed ocean surface water temperature estimates for the entire globe for the entire Cenozoic. Unfortunately, that type of data does not exist. So, we interpret our temperature estimates as reflecting the global climate state that an organisms experiences, and not as a descriptor of that taxon's local environmental ecology.''
 
 
 \begin{bfseries}

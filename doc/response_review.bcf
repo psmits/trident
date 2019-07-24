@@ -1933,8 +1933,16 @@
     <bcf:citekey order="1">Gelman2013d</bcf:citekey>
     <bcf:citekey order="2">ESL</bcf:citekey>
     <bcf:citekey order="3">ESL</bcf:citekey>
-    <bcf:citekey order="4">Lazarus1994</bcf:citekey>
-    <bcf:citekey order="5">Lazarus1994</bcf:citekey>
+    <bcf:citekey order="4">Harnik2012a</bcf:citekey>
+    <bcf:citekey order="4">Finnegan2015</bcf:citekey>
+    <bcf:citekey order="5">Harnik2012a</bcf:citekey>
+    <bcf:citekey order="5">Finnegan2015</bcf:citekey>
+    <bcf:citekey order="5">Payne2007</bcf:citekey>
+    <bcf:citekey order="6">Prothero1994</bcf:citekey>
+    <bcf:citekey order="6">Wade2008</bcf:citekey>
+    <bcf:citekey order="6">Kamikuri2012</bcf:citekey>
+    <bcf:citekey order="7">Lazarus1994</bcf:citekey>
+    <bcf:citekey order="8">Lazarus1994</bcf:citekey>
   </bcf:section>
   <!-- SECTION 0 (cont.) -->
   <bcf:section number="0">
