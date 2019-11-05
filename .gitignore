@@ -9,3 +9,5 @@
 *.hpp
 data/mcmc_out/*
 data/data_dump/*
+doc/*review*
+doc/*letter*
